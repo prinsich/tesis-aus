@@ -1,0 +1,38 @@
+<script>
+    {$Sajax}
+    {literal}
+    
+    function crear_certificado(id_alumno){
+        var id_taller = document.getElementById("taller").value;
+        var estado = document.getElementById("estado").value;
+        var urlp = "index.php?section=certificados&sub=imprimir&id_alumno=" + id_alumno + "&id_taller=" + id_taller + "&estado=" + estado;
+        window.open(urlp, "_self");
+    }
+    
+    function buscar_alumnos(){
+        var id_taller = document.getElementById("taller").value;
+        if(id_taller !== 0){
+            x_buscar_alumnos(id_taller, retorno_cb);
+        } else {
+            alert("Selecione un taller");
+        }
+    }
+    
+    function retorno_cb(z){
+        if (z !== "") {
+            document.getElementById("capa_datos").innerHTML = z;
+        }
+        else
+            document.getElementById("capa_datos").innerHTML = "";
+    }
+    
+    {/literal}
+</script>
+<h1>Certificados</h1>
+
+<p>{html_talleres name="taller"}
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <img src="images/icons/search.png" title="" alt="" border="0" height="20" align="absmiddle" onclick="buscar_alumnos()"/>
+</p>
+
+<div id="capa_datos"></div>

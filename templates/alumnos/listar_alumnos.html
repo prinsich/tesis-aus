@@ -1,0 +1,76 @@
+<script>
+    {$Sajax}
+    {literal}
+    function ver_alumno(id) {
+        var urlp = "index.php?section=alumnos&sub=ver_alumno&id_alumno=" + id;
+        window.open(urlp, "_self");
+    }
+    
+    function modificar_alumno(id) {
+        var urlp = "index.php?section=alumnos&sub=modificar_alumno&id_alumno=" + id;
+        window.open(urlp, "_self");
+    }
+    
+    function alta_alumno(id) {
+        if (confirm("Esta seguro que desea dar de alta este alumno?")) {
+            var usrlogin = document.getElementById("usrlogin").value;
+            x_alta_alumno(id, usrlogin, retorno_cb);
+        }
+    }
+
+    function baja_alumno(id) {
+        if (confirm("Esta seguro que desea dar de baja este alumno?")) {
+            var usrlogin = document.getElementById("usrlogin").value;
+            x_baja_alumno(id, usrlogin, retorno_cb);
+        }
+    }
+    
+    function retorno_cb(z){
+        alert(z);
+        window.location.reload();
+    }
+    {/literal}
+</script>
+
+<h1>Alumnos</h1>
+<p>Cantidad total de alumnos: {$cantidad_alumnos}</p>
+<table class="zebra-striped" id="sortTableExample">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Apellido</th>
+            <th>Nombres</th>
+            <th>DNI</th>
+            <th>Fecha Nac.</th>
+            <th>Tel&oacute;fono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {assign var="index" value=1}
+        {section name=a loop=$lista_alumnos}
+        <tr>
+            <td>{$index}</td>
+            <td>{$lista_alumnos[a].apellido}</td>
+            <td>{$lista_alumnos[a].nombre}</td>
+            <td>{$lista_alumnos[a].dni}</td>
+            <td>{$lista_alumnos[a].fecha_nacimiento|date_format:"d-m-Y"}</td>
+            <td>{$lista_alumnos[a].telefono}</td>
+            <td>{$lista_alumnos[a].estado}</td>
+            <td>
+                <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_alumno('{$lista_alumnos[a].id_alumno}')" />
+                <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_alumno('{$lista_alumnos[a].id_alumno}')" />
+                {if $lista_alumnos[a].estado eq "ACTIVO"}
+                <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_alumno('{$lista_alumnos[a].id_alumno}')"/>
+                {else}
+                <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_alumno('{$lista_alumnos[a].id_alumno}')"/>
+                {/if}
+            </td>
+        </tr>
+        {$index = $index + 1}
+        {/section}
+    </tbody>
+</table>
+<input type="hidden" value="{$usrlogin}" id="usrlogin" name="usrlogin"/>

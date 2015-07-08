@@ -1,0 +1,42 @@
+<style>
+    td { /*border: none;*/ text-align: left; /*width: 10%;*/}
+</style>
+<h1>Datos del Usuario</h1>
+
+<h2>Datos de Login</h2>
+<table style="width: 70%; border: none; padding-left: 10%;" >
+    <tr>
+        <td style="width: 55%">Usuario</td>
+        <td><b>{$dato_usuario.nombreusr}</b></td>
+    </tr>
+    <tr>
+        <td>Perfil:</td>
+        <td><b>{$dato_usuario.perfil}</b></td>
+    </tr>
+</table>
+
+<h2>Datos Personales</h2>
+<table style="width: 70%; border: none; padding-left: 10%;" >
+    <tr>
+        <td style="width: 55%">Apellido:</td>
+        <td><b>{$dato_usuario.apellido}</b></td>
+    </tr>
+    <tr>
+        <td>Nombres:</td>
+        <td><b>{$dato_usuario.nombre}</b></td>
+    </tr>
+    <tr>
+        <td>Domicilio:</td>
+        <td><b>{$dato_usuario.domicilio}</b></td>
+    </tr>
+    <tr>
+        <td>Tel&eacute;fono:</td>
+        <td><b>{$dato_usuario.telefono}</b></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><b>{$dato_usuario.email}</b></td>
+    </tr>
+</table>
+
+<input class="btnSubmit" type="button" name="volver" value="Volver" onclick="history.back();">

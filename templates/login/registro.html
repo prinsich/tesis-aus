@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Casa de Francisco</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+        <!-- ESTILOS CSS -->
+        <!--link type="text/css" rel="stylesheet" href="css/reset.css"-->
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/fonts.css">
+
+        <!-- SCRIPTS JS & JQUERY -->
+        <!--script src="http://code.jquery.com/jquery-latest.js"></script-->
+        <script src="javascript/jquery_ui/js/jquery-1.7.2.min.js"></script>
+        <script src="javascript/javascript.js"></script>
+        <script src="javascript/myJQuery.js"></script>
+    </head>
+
+    <body>
+        <div id="cuerpo">
+            <a id="top"></a>
+            <div id="tituloPag">
+            </div>
+
+            <div id="navegacion">
+                <ul></ul>
+            </div>
+            <div id="contenido">
+                <h1>REGISTRO</h1>
+
+                <p> Recuerde que para poder registrase su nombre de usuario debio ser dado de alta por el administrador</p>
+                <form autocomplete="off" name="formCapacitador" action="index.php?section=admin&sub=guardar_usuario" method="POST">
+                    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
+                    
+                    <label for="user">Nombre de usuario:</label>
+                    <input type="text" value="" id="user" name="user" />
+                    <br />
+                    
+                    <label for="pass1">Contrase&ntilde;a:</label>
+                    <input type="password" value="" id="pass1" name="pass1" />
+                    <br />
+                    
+                    <label for="pass2">Repita la contrase&ntilde;a:</label>
+                    <input type="password" value="" id="pass2" name="pass2" />
+                    <br />
+
+                    <div align="center">
+                        <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
+                        <input class="btnSubmit2" type="button" name="volver" value="Volver" onclick="history.back();">
+                    </div>
+                </form>
+            </div>
+            <div id="piePag">
+            </div>
+
+        </div>
+    </body>
+
+</html> 

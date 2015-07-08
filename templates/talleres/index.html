@@ -1,0 +1,15 @@
+{if $sub eq "" || $sub eq "buscar_talleres"}
+    {include file="talleres/buscar_talleres.html"}
+{elseif $sub eq "agregar_taller"}
+    {include file="talleres/agregar_taller.html"}
+{elseif $sub eq "guardar_taller"}
+    {include file="talleres/guardar_taller.html"}
+{elseif $sub eq "listar_talleres"}
+    {include file="talleres/listar_talleres.html"}
+{elseif $sub eq "modificar_taller"}
+    {include file="talleres/modificar_taller.html"}
+{elseif $sub eq "ver_taller"}
+    {include file="talleres/ver_taller.html"}
+{else}
+    {include file="desarrollo.html"}
+{/if}

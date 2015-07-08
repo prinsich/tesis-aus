@@ -1,0 +1,95 @@
+<script>
+{literal}
+
+    function validar(){
+        var valido = true;
+        var error = "Complete lis siguientes campos\n";
+        
+        var nombre = document.getElementById("nombre").value;
+        if(nombre === ""){
+            valido = false;
+            error += " - Nombre\n";
+        }
+        
+        var nombre = document.getElementById("id_capacitador").value;
+        if(nombre.trim() === "0"){
+            valido = false;
+            error += " - Capacitador\n";
+        }
+        
+        var i;
+        var error_check = false;
+        for(i = 1; i < 6; i++){
+            var id_dia = "dia_" + i;
+            var dia_check = document.getElementById(id_dia).checked;
+            //alert(id_dia + " " +dia_check);
+            if(dia_check){
+                error_check = true;
+            } 
+        }
+        
+        if(!valido){
+            if(!error_check)
+                error += " - Selecione al menos un dia\n";
+            alert(error);
+        }
+        return valido;
+    }
+
+    function guardar() {
+        if (validar()) {
+            document.forms[0].submit();
+        }
+    }
+    
+{/literal}
+</script>
+
+<h1>Modificar Taller</h1>
+<p>Los campos marcado con <b>*</b> son obligatorios</p>
+
+<form autocomplete="off" name="formTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
+    <input type="hidden" id="accion" name="accion" value="modificar" />
+    <input type="hidden" id="id_taller" name="id_taller" value="{$id_taller}" />
+    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
+    
+    <label for="nombre">Nombre(*):</label> 
+    <input type="text" value="{$taller.nombre}" id="nombre" name="nombre" />
+    <br />
+
+    <label for="capacitador">Capacitador(*):</label> 
+    {html_capacitadores name="id_capacitador" seleccionar=$taller.id_capacitador}
+    <br />
+
+    <label for="dias">D&iacute;as de Dictado:</label>
+    <br /><br />
+    <table class="diascheck" style="width: 35%; float: right; margin-left: 90px; margin-right: 125px; margin-top: 0px; margin-bottom: 20px;">
+        {section name=d loop=$lista_dias}
+            <tr>
+                <input type="hidden" name="id_dia_taller_{$lista_dias[d].id_dia}" value="{$lista_dias[d].id_dia_taller}" />
+                {if $lista_dias[d].id_taller == $id_taller}
+                    <td>{$lista_dias[d].dia}</td>
+                    <td><input type="checkbox" id="dia_{$lista_dias[d].id_dia}" name="days_list[]" value="{$lista_dias[d].id_dia}" checked></td>
+                {else}
+                    <td>{$lista_dias[d].dia}</td>
+                    <td><input type="checkbox" id="dia_{$lista_dias[d].id_dia}" name="days_list[]" value="{$lista_dias[d].id_dia}" ></td>
+                {/if}
+            </tr>
+        {/section}
+    </table>
+    <br />
+    {if $lista_alumnos != null}
+    <h2>Listado de Alumnos que asisten al taller</h2>
+    <p>Selecione los alumnos que desea eliminar del curso</p>
+    <table style="width: 50%; border: none; padding-left: 10%;" >
+        {section name=a loop=$lista_alumnos}
+        <tr>
+            <td><input type="checkbox" name="alumnos[]" value="{$lista_alumnos[a].id_alumno}"></td>
+            <td style="text-align: left;">&DoubleRightArrow; {$lista_alumnos[a].nombre}</td>
+            {/section}
+        </tr>
+    </table>
+    <br />
+    {/if}
+    <input class="btnSubmit" type="button" name="enviar" value="Guardar" onclick="guardar();">
+</form>

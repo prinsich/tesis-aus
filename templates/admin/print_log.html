@@ -1,0 +1,24 @@
+{if $log == null}
+<p>sin resultados</p>
+{else}
+<table>
+    <tr>
+        <th>Usuario</th>
+        <th>Fecha</th>
+        <th>Acci&oacute;n</th>
+        <th>Clase</th>
+        <th>Objeto</th>
+        <th>Observaciones</th>
+    </tr>
+    {section name=l loop=$log}
+    <tr>
+        <td>{$log[l].user}</td>
+        <td>{$log[l].date_time|date_format:"Y/m/d H:i:s"}</td>
+        <td>{$log[l].action}</td>
+        <td>{$log[l].sobre}</td>
+        <td>{$log[l].objeto}</td>
+        <td>{$log[l].observaciones}</td>
+    </tr>
+    {/section}
+</table>
+{/if}

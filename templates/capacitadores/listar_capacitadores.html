@@ -1,0 +1,77 @@
+<script>
+    {$Sajax}
+    {literal}
+    
+    function ver_capacitador(id) {
+        var urlp = "index.php?section=capacitadores&sub=ver_capacitador&id_capacitador=" + id;
+        window.open(urlp, "_self");
+    }
+
+    function modificar_capacitador(id) {
+        var urlp = "index.php?section=capacitadores&sub=modificar_capacitador&id_capacitador=" + id;
+        window.open(urlp, "_self");
+    }
+
+    function alta_capacitador(id) {
+        if (confirm("Esta seguro que desea dar de alta este capacitador?")) {
+            var usrlogin = document.getElementById("usrlogin").value;
+            x_alta_capacitador(id, usrlogin, retorno_cb);
+        }
+    }
+
+    function baja_capacitador(id) {
+        if (confirm("Esta seguro que desea dar de baja este capacitador?")) {
+            var usrlogin = document.getElementById("usrlogin").value;
+            x_baja_capacitador(id, usrlogin, retorno_cb);
+        }
+    }
+
+    function retorno_cb(z) {
+        alert(z);
+        window.location.reload();
+    }
+
+    {/literal}
+</script>
+
+<h1>Capacitadores</h1>
+<p>Cantidad total de capacitadores {$cantidad_capacitadores}</p>
+
+<table class="zebra-striped" id="sortTableExample">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Apellido</th>
+            <th>Nombres</th>
+            <th>Tel&eacute;fono</th>
+            <th>Celular</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {counter start=0 print=false}
+        {section name=c loop=$lista_capacitadores}
+        <tr>
+            <td>{counter}</td>
+            <td>{$lista_capacitadores[c].apellido}</td>
+            <td>{$lista_capacitadores[c].nombre}</td>
+            <td>{$lista_capacitadores[c].telefono}</td>
+            <td>{$lista_capacitadores[c].celular}</td>
+            <td>{$lista_capacitadores[c].estado}</td>
+            <td>
+                <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_capacitador('{$lista_capacitadores[c].id_capacitador}')" />
+                <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_capacitador('{$lista_capacitadores[c].id_capacitador}')" />
+                {if $lista_capacitadores[c].estado eq "ACTIVO"}
+                <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_capacitador('{$lista_capacitadores[c].id_capacitador}')"/>
+                {else}
+                <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_capacitador('{$lista_capacitadores[c].id_capacitador}')"/>
+                {/if}
+            </td>
+        </tr>
+        {/section}
+    </tbody>
+</table> 
+<input type="hidden" value="{$usrlogin}" id="usrlogin" name="usrlogin"/>
+

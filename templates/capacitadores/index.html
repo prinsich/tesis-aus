@@ -1,0 +1,21 @@
+{if $sub eq "" || $sub eq "buscar_capacitadores"}
+	{include file="capacitadores/buscar_capacitadores.html"}
+	
+{elseif $sub eq "agregar_capacitador"}
+	{include file="capacitadores/agregar_capacitador.html"}
+	
+{elseif $sub eq "guardar_capacitador"}
+	{include file="capacitadores/guardar_capacitador.html"}
+	
+{elseif $sub eq "listar_capacitadores"}
+	{include file="capacitadores/listar_capacitadores.html"}
+
+{elseif $sub eq "ver_capacitador"}
+	{include file="capacitadores/ver_capacitador.html"}
+
+{elseif $sub eq "modificar_capacitador"}
+	{include file="capacitadores/modificar_capacitador.html"}
+	
+{else}
+	{include file="desarrollo.html"}
+{/if}

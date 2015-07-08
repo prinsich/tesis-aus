@@ -1,0 +1,30 @@
+{if $sub eq "" || $sub eq "admin"}
+	{include file="admin/admin.html"}
+
+{elseif $sub eq "buscar_usuario"}
+	{include file="admin/buscar_usuario.html"}
+	
+{elseif $sub eq "agregar_usuario"}
+	{include file="admin/agregar_usuario.html"}
+	
+{elseif $sub eq "guardar_usuario"}
+	{include file="admin/guardar_usuario.html"}
+	
+{elseif $sub eq "listar_usuarios"}
+	{include file="admin/listar_usuarios.html"}
+
+{elseif $sub eq "ver_usuario"}
+	{include file="admin/ver_usuario.html"}
+
+{elseif $sub eq "modificar_usuario"}
+	{include file="admin/modificar_usuario.html"}
+        
+{elseif $sub eq "ver_registro"}
+	{include file="admin/ver_registro.html"}
+        
+{elseif $sub eq "print_log"}
+	{include file="admin/print_log.html"}
+
+        {else}
+	{include file="desarrollo.html"}
+{/if}

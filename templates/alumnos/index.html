@@ -1,0 +1,21 @@
+{if $sub eq "" || $sub eq "buscar_alumno"}
+	{include file="alumnos/buscar_alumno.html"}
+	
+{elseif $sub eq "agregar_alumno"}
+	{include file="alumnos/agregar_alumno.html"}
+	
+{elseif $sub eq "guardar_alumno"}
+	{include file="alumnos/guardar_alumno.html"}
+	
+{elseif $sub eq "listar_alumnos"}
+	{include file="alumnos/listar_alumnos.html"}
+
+{elseif $sub eq "ver_alumno"}
+	{include file="alumnos/ver_alumno.html"}
+
+{elseif $sub eq "modificar_alumno"}
+	{include file="alumnos/modificar_alumno.html"}
+	
+{else}
+	{include file="desarrollo.html"}
+{/if}

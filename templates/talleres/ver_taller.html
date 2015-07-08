@@ -1,0 +1,40 @@
+<style>
+    td { /*border: none;*/ text-align: left; /*width: 10%;*/}
+</style>
+<h1>Ver Taller</h1>
+<table style="width: 70%; border: none; padding-left: 10%;" >
+    <tr>
+        <td style="width: 30%">Nombre:</td>
+        <td><b>{$taller.taller}</b></td>
+    </tr>
+    <tr>
+        <td>Capacitador:</td>
+        <td><b>{$taller.capacitador}</b></td>
+    </tr>
+</table>
+
+<h2>D&iacute;as de Dictado:</h2>
+
+<table style="width: 30%; border: none; padding-left: 10%;" >
+    {section name=d loop=$lista_dias}
+    <tr>
+        <td style="border: none;">
+        <img src="images/icons/direction_right.png" border="0" height="17" align="absmiddle" />
+            {$lista_dias[d].dia}
+        </td>
+    </tr>
+    {/section}
+</table>
+<br />
+
+<h2>Listado de Alumnos que asisten al taller</h2>
+<p>cantidad de alumnos: {$cantidad_alumnos}</p>
+<table style="width: 50%; border: none; padding-left: 10%;" >
+    {section name=a loop=$lista_alumnos}
+    <tr>
+        <td>&DoubleRightArrow; {$lista_alumnos[a].nombre}</td>
+        {/section}
+    </tr>
+</table>
+
+<input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">

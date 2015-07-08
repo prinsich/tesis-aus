@@ -1,0 +1,42 @@
+<script>
+    {$Sajax}
+    {literal}
+    
+    function buscar_talleres(){
+        var nombre = document.getElementById("nombre").value;
+        var id_capacitador = document.getElementById("id_capacitador").value;
+        var estado = document.getElementById("estado").value;
+        x_buscar_talleres(nombre, id_capacitador, estado, resultado_cb);
+    }
+    
+    function resultado_cb(z){
+        if(z === 0){
+            alert("No existe coincidencia con los datos ingresados\nPruebe nuevamente");
+        } else {
+            document.forms[0].submit();
+        }
+    }
+    {/literal}
+</script>
+
+
+<h1>Buscar Taller</h1>
+<form autocomplete="off" name="formBTaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
+    <label for="nombre">Nombre:</label>
+    <input type="text" value="" name="nombre" id="nombre"/>
+    </br>
+
+    <label for="capacitador">Capacitador:</label> 
+    {html_capacitadores name="id_capacitador"}
+    </br>
+
+    <label for="dni">Estado:</label>
+    <select id="estado" name="estado">
+        <option value=""> TODOS </option>
+        <option value="ACTIVO"> ACTIVO </option>
+        <option value="INACTIVO"> INACTIVO </option>
+    </select>
+    <br />
+
+    <input class="btnSubmit" type="button" name="buscar" value="Buscar" onclick="buscar_talleres()">
+</form>

@@ -1,0 +1,9 @@
+{if $sub eq "" || $sub eq "acceso"}
+    {include file="login/acceso.html"}
+{elseif $sub eq "registro"}
+    {include file="login/registro.html"} 
+{elseif $sub eq "lost_password"}
+    {include file="login/lost_password.html"} 
+{else}
+    {include file="desarrollo.html"}
+{/if}

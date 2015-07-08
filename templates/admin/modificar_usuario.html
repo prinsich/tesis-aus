@@ -1,0 +1,129 @@
+<script>
+    {literal}
+    function validar() {
+        
+        var valido = true;
+        var error = "Por favor complete los siguiente campos: \n";
+        
+        var usr = document.getElementById("user").value;
+        if (usr.trim() === "") {
+            valido = false;
+            error += " - DNI para el nombre de usuario\n";
+        }        
+        
+        var perfil = document.getElementById("perfil").value;
+        if (perfil === "00") {
+            valido = false;
+            error += " - Selecione un perfil\n";
+        }        
+              
+        var apellido = document.getElementById("apellido").value;
+        if (apellido.trim() === "") {
+            valido = false;
+            error += " - Apellido\n";
+        }
+
+        var nombre = document.getElementById("nombre").value;
+        if (nombre.trim() === "") {
+            valido = false;
+            error += " - Nombre\n";
+        }
+        
+        var domicilio = document.getElementById("domicilio").value;
+        if (domicilio.trim() === "") {
+            valido = false;
+            error += " - Domicilio\n";
+        }
+
+        var telefono = document.getElementById("telefono").value;
+        if (telefono.trim() === "") {
+            valido = false;
+            error += " - Telefono y/o celular\n";
+        }
+        
+        var email = document.getElementById("email").value;
+        if (email.trim() === "") {
+            valido = false;
+            error += " - Email\n";
+        }
+
+        if(!valido){
+            alert(error);
+        }
+        
+        return valido;
+    }
+    
+    function validarEmail() {
+        var email = document.getElementById("email").value;
+        expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(email.trim() !== ""){
+            if ( !expr.test(email) ){
+                alert("La direcci\u00F3n de correo " + email + " es incorrecta.");
+            }
+        }
+    }
+    
+    function guardar(){
+        
+        var valido = validar();
+                
+        if(valido){
+            document.forms[0].submit();
+        }
+    }
+    
+    {/literal}
+</script>
+
+<h1>Agregar Usuario</h1>
+
+<form autocomplete="off" name="formCapacitador" action="index.php?section=admin&sub=guardar_usuario" method="POST">
+    <input type="hidden" id="accion" name="accion" value="modificar" />
+    <input type="hidden" id="id_usuario" name="id_usuario" value="{$dato_usuario.id_usuario}" />
+    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
+    
+    <h2>Datos de login</h2>
+    
+    <label for="user">Usuario:</label>
+    <input type="text" value="{$dato_usuario.nombreusr}" disabled=""/>
+    <input type="hidden" value="{$dato_usuario.nombreusr}" id="user" name="user"/>
+    <br />
+
+    <label for="nombre">Perfil:</label>
+    {html_perfiles name="perfil" seleccionar=$dato_usuario.id_perfil}
+    <br />
+    
+    <label for="new_pass">Nueva Contrase&ntilde;a:</label>
+    <span class="diascheck">
+        <input type="radio" id="new_pass_si" name="new_pass" value="SI" />SI<br />
+        <input type="radio" id="new_pass_no" name="new_pass" value="NO" checked=""/>NO<br />
+    </span>
+    <br />
+    
+    <h2>Datos Personales</h2>
+    <label for="apellido">Apellido:</label>
+    <input type="text" value="{$dato_usuario.apellido}" id="apellido" name="apellido" onkeyup="this.value = this.value.toUpperCase();" />
+    <br />
+    
+    <label for="nombre">Nombres:</label>
+    <input type="text" value="{$dato_usuario.nombre}" id="nombre" name="nombre" onkeyup="this.value = this.value.toUpperCase();"/>
+    <br />
+
+    <label for="domicilio">Domicilio:</label>
+    <input type="text" value="{$dato_usuario.domicilio}" id="domicilio" name="domicilio" onkeyup="this.value = this.value.toUpperCase();"/>
+    <br />
+
+    <label for="telefono">Tel&eacute;fono de contacto:</label>
+    <input type="text" value="{$dato_usuario.telefono}" id="telefono" name="telefono" class="numeros"/>
+    <br />
+    
+    <label for="email">Email:</label>
+    <input type="text" value="{$dato_usuario.email}" id="email" name="email" onblur="validarEmail()" onkeyup="this.value = this.value.toUpperCase();"/>
+    <br />
+    
+    <div align="center">
+        <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
+        <input class="btnSubmit2" type="button" name="volver" value="volver" onclick="history.back();">
+    </div>
+</form>

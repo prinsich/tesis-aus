@@ -1,0 +1,88 @@
+<script>
+    {$Sajax}
+    
+    $(function () {
+        $("#desde").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+        $("#hasta").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+
+    function buscar() {
+        var desde = document.getElementById("desde").value;
+        var hasta = document.getElementById("hasta").value;
+        var usr = document.getElementById("usr").value;
+        var accion = document.getElementById("accion").value;
+        var clase = document.getElementById("clase").value;
+
+        document.getElementById("hidden_desde").value = desde;
+        document.getElementById("hidden_hasta").value = hasta;
+        document.getElementById("hidden_usr").value = usr;
+        document.getElementById("hidden_accion").value = accion;
+        document.getElementById("hidden_clase").value = clase;
+
+        x_ver_registro(desde, hasta, usr, accion, clase, buscar_cb);
+    }
+
+    function buscar_cb(log) {
+        if (log !== "") {
+            document.getElementById("capa_datos").innerHTML = log;
+            document.getElementById("div_form").style.display = "block";
+        } else {
+            document.getElementById("div_form").style.display = "none";
+        }
+    }
+
+    function imprimir() {
+        document.forms[0].submit();
+    }
+
+    function buscar_cb(log) {
+        document.getElementById("capa_datos").innerHTML = log;
+    }
+</script>
+<h1>Log de Acciones</h1>
+<p>Acciones realizadas por los usuarios del sistemas</p>
+<hr />
+<p>Filtros</p>
+<p>
+    Desde: <input type="text" value="" id="desde" name="desde" style="width: 100px" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Hasta: <input type="text" value="" id="hasta" name="hasta" style="width: 100px" />
+</p>
+
+<p>
+    Usuario: 
+    {html_log_usr name="usr" style="width: 130px;"}
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    Acci&oacute;n: 
+    {html_log_accion name="accion" style="width: 130px;"}
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    Clase: 
+    {html_log_clase name="clase" style="width: 130px;"}
+</p>
+
+<input type="button" class="btnSubmit" value="Buscar" id="search" name="search" onclick="buscar();"/>
+<hr />
+<p>Resultado</p>
+<div id="capa_datos">
+
+</div>
+<div id="div_form" style="display: inline">
+    <form autocomplete="off" id="formPrintLog" action="index.php?section=admin&sub=print_log" method="POST" >
+        <input type="hidden" value="" id="hidden_desde" name="hidden_desde" />
+        <input type="hidden" value="" id="hidden_hasta" name="hidden_hasta" />
+        <input type="hidden" value="" id="hidden_usr" name="hidden_usr" />
+        <input type="hidden" value="" id="hidden_accion" name="hidden_accion" />
+        <input type="hidden" value="" id="hidden_clase" name="hidden_clase" />
+        <input type="button" class="btnSubmit" value="Imprimir" id="print" name="print" onclick="imprimir();"/>
+    </form>
+</div>

@@ -1,0 +1,72 @@
+<script>
+    {literal}
+    
+    function validar(){
+        var valido = true;
+        var error = "Complete lis siguientes campos\n";
+        
+        var nombre = document.getElementById("nombre").value;
+        if(nombre.trim() === ""){
+            valido = false;
+            error += " - Nombre\n";
+        }
+        
+        var nombre = document.getElementById("id_capacitador").value;
+        if(nombre === "00"){
+            valido = false;
+            error += " - Capacitador\n";
+        }
+        
+        var i;
+        var error_check = false;
+        for(i = 1; i < 6; i++){
+            var id_dia = "dia_" + i;
+            var dia_check = document.getElementById(id_dia).checked;
+            if(dia_check){
+                error_check = true;
+            } 
+        }
+        
+        if(!valido){
+            if(!error_check)
+                error += " - Selecione al menos un dia\n";
+            alert(error);
+        }
+        return valido;
+    }
+    
+    function guardar(){
+        if(validar()){
+                document.forms[0].submit();
+        }
+    }
+    {/literal}
+</script>
+
+<h1>Agregar Taller</h1>
+<p>Los campos marcado con <b>*</b> son obligatorios</p>
+<form autocomplete="off" name="formTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
+    <input type="hidden" id="accion" name="accion" value="agregar" />
+    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
+    
+    <label for="nombre">Nombre(*):</label> 
+    <input type="text" value="" id="nombre" name="nombre" class="letras"/>
+    <br />
+
+    <label for="capacitador">Capacitador(*):</label> 
+    {html_capacitadores name="id_capacitador"}
+    <br />
+
+    <label for="dias">D&iacute;as de Dictado:</label>
+    <br /><br />
+    <table class="diascheck" style="width: 20%; float: right; margin-left: 90px; margin-right: 125px; margin-top: 0px; margin-bottom: 20px; ">
+        {section name=d loop=$lista_dias}
+        <tr>
+            <td style="text-align: left">{$lista_dias[d].dia}</td>
+            <td><input type="checkbox" id="dia_{$lista_dias[d].id_dia}" name="days_list[]" value="{$lista_dias[d].id_dia}"></td>
+        </tr>
+        {/section}
+    </table>
+    <br />
+    <input class="btnSubmit" type="button" name="enviar" value="Guardar" onclick="guardar();" />
+</form>

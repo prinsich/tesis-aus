@@ -1,0 +1,7 @@
+{if $sub eq "" || $sub eq "crear_certificados"}
+	{include file="certificados/crear_certificados.html"}
+{elseif $sub eq "" || $sub eq "imprimir"}
+	{include file="certificados/certificado.html"}
+{else}
+	{include file="desarrollo.html"}
+{/if}

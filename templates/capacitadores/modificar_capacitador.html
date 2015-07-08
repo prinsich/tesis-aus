@@ -1,0 +1,117 @@
+<script>
+    {literal}
+    
+    $(function () {
+        $("#fecha_nacimiento").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+    
+    
+    function validar() {
+        
+        var valido = true;
+        var error = "Por favor complete los siguiente campos: \n";
+
+        var apellido = document.getElementById("apellido").value;
+        if (apellido.trim() === "") {
+            valido = false;
+            error += " - Apellido\n";
+        }
+
+        var nombre = document.getElementById("nombre").value;
+        if (nombre.trim() === "") {
+            valido = false;
+            error += " - Nombre\n";
+        }
+
+        var telefono = document.getElementById("telefono").value;
+        var celular = document.getElementById("celular").value;
+        if (telefono.trim() === "" && celular.trim() === "") {
+            valido = false;
+            error += " - Telefono y/o celular\n";
+        }
+
+        var dni = document.getElementById("dni").value;
+        if (dni.trim() === "") {
+            valido = false;
+            error += " - D.N.I.\n";
+        }
+        
+        var fecha_nac = document.getElementById("fecha_nacimiento").value;
+        var edad = calcularEdad(fecha_nac);
+        if ( edad >= 18 ) {
+            valido = false;
+            error += " - El capacitador debe ser mayor a 18 a\u00F1os\n";
+        }
+
+        if(!valido){
+            alert(error);
+        }
+        
+        return valido;
+    }
+         
+    function guardar(){
+        if(validar()){
+            document.forms[0].submit();
+        }
+    }
+    {/literal}
+</script>
+
+<h1>Agregar Capacitador</h1>
+<h2>Datos Personales</h2>
+<p>Los campos marcado con <b>*</b> son obligatorios</p>
+<form autocomplete="off" name="formCapacitador" action="index.php?section=capacitadores&sub=guardar_capacitador" method="POST">
+    <input type="hidden" id="accion" name="accion" value="modificar" />
+    <input type="hidden" id="id_capacitador" name="id_capacitador" value="{$datos_capacitador.id_capacitador}" />
+    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
+    <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="{$fecha_hoy}" />
+    
+    <label for="apellido">Apellido(*):</label>
+    <input type="text" value="{$datos_capacitador.apellido}" id="apellido" name="apellido" class="letras" onkeyup="this.value = this.value.toUpperCase();" />
+    <br />
+
+    <label for="nombre">Nombres(*):</label>
+    <input type="text" value="{$datos_capacitador.nombre}" id="nombre" name="nombre" class="letras" onkeyup="this.value = this.value.toUpperCase();" />
+    <br />
+
+    <label for="dni">DNI(*):</label>
+    <input type="text" value="{$datos_capacitador.dni}" id="dni" name="dni" class="numeros" maxlength="8" />
+    <br />
+    
+    <label for="sexo">Sexo:</label> 
+    <select name="sexo" id="sexo" style="width: 300px;"> 
+        {if $datos_capacitador.sexo == "M"}
+            <option value="M" selected="selected" >MASCULINO</option>
+            <option value="F">FEMENINO</option>
+        {else}
+            <option value="M">MASCULINO</option>
+            <option value="F" selected="selected">FEMENINO</option>
+        {/if}
+    </select>
+    <br />
+
+    <label for="domicilio">Domicilio:</label>
+    <input type="text" value="{$datos_capacitador.domicilio}" id="domicilio" name="domicilio" onkeyup="this.value = this.value.toUpperCase();" />
+    <br />
+
+    <label for="telefono">Tel&eacute;fono(*):</label>
+    <input type="text" value="{$datos_capacitador.telefono}" id="telefono" name="telefono" class="numeros"/>
+    <br />
+    
+    <label for="celular">Celular(*):</label>
+    <input type="text" value="{$datos_capacitador.celular}" id="celular" name="celular" class="numeros"/>
+    <br />
+
+    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+    <input type="text" value="{$datos_capacitador.fecha_nacimiento}" id="fecha_nacimiento" name="fecha_nacimiento" readonly/>
+    <br />
+
+    <div align="center">
+        <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
+        <input class="btnSubmit2" type="button" name="cancel" value="Cancelar" onclick="location.href='index.php'">
+    </div>
+</form>
