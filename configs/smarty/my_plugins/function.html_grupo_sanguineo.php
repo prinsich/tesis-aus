@@ -38,7 +38,7 @@ function smarty_function_html_grupo_sanguineo($params, &$smarty) {
     
     //SALIDA
     $_output = "<select style='width: 300px;' name='$nombre' id='$nombre' $onchange $onblur $option> ";
-    $_output .= "<option value='0'> SELECIONAR </option>";
+    $_output .= "<option value='0'> SELECCIONAR </option>";
 
     $sql = "SELECT id_grupo_sanguineo, CONCAT(grupo_sanguineo, ' ', factor) AS gsanguineo
             FROM ".BASE_DATA.".grupo_sanguineos

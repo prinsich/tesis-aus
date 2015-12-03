@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     //FLECHA PARA IR ARRIBA
-    $('.ir-arriba').click(function () {
+    /*$('.ir-arriba').click(function () {
         $('body, html').animate({
             scrollTop: '0px'
         }, 300);
@@ -16,7 +16,7 @@ $(document).ready(function () {
     });
     
     //FLECHA PARA IR ABAJO
-    $('.ir-abajo').click(function () {
+    /*$('.ir-abajo').click(function () {
         $('body, html').animate({
             scrollTop: $(document).height()
         }, 300);
@@ -28,7 +28,7 @@ $(document).ready(function () {
         } else {
             $('.ir-abajo').slideUp(300);
         }
-    });
+    });*/
 
     //SOLO INGRESA LETRAS, ESPACIOS Y BORRAR Y TABULACION
     $(".letras").keypress(function (key) {
@@ -53,6 +53,8 @@ $(document).ready(function () {
                 && (key.keyCode !== 9) //tab
                 && (key.keyCode !== 37) //izq
                 && (key.keyCode !== 39) //der
+                && (key.which !== 46) //punto
+                && (key.which !== 44) //coma
                 )
             return false;
     });
@@ -64,7 +66,6 @@ $(document).ready(function () {
                 && (key.keyCode  !== 46) //retroceso
                 && (key.charCode !== 32) //espacio
                 && (key.which !== 8) //backspace
-                
                 && (key.keyCode !== 9) //tab
                 && (key.keyCode !== 37) //izq
                 && (key.keyCode !== 39) //der

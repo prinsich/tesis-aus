@@ -1,7 +1,7 @@
 <?php
 include_once("configs/Sajax.php");
 include_once("classes/class.Usuarios.php");
-include_once("classes/class.Estados.php");
+include_once("classes/class.Log_Estados.php");
 include_once("classes/class.Log.php");
 
 sajax_init();

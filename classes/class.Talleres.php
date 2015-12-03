@@ -43,14 +43,12 @@ class Talleres extends DBTable {
     }
     
     function listar_talleres(){
-        $sql = "SELECT talleres.id_taller, talleres.nombre, CONCAT(capacitadores.apellido,', ',capacitadores.nombre) AS capacitador, COUNT(id_alumno) AS cant_alumnos, estado
+        $sql = "SELECT talleres.id_taller, talleres.nombre, CONCAT(capacitadores.apellido,', ',capacitadores.nombre) AS capacitador, COUNT(id_alumno) AS cant_alumnos, talleres.estado
                 FROM talleres
                     JOIN capacitadores ON talleres.id_capacitador = capacitadores.id_capacitador
                     LEFT JOIN taller_alumno ON talleres.id_taller = taller_alumno.id_taller
-                    JOIN estados ON talleres.id_taller = estados.id_sobre
-                WHERE sobre LIKE '$this->className' AND activo = 1
                 GROUP BY id_taller
-                ORDER BY id_taller ASC";
+                ORDER BY talleres.estado, id_taller ASC";
         
         $lista_talleres = $this->consultar($sql);
         return $lista_talleres;
@@ -86,15 +84,14 @@ class Talleres extends DBTable {
     }
     
     function buscar_talleres($nombre, $id_capacitador, $estado){
-        $sql = "SELECT talleres.id_taller, talleres.nombre, CONCAT(capacitadores.apellido,', ',capacitadores.nombre) AS capacitador, COUNT(id_alumno) AS cant_alumnos, estado
+        $sql = "SELECT talleres.id_taller, talleres.nombre, CONCAT(capacitadores.apellido,', ',capacitadores.nombre) AS capacitador, COUNT(id_alumno) AS cant_alumnos, talleres.estado
                 FROM talleres
                     JOIN capacitadores ON talleres.id_capacitador = capacitadores.id_capacitador
                     LEFT JOIN taller_alumno ON talleres.id_taller = taller_alumno.id_taller
-                    JOIN estados ON talleres.id_taller = estados.id_sobre
-                WHERE sobre LIKE '$this->className' AND activo = 1";
+                WHERE 1";
         
         if($nombre != ""){
-            $sql .= " AND UPPER(talleres.nombre) LIKE '%".trim($nombre)."%' ";
+            $sql .= " AND talleres.nombre LIKE '$nombre%' ";
         }
         
         if($id_capacitador != 0){
@@ -102,15 +99,39 @@ class Talleres extends DBTable {
         }
         
         if($estado != "") {
-            $sql .= " AND UPPER(estado) LIKE '".trim($estado)."' ";
+            $sql .= " AND talleres.estado LIKE '$estado' ";
         }
         
-        $sql .=" GROUP BY id_taller
-                 ORDER BY id_taller ASC";
+        $sql .=" GROUP BY talleres.id_taller
+                 ORDER BY talleres.id_taller ASC";
+        
         //var_dump($sql);
         //die;
         $lista_talleres = $this->consultar($sql);
         return $lista_talleres;
+    }
+    
+    function darAlta($id_taller){
+        $sql = "UPDATE talleres SET estado = 'ACTIVO' WHERE id_taller = $id_taller";
+        $this->ejecutar($sql);
+    }
+    
+    function darBaja($id_taller){
+        $sql = "UPDATE talleres SET estado = 'INACTIVO' WHERE id_taller = $id_taller";
+        $this->ejecutar($sql);
+    }
+    
+    function quitarCapacitador($id_taller){
+        $sql = "UPDATE talleres SET id_capacitador = 0 WHERE id_taller = $id_taller";
+        $this->ejecutar($sql);
+    }
+    
+    function checkCapacitador($id_taller){
+        $sql = "SELECT id_capacitador FROM talleres  WHERE id_taller = $id_taller";
+        $result = $this->consultar($sql);
+        if($result[0]["id_capacitador"] != 0)
+            return true;
+        else            return false;
     }
 }
 // fin de clase

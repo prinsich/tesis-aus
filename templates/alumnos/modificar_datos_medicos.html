@@ -1,3 +1,5 @@
+<h2>Datos M&eacute;dicos</h2>
+
 <label for="grupo_sanguineo">Grupo Sangu&iacute;neo:</label>
 {html_grupo_sanguineo name="grupo_sanguineo" seleccionar=$datos_medicos.id_grupo_sanguineo}
 <br />
@@ -22,56 +24,54 @@
 
 {if $datos_medicos.vacunacion eq "COMPLETAS"}
 <div id="vac_faltantes" style="display: none">
-{else}    
-<div id="vac_faltantes" style="display: inline">
-{/if}
-    <label for="vacunas_faltantes">Vacunas Faltantes:</label>
-    <textarea id="vacunas_faltantes" name="vacunas_faltantes">{$datos_medicos.vacunas_faltantes}</textarea>
+    {else}    
+    <div id="vac_faltantes" style="display: inline">
+        {/if}
+        <label for="vacunas_faltantes">Vacunas Faltantes:</label>
+        <textarea id="vacunas_faltantes" name="vacunas_faltantes">{$datos_medicos.vacunas_faltantes}</textarea>
+        <br />
+    </div>
+
+    <label for="enfermedades_padecidas">Enfermedades Padecidas (especificar edad aproximada):</label>
+    <textarea id="enfermedades_padecidas" name="enfermedades_padecidas">{$datos_medicos.enfermedades_padecidas}</textarea>
     <br />
-</div>
 
-<label for="enfermedades_padecidas">Enfermedades Padecidas (especificar edad aproximada):</label>
-<textarea id="enfermedades_padecidas" name="enfermedades_padecidas">{$datos_medicos.enfermedades_padecidas}</textarea>
-<br />
+    <label for="alergias">Alergias:</label>
+    <textarea id="alergias" name="alergias">{$datos_medicos.alergias}</textarea>
+    <br />
 
-<label for="alergias">Alergias:</label>
-<textarea id="alergias" name="alergias">{$datos_medicos.alergias}</textarea>
-<br />
+    <label for="secuelas">Secuelas:</label>
+    <textarea id="secuelas" name="secuelas">{$datos_medicos.secuelas}</textarea>
+    <br />
 
-<label for="secuelas">Secuelas:</label>
-<textarea id="secuelas" name="secuelas">{$datos_medicos.secuelas}</textarea>
-<br />
+    <label for="cuidados_especiales">Cuidados Especiales:</label>
+    <textarea id="cuidados_especiales" name="cuidados_especiales">{$datos_medicos.cuidados_especiales}</textarea>
+    <br />
 
-<label for="cuidados_especiales">Cuidados Especiales:</label>
-<textarea id="cuidados_especiales" name="cuidados_especiales">{$datos_medicos.cuidados_especiales}</textarea>
-<br />
+    <label for="enfermedades_cogenitas">Enfermedades Cong&eacute;nitas:</label>
+    <textarea id="enfermedades_cogenitas" name="enfermedades_cogenitas">{$datos_medicos.enfermedades_cogenitas}</textarea>
+    <br />
 
-<label for="enfermedades_cogenitas">Enfermedades Cong&eacute;nitas:</label>
-<textarea id="enfermedades_cogenitas" name="enfermedades_cogenitas">{$datos_medicos.enfermedades_cogenitas}</textarea>
-<br />
+    <label for="cirugias">Cirug&iacute;as (especificar edad aproximada):</label>
+    <textarea id="cirugias" name="cirugias">{$datos_medicos.cirugias}</textarea>
+    <br />
 
-<label for="cirugias">Cirug&iacute;as (especificar edad aproximada):</label>
-<textarea id="cirugias" name="cirugias">{$datos_medicos.cirugias}</textarea>
-<br />
+    <label for="tratamientos_prolongados">Tratamientos M&eacute;dicos Prolongados:</label>
+    <textarea id="tratamientos_prolongados" name="tratamientos_prolongados">{$datos_medicos.tratamientos_prolongados}</textarea>
+    <br />
 
-<label for="tratamientos_prolongados">Tratamientos M&eacute;dicos Prolongados:</label>
-<textarea id="tratamientos_prolongados" name="tratamientos_prolongados">{$datos_medicos.tratamientos_prolongados}</textarea>
-<br />
+    <label for="tratamientos_actuales">Tratamientos M&eacute;dicos Actuales:</label>
+    <textarea id="tratamientos_actuales" name="tratamientos_actuales">{$datos_medicos.tratamientos_actuales}</textarea>
+    <br />
 
-<label for="tratamientos_actuales">Tratamientos M&eacute;dicos Actuales:</label>
-<textarea id="tratamientos_actuales" name="tratamientos_actuales">{$datos_medicos.tratamientos_actuales}</textarea>
-<br />
+    <label for="medicacion_actual">Medicamentos que toma actualmente:</label>
+    <textarea id="medicacion_actual" name="medicacion_actual">{$datos_medicos.medicacion_actual}</textarea>
+    <br />
 
-<label for="medicacion_actual">Medicamentos que toma actualmente:</label>
-<textarea id="medicacion_actual" name="medicacion_actual">{$datos_medicos.medicacion_actual}</textarea>
-<br />
+    <label for="urgencias">En caso de URGENCIA, M&eacute;dicos autorizados para su tratamiento y Hospitales o Centros M&eacute;dicos para su traslado:</label>
+    <textarea id="urgencias" name="urgencias">{$datos_medicos.urgencias}</textarea>
+    <br />
 
-<label for="urgencias">En caso de URGENCIA, M&eacute;dicos autorizados para su tratamiento y Hospitales o Centros M&eacute;dicos para su traslado:</label>
-<textarea id="urgencias" name="urgencias">{$datos_medicos.urgencias}</textarea>
-<br />
-
-<label for="obra_social">Obra Social:</label>
-<input type="text" value="{$datos_medicos.obra_social}" id="obra_social" name="obra_social" />
-<br />
-
-<h3>El taller se encuentra protegido por Seguro San Crist&iacute;bal.</h3>
+    <label for="obra_social">Obra Social:</label>
+    <input type="text" value="{$datos_medicos.obra_social}" id="obra_social" name="obra_social" />
+    <br />

@@ -1,6 +1,6 @@
 <?php
 include_once("classes/class.Capacitador.php");
-include_once("classes/class.Estados.php");
+include_once("classes/class.Log_Estados.php");
 include_once("classes/class.Log.php");
 
 extract($_POST);
@@ -26,6 +26,7 @@ $datos_capacitador["telefono"] = $datos["telefono"];
 $datos_capacitador["celular"] = $datos["celular"];
 $datos_capacitador["dni"] = $datos["dni"];
 $datos_capacitador["fecha_nacimiento"] = $datos["fecha_nacimiento"];
+$datos_capacitador["estado"] = "ACTIVO";
 
 
 if ($datos_capacitador["id_capacitador"] == null) {
@@ -40,7 +41,7 @@ $id_capacitador = $capacitador->guardar($datos_capacitador);
 // Dar de alta como capacitador
 //------------------------------------------------------------------------------
 if ($datos["accion"] == "agregar"){
-    $estado = new Estados($db);
+    $estado = new Log_Estados($db);
     $estado->darAlta($capacitador->getClassName(), $id_capacitador, $datos["usrlogin"]);
 }
 

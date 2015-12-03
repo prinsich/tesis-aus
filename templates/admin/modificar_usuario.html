@@ -94,24 +94,17 @@
     {html_perfiles name="perfil" seleccionar=$dato_usuario.id_perfil}
     <br />
     
-    <label for="new_pass">Nueva Contrase&ntilde;a:</label>
-    <span class="diascheck">
-        <input type="radio" id="new_pass_si" name="new_pass" value="SI" />SI<br />
-        <input type="radio" id="new_pass_no" name="new_pass" value="NO" checked=""/>NO<br />
-    </span>
-    <br />
-    
     <h2>Datos Personales</h2>
     <label for="apellido">Apellido:</label>
-    <input type="text" value="{$dato_usuario.apellido}" id="apellido" name="apellido" onkeyup="this.value = this.value.toUpperCase();" />
+    <input type="text" value="{$dato_usuario.apellido}" id="apellido" name="apellido"   />
     <br />
     
     <label for="nombre">Nombres:</label>
-    <input type="text" value="{$dato_usuario.nombre}" id="nombre" name="nombre" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="{$dato_usuario.nombre}" id="nombre" name="nombre"  />
     <br />
 
     <label for="domicilio">Domicilio:</label>
-    <input type="text" value="{$dato_usuario.domicilio}" id="domicilio" name="domicilio" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="{$dato_usuario.domicilio}" id="domicilio" name="domicilio"  />
     <br />
 
     <label for="telefono">Tel&eacute;fono de contacto:</label>
@@ -119,7 +112,7 @@
     <br />
     
     <label for="email">Email:</label>
-    <input type="text" value="{$dato_usuario.email}" id="email" name="email" onblur="validarEmail()" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="{$dato_usuario.email}" id="email" name="email" onblur="validarEmail()"  />
     <br />
     
     <div align="center">

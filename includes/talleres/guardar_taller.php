@@ -3,7 +3,7 @@
 include_once("classes/class.Talleres.php");
 include_once("classes/class.Dias_Talleres.php");
 include_once("classes/class.Taller_Alumno.php");
-include_once("classes/class.Estados.php");
+include_once("classes/class.Log_Estados.php");
 include_once("classes/class.Log.php");
 
 extract($_POST);
@@ -22,6 +22,7 @@ if ($datos["accion"] == "modificar") {
 
 $datos_taller["id_capacitador"] = $datos["id_capacitador"];
 $datos_taller["nombre"] = $datos["nombre"];
+$datos_taller["estado"] = "ACTIVO";
 
 if ($datos_taller["id_taller"] == null) {
     $taller = new Talleres($db);
@@ -69,7 +70,7 @@ if (isset($datos['alumnos'])) {
 // Dar de alta como taller
 //------------------------------------------------------------------------------
 if ($datos["accion"] == "agregar"){
-    $estado = new Estados($db);
+    $estado = new Log_Estados($db);
     $estado->darAlta($taller->getClassName(), $id_taller, $datos["usrlogin"]);
 }
 

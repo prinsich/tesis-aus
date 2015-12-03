@@ -5,7 +5,7 @@ include_once("classes/class.Datos_Familiares.php");
 include_once("classes/class.Datos_Medicos.php");
 include_once("classes/class.Datos_Personales.php");
 include_once("classes/class.Taller_Alumno.php");
-include_once("classes/class.Estados.php");
+include_once("classes/class.Log_Estados.php");
 include_once("classes/class.Log.php");
 
 extract($_POST);
@@ -39,6 +39,7 @@ $datos_alumno["escuela"] = $datos["escuela"];
 $datos_alumno["anio"] = $datos["anio"];
 $datos_alumno["turno"] = $datos["turno"];
 $datos_alumno["alta_seguro"] = $datos["alta_seguro"];
+$datos_alumno["estado"] = "ACTIVO";
 
 if ($datos_alumnos["id_alumno"] == null) {
     $alumno = new Alumno($db);
@@ -73,19 +74,19 @@ if (isset($datos['talleres_list'])) {
 //------------------------------------------------------------------------------
 //Datos Familiares
 //------------------------------------------------------------------------------
-$cantidad_familiares = $datos["cant_filas"];
+$cantidad_familiares = 10;
 $i = 0;
 for ($i = 0; $i < $cantidad_familiares; $i++) {
-    if (isset($datos["nombre_apellido_" . $i])) {
+    if (($datos["nombre_apellido_" . $i]) != "") {
         if ($datos["accion"] == "modificar") {
-            $datos_familiares["id_familiar"] = $datos["id_familiar_" . $i];
-        } else if ($datos["accion"] == "agregar") {
-            $datos_familiares["id_familiar"] = null;
-        }
-
-        if ($datos["accion"] == "modificar") {
+            if($datos["id_familiar_" . $i] == "null"){
+                $datos_familiares["id_familiar"] = null;
+            } else {
+                $datos_familiares["id_familiar"] = $datos["id_familiar_" . $i];
+            }
             $datos_familiares["id_alumno"] = $datos["id_alumno"];
         } else if ($datos["accion"] == "agregar") {
+            $datos_familiares["id_familiar"] = null;
             $datos_familiares["id_alumno"] = $id_alumno;
         }
 
@@ -171,7 +172,7 @@ $personal->guardar($datos_personales);
 // Dar de alta como capacitador
 //------------------------------------------------------------------------------
 if ($datos["accion"] == "agregar"){
-    $estado = new Estados($db);
+    $estado = new Log_Estados($db);
     $estado->darAlta($alumno->getClassName(), $id_alumno, $datos["usrlogin"]);
 }
 

@@ -1,0 +1,105 @@
+<script>
+    {$Sajax}
+    {literal}
+    function newpassword() {
+        var usr = document.getElementById("user").value;
+        var pass1 = document.getElementById("pass1").value;
+        var pass2 = document.getElementById("pass1").value;
+        var valida = true;
+
+        //password sin espacios
+        var espacios = false;
+        var cont = 0;
+
+        while (!espacios && (cont < pass1.length)) {
+            if (pass1.charAt(cont) == " ")
+                espacios = true;
+            cont++;
+        }
+
+        if (espacios) {
+            alert("La contraseña no puede contener espacios en blanco");
+            valida = false;
+        }
+
+        //password con mas de 8 caracteres
+        if (pass1.length < 8 || pass2.length < 8) {
+            alert("Los campos de la password deben tener mas de 8 caracteres");
+            valida = false;
+        }
+        
+        //password iguales
+        if (pass1 != pass2) {
+            alert("Las passwords deben de coincidir");
+            valida = false;
+        }
+        
+        if(valida){
+            x_newPassword(usr, pass1, newPassword_cb);
+        }
+    }
+
+    function newPassword_cb() {
+        alert("La contrase\u00F1a se cmabio con exito");
+    }
+    {/literal}
+</script>
+
+<style>
+    td { /*border: none;*/ text-align: left; /*width: 10%;*/}
+</style>
+<h1>Mis Datos</h1>
+
+<h2>Datos de Login</h2>
+<table style="width: 70%; border: none; padding-left: 10%;" >
+    <tr>
+        <td style="width: 55%">Usuario</td>
+        <td><b>{$dato_usuario.nombreusr}</b></td>
+    <input type="hidden" id="user" value="{$dato_usuario.nombreusr}"/>
+</tr>
+<tr>
+    <td>Perfil:</td>
+    <td><b>{$dato_usuario.perfil}</b></td>
+</tr>
+</table>
+
+<h2>Datos Personales</h2>
+<table style="width: 70%; border: none; padding-left: 10%;" >
+    <tr>
+        <td style="width: 55%">Apellido:</td>
+        <td><b>{$dato_usuario.apellido}</b></td>
+    </tr>
+    <tr>
+        <td>Nombres:</td>
+        <td><b>{$dato_usuario.nombre}</b></td>
+    </tr>
+    <tr>
+        <td>Domicilio:</td>
+        <td><b>{$dato_usuario.domicilio}</b></td>
+    </tr>
+    <tr>
+        <td>Tel&eacute;fono:</td>
+        <td><b>{$dato_usuario.telefono}</b></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><b>{$dato_usuario.email}</b></td>
+    </tr>
+</table>
+
+<h2>Nueva Contrase&ntilde;a</h2>
+<table style="width: 70%; border: none; padding-left: 10%;" >
+    <tr>
+        <td style="width: 55%">Nueva Contrase&ntilde;a</td>
+        <td><input type="password" value="" id="pass1" name="pass1"/></td>
+    </tr>
+    <tr>
+        <td>Repita Contrase&ntilde;a</td>
+        <td><input type="password" value="" id="pass2" name="pass2"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: center"><input class="btnSubmit2" type="button" name="newpass" id="newpass" value="Crear nueva contrase&ntilde;a" onclick="newpassword()"/></td>
+    </tr>
+</table>
+
+<input class="btnSubmit" type="button" name="volver" value="Volver" onclick="history.back();">

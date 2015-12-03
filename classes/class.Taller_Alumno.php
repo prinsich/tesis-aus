@@ -67,7 +67,11 @@ class Taller_Alumno extends DBTable {
         
         $id_taller_alumno =  $this->consultar($sql);
         return $id_taller_alumno;
-        
+    }
+    
+    function darBajaAlumno($id_alumno){
+        $sql = "DELETE FROM taller_alumno WHERE id_alumno = $id_alumno";
+        $this->ejecutar($sql);
     }
 }
 // fin de clase

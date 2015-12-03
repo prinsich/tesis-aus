@@ -2,7 +2,7 @@
 
 include_once("configs/Sajax.php");
 include_once("classes/class.Usuarios.php");
-include_once("classes/class.Estados.php");
+include_once("classes/class.Log_Estados.php");
 include_once("classes/class.Log.php");
 
 sajax_init();
@@ -10,13 +10,13 @@ sajax_export("buscar_usuario", "buscar_usuarios", "alta_usuario", "baja_usuario"
 
 function buscar_usuario($user) {
     global $db;
-    $sql = "SELECT id_usuario
+    $sql = "SELECT count(id_usuario) as nro
                 FROM usuarios
                 WHERE nombreusr = '$user'";
-
+    
     $usr = $db->getAll($sql);
-
-    if ($usr == NULL) {
+    
+    if ($usr[0]["nro"] == "0") {
         return 0;
     } else {
         return 1;
@@ -61,7 +61,7 @@ function alta_usuario($id_usuario, $usrlogin) {
     $usuario = new Usuarios($db, $id_usuario);
     
     //CREA EL NUEVO ESTADO
-    $estado = new Estados($db);
+    $estado = new Log_Estados($db);
     $estado->darAlta($usuario->getClassName(), $id_usuario, $usrlogin);
     
     // REGRISTRO EN EL LOG
@@ -76,7 +76,7 @@ function baja_usuario($id_usuario, $usrlogin) {
     $usuario = new Usuarios($db, $id_usuario);
     
     //CREA EL NUEVO ESTADO
-    $estado = new Estados($db);
+    $estado = new Log_Estados($db);
     $estado->darBaja($usuario->getClassName(), $id_usuario, $usrlogin);
     
     // REGRISTRO EN EL LOG

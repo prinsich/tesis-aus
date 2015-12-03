@@ -18,7 +18,13 @@
     </tr>
     <tr>
         <td>Sexo:</td>
-        <td><b>{$datos_capacitador.sexo}</b></td>
+        <td><b>
+                {if $datos_capacitador.sexo eq "M"}
+                    MASCULINO
+                {else}
+                    FEMENINO
+                {/if}
+            </b></td>
     </tr>
     <tr>
         <td>Domicilio:</td>
@@ -34,7 +40,11 @@
     </tr>
     <tr>
         <td>Fecha de Nacimiento:</td>
-        <td><b>{$datos_capacitador.fecha_nacimiento}</b></td>
+        <td><b>
+                {if $datos_capacitador.fecha_nacimiento neq "0000-00-00"}
+                    {$datos_capacitador.fecha_nacimiento}
+                {/if}
+            </b></td>
     </tr>
 
 </table>
@@ -48,4 +58,4 @@
         {/section}
     </tr>
 </table>
-<input class="btnSubmit2" type="button" name="volver" value="volver" onclick="history.back();">
+<input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">

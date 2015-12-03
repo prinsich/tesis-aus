@@ -1,5 +1,27 @@
 <script>
+    {$Sajax}
     {literal}
+    
+    function verficar_disponibilidad(){
+        if(validar()){
+            var nombre = document.getElementById("nombre").value;
+            var id_capacitador = document.getElementById("id_capacitador").value;
+            var dias = new Array();
+            dias.push(""); 
+            for(i = 1; i < 6; i++){
+                var id_dia = "dia_" + i;
+                dias.push(document.getElementById(id_dia).checked); 
+            }
+            x_verficar_disponibilidad("agregar", "0", nombre, id_capacitador, dias, verficar_disponibilidad_cb);
+        }
+    }
+    
+    function verficar_disponibilidad_cb(z){
+        alert(z);
+        if(z === "OK"){
+            document.getElementById("guardar").disabled = false;
+        }
+    }
     
     function validar(){
         var valido = true;
@@ -11,8 +33,8 @@
             error += " - Nombre\n";
         }
         
-        var nombre = document.getElementById("id_capacitador").value;
-        if(nombre === "00"){
+        var capacitador = document.getElementById("id_capacitador").value;
+        if(capacitador === "00"){
             valido = false;
             error += " - Capacitador\n";
         }
@@ -40,6 +62,13 @@
                 document.forms[0].submit();
         }
     }
+    
+    function salir() {
+        var respuesta = confirm("Esta seguro q desea salir?");
+        if (respuesta)
+            window.location = "index.php";
+    }
+   
     {/literal}
 </script>
 
@@ -50,11 +79,11 @@
     <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
     
     <label for="nombre">Nombre(*):</label> 
-    <input type="text" value="" id="nombre" name="nombre" class="letras"/>
+    <input type="text" value="" id="nombre" name="nombre" class="letras"  />
     <br />
 
     <label for="capacitador">Capacitador(*):</label> 
-    {html_capacitadores name="id_capacitador"}
+    {html_capacitadores name="id_capacitador" estado="ACTIVO"}
     <br />
 
     <label for="dias">D&iacute;as de Dictado:</label>
@@ -67,6 +96,10 @@
         </tr>
         {/section}
     </table>
-    <br />
-    <input class="btnSubmit" type="button" name="enviar" value="Guardar" onclick="guardar();" />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div style="text-align: center">
+    <input class="btnSubmit2" type="button" name="verificar" id="verificar" value="Verficar Disponibilidad" onclick="verficar_disponibilidad();" />
+    <input class="btnSubmit2" type="button" name="guardar" id="guardar" value="Guardar" onclick="guardar();" disabled/>
+    <input class="btnSubmit2" type="button" name="volver" id="volver" value="Cancelar" onclick="salir()">
+    </div>
 </form>

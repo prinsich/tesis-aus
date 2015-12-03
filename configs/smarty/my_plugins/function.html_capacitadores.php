@@ -11,6 +11,7 @@ function smarty_function_html_capacitadores($params) {
     $nombre = "capacitadores";
     $onchange = "";
     $seleccionar = "";
+    $estado = "ALL";
     $option = "";
 
     $row = array();
@@ -26,6 +27,9 @@ function smarty_function_html_capacitadores($params) {
                 case 'seleccionar':
                     $seleccionar = $_val;
                     break;
+                case 'estado':
+                    $estado = $_val;
+                    break;
                 default:
                     $option .= " " . $_key . "='" . $_val . "' ";
                     break;
@@ -37,10 +41,12 @@ function smarty_function_html_capacitadores($params) {
     $_output .= "<option value='0'> SELECCIONAR </option>";
 
         $sql = "SELECT id_capacitador, CONCAT(apellido, ', ', nombre) AS nombre
-                FROM capacitadores 
-                    JOIN estados ON capacitadores.id_capacitador = estados.id_sobre
-                WHERE sobre LIKE 'Capacitador' AND activo = 1 AND estado LIKE 'ACTIVO'";
-
+                FROM capacitadores
+                WHERE id_capacitador != 0";
+        if($estado != "ALL"){        
+            $sql .= " AND estado LIKE '$estado'";
+        }
+        
         $resultSetSql = $db->query($sql);
         while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {
             

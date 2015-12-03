@@ -72,28 +72,26 @@
         return true;
         
     }
-    
-    var nuevo_user = true;
+
     function buscar_usuario_cb(z){
-        if(z === 0){
+        if(z === 1){
             alert("El usuario ya existe");
-            nuevo_user = false;
+            document.getElementById("user").value = "";
         }
     }
          
     function guardar(){
         
         var valido = validar();
-        buscar_usuario();
                 
-        if(valido && nuevo_user){
+        if(valido){
             document.forms[0].submit();
         }
     }
     
+    
     {/literal}
 </script>
-<script src="javascript/date/datetimepicker_css.js"></script>
 
 <h1>Agregar Usuario</h1>
 
@@ -103,11 +101,13 @@
     <input type="hidden" id="new_pass" name="new_pass" value="SI" />
     
     <h2>Datos de login</h2>
-    <label for="user">Nombre de usuario: (use el dni de la persona)</label>
-    <input type="text" value="" id="user" name="user" />
+    <label for="user">Nombre de usuario:(dni de la persona)</label>
+    <input type="text" value="" id="user" name="user" onchange="buscar_usuario()"/>
     <br />
-
     <label></label>
+    <br>
+    <label for="password">Contrase&ntilde;a temporal:</label>
+    <input type="text" value="{$password}" id="password" name="password" readonly=""/>
     <br />
     
     <label for="perfil">Perfil:</label>
@@ -116,15 +116,15 @@
     
     <h2>Datos Personales</h2>
     <label for="apellido">Apellido:</label>
-    <input type="text" value="" id="apellido" name="apellido" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="" id="apellido" name="apellido"  />
     <br />
 
     <label for="nombre">Nombres:</label>
-    <input type="text" value="" id="nombre" name="nombre" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="" id="nombre" name="nombre"  />
     <br />
 
     <label for="domicilio">Domicilio:</label>
-    <input type="text" value="" id="domicilio" name="domicilio" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="" id="domicilio" name="domicilio"  />
     <br />
 
     <label for="telefono">Tel&eacute;fono de contacto:</label>
@@ -132,7 +132,7 @@
     <br />
     
     <label for="email">Email:</label>
-    <input type="text" value="" id="email" name="email" onblur="validarEmail()" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="" id="email" name="email" onblur="validarEmail()"  />
     <br />
 
     <div align="center">

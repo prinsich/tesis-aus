@@ -1,10 +1,7 @@
 <script>
-    {
-        $Sajax
-    }
-    {
-        literal
-    }
+    {$Sajax}
+    {literal}
+    
     function ver_taller(id) {
         var urlp = "index.php?section=talleres&sub=ver_taller&id_taller=" + id;
         window.open(urlp, "_self");
@@ -16,14 +13,14 @@
     }
 
     function alta_taller(id) {
-        if (confirm("Esta seguro que desea borrar este taller?")) {
+        if (confirm("Esta seguro que desea dar de alta este taller?")) {
             var usrlogin = document.getElementById("usrlogin").value;
             x_alta_taller(id, usrlogin, retorno_cb);
         }
     }
 
     function baja_taller(id) {
-        if (confirm("Esta seguro que desea borrar este taller?")) {
+        if (confirm("Esta seguro que desea dar de baja este taller?")) {
             var usrlogin = document.getElementById("usrlogin").value;
             x_baja_taller(id, usrlogin, retorno_cb);
         }
@@ -37,20 +34,35 @@
     }
 
     function retorno_cb(z) {
-        alert(z);
-        window.location.reload();
+        if(typeof(z) === "string"){
+            alert(z);
+            window.location.reload();
+        } else {
+            alert(z[1]);
+            modificar_taller(z[0]);
+        }
+        
     }
-    {
-        /literal}
+    
+    {/literal}
 </script>
 
 <h1>Talleres</h1>
-<p>
-    Cantidad de talleres {$cantidad_talleres}<br/>
-    Estados: 
-    <select>
+<form autocomplete="off" id="formBAlumno" name="formBAlumno" action="index.php?section=talleres&sub=listar_talleres" method="POST">
+
+    <p>Cantidad de Talleres: {$cantidad_talleres}<br />
+    Estado:
+    <input type="hidden" value="" name="nombre" id="nombre"/>
+    <input type="hidden" value="" name="id_capacitador" id="id_capacitador"/>
+
+    <select id="estado" name="estado">
+        <option value=""> TODOS </option>
+        <option value="ACTIVO"> ACTIVO </option>
+        <option value="INACTIVO"> INACTIVO </option>
     </select>
-</p>
+    <button type="submit" form="formBAlumno" value="filtrar">Filtrar</button>
+    </p>
+</form>
 <div id="listado">
     <table class="zebra-striped" id="sortTableExample">
         <thead>
@@ -64,7 +76,7 @@
             </tr>
         </thead>
         <tbody>
-            {counter start=1 print=false}
+            {counter start=0 print=false}
             {section name=t loop=$lista_talleres}
             <tr>
                 <td>{counter}</td>
@@ -74,8 +86,8 @@
                 <td>{$lista_talleres[t].estado}</td>
                 <td>
                     <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_taller('{$lista_talleres[t].id_taller}')" />
-                    <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_taller('{$lista_talleres[t].id_taller}')" />
                     {if $lista_talleres[t].estado == "ACTIVO"}
+                    <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_taller('{$lista_talleres[t].id_taller}')" />
                     <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_taller('{$lista_talleres[t].id_taller}')"/>
                     {else}
                     <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_taller('{$lista_talleres[t].id_taller}')"/>

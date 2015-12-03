@@ -4,9 +4,9 @@
 <h1>Ver Alumno</h1>
 <h2>Datos Personales</h2>
 
-<table style="width: 70%; border: none; padding-left: 10%;" >
+<table style="width: 90%; border: none; padding-left: 5%;" >
     <tr>
-        <td style="width: 55%">Apellido:</td>
+        <td style="width: 40%">Apellido:</td>
         <td><b>{$datos_alumno.apellido}</b></td>
     </tr>
     <tr>
@@ -27,10 +27,12 @@
         <td>Domicilio:</td>
         <td><b>{$datos_alumno.domicilio}</b></td>
     </tr>
+    {if $datos_alumno.barrio != ''}
     <tr>
         <td>Barrio:</td>
         <td><b>{$datos_alumno.barrio}</b></td>
     </tr>
+    {/if}
     <tr>
         <td>Tel&eacute;fono:</td>
         <td><b>{$datos_alumno.telefono}</b></td>
@@ -43,18 +45,24 @@
         <td>Fecha de Nacimiento:</td>
         <td><b>{$datos_alumno.fecha_nacimiento|date_format:"d-m-Y"}</b></td>
     </tr>
+    {if $datos_alumno.escuela != ''}
     <tr>
         <td>Escuela:</td>
         <td><b>{$datos_alumno.escuela}</b></td>
     </tr>
+    {/if}
+    {if $datos_alumno.anio != 0}
     <tr>
         <td>A&ntilde;o</td>
         <td><b>{$datos_alumno.anio}</b></td>
     </tr>
+    {/if}
+    {if $datos_alumno.turno != 'N/A'}
     <tr>
         <td>Turno</td>
         <td><b>{$datos_alumno.turno}</b></td>
     </tr>
+    {/if}
     <tr>
         <td>Alta Seguro</td>
         <td><b>{$datos_alumno.alta_seguro}</b></td>
@@ -62,112 +70,160 @@
 </table>
 
 <h2>Talleres a los q asiste</h2>
-
-<table style="width: 70%; border: none; padding-left: 10%;" >
+{if $talleres_alumno != null}
+<table style="width: 90%; border: none; padding-left: 5%;" >
     {section name=t loop=$talleres_alumno}
     <tr>
         <td>&DoubleRightArrow; {$talleres_alumno[t].nombre}</td>
         {/section}
     </tr>
 </table>
+{else}
+<table style="width: 90%; border: none; padding-left: 5%;" >
+    <tr>
+        <td>SIN INSCRIPCIONES A TALLERES</td>
+    </tr>
+</table>
+{/if}
 
 <h2>Datos M&eacute;dicos</h2>
 
-<table style="width: 70%; border: none; padding-left: 10%;" >
+<table style="width: 90%; border: none; padding-left: 5%;" >
+    {if $datos_medicos.grupo_sanguineo != ''}
     <tr>
-        <td style="width: 55%">Grupo Sangu&iacute;neo:</td>
+        <td style="width: 40%">Grupo Sangu&iacute;neo:</td>
         <td><b>{$datos_medicos.grupo_sanguineo}{$datos_medicos.factor}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.vacunacion != ''}
     <tr>
         <td>Vacunaci&oacute;n:</td>
         <td><b>{$datos_medicos.vacunacion}</b></td>
     </tr>
+    {/if}
     {if $datos_medicos.vacunacion eq "INCOMPLETA"}
     <tr>
         <td>Vacunas Faltantes:</td>
         <td><b>{$datos_medicos.vacunas_faltantes}</b></td>
     </tr>
     {/if}
+    {if $datos_medicos.enfermedades_padecidas != ''}
     <tr>
         <td>Enfermedades Padecidas:</td>
         <td><b>{$datos_medicos.enfermedades_padecidas}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.alergias != ''}
     <tr>
         <td>Alergias:</td>
         <td><b>{$datos_medicos.alergias}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.secuelas != ''}
     <tr>
         <td>Secuelas:</td>
         <td><b>{$datos_medicos.secuelas}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.cuidados_especiales != ''}
     <tr>
         <td>Cuidados Especiales:</td>
         <td><b>{$datos_medicos.cuidados_especiales}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.enfermedades_cogenitas != ''}
     <tr>
         <td>Enfermedades Cong&eacute;nitas:</td>
         <td><b>{$datos_medicos.enfermedades_cogenitas}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.cirugias != ''}
     <tr>
         <td>Cirug&iacute;as</td>
         <td><b>{$datos_medicos.cirugias}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.tratamientos_prolongados != ''}
     <tr>
         <td>Tratamientos M&eacute;dicos Prolongados</td>
         <td><b>{$datos_medicos.tratamientos_prolongados}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.tratamientos_actuales != ''}
     <tr>
         <td>Tratamientos M&eacute;dicos Actuales</td>
         <td><b>{$datos_medicos.tratamientos_actuales}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.medicacion_actual != ''}
     <tr>
         <td>Medicamentos que toma actualmente</td>
         <td><b>{$datos_medicos.medicacion_actual}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.urgencias != ''}
     <tr>
         <td>En caso de URGENCIA, M&eacute;dicos autorizados para su tratamiento y Hospitales o Centros M&eacute;dicos para su traslado</td>
         <td><b>{$datos_medicos.urgencias}</b></td>
     </tr>
+    {/if}
+    {if $datos_medicos.obra_social != ''}
     <tr>
         <td>Obra Social</td>
         <td><b>{$datos_medicos.obra_social}</b></td>
     </tr>
+    {/if}
 </table>
 
-<h3>El taller se encuentra protegido por Seguro San Crist&iacute;bal.</h3>
+<!--h3>El taller se encuentra protegido por Seguro San Crist&iacute;bal.</h3-->
 
 <h2>Grupo Familiar y/o de Convivencia</h2>
 
-<table id="familiares">
-    <tr>
-        <th>Nombre y Apellido</th>
-        <th>Parentesco</th>
-        <th>Edad</th>
-        <th>Estado Civil</th>
-        <th>Vive en el Hogar</th>
-        <th>Ocupaci&oacute;n</th>
-    </tr>
-    {section name=dm loop=$datos_familiares}
-    <tr>
-        <td><input type="text" value="{$datos_familiares[dm].nombre_apellido}" name="nombre_apellido_0" class="inputntable" readonly/></td>
-        <td><input type="text" value="{$datos_familiares[dm].parentesco}" name="parentesco_0" readonly/></td>
-        <td><input type="text" value="{$datos_familiares[dm].edad}" name="edad_0" class="inputedad" readonly/></td>
-        <td><input type="text" value="{$datos_familiares[dm].estado_civil}" name="estado_civil_0" style="width: 80px;" readonly/></td>
-        <td><input type="text" value="{$datos_familiares[dm].vive_hogar}" name="vive_hogar_0" style="width: 80px;" readonly/></td>
-        <td><input type="text" value="{$datos_familiares[dm].ocupacion}" name="ocupacion_0" readonly/></td>
-    </tr>
-    {/section}
-</table>
-
+{section name=dm loop=$datos_familiares}
+<h3>{$datos_familiares[dm].nombre_apellido}</h3>
 <table style="width: 90%; border: none; padding-left: 5%;" >
     <tr>
-        <td>Observaciones:</td>
+        <td style="width: 40%">Parentesco</td>
+        <td>{$datos_familiares[dm].parentesco}</td>
+    </tr>
+    {if $datos_familiares[dm].edad != ''}
+    <tr>
+        <td>Edad</td>
+        <td>{$datos_familiares[dm].edad}</td>
+    </tr>
+    {/if}
+    {if $datos_familiares[dm].estado_civil != 'N/A'}
+    <tr>
+        <td>Estado Civil</td>
+        <td>{$datos_familiares[dm].estado_civil}</td>
+    </tr>
+    {/if}
+    {if $datos_familiares[dm].vive_hogar != ''}
+    <tr>
+        <td>Vive en el Hogar</td>
+        <td>{$datos_familiares[dm].vive_hogar}</td>
+    </tr>
+    {/if}
+    {if $datos_familiares[dm].ocupacion != ''}
+    <tr>
+        <td>Ocupaci&oacute;n</td>
+        <td>{$datos_familiares[dm].ocupacion}</td>
+    </tr>
+    {/if}
+</table>
+{/section}
+{if $datos_personales.observaciones_familiares != ''}
+<table style="width: 90%; border: none; padding-left: 5%;" >
+    <tr>
+        <td style="width: 40%">Observaciones:</td>
         <td>{$datos_personales.observaciones_familiares}</td>
     </tr>
 </table>
+{/if}
+{if $datos_personales.relaciones_familiares != ''}
 <table style="width: 90%; border: none; padding-left: 5%;" >
     <tr>
-        <td style="width: 50%;"><ul>
+        <td style="width: 40%;"><ul>
                 <li>Relaciones familiares. </li>
                 <li>Din&aacute;mica Familiar. </li>
                 <li>Momento de encuentro familiar. </li>
@@ -178,12 +234,13 @@
         <td>{$datos_personales.relaciones_familiares}</td>
     </tr>
 </table>
-
+{/if}
+{if $datos_personales.grupo_amigo != ''}
 <h2>Grupo de Amigos</h2>
 
 <table style="width: 90%; border: none; padding-left: 5%;" >
     <tr>
-        <td style="width: 50%;"><ul>
+        <td style="width: 40%;"><ul>
                 <li>Si tiene amigos, c&oacute;mo son y qu&eacute; hacen. </li>
                 <li>Cu&aacute;nto tiempo pasa con ellos. </li>
                 <li>Qu&eacute; hacen juntos. </li>
@@ -193,24 +250,26 @@
         <td>{$datos_personales.grupo_amigo}</td>
     </tr>
 </table>
-
+{/if}
+{if $datos_personales.tiempo_libre != ''}
 <h2>Tiempo Libre</h2>
 
 <table style="width: 90%; border: none; padding-left: 5%;" >
     <tr>
-        <td style="width: 50%;"><ul>
+        <td style="width: 40%;"><ul>
                 <li>Qu&eacute; actividades recreativas realiza. </li>
                 <li>Qu&eacute; otras actividades recreativas le gustar&iacute;a realizar. </li>
             </ul></td>
         <td>{$datos_personales.tiempo_libre}</td>
     </tr>
 </table>
-
+{/if}
+{if $datos_personales.educacion != ''}
 <h2>Educaci&oacute;n</h2>
 
 <table style="width: 90%; border: none; padding-left: 5%;" >
     <tr>
-        <td style="width: 50%;"><ul>
+        <td style="width: 40%;"><ul>
                 <li>Si participa del sistema educativo. </li>
                 <li>Inconvenientes con la educaci&oacute;n o con el sistema. </li>
                 <li>Importancia que le da. </li>
@@ -220,12 +279,13 @@
         <td>{$datos_personales.educacion}</td>
     </tr>
 </table>
-
+{/if}
+{if $datos_personales.trabajo != ''}
 <h2>Trabajo</h2>
 
 <table style="width: 90%; border: none; padding-left: 5%;" >
     <tr>
-        <td style="width: 50%;"><ul>
+        <td style="width: 40%;"><ul>
                 <li>Si tiene o ha tenido alg&uacute;n trabajo. </li>
                 <li>Motivo por los cuales trabaja. </li>
                 <li>Formas en que consigui&oacute; el trabajo. </li>
@@ -236,39 +296,53 @@
         <td>{$datos_personales.trabajo}</td>
     </tr>
 </table>
-
+{/if}
+{if $datos_personales.como_llega != '' && $datos_personales.porque_viene != '' && $datos_personales.instituciones != ''}
 <h2>Instituciones</h2>
 
 <table style="width: 90%; border: none; padding-left: 5%;" >
+    {if $datos_personales.como_llega != ''}
     <tr>
-        <td style="width: 50%;">C&oacute;mo llega a Casa de Francisco:</td>
+        <td style="width: 40%;">C&oacute;mo llega a Casa de Francisco:</td>
         <td>{$datos_personales.como_llega}</td>
     </tr>
+    {/if}
+    {if $datos_personales.porque_viene != ''}
     <tr>
         <td>Por qu&eacute; viene a Casa de Francisco:</td>
         <td>{$datos_personales.porque_viene}</td>
     </tr>
+    {/if}
+    {if $datos_personales.instituciones != ''}
     <tr>
         <td>Instituciones a las que ha asistido:</td>
         <td>{$datos_personales.instituciones}</td>
     </tr>
+    {/if}
 </table>
-
+{/if}
+{if $datos_personales.preocupaciones != '' && $datos_personales.que_hizo != '' && $datos_personales.observaciones_personales != ''}
 <h2>Caracter&iacute;sticas Personales</h2>
 
 <table style="width: 90%; border: none; padding-left: 5%;" >
+    {if $datos_personales.preocupaciones != ''}
     <tr>
-        <td style="width: 50%;">Preocupaciones:</td>
+        <td style="width: 40%;">Preocupaciones:</td>
         <td>{$datos_personales.preocupaciones}</td>
     </tr>
+    {/if}
+    {if $datos_personales.que_hizo != ''}
     <tr>
         <td>Qu&eacute; hizo al respecto:</td>
         <td>{$datos_personales.que_hizo}</td>
     </tr>
+    {/if}
+    {if $datos_personales.observaciones_personales != ''}
     <tr>
         <td>Observaciones:</td>
         <td>{$datos_personales.observaciones_personales}</td>
     </tr>
+    {/if}
 </table>
-
+{/if}
 <input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">

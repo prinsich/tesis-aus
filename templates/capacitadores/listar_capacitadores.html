@@ -35,8 +35,22 @@
 </script>
 
 <h1>Capacitadores</h1>
-<p>Cantidad total de capacitadores {$cantidad_capacitadores}</p>
+<form autocomplete="off" id="formBAlumno" name="formBAlumno" action="index.php?section=capacitadores&sub=listar_capacitadores" method="POST">
 
+    <p>Cantidad total de capacitadores {$cantidad_capacitadores}<br />
+    Estado:
+    <input type="hidden" value="" name="apellido" id="nombre"/>
+    <input type="hidden" value="" name="nombre" id="apellido"/>
+    <input type="hidden" value="" name="dni" id="dni"/>
+    
+    <select id="estado" name="estado">
+        <option value=""> TODOS </option>
+        <option value="ACTIVO"> ACTIVO </option>
+        <option value="INACTIVO"> INACTIVO </option>
+    </select>
+    <button type="submit" form="formBAlumno" value="filtrar">Filtrar</button>
+    </p>
+</form>
 <table class="zebra-striped" id="sortTableExample">
     <thead>
         <tr>
@@ -62,8 +76,8 @@
             <td>{$lista_capacitadores[c].estado}</td>
             <td>
                 <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_capacitador('{$lista_capacitadores[c].id_capacitador}')" />
-                <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_capacitador('{$lista_capacitadores[c].id_capacitador}')" />
                 {if $lista_capacitadores[c].estado eq "ACTIVO"}
+                <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_capacitador('{$lista_capacitadores[c].id_capacitador}')" />
                 <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_capacitador('{$lista_capacitadores[c].id_capacitador}')"/>
                 {else}
                 <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_capacitador('{$lista_capacitadores[c].id_capacitador}')"/>

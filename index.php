@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require ("configs/Smarty.php");
 require ("configs/db.php");
@@ -12,58 +13,50 @@ $sub = (isset($_GET["sub"])) ? $_GET["sub"] : "";
 //------------------------------------------------------------------------------
 //CONTROL DE SESION
 //------------------------------------------------------------------------------
-$logueado = true;
-$usrlogin = "";
-$usrperfil = "";
-/*
-$sectiones = array("login", "home", "alumnos", "capacitadores", "talleres", "certificados", "admin"); // => LOGOOUT NO FIGURA PORQUE SI NO ES UNA SESION AUTORIZADA INVOCA AL LOGUT Y DESTRUYE LA SECION
-if(!in_array($section, $sectiones)){
+$sectiones = array("login", "home", "alumnos", "capacitadores", "talleres", "certificados", "admin", "perfil",""); // => LOGOOUT NO FIGURA PORQUE SI NO ES UNA SESION AUTORIZADA INVOCA AL LOGUT Y DESTRUYE LA SECION
+if (!in_array($section, $sectiones)) {
     $section = "logout";
     $sub = "";
-} */
-
-//Verifica q este logueado
-if ($section != "login") {
-    if (!isset($_SESSION['logged_in'])) {
-        $_SESSION['error'] = "You need to log in to access that page.";
-        $section = "login";
-        $sub = "acceso";
-        
-        $logueado = false;
-        $usrlogin = "";
-        $usrperfil = "";
-    } else {
-        $usrlogin = $_SESSION['usr'];
-        $usrperfil = $_SESSION['perfil'];
-    }
-} else {
-    if($sub == ""){
-        $sub = "acceso"; 
-    } else if($sub != "acceso" && $sub != "registro" && $sub != "lost_password"){
-        $sub = "acceso"; 
-    }
-} 
+}
+/*foreach ($_SESSION as $key => $valor) {
+    echo "variable : $key <br>--Valor: $valor <br>";
+}*/
 
 //log out
 if ($section == "logout") {
     unset($_GET['logout']);
-    
+    unset($_SESSION['logged_in']);
+    session_unset();
     session_destroy();
     session_start();
-    
-    $_SESSION['error'] = 'You have been logged out.';
-    
+
     $section = "login";
     $sub = "acceso";
-    
+
     $logueado = false;
     $usrlogin = "";
     $usrperfil = "";
-}
+    
+} else if ($section != "login") {//Verifica q este logueado
+    if (!isset($_SESSION['logged_in'])) {
+        $section = "login";
+        $sub = "acceso";
 
-$usrlogin = "admin";
-$usrperfil = "admin";
-$logueado = true;
+        $logueado = false;
+        $usrlogin = "";
+        $usrperfil = "";
+    } else {
+        $logueado = true;
+        $usrlogin = $_SESSION['usr'];
+        $usrperfil = $_SESSION['perfil'];
+    }
+} else {
+    if ($sub == "") {
+        $sub = "acceso";
+    } else if ($sub != "acceso" && $sub != "registro" && $sub != "lost_password") {
+        $sub = "acceso";
+    }
+}
 
 $smarty->assign("section", $section);
 $smarty->assign("sub", $sub);

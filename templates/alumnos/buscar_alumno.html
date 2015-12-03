@@ -30,15 +30,15 @@
 </p>
 <form autocomplete="off" name="formBAlumno" action="index.php?section=alumnos&sub=listar_alumnos" method="POST">
     <label for="apellido">Apellido:</label>
-    <input type="text" value="" name="apellido" class="letras" id="nombre"/>
+    <input type="text" value="" name="apellido" class="letras" id="apellido"/>
     <br />
 
     <label for="nombre">Nombres:</label> 
-    <input type="text" value="" name="nombre" class="letras" id="apellido"/>
+    <input type="text" value="" name="nombre" class="letras" id="nombre"/>
     <br />
 
     <label for="dni">DNI:</label>
-    <input type="text" value="" name="dni" id="dni"/>
+    <input type="text" value="" name="dni" id="dni" class="numeros" maxlength="8"/>
     <br />
 
     <label for="taller">Taller:</label> 
@@ -48,14 +48,14 @@
     <label for="alta_seguro">Alta Seguro:</label> 
     <select name="alta_seguro" id="alta_seguro"> 
         <option value="" selected="selected">&nbsp;</option>
-        <option value="no" >No</option>
-        <option value="si">Si</option>
+        <option value="SI">Si</option>
+        <option value="NO">No</option>
     </select>
     <br />
     
-    <label for="dni">Estado:</label>
+    <label for="estado">Estado:</label>
     <select id="estado" name="estado">
-        <option value=""> TODOS </option>
+        <option value="" selected="selected"> TODOS </option>
         <option value="ACTIVO"> ACTIVO </option>
         <option value="INACTIVO"> INACTIVO </option>
     </select>

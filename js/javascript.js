@@ -27,28 +27,34 @@ function control_salida() {
 }
 
 function calcularEdad(fecha) {
-    var values = fecha.split("/");
-    var dia = values[0];
-    var mes = values[1];
-    var ano = values[2];
-    var fecha_hoy = new Date(document.getElementById("fecha_hoy").value);
-    var ahora_ano = fecha_hoy.getUTCFullYear();
-    var ahora_mes = fecha_hoy.getUTCMonth();
-    var ahora_dia = fecha_hoy.getUTCDate();
-    var edad = (ahora_ano + 1900) - ano;
+    var fechaActual = new Date(document.getElementById("fecha_hoy").value);
+    var diaActual = fechaActual.getDate();
+    var mmActual = fechaActual.getMonth() + 1;
+    var yyyyActual = fechaActual.getFullYear();
+    
+    FechaNac = fecha.split("/");
+    var diaCumple = FechaNac[0];
+    var mmCumple = FechaNac[1];
+    var yyyyCumple = FechaNac[2];
+    
+    //retiramos el primer cero de la izquierda
+    if (mmCumple.substr(0, 1) === 0) {
+        mmCumple = mmCumple.substring(1, 2);
+    }
 
-    if (ahora_mes < (mes - 1)) {
+    //retiramos el primer cero de la izquierda
+    if (diaCumple.substr(0, 1) === 0) {
+        diaCumple = diaCumple.substring(1, 2);
+    }
+    var edad = yyyyActual - yyyyCumple;
+
+    //validamos si el mes de cumpleaños es menor al actual
+    //o si el mes de cumpleaños es igual al actual
+    //y el dia actual es menor al del nacimiento
+    //De ser asi, se resta un año
+    if ((mmActual < mmCumple) || (mmActual === mmCumple && diaActual < diaCumple)) {
         edad--;
     }
-
-    if (((mes - 1) === ahora_mes) && (ahora_dia < dia)) {
-        edad--;
-    }
-
-    if (edad > 1900) {
-        edad -= 1900;
-    }
-
     return edad;
 }
 

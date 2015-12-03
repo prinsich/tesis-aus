@@ -1,5 +1,28 @@
 <script>
-{literal}
+    {$Sajax}
+    {literal}
+
+    function verficar_disponibilidad(){
+        if(validar()){
+            var nombre = document.getElementById("nombre").value;
+            var id_capacitador = document.getElementById("id_capacitador").value;
+            var id_taller = document.getElementById("id_taller").value;
+            var dias = new Array();
+            dias.push(""); 
+            for(i = 1; i < 6; i++){
+                var id_dia = "dia_" + i;
+                dias.push(document.getElementById(id_dia).checked); 
+            }
+            x_verficar_disponibilidad("modificar", id_taller, nombre, id_capacitador, dias, verficar_disponibilidad_cb);
+        }
+    }
+    
+    function verficar_disponibilidad_cb(z){
+        alert(z);
+        if(z === "OK"){
+            document.getElementById("save").disabled = false;
+        }
+    }
 
     function validar(){
         var valido = true;
@@ -58,7 +81,7 @@
     <br />
 
     <label for="capacitador">Capacitador(*):</label> 
-    {html_capacitadores name="id_capacitador" seleccionar=$taller.id_capacitador}
+    {html_capacitadores name="id_capacitador" seleccionar=$taller.id_capacitador estado="ACTIVO"}
     <br />
 
     <label for="dias">D&iacute;as de Dictado:</label>
@@ -91,5 +114,9 @@
     </table>
     <br />
     {/if}
-    <input class="btnSubmit" type="button" name="enviar" value="Guardar" onclick="guardar();">
+    <div style="text-align: center">
+    <input class="btnSubmit2" type="button" name="verificar" id="verificar" value="Verficar Disponibilidad" onclick="verficar_disponibilidad();" />
+    <input class="btnSubmit2" type="button" name="save" id="save" value="Guardar" onclick="guardar()" disabled/>
+    <input class="btnSubmit2" type="button" name="volver" id="volver" value="Cancelar" onclick="salir()">
+    </div>
 </form>

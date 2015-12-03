@@ -2,8 +2,9 @@
     <ul>
         <hr>
         <a href="index.php" id="index" onclick="return control_salida();"><li>Inicio</li></a>
+        <a href="index.php?section=perfil&sub=ver" id="ver_perfil" onclick="return control_salida();"><li>Ver mi perfil</li></a>
         {if $logueado }
-        <a href="index.php?section=logout" id="logout"><li>Logout</li></a>
+        <a href="index.php?section=logout" id="logout"><li>Salir</li></a>
         {/if}
         <hr>
         <p align="center"><b>Alumnos</b></p>
@@ -29,7 +30,7 @@
         <hr>	
         <a href="index.php?section=certificados&sub=crear_certificados" id="crear_certificados" onclick="return control_salida();"><li>Crear Certificados</li></a>
         <hr>
-        {if $usrperfil eq "admin"}
+        {if $usrperfil eq "Admin"}
         <p align="center"><b>Administraci&oacute;n</b></p>
         <hr>	
         <a href="index.php?section=admin&sub=admin"><li>Acceder a sistema</li></a>

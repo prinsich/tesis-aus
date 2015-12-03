@@ -62,7 +62,7 @@ body{
     margin-left: 50px;
     margin-bottom: 0px;
 }
-#contenido h2{
+#contenido h2 {
     margin-left: 60px;
     margin-bottom: 0px;
     margin-top: 30px;
@@ -70,12 +70,18 @@ body{
     clear:both;
 }
 #contenido h3{
+    font-size: 15px;
+    margin-left: 60px;
+    font-style:italic;
+
+    /*
     float: left;
     font-size: 15px;
     margin-bottom: 30px;
     margin-left: 50px;
     margin-right: 100px;
     font-style:italic;
+    */
 }
 #contenido p{
     margin-left: 70px;
@@ -301,4 +307,8 @@ label ul{
     position: fixed;
     bottom:20px;
     right:20px;
+}
+
+#ui-datepicker-div {
+    font-size:12px !important;
 }

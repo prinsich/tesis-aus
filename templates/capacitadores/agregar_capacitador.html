@@ -1,12 +1,47 @@
+{literal}
 <script>
-    {literal}
-    
-    $(function () {
-        $("#fecha_nacimiento").datepicker({
-            changeMonth: true,
-            changeYear: true
-        });
+    $(document).ready(function () {
+        $("#fecha_nacimiento").mask("99/99/9999");
     });
+    
+    function validar_fecha(fecha_input){
+        var fecha = fecha_input.value;
+        var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+        var fechaCompleta = fecha.match(datePat);
+        if (fechaCompleta == null) {
+            return false;
+        }
+
+        dia = fechaCompleta[1];
+        mes = fechaCompleta[3];
+        anio = fechaCompleta[5];
+
+        if (dia < 1 || dia > 31) {
+            alert("El valor del día debe estar comprendido entre 1 y 31.");
+            fecha_input.value = "";
+            return false;
+        }
+        if (mes < 1 || mes > 12) {
+            alert("El valor del mes debe estar comprendido entre 1 y 12.");
+            fecha_input.value = "";
+            return false;
+        }
+        if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia == 31) {
+            alert("El mes " + mes + " no tiene 31 días!");
+            fecha_input.value = "";
+            return false;
+        }
+        if (mes == 2) { // bisiesto
+            var bisiesto = (anio % 4 == 0 && (anio % 100 != 0 || anio % 400 == 0));
+            if (dia > 29 || (dia == 29 && !bisiesto)) {
+                alert("Febrero del " + anio + " no contiene " + dia + " dias!");
+                fecha_input.value = "";
+                return false;
+            }
+        }
+        return true;
+    }
+
    
     function validar() {
         
@@ -25,24 +60,35 @@
             error += " - Nombre\n";
         }
 
+        var dni = document.getElementById("dni").value;
+        if (dni.trim() === ""){
+            valido = false;
+            error += " - D.N.I.\n";
+        } else if(dni.length < 7 ){
+             valido = false;
+            error += " - D.N.I. invalido\n";
+        }
+                
+        var sexo = document.getElementById("sexo").value;
+        if (sexo === "0") {
+            valido = false;
+            error += " - Sexo\n";
+        }
+
         var telefono = document.getElementById("telefono").value;
         var celular = document.getElementById("celular").value;
         if (telefono.trim() === "" && celular.trim() === "") {
             valido = false;
             error += " - Telefono y/o celular\n";
         }
-
-        var dni = document.getElementById("dni").value;
-        if (dni.trim() === "" && ( dni.length > 6 && dni.length < 9 ) {
-            valido = false;
-            error += " - D.N.I.\n";
-        }
         
         var fecha_nac = document.getElementById("fecha_nacimiento").value;
-        var edad = calcularEdad(fecha_nac);
-        if ( edad < 18 ) {
-            valido = false;
-            error += " - El capacitador debe ser mayor a 18 a\u00F1os\n";
+        if (fecha_nac.trim() !== "") {
+            var edad = calcularEdad(fecha_nac);
+            if (edad < 18) {
+                valido = false;
+                error += " - El capacitador debe ser mayor a 18 a\u00F1os\n";
+            }
         }
 
         if(!valido){
@@ -57,9 +103,15 @@
             document.forms[0].submit();
         }
     }
-    {/literal}
+    
+    function salir() {
+        var respuesta = confirm("Esta seguro q desea salir?");
+        if (respuesta)
+            window.location = "index.php";
+    }
+    
 </script>
-
+{/literal}
 <h1>Agregar Capacitador</h1>
 <h2>Datos Personales</h2>
 <p>Los campos marcado con <b>*</b> son obligatorios</p>
@@ -69,42 +121,43 @@
     <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="{$fecha_hoy}" />
     
     <label for="apellido">Apellido(*):</label>
-    <input type="text" value="" id="apellido" name="apellido" class="letras" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="" id="apellido" name="apellido" class="letras"  />
     <br />
 
     <label for="nombre">Nombres(*):</label>
-    <input type="text" value="" id="nombre" name="nombre" class="letras" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="" id="nombre" name="nombre" class="letras"  />
     <br />
 
-    <label for="dni">DNI(*):</label>
+    <label for="dni">D.N.I.(*):</label>
     <input type="text" value="" id="dni" name="dni" class="numeros" maxlength="8"/>
     <br />
     
     <label for="sexo">Sexo:</label> 
     <select name="sexo" id="sexo" style="width: 300px;"> 
-        <option value="M" selected="selected" >MASCULINO</option>
-        <option value="F">FEMENINO</option>
+        <option value="0" selected="selected" >SELECIONAR</option>
+        <option value="M" >MASCULINO</option>
+        <option value="F" >FEMENINO</option>
     </select>
     <br />
 
     <label for="domicilio">Domicilio:</label>
-    <input type="text" value="" id="domicilio" name="domicilio" onkeyup="this.value = this.value.toUpperCase();"/>
+    <input type="text" value="" id="domicilio" name="domicilio"  />
     <br />
 
     <label for="telefono">Tel&eacute;fono(*):</label>
-    <input type="text" value="" id="telefono" name="telefono" class="numeros"/>
+    <input type="text" value="" id="telefono" name="telefono" class="numeros" maxlength="15"/>
     <br />
     
     <label for="celular">Celular(*):</label>
-    <input type="text" value="" id="celular" name="celular" class="numeros" />
+    <input type="text" value="" id="celular" name="celular" class="numeros" maxlength="15"/>
     <br />
 
     <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-    <input type="text" value="" id="fecha_nacimiento" name="fecha_nacimiento" readonly/>
+    <input type="text" value="" id="fecha_nacimiento" name="fecha_nacimiento" onchange="validar_fecha(this);"/>
     <br />
 
     <div align="center">
         <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
-        <input class="btnSubmit2" type="button" name="cancel" value="Cancelar" onclick="index.php">
+        <input class="btnSubmit2" type="button" name="cancel" value="Cancelar" onclick="salir()">
     </div>
 </form>

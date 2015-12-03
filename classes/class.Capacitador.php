@@ -45,9 +45,8 @@ class Capacitador extends DBTable {
     function listar_capacitadores(){
         $sql = "SELECT id_capacitador, apellido, nombre, dni, fecha_nacimiento, telefono, celular, estado
                 FROM capacitadores
-                    JOIN estados ON capacitadores.id_capacitador = estados.id_sobre
-                WHERE sobre LIKE '$this->className' AND activo = 1
-                ORDER BY id_capacitador ASC";
+                WHERE id_capacitador != 0
+                ORDER BY estado, id_capacitador ASC";
 
         $capacitadores = $this->consultar($sql);
         return $capacitadores;
@@ -57,26 +56,25 @@ class Capacitador extends DBTable {
         
         $sql = "SELECT id_capacitador, apellido, nombre, dni, fecha_nacimiento, telefono, celular, estado
                 FROM capacitadores
-                    JOIN estados ON capacitadores.id_capacitador = estados.id_sobre
-                WHERE sobre LIKE '$this->className' AND activo = 1 ";
+                WHERE id_capacitador != 0 ";
         
         if($apellido != "") {
-            $sql .= " AND UPPER(apellido) LIKE '%".trim($apellido)."%' ";
+            $sql .= " AND apellido LIKE '$apellido%' ";
         }
         
         if($nombre != "") {
-            $sql .= " AND UPPER(nombre) LIKE '%".trim($nombre)."%' ";
+            $sql .= " AND nombre LIKE '$nombre%' ";
         }
         
         if($dni != "") {
-            $sql .= " AND UPPER(dni) LIKE '%".trim($dni)."%' ";
+            $sql .= " AND dni = $dni ";
         }
         
         if($estado != "") {
-            $sql .= " AND UPPER(estado) LIKE '".trim($estado)."' ";
+            $sql .= " AND estado LIKE '$estado' ";
         }
         
-        $sql .= " ORDER BY id_capacitador ASC ";
+        $sql .= " ORDER BY estado, id_capacitador ASC ";
         
         $capacitadores = $this->consultar($sql);
         
@@ -95,6 +93,16 @@ class Capacitador extends DBTable {
         
         $dato_capacitador = $this->consultar($sql);
         return $dato_capacitador;
+    }
+    
+    function darAlta($id_capacitador){
+        $sql = "UPDATE capacitadores SET estado = 'ACTIVO' WHERE id_capacitador = $id_capacitador";
+        $this->ejecutar($sql);
+    }
+    
+    function darBaja($id_capacitador){
+        $sql = "UPDATE capacitadores SET estado = 'INACTIVO' WHERE id_capacitador = $id_capacitador";
+        $this->ejecutar($sql);
     }
 }
 // fin de clase

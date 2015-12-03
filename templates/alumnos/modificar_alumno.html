@@ -1,111 +1,57 @@
-<script>
-{$Sajax}
 {literal}
-    function addRow(tableID) {
-        index = parseInt(document.getElementById("cant_filas").value);
-        if (index !== 0) {
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
-            for (var i = 0; i < rowCount; i++) {
-                var row = table.rows[i];
-                var campovacio = row.cells[1].childNodes[0];
-                var campovacio2 = row.cells[2].childNodes[0];
+<script>
+    $(document).ready(function () {
+        $("ul#tabs li").click(function (e) {
+            if (!$(this).hasClass("active")) {
+                var tabNum = $(this).index();
+                var nthChild = tabNum + 1;
+                $("ul#tabs li.active").removeClass("active");
+                $(this).addClass("active");
+                $("ul#tab li.active").removeClass("active");
+                $("ul#tab li:nth-child(" + nthChild + ")").addClass("active");
+            }
+        }); 
+        $("#fecha_nacimiento").mask("99/99/9999");
+    });
+    
+    function validar_fecha(fecha_input){
+        var fecha = fecha_input.value;
+        var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+        var fechaCompleta = fecha.match(datePat);
+        if (fechaCompleta == null) {
+            return false;
+        }
+
+        dia = fechaCompleta[1];
+        mes = fechaCompleta[3];
+        anio = fechaCompleta[5];
+
+        if (dia < 1 || dia > 31) {
+            alert("El valor del día debe estar comprendido entre 1 y 31.");
+            fecha_input.value = "";
+            return false;
+        }
+        if (mes < 1 || mes > 12) {
+            alert("El valor del mes debe estar comprendido entre 1 y 12.");
+            fecha_input.value = "";
+            return false;
+        }
+        if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia == 31) {
+            alert("El mes " + mes + " no tiene 31 días!");
+            fecha_input.value = "";
+            return false;
+        }
+        if (mes == 2) { // bisiesto
+            var bisiesto = (anio % 4 == 0 && (anio % 100 != 0 || anio % 400 == 0));
+            if (dia > 29 || (dia == 29 && !bisiesto)) {
+                alert("Febrero del " + anio + " no contiene " + dia + " dias!");
+                fecha_input.value = "";
+                return false;
             }
         }
-        if (campovacio.value === '') {
-            alert('Debe completar el nombre');
-            window.setTimeout(function () {
-                campovacio.value = '';
-                campovacio.focus();
-            }, 0);
-        } else if (campovacio2.value === '') {
-            alert('Debe completar el parentesco');
-            window.setTimeout(function () {
-                campovacio2.value = '';
-                campovacio2.focus();
-            }, 0);
-        } else {
-
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
-            var row = table.insertRow(rowCount);
-            var colCount = table.rows[0].cells.length;
-            for (var i = 0; i < colCount; i++) {
-
-                var newcell = row.insertCell(i);
-                newcell.innerHTML = table.rows[1].cells[i].innerHTML;
-                switch (newcell.childNodes[0].id) {
-                    case "table_checkbox":
-                        newcell.childNodes[0].value = "";
-                        newcell.childNodes[0].checked = false;
-                        newcell.childNodes[0].name = 'id_' + index;
-                        break;
-                    case "table_nombre":
-                        newcell.childNodes[0].value = "";
-                        newcell.childNodes[0].name = 'nombre_apellido_' + index;
-                        break;
-                    case "table_parentesco":
-                        newcell.childNodes[0].value = "";
-                        newcell.childNodes[0].name = 'parentesco_' + index;
-                        break;
-                    case "table_edad":
-                        newcell.childNodes[0].value = "";
-                        newcell.childNodes[0].name = 'edad_' + index;
-                        break;
-                    case "table_estado_civil":
-                        newcell.childNodes[0].selectedIndex = 0;
-                        newcell.childNodes[0].name = 'estado_civil_' + index;
-                        break;
-                    case "table_vive_hogar":
-                        newcell.childNodes[0].selectedIndex = 0;
-                        newcell.childNodes[0].name = 'vive_hogar_' + index;
-                        break;
-                    case "table_ocupacion":
-                        newcell.childNodes[0].value = "";
-                        newcell.childNodes[0].name = 'ocupacion_' + index;
-                        break;
-                }
-            }
-            index = index + 1;
-            document.getElementById("cant_filas").value = index;
-        }
+        return true;
     }
-
-    function deleteRow(tableID) {
-        chequea = 0;
-        try {
-            if (confirm("¿Esta seguro q desea eliminar estos familiares?")) {
-                var table = document.getElementById(tableID);
-                var rowCount = table.rows.length;
-                var ultima = rowCount - 1;
-                for (var i = ultima; i >= 0; i--) {
-                    var row = table.rows[i];
-                    var chkbox = row.cells[0].childNodes[0];
-                    if (null !== chkbox && true === chkbox.checked) {
-                        var chequea = chequea + 1;
-                        if (rowCount === 2) {
-                            alert("No se pueden borrar todas las lineas.");
-                            break;
-                        }
-                        table.deleteRow(i);
-                        rowCount--;
-                        if(chkbox.value !== "" )
-                            x_eliminar_familiar(chkbox.value, cargar_cb);
-                    }
-                }
-            }
-        } catch (e) {
-            alert(e);
-        }
-        if (chequea === 0) {
-            alert("Seleccione cual borrar.");
-        }
-    }
-
-    function cargar_cb(z) {
-        alert(z);
-    }
-
+    
     function validar() {
         
         var valido = true;
@@ -145,13 +91,12 @@
         if (fecha_nacimiento.trim() === "") {
             valido = false;
             error += " - Fecha de Nacimiento\n";
-        }
-        
-        var fecha_nac = document.getElementById("fecha_nacimiento").value;
-        var edad = calcularEdad(fecha_nac);
-        if ( edad < 6 ) {
-            valido = false;
-            error += " - El alumno debe ser mayor a 6 a\u00F1os\n";
+        } else {
+            var edad = calcularEdad(fecha_nacimiento);
+            if (edad < 6) {
+                valido = false;
+                error += " - El alumno debe ser mayor a 6 a\u00F1os\n";
+            }
         }
     
         var alta_seguro = validCheckedRadioValue("alta_seguro_radio");
@@ -195,12 +140,63 @@
             document.getElementById("vacunas_faltantes").innerHTML = "";
         }
     }
-{/literal}
+    
+    $(document).ready(function () {
+        $("ul#tabs li").click(function (e) {
+            if (!$(this).hasClass("active")) {
+                var tabNum = $(this).index();
+                var nthChild = tabNum + 1;
+                $("ul#tabs li.active").removeClass("active");
+                $(this).addClass("active");
+                $("ul#tab li.active").removeClass("active");
+                $("ul#tab li:nth-child(" + nthChild + ")").addClass("active");
+            }
+        });
+    });
+    
+    function salir() {
+        var respuesta = confirm("Esta seguro q desea salir?");
+        if (respuesta)
+            window.location = "index.php?section=alumnos&sub=listar_alumnos";
+    }
+
 </script>
-<script src="javascript/date/datetimepicker_css.js"></script>
-<h1>Agregar Alumno</h1>
-<h2>Datos Personales</h2>
-<p>Los campos marcado con <b>*</b> son obligatorios</p>
+{/literal}
+<style>
+    ul#tabs {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+    }
+    ul#tabs li {
+        display: inline-block;
+        background-color: #32c896;
+        border-bottom: solid 5px #238b68;
+        padding: 5px 20px;
+        margin-bottom: 4px;
+        color: #fff;
+        cursor: pointer;
+    }
+    ul#tabs li:hover {
+        background-color: #238b68;
+    }
+    ul#tabs li.active {
+        background-color: #238b68;
+    }
+    ul#tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    ul#tab li {
+        display: none;
+    }
+    ul#tab li.active {
+        display: block;
+    }
+</style>
+
+<h1>Modificar Alumno</h1>
 
 <form autocomplete="off" name="formAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />
@@ -210,101 +206,27 @@
     <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
     <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="{$fecha_hoy}" />
     
-    <label for="apellido">Apellido(*):</label>
-    <input type="text" value="{$datos_alumno.apellido}" id="apellido" name="apellido" class="letras"/>
-    <br />
+    <ul id="tabs">
+        <li class="active">Datos Personales</li>
+        <li>Datos M&eacute;dicos</li>
+        <li>Grupo Familiar y/o de Convivencia</li>
+    </ul>
+    <ul id="tab">
+        <li class="active">
+            {include file="alumnos/modificar_datos_personales.html"}
+        </li>
+        <li>
+            {include file="alumnos/modificar_datos_medicos.html"}
+        </li>
+        <li>
+            {include file="alumnos/modificar_datos_familiares.html"}
+        </li>
+    </ul>
 
-    <label for="nombre">Nombres(*):</label>
-    <input type="text" value="{$datos_alumno.nombre}" id="nombre" name="nombre" class="letras"/>
-    <br />
-
-    <label for="sexo">Sexo(*):</label>
-    <select name="sexo" id="sexo" style="width: 300px;"> 
-        {if $datos_alumno.sexo eq "M"}
-        <option value="00" > SELECCIONAR </option>
-        <option value="M" selected="selected" >MASCULINO</option>
-        <option value="F" >FEMENINO</option>
-        {elseif $datos_alumno.sexo eq "F"}
-        <option value="00" > SELECCIONAR </option>
-        <option value="M" selected="selected">MASCULINO</option>
-        <option value="F" >FEMENINO</option>
-        {else}
-        <option value="00" selected="selected"> SELECCIONAR </option>
-        <option value="M" >MASCULINO</option>
-        <option value="F" >FEMENINO</option>
-        {/if}
-    </select>
-    <br />
-
-    <label for="domicilio">Domicilio(*):</label>
-    <input type="text" value="{$datos_alumno.domicilio}" id="domicilio" name="domicilio" />
-    <br />
-
-    <label for="barrio">Barrio:</label>
-    <input type="text" value="{$datos_alumno.barrio}" id="barrio" name="barrio" />
-    <br />
-
-    <label for="telefono">Tel&eacute;fono(*):</label>
-    <input type="text" value="{$datos_alumno.telefono}" id="telefono" name="telefono" class="numeros"/>
-    <br />
-
-    <label for="dni">DNI(*):</label>
-    <input type="text" value="{$datos_alumno.dni}" id="dni" name="dni" class="numeros" maxlength="8"/>
-    <br />
-
-    <label for="fecha_nacimiento">Fecha de Nacimiento(*):</label>
-    <input type="text" value="{$datos_alumno.fecha_nacimiento|date_format:'d-m-Y'}" id="fecha_nacimiento" name="fecha_nacimiento" onclick="javascript:NewCssCal(id)" readonly/>
-    <br />
-
-    <label for="escuela">Escuela:</label>
-    <input type="text" value="{$datos_alumno.escuela}" id="escuela" name="escuela" />
-    <br />
-
-    <label for="anio">A&ntilde;o:</label>
-    <input type="text" value="{$datos_alumno.anio}" id="anio" name="anio" class="numeros" maxlength="2"/>
-    <br />
-
-    <label for="turno">Turno:</label> 
-    <input type="hidden" id="turno_aux" name="turno_aux" value="{$datos_alumno.turno}" />
-    {html_turnos name="turno" seleccionar=$datos_alumno.id_turno}
-    <br />
-
-    <label>Alta Seguro(*):</label> <br />
-    <span class="diascheck">
-        {if $datos_alumno.alta_seguro = "SI"}
-        <input type="radio" id="alta_seguro_si" name="alta_seguro_radio" value="SI" checked=""/>Si<br />
-        <input type="radio" id="alta_seguro_no" name="alta_seguro_radio" value="NO" />No<br />
-        <input type="hidden" id="alta_seguro" name="alta_seguro" value="" />
-        {elseif $datos_alumno.alta_seguro = "NO"}
-        <input type="radio" id="alta_seguro_si" name="alta_seguro_radio" value="SI" />Si<br />
-        <input type="radio" id="alta_seguro_no" name="alta_seguro_radio" value="NO" checked=""/>No<br />
-        <input type="hidden" id="alta_seguro" name="alta_seguro" value="" />
-        {else}
-        <input type="radio" id="alta_seguro_si" name="alta_seguro_radio" value="SI" />Si<br />
-        <input type="radio" id="alta_seguro_no" name="alta_seguro_radio" value="NO" />No<br />
-        <input type="hidden" id="alta_seguro" name="alta_seguro" value="" />
-        {/if}
-    </span>
-    <br />
-
-    <h2>Talleres</h2>
-    <label>Talleres a los que asiste:</label><br />
-    <span class="diascheck">
-        {html_checkbox_talleres name="talleres[]" selecionar="$talleres_alumno"}
-    </span>
-
-
-    <h2>Datos M&eacute;dicos</h2>
-
-    {include file="alumnos/modificar_datos_medicos.html"}
-
-    <h2>Grupo Familiar y/o de Convivencia</h2>
-
-    {include file="alumnos/modificar_grupo_familiar.html"}
-
+    <h2>El taller se encuentra protegido por Seguro San Crist&oacute;bal.</h2>
     <div align="center">
         <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
-        <input class="btnSubmit2" type="button" name="volver" value="Volver" onclick="history.back();">
+        <input class="btnSubmit2" type="button" name="volver" value="Volver" onclick="salir();">
     </div>
 
 </form>

@@ -5,13 +5,12 @@ $id_taller = $_GET["id_taller"];
 
 $lista_dias = $db->getAll("
     SELECT dias.dia 
-    FROM dias JOIN dias_talleres ON dias.id_dia = dias_talleres.id_dia
+    FROM ".BASE_DATA.".dias JOIN dias_talleres ON dias.id_dia = dias_talleres.id_dia
     WHERE id_taller = $id_taller
     ORDER BY dias.id_dia");
 
 $taller_aux = new Talleres($db);
 $taller = $taller_aux->getTaller2($id_taller);
-
 
 $lista_alumnos = $db->getAll("
     SELECT CONCAT(apellido, ', ', alumnos.nombre) AS nombre

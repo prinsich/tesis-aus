@@ -6,8 +6,14 @@
 define("BASE_TESIS_AUS", "tesis-aus");
 define("BASE_DATA", "`tesis-aus-data`");
 
-define("HOST_BD", "10.3.1.3");
-//define("HOST_BD", "localhost");
+define("HOST_BD", "localhost");
+$database["cdmon"]["user"] = 'myaus7781';
+$database["cdmon"]["pass"] = 'wNmSHhtE';
+
+$database["localhost"]["user"] = 'root';
+$database["localhost"]["pass"] = 'root';
+
+$database_used = $database["localhost"];
 
 /////////////////////////////////////////////////////////////
 define("DB_FETCHMODE_ORDERED", "3");
@@ -36,15 +42,13 @@ class ConexionBD extends PDO {
     }
 
     function ConexionBD($base = BASE_TESIS_AUS) {
+        global $database_used;
         try {
             $tipobdd = 'mysql';
             $host = HOST_BD ; 
 
-            //$this->user = 'tesisUsr';
-            $this->user = 'root';
-            
-            //$this->pass = 'password2015';
-            $this->pass = 'root';
+            $this->user = $database_used['user'];
+            $this->pass = $database_used['pass'];
 
             $this->bdd = $base;
             $this->dsn["conexion"] = $tipobdd . ":host=" . $host . ";dbname=" . $base;

@@ -57,9 +57,7 @@ class Alumno extends DBTable {
     function listar_alumnos() {
         $sql = "SELECT id_alumno, apellido, nombre, dni, fecha_nacimiento, telefono, estado
                 FROM alumnos
-                    JOIN estados ON alumnos.id_alumno = estados.id_sobre
-                WHERE sobre LIKE '$this->className' AND activo = 1
-                ORDER BY id_alumno ASC";
+                ORDER BY estado, id_alumno ASC";
         
         $alumnos = $this->consultar($sql);
         return $alumnos;
@@ -69,16 +67,15 @@ class Alumno extends DBTable {
 
         $sql = "SELECT alumnos.id_alumno, apellido, nombre, dni, fecha_nacimiento, telefono, estado
                 FROM alumnos 
-                    JOIN taller_alumno ON alumnos.id_alumno = taller_alumno.id_alumno
-                    JOIN estados ON alumnos.id_alumno = estados.id_sobre
-                WHERE sobre LIKE '$this->className' AND activo = 1";
+                    LEFT JOIN taller_alumno ON alumnos.id_alumno = taller_alumno.id_alumno
+                WHERE 1";
 
         if ($apellido != "") {
-            $sql .= " AND UPPER(apellido) LIKE '" . trim($apellido) . "%' ";
+            $sql .= " AND apellido LIKE '" . trim($apellido) . "%' ";
         }
 
         if ($nombre != "") {
-            $sql .= " AND UPPER(nombre) LIKE '" . trim($nombre) . "%' ";
+            $sql .= " AND nombre LIKE '" . trim($nombre) . "%' ";
         }
 
         if ($dni != "") {
@@ -90,16 +87,14 @@ class Alumno extends DBTable {
         }
 
         if ($alta_seguro != "") {
-            $sql .= " AND UPPER(alta_seguro) LIKE '" . trim($alta_seguro) . "%' ";
+            $sql .= " AND alta_seguro LIKE '" . trim($alta_seguro) . "%' ";
         }
         
         if($estado != "") {
-            $sql .= " AND UPPER(estado) LIKE '".trim($estado)."' ";
+            $sql .= " AND estado LIKE '".trim($estado)."' ";
         }
-        
+
         $sql .= " GROUP BY alumnos.id_alumno ORDER BY alumnos.id_alumno ASC";
-        //var_dump($sql);
-        //die;
         $alumnos = $this->consultar($sql);
 
         return $alumnos;
@@ -135,7 +130,16 @@ class Alumno extends DBTable {
         $id_personal = $this->consultar($sql);
         return $id_personal[0]["id_personal"];
     }
-
+    
+    function darAlta($id_usuario){
+        $sql = "UPDATE alumnos SET estado = 'ACTIVO' WHERE id_alumno = $id_usuario";
+        $this->ejecutar($sql);
+    }
+    
+    function darBaja($id_usuario){
+        $sql = "UPDATE alumnos SET estado = 'INACTIVO' WHERE id_alumno = $id_usuario";
+        $this->ejecutar($sql);
+    }
 }
 
 // fin de clase

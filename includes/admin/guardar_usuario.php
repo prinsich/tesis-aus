@@ -1,6 +1,6 @@
 <?php
 include_once("classes/class.Usuarios.php");
-include_once("classes/class.Estados.php");
+include_once("classes/class.Log_Estados.php");
 include_once("classes/class.Log.php");
 
 extract($_POST);
@@ -21,10 +21,15 @@ if ($datos["accion"] == "modificar") {
 $datos_usuario["nombreusr"] = $datos["user"];
 $datos_usuario["id_perfil"] = $datos["perfil"];
 
-if($datos["new_pass"] == "SI"){
+if($datos["accion"] == "agregar"){
+    $datos_usuario["passusr"] = $datos["password"];
+    $datos_usuario["new_pass"] = 1;
+}
+
+/*if($datos["new_pass"] == "SI"){
     $newpass = substr(md5(microtime()), 1, 8);
     $datos_usuario["pass"] = md5($newpass);
-}
+}*/
 
 
 //------------------------------------------------------------------------------
@@ -49,7 +54,7 @@ $id_usuario = $usuario->guardar($datos_usuario);
 // Dar de alta como usuario
 //------------------------------------------------------------------------------
 if ($datos["accion"] == "agregar"){
-    $estado = new Estados($db);
+    $estado = new Log_Estados($db);
     $estado->darAlta($usuario->getClassName(), $id_usuario, $datos["usrlogin"]);
 }
 

@@ -23,11 +23,11 @@
 <h1>Buscar Taller</h1>
 <form autocomplete="off" name="formBTaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
     <label for="nombre">Nombre:</label>
-    <input type="text" value="" name="nombre" id="nombre"/>
+    <input type="text" value="" name="nombre" id="nombre" class="letras"/>
     </br>
 
     <label for="capacitador">Capacitador:</label> 
-    {html_capacitadores name="id_capacitador"}
+    {html_capacitadores name="id_capacitador" estado="ALL"}
     </br>
 
     <label for="dni">Estado:</label>

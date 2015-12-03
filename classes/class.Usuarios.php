@@ -1,7 +1,7 @@
 <?php
 //ini_set("error_reporting",E_ALL); ini_set('display_errors',1);
 include_once (dirname(__file__) . '/class.BDTable.php');
-include_once ("classes/class.Estados.php");
+include_once (dirname(__file__) . "/class.Log_Estados.php");
 
 class Usuarios extends DBTable {
 
@@ -96,14 +96,41 @@ class Usuarios extends DBTable {
         return $dato_usuario[0];
     }
     
+    function getUsuarioName($usrname){
+        $sql = "SELECT * 
+                FROM usuarios 
+                    JOIN ".BASE_DATA.".perfiles on usuarios.id_perfil = perfiles.id_perfil
+                WHERE nombreusr LIKE '$usrname'";
+        
+        $dato_usuario = $this->consultar($sql);
+        return $dato_usuario[0];
+    }
+    
     function getUsuarioLogin($username){
-        $dato["nombreusr"] = "admin";
-        $dato["perfil"] = "admin";
-        return $dato;
+        $sql = "SELECT nombreusr, perfil FROM usuarios JOIN ".BASE_DATA.".perfiles ON usuarios.id_perfil = perfiles.id_perfil WHERE nombreusr LIKE '$username'";
+        $user = $this->consultar($sql);
+        return $user[0];
     }
     
     function login($username, $password){
-        return true;
+        $sql = "SELECT id_usuario FROM usuarios WHERE nombreusr LIKE '$username' AND passusr LIKE '$password'";
+        $login = $this->consultar($sql);
+        if($login == null)
+            return false;
+        else return true;
+    }
+    
+    function usrExist($username){
+        $sql = "SELECT id_usuario FROM usuarios WHERE nombreusr LIKE '$username'";
+        $login = $this->consultar($sql);
+        if($login == null)
+            return false;
+        else return true;
+    }
+    
+    function setPassword($username, $password){
+        $sql = "UPDATE usuarios SET passusr = '$password' WHERE nombreusr LIKE '$username' ";
+        $this->ejecutar($sql);
     }
 }
 // fin de clase

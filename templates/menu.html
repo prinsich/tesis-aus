@@ -12,22 +12,27 @@
         
         <!-- LIBRERIAS DE JQUERY -->
         <script src="js/jquery-2.1.4.js" type="text/javascript"></script>
+        <script src="js/jquery-validate.js" type="text/javascript"></script>
+        <!--script src="js/jquery-validate.min.js" type="text/javascript"></script-->
         
         <script src="js/jquery-ui/jquery-ui.js" type="text/javascript"></script>
         <link href="js/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
         <script src="js/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-        <link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <!--link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/-->
 
         <link href="js/jquery-ui/jquery-ui.structure.css" rel="stylesheet" type="text/css"/>
-        <link href="js/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+        <!--link href="js/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/-->
 
         <link href="js/jquery-ui/jquery-ui.theme.css" rel="stylesheet" type="text/css"/>
-        <link href="js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+        <!--link href="js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/-->
         
         <!-- MY SCRIPTS JS -->
         <script src="js/javascript.js"></script>
         <script src="js/myJQuery.js"></script>
+        <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+        
+        
     </head>
 
     <body>
@@ -61,8 +66,10 @@
                     {include file="talleres/index.html"}
                 {elseif $section eq "certificados"}
                     {include file="certificados/index.html"}
+                {elseif $section eq "perfil"}
+                    {include file="perfil/index.html"}
                 {elseif $section eq "admin"}
-                    {if $usrperfil eq "admin"}
+                    {if $usrperfil eq "Admin"}
                         {include file="admin/index.html"}
                     {else}
                         <h1 style="text-align: center">ACCESO DENEGADO</h1> 

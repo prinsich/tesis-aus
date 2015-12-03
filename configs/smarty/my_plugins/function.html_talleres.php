@@ -9,6 +9,7 @@ function smarty_function_html_talleres($params, &$smarty) {
 
     $nombre = "";
     $onchange = "";
+    $estado = "ALL";
     $seleccionar = "";
 
     $row = array();
@@ -21,6 +22,9 @@ function smarty_function_html_talleres($params, &$smarty) {
                 case "onchange":
                     $onchange = ' onchange="' . $_val . '"';
                     break;
+                case 'estado':
+                    $estado = $_val;
+                    break;
                 case "seleccionar":
                     $seleccionar = $_val;
                     break;
@@ -32,7 +36,11 @@ function smarty_function_html_talleres($params, &$smarty) {
     $_output .= "<option value='0'> Seleccionar </option>";
 
     $sql = "SELECT id_taller, nombre
-            FROM talleres";// order by id_agrupamiento";
+            FROM talleres";
+    
+    if($estado != "ALL"){        
+        $sql .= " WHERE estado LIKE '$estado'";
+    }
 
     $resultSetSql = $db->query($sql);
     while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {

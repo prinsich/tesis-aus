@@ -1,0 +1,85 @@
+<h2>Datos Personales</h2>
+<p>Los campos marcado con <b>*</b> son obligatorios</p>
+
+<label for="apellido">Apellido(*):</label>
+<input type="text" value="{$datos_alumno.apellido}" id="apellido" name="apellido" class="letras"/>
+<br />
+
+<label for="nombre">Nombres(*):</label>
+<input type="text" value="{$datos_alumno.nombre}" id="nombre" name="nombre" class="letras"/>
+<br />
+
+<label for="sexo">Sexo(*):</label>
+<select name="sexo" id="sexo" style="width: 300px;"> 
+    {if $datos_alumno.sexo eq "M"}
+    <option value="00" > SELECCIONAR </option>
+    <option value="M" selected="selected" >MASCULINO</option>
+    <option value="F" >FEMENINO</option>
+    {elseif $datos_alumno.sexo eq "F"}
+    <option value="00" > SELECCIONAR </option>
+    <option value="M" selected="selected">MASCULINO</option>
+    <option value="F" >FEMENINO</option>
+    {else}
+    <option value="00" selected="selected"> SELECCIONAR </option>
+    <option value="M" >MASCULINO</option>
+    <option value="F" >FEMENINO</option>
+    {/if}
+</select>
+<br />
+
+<label for="domicilio">Domicilio(*):</label>
+<input type="text" value="{$datos_alumno.domicilio}" id="domicilio" name="domicilio" />
+<br />
+
+<label for="barrio">Barrio:</label>
+<input type="text" value="{$datos_alumno.barrio}" id="barrio" name="barrio" />
+<br />
+
+<label for="telefono">Tel&eacute;fono(*):</label>
+<input type="text" value="{$datos_alumno.telefono}" id="telefono" name="telefono" class="numeros"/>
+<br />
+
+<label for="dni">DNI(*):</label>
+<input type="text" value="{$datos_alumno.dni}" id="dni" name="dni" class="numeros" maxlength="8"/>
+<br />
+
+<label for="fecha_nacimiento">Fecha de Nacimiento(*):</label>
+<input type="text" value="" id="fecha_nacimiento" name="fecha_nacimiento" value="{$datos_alumno.fecha_nacimiento|date_format:'d/m/Y'}" onchange="validar_fecha(this);"/>
+<br />
+
+<label for="escuela">Escuela:</label>
+<input type="text" value="{$datos_alumno.escuela}" id="escuela" name="escuela" />
+<br />
+
+<label for="anio">A&ntilde;o:</label>
+<input type="text" value="{$datos_alumno.anio}" id="anio" name="anio" class="numeros" maxlength="2"/>
+<br />
+
+<label for="turno">Turno:</label> 
+<input type="hidden" id="turno_aux" name="turno_aux" value="{$datos_alumno.turno}" />
+{html_turnos name="turno" seleccionar=$datos_alumno.id_turno}
+<br />
+
+<label>Alta Seguro(*):</label> <br />
+<span class="diascheck">
+    {if $datos_alumno.alta_seguro = "SI"}
+    <input type="radio" id="alta_seguro_si" name="alta_seguro_radio" value="SI" checked=""/>Si<br />
+    <input type="radio" id="alta_seguro_no" name="alta_seguro_radio" value="NO" />No<br />
+    <input type="hidden" id="alta_seguro" name="alta_seguro" value="" />
+    {elseif $datos_alumno.alta_seguro = "NO"}
+    <input type="radio" id="alta_seguro_si" name="alta_seguro_radio" value="SI" />Si<br />
+    <input type="radio" id="alta_seguro_no" name="alta_seguro_radio" value="NO" checked=""/>No<br />
+    <input type="hidden" id="alta_seguro" name="alta_seguro" value="" />
+    {else}
+    <input type="radio" id="alta_seguro_si" name="alta_seguro_radio" value="SI" />Si<br />
+    <input type="radio" id="alta_seguro_no" name="alta_seguro_radio" value="NO" />No<br />
+    <input type="hidden" id="alta_seguro" name="alta_seguro" value="" />
+    {/if}
+</span>
+<br />
+
+<h2>Talleres</h2>
+<label>Talleres a los que asiste:</label><br />
+<span class="diascheck">
+    {html_checkbox_talleres name="talleres[]" selecionar="$talleres_alumno"}
+</span>

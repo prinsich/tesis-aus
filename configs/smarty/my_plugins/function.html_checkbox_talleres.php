@@ -82,8 +82,7 @@ function smarty_function_html_checkbox_talleres($params) {
 
     $sql = "SELECT id_taller, nombre
                 FROM talleres
-                    JOIN estados ON talleres.id_taller = estados.id_sobre
-                WHERE sobre LIKE 'TALLERES' AND activo = 1";
+                WHERE estado LIKE 'ACTIVO'";
 
     $resultSetSql = $db->query($sql);
     while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {
