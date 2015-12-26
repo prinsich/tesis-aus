@@ -63,7 +63,7 @@ function alta_alumno($id_alumno, $usrlogin) {
     $log =  new Log($db);
     $log->crear_registro($usrlogin, "ALTA", $alumno->getClassName(), $id_alumno);
     
-    return "Alumno dado de alta";
+    return "El alumno fue dado de alta";
 }
 
 function baja_alumno($id_alumno, $usrlogin) {
@@ -83,7 +83,7 @@ function baja_alumno($id_alumno, $usrlogin) {
     $taller_alumno = new Taller_Alumno($db);
     $taller_alumno->darBajaAlumno($id_alumno);
     
-    return "Alumno dado de baja";
+    return "El alumno fue dado de baja";
 }
 
 function eliminar_familiar($id_familiar) {

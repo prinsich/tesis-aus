@@ -44,9 +44,19 @@
     <input type="hidden" value="" name="dni" id="dni"/>
     
     <select id="estado" name="estado">
+        {if $estado eq "ACTIVO"}
+        <option value=""> TODOS </option>
+        <option value="ACTIVO" selected=""> ACTIVO </option>
+        <option value="INACTIVO"> INACTIVO </option>
+        {elseif $estado eq "INACTIVO"}
         <option value=""> TODOS </option>
         <option value="ACTIVO"> ACTIVO </option>
+        <option value="INACTIVO" selected=""> INACTIVO </option>
+        {else}
+        <option value="" selected=""> TODOS </option>
+        <option value="ACTIVO"> ACTIVO </option>
         <option value="INACTIVO"> INACTIVO </option>
+        {/if}
     </select>
     <button type="submit" form="formBAlumno" value="filtrar">Filtrar</button>
     </p>

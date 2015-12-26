@@ -1,5 +1,33 @@
-{literal}
-<script>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:11:59
+         compiled from ".\templates\alumnos\agregar_alumno.html" */ ?>
+<?php /*%%SmartyHeaderCode:18901567ef24022acc0-43125761%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '8d6049b3efc810a0097b14aa0354fb930f12b0f1' => 
+    array (
+      0 => '.\\templates\\alumnos\\agregar_alumno.html',
+      1 => 1451160705,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '18901567ef24022acc0-43125761',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567ef240381985_50310402',
+  'variables' => 
+  array (
+    'usrlogin' => 0,
+    'fecha_hoy' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_567ef240381985_50310402')) {function content_567ef240381985_50310402($_smarty_tpl) {?>
+<?php echo '<script'; ?>
+>
+    /*JQUERY*/
     $(document).ready(function () {
         $("ul#tabs li").click(function (e) {
             if (!$(this).hasClass("active")) {
@@ -13,6 +41,8 @@
         }); 
         $("#fecha_nacimiento").mask("99/99/9999");
     });
+
+    /*JAVASCRIPT*/
     
     function validar_fecha(fecha_input){
         var fecha = fecha_input.value;
@@ -57,13 +87,12 @@
         var edad = calcularEdad(fecha_nacimiento);
         if (edad < 6) {
             alert("El alumno debe ser mayor a 6 a\u00F1os\n");
-            fecha_input.value = "";
             fecha_input.focus();
         }
     }
-    
+
     function validar() {
-        
+
         var valido = true;
         var error = "Por favor complete los siguiente campos: \n";
 
@@ -77,6 +106,12 @@
         if (nombre.trim() === "") {
             valido = false;
             error += " - Nombre\n";
+        }
+
+        var sexo = document.getElementById("sexo").value;
+        if (sexo === "00") {
+            valido = false;
+            error += " - Sexo\n";
         }
 
         var domicilio = document.getElementById("domicilio").value;
@@ -108,13 +143,13 @@
                 error += " - El alumno debe ser mayor a 6 a\u00F1os\n";
             }
         }
-    
+
         var alta_seguro = validCheckedRadioValue("alta_seguro_radio");
         if (alta_seguro === false) {
             valido = false;
             error += " - Alta del seguro\n";
         }
-        
+
         var padre = document.getElementById("table_nombre").value;
         if (padre.trim() === "") {
             valido = false;
@@ -126,11 +161,11 @@
             valido = false;
             error += " - Debe tener al menos un parentesco con el tutor legal\n";
         }
-        
-        if(!valido){
+
+        if (!valido) {
             alert(error);
         }
-        
+
         return valido;
     }
 
@@ -140,38 +175,25 @@
             document.forms[0].submit();
         }
     }
-    
-    function ver_vac_faltantes(){
+
+    function ver_vac_faltantes() {
         var vac = document.getElementById("vacunacion").value;
-        if(vac === "INCOMPLETA"){
+        if (vac === "INCOMPLETAS") {
             document.getElementById("vac_faltantes").style.display = "inline";
         } else {
             document.getElementById("vac_faltantes").style.display = "none";
-            document.getElementById("vacunas_faltantes").innerHTML = "";
         }
     }
-    
-    $(document).ready(function () {
-        $("ul#tabs li").click(function (e) {
-            if (!$(this).hasClass("active")) {
-                var tabNum = $(this).index();
-                var nthChild = tabNum + 1;
-                $("ul#tabs li.active").removeClass("active");
-                $(this).addClass("active");
-                $("ul#tab li.active").removeClass("active");
-                $("ul#tab li:nth-child(" + nthChild + ")").addClass("active");
-            }
-        });
-    });
-    
+
     function salir() {
         var respuesta = confirm("Esta seguro q desea salir?");
         if (respuesta)
-            window.location = "index.php?section=alumnos&sub=listar_alumnos";
+            window.location = "index.php";
     }
 
-</script>
-{/literal}
+<?php echo '</script'; ?>
+>
+
 <style>
     ul#tabs {
         list-style-type: none;
@@ -206,16 +228,15 @@
     }
 </style>
 
-<h1>Modificar Alumno</h1>
+<h1>Agregar Alumno</h1>
 
-<form autocomplete="off" name="formAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST">
-    <input type="hidden" id="accion" name="accion" value="modificar" />
-    <input type="hidden" value="{$datos_alumno.id_alumno}" id="id_alumno" name="id_alumno" />
-    <input type="hidden" value="{$datos_medicos.id_dato_medico}" id="id_dato_medico" name="id_dato_medico" />
-    <input type="hidden" value="{$datos_personales.id_personal}" id="id_personal" name="id_personal" />
-    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
-    <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="{$fecha_hoy}" />
-    
+<form autocomplete="off" id="formAlumno" name="formAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST" >
+    <input type="hidden" id="accion" name="accion" value="agregar" />
+    <input type="hidden" id="usrlogin" name="usrlogin" value="<?php echo $_smarty_tpl->tpl_vars['usrlogin']->value;?>
+" />
+    <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="<?php echo $_smarty_tpl->tpl_vars['fecha_hoy']->value;?>
+" />
+
     <ul id="tabs">
         <li class="active">Datos Personales</li>
         <li>Datos M&eacute;dicos</li>
@@ -223,20 +244,24 @@
     </ul>
     <ul id="tab">
         <li class="active">
-            {include file="alumnos/modificar_datos_personales.html"}
+            <?php echo $_smarty_tpl->getSubTemplate ("alumnos/agregar_datos_personales.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
         </li>
         <li>
-            {include file="alumnos/modificar_datos_medicos.html"}
+            <?php echo $_smarty_tpl->getSubTemplate ("alumnos/agregar_datos_medicos.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
         </li>
         <li>
-            {include file="alumnos/modificar_datos_familiares.html"}
+            <?php echo $_smarty_tpl->getSubTemplate ("alumnos/agregar_datos_familiares.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
         </li>
     </ul>
 
-    <h2>El taller se encuentra protegido por Seguro San Crist&oacute;bal.</h2>
+
+    <h2>El taller se encuentra protegido por Seguro San Crist&oacute;bal</h2>
     <div align="center">
         <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
-        <input class="btnSubmit2" type="button" name="volver" value="Cancelar" onclick="salir();">
+        <input class="btnSubmit2" type="button" name="volver" value="Cancelar" onclick="salir()">
     </div>
 
-</form>
+</form><?php }} ?>

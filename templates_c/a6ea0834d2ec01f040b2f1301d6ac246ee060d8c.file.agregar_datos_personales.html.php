@@ -1,4 +1,27 @@
-    
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:12:00
+         compiled from ".\templates\alumnos\agregar_datos_personales.html" */ ?>
+<?php /*%%SmartyHeaderCode:1514567ef240439298-84485383%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'a6ea0834d2ec01f040b2f1301d6ac246ee060d8c' => 
+    array (
+      0 => '.\\templates\\alumnos\\agregar_datos_personales.html',
+      1 => 1451160717,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1514567ef240439298-84485383',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567ef24059d784_12633862',
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_567ef24059d784_12633862')) {function content_567ef24059d784_12633862($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_turnos')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_turnos.php';
+if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_checkbox_talleres.php';
+?>    
     <h2>Datos Personales</h2>
     <p>Los campos marcado con <b>*</b> son obligatorios</p>
 
@@ -47,7 +70,8 @@
     <br />
 
     <label for="turno">Turno:</label> 
-    {html_turnos name="turno"}
+    <?php echo smarty_function_html_turnos(array('name'=>"turno"),$_smarty_tpl);?>
+
     <br />
 
     <label>Alta Seguro(*):</label> <br />
@@ -61,5 +85,7 @@
     <h2>Talleres</h2>
     <label>Talleres a los que asiste:</label><br />
     <span class="diascheck">
-        {html_checkbox_talleres name="talleres[]"}
+        <?php echo smarty_function_html_checkbox_talleres(array('name'=>"talleres[]"),$_smarty_tpl);?>
+
     </span>
+<?php }} ?>

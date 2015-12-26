@@ -54,6 +54,16 @@
         }
         return true;
     }
+    
+    function validar_edad(fecha_input){
+        var fecha_nacimiento = fecha_input.value;
+        var edad = calcularEdad(fecha_nacimiento);
+        if (edad < 6) {
+            alert("El alumno debe ser mayor a 6 a\u00F1os\n");
+            fecha_input.value = "";
+            fecha_input.focus();
+        }
+    }
 
     function validar() {
 

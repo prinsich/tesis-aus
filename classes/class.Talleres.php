@@ -76,7 +76,7 @@ class Talleres extends DBTable {
     }
     
     function getTaller2($id_taller){
-        $sql = "SELECT talleres.nombre AS taller, capacitadores.nombre AS capacitador
+        $sql = "SELECT talleres.nombre AS taller, CONCAT(capacitadores.apellido,', ',capacitadores.nombre AS capacitador
                FROM talleres JOIN capacitadores ON talleres.id_capacitador = capacitadores.id_capacitador
                WHERE id_taller = $id_taller";
         $taller = $this->consultar($sql);
@@ -105,8 +105,6 @@ class Talleres extends DBTable {
         $sql .=" GROUP BY talleres.id_taller
                  ORDER BY talleres.id_taller ASC";
         
-        //var_dump($sql);
-        //die;
         $lista_talleres = $this->consultar($sql);
         return $lista_talleres;
     }

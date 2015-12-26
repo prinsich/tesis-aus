@@ -1,5 +1,35 @@
-{literal}
-<script>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 18:42:28
+         compiled from ".\templates\alumnos\modificar_alumno.html" */ ?>
+<?php /*%%SmartyHeaderCode:26690567f09c48a81a9-78162082%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '6c8392c6e7657cbb6a927203c2340c6b890b0dcb' => 
+    array (
+      0 => '.\\templates\\alumnos\\modificar_alumno.html',
+      1 => 1451161300,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '26690567f09c48a81a9-78162082',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'datos_alumno' => 0,
+    'datos_medicos' => 0,
+    'datos_personales' => 0,
+    'usrlogin' => 0,
+    'fecha_hoy' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567f09c49f9ee6_20505089',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_567f09c49f9ee6_20505089')) {function content_567f09c49f9ee6_20505089($_smarty_tpl) {?>
+<?php echo '<script'; ?>
+>
     $(document).ready(function () {
         $("ul#tabs li").click(function (e) {
             if (!$(this).hasClass("active")) {
@@ -170,8 +200,9 @@
             window.location = "index.php?section=alumnos&sub=listar_alumnos";
     }
 
-</script>
-{/literal}
+<?php echo '</script'; ?>
+>
+
 <style>
     ul#tabs {
         list-style-type: none;
@@ -210,11 +241,16 @@
 
 <form autocomplete="off" name="formAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />
-    <input type="hidden" value="{$datos_alumno.id_alumno}" id="id_alumno" name="id_alumno" />
-    <input type="hidden" value="{$datos_medicos.id_dato_medico}" id="id_dato_medico" name="id_dato_medico" />
-    <input type="hidden" value="{$datos_personales.id_personal}" id="id_personal" name="id_personal" />
-    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
-    <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="{$fecha_hoy}" />
+    <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['datos_alumno']->value['id_alumno'];?>
+" id="id_alumno" name="id_alumno" />
+    <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['datos_medicos']->value['id_dato_medico'];?>
+" id="id_dato_medico" name="id_dato_medico" />
+    <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['datos_personales']->value['id_personal'];?>
+" id="id_personal" name="id_personal" />
+    <input type="hidden" id="usrlogin" name="usrlogin" value="<?php echo $_smarty_tpl->tpl_vars['usrlogin']->value;?>
+" />
+    <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="<?php echo $_smarty_tpl->tpl_vars['fecha_hoy']->value;?>
+" />
     
     <ul id="tabs">
         <li class="active">Datos Personales</li>
@@ -223,13 +259,16 @@
     </ul>
     <ul id="tab">
         <li class="active">
-            {include file="alumnos/modificar_datos_personales.html"}
+            <?php echo $_smarty_tpl->getSubTemplate ("alumnos/modificar_datos_personales.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
         </li>
         <li>
-            {include file="alumnos/modificar_datos_medicos.html"}
+            <?php echo $_smarty_tpl->getSubTemplate ("alumnos/modificar_datos_medicos.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
         </li>
         <li>
-            {include file="alumnos/modificar_datos_familiares.html"}
+            <?php echo $_smarty_tpl->getSubTemplate ("alumnos/modificar_datos_familiares.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
         </li>
     </ul>
 
@@ -240,3 +279,4 @@
     </div>
 
 </form>
+<?php }} ?>

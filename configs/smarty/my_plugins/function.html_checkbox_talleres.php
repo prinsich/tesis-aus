@@ -74,9 +74,7 @@ function smarty_function_html_checkbox_talleres($params) {
             }
         }
     }
-    
-    //var_dump($seleccionar);
-    //die;
+
     //SALIDA
     $_output = "<table id='$nombre' name='$nombre' class='diascheck' style='width: 310px; float: right; margin-left: 360px; margin-right: 100px; margin-top: 0px; margin-bottom: 20px;'>";
 

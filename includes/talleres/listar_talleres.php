@@ -7,10 +7,12 @@ $lista_talleres = null;
 
 if(empty($_POST)){
     $lista_talleres = $taller->listar_talleres();
+    $smarty->assign("estado",  "");
 } else {
     extract($_POST);
     $datos = $_POST;
-    $lista_talleres = $taller->buscar_talleres($datos["nombre"], $datos["id_capacitador"], $datos["estado"]);    
+    $lista_talleres = $taller->buscar_talleres($datos["nombre"], $datos["id_capacitador"], $datos["estado"]);
+    $smarty->assign("estado",  $datos["estado"]);
 }
 
 $cantidad_alumnos_taller = $taller->cantidad_alumnos_por_taller();

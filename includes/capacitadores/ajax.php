@@ -34,8 +34,6 @@ function buscar_capacitadores($apellido, $nombre, $dni, $estado) {
 
     $capacitadores = $db->getAll($sql);
 
-    //var_dump($sql);
-    //die;
     if ($capacitadores == NULL) {
         return 0;
     } else {
@@ -56,7 +54,7 @@ function alta_capacitador($id_capacitador, $usrlogin) {
     $log =  new Log($db);
     $log->crear_registro($usrlogin, "ALTA", $capacitador->getClassName(), $id_capacitador);
     
-    return "Capacitador dado de alta";
+    return "El capacitador fue dado de alta";
 }
 
 function baja_capacitador($id_capacitador, $usrlogin) {
@@ -80,7 +78,7 @@ function baja_capacitador($id_capacitador, $usrlogin) {
     $log =  new Log($db);
     $log->crear_registro($usrlogin, "BAJA", $capacitador->getClassName(), $id_capacitador);
     
-    return "Capacitador dado de baja";
+    return "El capacitador fue dado de baja";
 }
 
 sajax_handle_client_request();

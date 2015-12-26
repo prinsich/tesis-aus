@@ -56,9 +56,19 @@
     <input type="hidden" value="" name="id_capacitador" id="id_capacitador"/>
 
     <select id="estado" name="estado">
+        {if $estado eq "ACTIVO"}
+        <option value=""> TODOS </option>
+        <option value="ACTIVO" selected=""> ACTIVO </option>
+        <option value="INACTIVO"> INACTIVO </option>
+        {elseif $estado eq "INACTIVO"}
         <option value=""> TODOS </option>
         <option value="ACTIVO"> ACTIVO </option>
+        <option value="INACTIVO" selected=""> INACTIVO </option>
+        {else}
+        <option value="" selected=""> TODOS </option>
+        <option value="ACTIVO"> ACTIVO </option>
         <option value="INACTIVO"> INACTIVO </option>
+        {/if}
     </select>
     <button type="submit" form="formBAlumno" value="filtrar">Filtrar</button>
     </p>
@@ -89,10 +99,10 @@
                     {if $lista_talleres[t].estado == "ACTIVO"}
                     <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_taller('{$lista_talleres[t].id_taller}')" />
                     <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_taller('{$lista_talleres[t].id_taller}')"/>
+                    <img src="images/icons/file_warning.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="resetear_taller('{$lista_talleres[t].id_taller}')"/>
                     {else}
                     <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_taller('{$lista_talleres[t].id_taller}')"/>
                     {/if}
-                    <img src="images/icons/file_warning.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="resetear_taller('{$lista_talleres[t].id_taller}')"/>
                 </td>
             </tr>
             {/section}

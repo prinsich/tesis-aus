@@ -53,14 +53,18 @@ function verficar_disponibilidad($accion, $id_taller, $nombre, $id_capacitador, 
     }
     
     if($taller_existe){
-        return "El taller ya existe, elija otro nombre";
+        $z[0] = "El taller ya existe, elija otro nombre";
+        $z[1] = false;
     } 
     
     if(!$capacitador_habilitado) {
-        return "El capacitador no puede dictar en esos dias";
+        $z[0] = "Verificacion Fallida, modifique los didas de dictado o el capacitador a cargo";
+        $z[1] = false;
     }
     
-    return "OK";
+    $z[0] = "Verificacion Exitosa";
+    $z[1] = true;
+    return $z;
 }
 
 function buscar_talleres($nombre, $id_capacitador, $estado) {
@@ -97,6 +101,7 @@ function baja_taller($id_taller, $usrlogin) {
     global $db;
     $taller = new Talleres($db, $id_taller);
     $taller->darBaja($id_taller);
+    $taller->quitarCapacitador($id_taller);
     
     $alumno = new Taller_Alumno($db);
     $alumno->borrar("id_taller = $id_taller");

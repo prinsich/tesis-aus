@@ -22,7 +22,7 @@
             <td>{$lista_alumnos[a].nombre}</td>
             <td>{$lista_alumnos[a].dni}</td>
             <td>
-                <select name="estado" id="estado" class="estadoselect"> 
+                <select name="estado_{$lista_alumnos[a].id_alumno}" id="estado_{$lista_alumnos[a].id_alumno}" class="estadoselect"> 
                     <option value="a" selected="selected">Asisti&oacute;</option>
                     <option value="c">Capacit&oacute;</option>
                 </select>

@@ -4,7 +4,7 @@
     
     function crear_certificado(id_alumno){
         var id_taller = document.getElementById("taller").value;
-        var estado = document.getElementById("estado").value;
+        var estado = document.getElementById("estado_" + id_alumno).value;
         var urlp = "index.php?section=certificados&sub=imprimir&id_alumno=" + id_alumno + "&id_taller=" + id_taller + "&estado=" + estado;
         window.open(urlp, "_self");
     }

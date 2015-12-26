@@ -16,20 +16,26 @@
         <td>DNI:</td>
         <td><b>{$datos_capacitador.dni}</b></td>
     </tr>
+    {if $datos_capacitador.sexo eq "M" || $datos_capacitador.sexo eq "F"}
     <tr>
         <td>Sexo:</td>
         <td><b>
                 {if $datos_capacitador.sexo eq "M"}
                     MASCULINO
-                {else}
+                {elseif $datos_capacitador.sexo eq "F"}
                     FEMENINO
+                {else}
+                    O.o
                 {/if}
             </b></td>
     </tr>
+    {/if}
+    {if $datos_capacitador.domicilio neq ""}
     <tr>
         <td>Domicilio:</td>
         <td><b>{$datos_capacitador.domicilio}</b></td>
     </tr>
+    {/if}
     <tr>
         <td>Tel&eacute;fono:</td>
         <td><b>{$datos_capacitador.telefono}</b></td>
@@ -38,24 +44,30 @@
         <td>Celular:</td>
         <td><b>{$datos_capacitador.celular}</b></td>
     </tr>
+    {if $datos_capacitador.fecha_nacimiento neq "0000-00-00"}
     <tr>
         <td>Fecha de Nacimiento:</td>
-        <td><b>
-                {if $datos_capacitador.fecha_nacimiento neq "0000-00-00"}
-                    {$datos_capacitador.fecha_nacimiento}
-                {/if}
-            </b></td>
+        <td><b>{$datos_capacitador.fecha_nacimiento}</b></td>
     </tr>
+    {/if}
 
 </table>
 
 <h2>Listado de Talleres que dicta</h2>
+{if $lista_talleres != null}
 <p>cantidad de talleres: {$cantidad_talleres}</p>
 <table style="width: 50%; border: none; padding-left: 10%;" >
     {section name=t loop=$lista_talleres}
     <tr>
         <td>&DoubleRightArrow; {$lista_talleres[t].nombre}</td>
-        {/section}
+    </tr>
+    {/section}
+</table>
+{else}
+<table style="width: 50%; border: none; padding-left: 10%;" >
+    <tr>
+        <td>No dicta ningun taller</td>
     </tr>
 </table>
+{/if}
 <input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">

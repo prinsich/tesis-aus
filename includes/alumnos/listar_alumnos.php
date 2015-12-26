@@ -7,10 +7,12 @@ $lista_alumnos = null;
 
 if(empty($_POST)){
     $lista_alumnos = $alumno->listar_alumnos();
+    $smarty->assign("estado", "");
 } else {
     extract($_POST);
     $datos = $_POST;
     $lista_alumnos = $alumno->buscar_alumnos($datos["apellido"], $datos["nombre"], $datos["dni"], $datos["taller"], $datos["alta_seguro"], $datos["estado"]);    
+    $smarty->assign("estado", $datos["estado"]);
 }
 
 $smarty->assign("cantidad_alumnos", count($lista_alumnos));

@@ -18,8 +18,8 @@
     }
     
     function verficar_disponibilidad_cb(z){
-        alert(z);
-        if(z === "OK"){
+        alert(z[0]);
+        if(z[1]){
             document.getElementById("save").disabled = false;
         }
     }
@@ -65,6 +65,16 @@
         }
     }
     
+    function salir() {
+        var respuesta = confirm("Esta seguro q desea salir?");
+        if (respuesta)
+            window.location = "http://localhost/tesis-aus/index.php?section=talleres&sub=listar_talleres";
+    }
+    
+    function disableSave(){
+        document.getElementById("save").disabled = true;
+    }
+    
 {/literal}
 </script>
 
@@ -77,11 +87,11 @@
     <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
     
     <label for="nombre">Nombre(*):</label> 
-    <input type="text" value="{$taller.nombre}" id="nombre" name="nombre" />
+    <input type="text" value="{$taller.nombre}" id="nombre" name="nombre" onchange="disableSave()"/>
     <br />
 
     <label for="capacitador">Capacitador(*):</label> 
-    {html_capacitadores name="id_capacitador" seleccionar=$taller.id_capacitador estado="ACTIVO"}
+    {html_capacitadores name="id_capacitador" seleccionar=$taller.id_capacitador estado="ACTIVO" onchange="disableSave()"}
     <br />
 
     <label for="dias">D&iacute;as de Dictado:</label>
@@ -92,10 +102,10 @@
                 <input type="hidden" name="id_dia_taller_{$lista_dias[d].id_dia}" value="{$lista_dias[d].id_dia_taller}" />
                 {if $lista_dias[d].id_taller == $id_taller}
                     <td>{$lista_dias[d].dia}</td>
-                    <td><input type="checkbox" id="dia_{$lista_dias[d].id_dia}" name="days_list[]" value="{$lista_dias[d].id_dia}" checked></td>
+                    <td><input type="checkbox" id="dia_{$lista_dias[d].id_dia}" name="days_list[]" value="{$lista_dias[d].id_dia}" checked onchange="disableSave()"></td>
                 {else}
                     <td>{$lista_dias[d].dia}</td>
-                    <td><input type="checkbox" id="dia_{$lista_dias[d].id_dia}" name="days_list[]" value="{$lista_dias[d].id_dia}" ></td>
+                    <td><input type="checkbox" id="dia_{$lista_dias[d].id_dia}" name="days_list[]" value="{$lista_dias[d].id_dia}" onchange="disableSave()"></td>
                 {/if}
             </tr>
         {/section}
