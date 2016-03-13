@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:47:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-10 22:22:34
          compiled from ".\templates\talleres\listar_talleres.html" */ ?>
 <?php /*%%SmartyHeaderCode:12752567efcd47b8838-01156082%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b6638b0f2418832f08ed4ae7de7f11fe76fa2705' => 
     array (
       0 => '.\\templates\\talleres\\listar_talleres.html',
-      1 => 1451162615,
+      1 => 1457659353,
       2 => 'file',
     ),
   ),
@@ -15,73 +15,184 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567efcd49f2d23_50900674',
   'variables' => 
   array (
-    'Sajax' => 0,
     'cantidad_talleres' => 0,
     'estado' => 0,
     'lista_talleres' => 0,
     'usrlogin' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567efcd49f2d23_50900674',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567efcd49f2d23_50900674')) {function content_567efcd49f2d23_50900674($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
->
-    <?php echo $_smarty_tpl->tpl_vars['Sajax']->value;?>
+ language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("[name='ver_taller']").click(function () {
+            var id_taller = $(this).data("id");
+            var urlp = "index.php?section=talleres&sub=ver_taller&id_taller=" + id_taller;
+            window.open(urlp, "_self");
+        });
 
-    
-    
-    function ver_taller(id) {
-        var urlp = "index.php?section=talleres&sub=ver_taller&id_taller=" + id;
-        window.open(urlp, "_self");
-    }
+        $("[name='modificar_taller']").click(function () {
+            var id_taller = $(this).data("id");
+            var urlp = "index.php?section=talleres&sub=modificar_taller&id_taller=" + id_taller;
+            window.open(urlp, "_self");
+        });
 
-    function modificar_taller(id) {
-        var urlp = "index.php?section=talleres&sub=modificar_taller&id_taller=" + id;
-        window.open(urlp, "_self");
-    }
+        $("[name='alta_taller']").click(function () {
+            var id_taller = $(this).data("id");
 
-    function alta_taller(id) {
-        if (confirm("Esta seguro que desea dar de alta este taller?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_alta_taller(id, usrlogin, retorno_cb);
-        }
-    }
+            $("#modal_confirm").dialog("option", "title", "Alta de taller");
+            $("#modal_confirm").html("Esta seguro que desea dar de alta este taller?");
+            $("#modal_confirm").dialog("open");
 
-    function baja_taller(id) {
-        if (confirm("Esta seguro que desea dar de baja este taller?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_baja_taller(id, usrlogin, retorno_cb);
-        }
-    }
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/talleres/ajax_talleres.php?funcion=alta_taller",
+                        data: {
+                            id_taller: id_taller,
+                            usrlogin: $("#usrlogin").val()
+                        }
+                    })
+                    .done(function (data, textStatus, jqXHR) {
+                        $("#modal_alert").dialog("option", "title", "Alta de taller");
+                        if (data.success) {
+                            if(data.direct_alta){
+                                $("#modal_alert").html(data.msj);
+                            } else {
+                                $("#modal_alert").html(data.msj);
+                                $("#modal_alert").dialog("option", "buttons", {
+                                    "Acpetar": function () {
+                                        var urlp = "index.php?section=talleres&sub=modificar_taller&id_taller=" + data.id_taller;
+                                        window.open(urlp, "_self");
+                                    }
+                                });
 
-    function resetear_taller(id) {
-        if (confirm("Esta seguro que desea resetear este taller?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_reset_taller(id, usrlogin, retorno_cb);
-        }
-    }
 
-    function retorno_cb(z) {
-        if(typeof(z) === "string"){
-            alert(z);
-            window.location.reload();
-        } else {
-            alert(z[1]);
-            modificar_taller(z[0]);
-        }
-        
-    }
-    
-    
+                            }
+                        } else {
+                            $("#modal_alert").html(data.msj)
+                        }
+                        $("#modal_alert").dialog("open");
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        if (console && console.log) {
+                            console.log("La solicitud a fallado: " + textStatus);
+                            console.log(jqXHR + " # " + errorThrown);
+                        }
+                    });
+                    $(this).dialog("close");
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
+
+        $("[name='baja_taller']").click(function () {
+            var id_taller = $(this).data("id");
+
+            $("#modal_confirm").dialog("option", "title", "Baja de taller");
+            $("#modal_confirm").html("Esta seguro que desea dar de baja este taller?");
+            $("#modal_confirm").dialog("open");
+
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/talleres/ajax_talleres.php?funcion=baja_taller",
+                        data: {
+                            id_taller: id_taller,
+                            usrlogin: $("#usrlogin").val()
+                        }
+                    })
+                    .done(function (data, textStatus, jqXHR) {
+                        $("#modal_alert").dialog("option", "title", "Baja de taller");
+                        if (data.success) {
+                            $("#modal_alert").html("El taller fue dado de baja");
+                        } else {
+                            $("#modal_alert").html("El taller no posee id valido");
+                        }
+                        $("#modal_alert").dialog("open");
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        if (console && console.log) {
+                            console.log("La solicitud a fallado: " + textStatus);
+                            console.log(jqXHR + " # " + errorThrown);
+                        }
+                    });
+                    $(this).dialog("close");
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
+
+        $("[name='resetear_taller']").click(function () {
+            var id_taller = $(this).data("id");
+
+            $("#modal_confirm").dialog("option", "title", "Baja de taller");
+            $("#modal_confirm").html("Esta seguro que desea resetear este taller?");
+            $("#modal_confirm").dialog("open");
+
+
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/capacitadores/ajax_capacitadores.php?funcion=resetear_taller",
+                        data: {
+                            id_taller: id_taller,
+                            usrlogin: $("#usrlogin").val(),
+                        }
+                    })
+                            .done(function (data, textStatus, jqXHR) {
+                                $("#modal_alert").dialog("option", "title", "Baja de taller");
+                                if (data.success) {
+                                    $("#modal_alert").html("El taller fue dado de baja");
+                                } else {
+                                    $("#modal_alert").html("El taller no posee id valido");
+                                }
+                                $("#modal_alert").dialog("open");
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                if (console && console.log) {
+                                    console.log("La solicitud a fallado: " + textStatus);
+                                    console.log(jqXHR + " # " + errorThrown);
+                                }
+                            });
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
+
+        //Set botones alert
+        $("#modal_alert").dialog("option", "buttons", {
+            "Acpetar": function () {
+                $(this).dialog("close");
+                //window.location.reload();
+            }
+        });
+    });
 <?php echo '</script'; ?>
 >
 
 <h1>Talleres</h1>
-<form autocomplete="off" id="formBAlumno" name="formBAlumno" action="index.php?section=talleres&sub=listar_talleres" method="POST">
+<form autocomplete="off" id="formBtaller" name="formBtaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
 
     <p>Cantidad de Talleres: <?php echo $_smarty_tpl->tpl_vars['cantidad_talleres']->value;?>
 <br />
@@ -158,18 +269,18 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['t']['last']       = ($_smart
                 <td><?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['estado'];?>
 </td>
                 <td>
-                    <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_taller('<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
-')" />
+                    <img name="ver_taller" src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
+" />
                     <?php if ($_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['estado']=="ACTIVO") {?>
-                    <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_taller('<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
-')" />
-                    <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_taller('<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
-')"/>
-                    <img src="images/icons/file_warning.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="resetear_taller('<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
-')"/>
+                    <img name="modificar_taller"  src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
+" />
+                    <img name="baja_taller"  src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
+"/>
+                    <img name="resetear_taller"  src="images/icons/file_warning.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
+"/>
                     <?php } else { ?>
-                    <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_taller('<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
-')"/>
+                    <img name="alta_taller"  src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['id_taller'];?>
+"/>
                     <?php }?>
                 </td>
             </tr>
@@ -178,4 +289,5 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['t']['last']       = ($_smart
     </table>
 </div>
 <input type="hidden" id="usrlogin" name="usrlogin" value="<?php echo $_smarty_tpl->tpl_vars['usrlogin']->value;?>
-" /><?php }} ?>
+" />
+<?php }} ?>

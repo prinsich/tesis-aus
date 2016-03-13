@@ -11,7 +11,7 @@ $medico = new Datos_Medicos($db);
 $personal = new Datos_Personales($db);
 $talleres = new Taller_Alumno($db);
 
-$id_alumno = $_GET["id_alumno"];
+$id_alumno = filter_input(INPUT_GET, 'id_alumno');
 
 $datos_alumno = $alumno->getAlumno($id_alumno);
 $datos_medicos = $medico->getDatosMedicos($id_alumno);

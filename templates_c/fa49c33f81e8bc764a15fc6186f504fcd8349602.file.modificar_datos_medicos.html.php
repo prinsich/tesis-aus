@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 18:42:28
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-08 21:35:11
          compiled from ".\templates\alumnos\modificar_datos_medicos.html" */ ?>
 <?php /*%%SmartyHeaderCode:3472567f09c4e59f51-04936999%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fa49c33f81e8bc764a15fc6186f504fcd8349602' => 
     array (
       0 => '.\\templates\\alumnos\\modificar_datos_medicos.html',
-      1 => 1448486290,
+      1 => 1457483667,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567f09c50e5b21_08805138',
   'variables' => 
   array (
     'datos_medicos' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567f09c50e5b21_08805138',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567f09c50e5b21_08805138')) {function content_567f09c50e5b21_08805138($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_grupo_sanguineo')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_grupo_sanguineo.php';
 ?><h2>Datos M&eacute;dicos</h2>
@@ -31,8 +31,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 <br />
 
-<label for="vacunacion">Vacunaci&oacute;n:</label> 
-<select id="vacunacion" name="vacunacion" onchange="ver_vac_faltantes()" style="width: 125px"> 
+<label for="vacunacion">Vacunaci&oacute;n:</label>
+<select id="vacunacion" name="vacunacion" style="width: 125px"> 
     <?php if ($_smarty_tpl->tpl_vars['datos_medicos']->value['vacunacion']=="I") {?>
     <option value="0"> SELECCIONAR </option>
     <option value="I" selected="">INCOMPLETAS</option>
@@ -51,7 +51,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 <?php if ($_smarty_tpl->tpl_vars['datos_medicos']->value['vacunacion']=="COMPLETAS") {?>
 <div id="vac_faltantes" style="display: none">
-    <?php } else { ?>    
+    <?php } else { ?>
     <div id="vac_faltantes" style="display: inline">
         <?php }?>
         <label for="vacunas_faltantes">Vacunas Faltantes:</label>

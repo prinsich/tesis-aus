@@ -1,32 +1,43 @@
-<script>
-    {$Sajax}
-    {literal}
-    
-    function buscar_talleres(){
-        var nombre = document.getElementById("nombre").value;
-        var id_capacitador = document.getElementById("id_capacitador").value;
-        var estado = document.getElementById("estado").value;
-        x_buscar_talleres(nombre, id_capacitador, estado, resultado_cb);
-    }
-    
-    function resultado_cb(z){
-        if(z === 0){
-            alert("No existe coincidencia con los datos ingresados\nPruebe nuevamente");
-        } else {
-            document.forms[0].submit();
-        }
-    }
-    {/literal}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+      $("#buscar").click(function (){
+          $.ajax({
+                  method: "POST",
+                  dataType: "json",
+                  url: "includes/talleres/ajax_talleres.php?funcion=buscar_talleres",
+                  data: {
+                      nombre: $("#nombre").val(),
+                      id_capacitador: $("#id_capacitador").val(),
+                      estado: $("#estado").val(),
+                  }
+              })
+                      .done(function (data, textStatus, jqXHR) {
+                          if (data.success) {
+                              $("#formBuscarTaller").submit();
+                          } else {
+                              $("#modal_alert").dialog("option", "title", "busquedar taller");
+                              $("#modal_alert").html("No existe coincidencia con los datos ingresados<br />Pruebe nuevamente");
+                              $("#modal_alert").dialog("open");
+                          }
+
+                      })
+                      .fail(function (jqXHR, textStatus, errorThrown) {
+                          if (console && console.log) {
+                              console.log("La solicitud a fallado: " + textStatus);
+                              console.log(jqXHR + " # " + errorThrown);
+                          }
+                      });
+          });
+    });
 </script>
 
-
 <h1>Buscar Taller</h1>
-<form autocomplete="off" name="formBTaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
+<form autocomplete="off" name="formBuscarTaller" id="formBuscarTaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
     <label for="nombre">Nombre:</label>
     <input type="text" value="" name="nombre" id="nombre" class="letras"/>
     </br>
 
-    <label for="capacitador">Capacitador:</label> 
+    <label for="capacitador">Capacitador:</label>
     {html_capacitadores name="id_capacitador" estado="ALL"}
     </br>
 
@@ -38,5 +49,5 @@
     </select>
     <br />
 
-    <input class="btnSubmit" type="button" name="buscar" value="Buscar" onclick="buscar_talleres()">
+    <button class="btnSubmit" type="button" id="buscar" name="buscar">Buscar</button>
 </form>

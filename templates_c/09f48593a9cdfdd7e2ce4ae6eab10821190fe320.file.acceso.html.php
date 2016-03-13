@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-09 12:58:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 21:58:48
          compiled from ".\templates\login\acceso.html" */ ?>
 <?php /*%%SmartyHeaderCode:2191356684f90c1fbc8-62556215%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '09f48593a9cdfdd7e2ce4ae6eab10821190fe320' => 
     array (
       0 => '.\\templates\\login\\acceso.html',
-      1 => 1448909412,
+      1 => 1457830727,
       2 => 'file',
     ),
   ),
@@ -15,17 +15,106 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_56684f90c6da10_38895826',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56684f90c6da10_38895826')) {function content_56684f90c6da10_38895826($_smarty_tpl) {?><!DOCTYPE html>
-<html >
+<html>
     <head>
         <meta charset="UTF-8">
         <title>Casa de Francisco</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="css/login.css">
+
+        <!-- LIBRERIAS DE JQUERY -->
+        <?php echo '<script'; ?>
+ src="js/jquery-2.1.4.js" type="text/javascript"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
+ src="js/jquery-validate.js" type="text/javascript"><?php echo '</script'; ?>
+>
+        <!--script src="js/jquery-validate.min.js" type="text/javascript"><?php echo '</script'; ?>
+-->
+
+        <?php echo '<script'; ?>
+ src="js/jquery-ui/jquery-ui.js" type="text/javascript"><?php echo '</script'; ?>
+>
+        <link href="js/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+        <?php echo '<script'; ?>
+ src="js/jquery-ui/jquery-ui.min.js" type="text/javascript"><?php echo '</script'; ?>
+>
+        <!--link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/-->
+
+        <link href="js/jquery-ui/jquery-ui.structure.css" rel="stylesheet" type="text/css"/>
+        <!--link href="js/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/-->
+
+        <link href="js/jquery-ui/jquery-ui.theme.css" rel="stylesheet" type="text/css"/>
+        <!--link href="js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/-->
+
+        <?php echo '<script'; ?>
+ language="javascript" type="text/javascript">
+            $(document).ready(function () {
+              $('#usr').on('keypress', function (event) {
+                  $("#error").html("");
+              });
+
+              $('#pass').on('keypress', function (event) {
+                  $("#error").html("");
+                  if (event.which === 13) {
+                    callAjax();
+                  }
+              });
+
+              $("#login-button").click(function () {
+                  callAjax();
+              });
+
+              function callAjax(){
+                  if ($.trim($("#usr").val()) !== "" && $.trim($("#pass").val()) !== "") {
+                        /*var passmd5 = $().crypt({
+                       method: "md5",
+                       source: pass
+                       });*/
+                       $.ajax({
+                               method: "POST",
+                               dataType: "json",
+                               url: "includes/login/ajax_login.php?funcion=login",
+                               data: {
+                                 usr: $("#usr").val(),
+                                 password: $("#pass").val(),
+                               }
+                           })
+                          .done(function (data, textStatus, jqXHR) {
+                              if (data.success) {
+                                $("#error").html("");
+                                $('form').fadeOut(500);
+                                $('.wrapper').addClass('form-success');
+                                setTimeout(function () {
+                                    window.location.href = "index.php?section=home";
+                                }, 2500);
+                              } else {
+                                $("#error").html("El usuario o la contrase&ntilde;a son incorrectos");
+                                $("#usr").val("");
+                                $("#pass").val("")
+                              }
+
+                          })
+                          .fail(function (jqXHR, textStatus, errorThrown) {
+                              if (console && console.log) {
+                                  console.log("La solicitud a fallado: " + textStatus);
+                                  console.log(jqXHR + " # " + errorThrown);
+                              }
+                          });
+                  } else {
+                      $("#error").html("Ingrese el usuario y/o contrase&ntilde;a");
+                  }
+              }
+
+            });
+            <?php echo '</script'; ?>
+>
     </head>
 
     <body>
@@ -33,7 +122,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="container">
                 <h1 id="title">Bienvenido a Casa de Francisco</h1>
                 <div id="error" style="color: red;font-weight: bold"></div>
-                <form class="form">
+                <form class="form" name="formLogin" id="formLogin">
                     <input type="text" placeholder="Usuario" id="usr">
                     <input type="password" placeholder="Contrase&ntilde;a" id="pass">
                     <button type="button" class="access" id="login-button" >Acceder</button>
@@ -57,15 +146,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <li></li>
             </ul>
         </div>
-        <?php echo '<script'; ?>
- src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'><?php echo '</script'; ?>
->
-        <?php echo '<script'; ?>
- src='http://www.itsyndicate.ca/gssi/jquery/jquery.crypt.js'><?php echo '</script'; ?>
->
-        <?php echo '<script'; ?>
- src="js/login.js"><?php echo '</script'; ?>
->
     </body>
 </html>
 <?php }} ?>

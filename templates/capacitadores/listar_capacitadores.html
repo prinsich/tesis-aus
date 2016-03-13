@@ -1,66 +1,134 @@
-<script>
-    {$Sajax}
-    {literal}
-    
-    function ver_capacitador(id) {
-        var urlp = "index.php?section=capacitadores&sub=ver_capacitador&id_capacitador=" + id;
-        window.open(urlp, "_self");
-    }
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
 
-    function modificar_capacitador(id) {
-        var urlp = "index.php?section=capacitadores&sub=modificar_capacitador&id_capacitador=" + id;
-        window.open(urlp, "_self");
-    }
+        $("[name='ver_capacitador']").click(function () {
+            var id_capacitador = $(this).data("id");
+            var urlp = "index.php?section=capacitadores&sub=ver_capacitador&id_capacitador=" + id_capacitador;
+            window.open(urlp, "_self");
+        });
 
-    function alta_capacitador(id) {
-        if (confirm("Esta seguro que desea dar de alta este capacitador?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_alta_capacitador(id, usrlogin, retorno_cb);
-        }
-    }
+        $("[name='modificar_capacitador']").click(function () {
+            var id_capacitador = $(this).data("id");
+            var urlp = "index.php?section=capacitadores&sub=modificar_capacitador&id_capacitador=" + id_capacitador;
+            window.open(urlp, "_self");
+        });
 
-    function baja_capacitador(id) {
-        if (confirm("Esta seguro que desea dar de baja este capacitador?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_baja_capacitador(id, usrlogin, retorno_cb);
-        }
-    }
+        $("[name='alta_capacitador']").click(function () {
+            $("#modal_confirm").dialog("option", "title", "Alta de capacitador");
+            $("#modal_confirm").html("Esta seguro que desea dar de alta este capacitador?");
+            $("#modal_confirm").dialog("open");
 
-    function retorno_cb(z) {
-        alert(z);
-        window.location.reload();
-    }
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/capacitadores/ajax_capacitadores.php?funcion=alta_capacitador",
+                        data: {
+                            id_capacitador: $(this).data("id"),
+                            usrlogin: $("#usrlogin").val()
+                        }
+                    })
+                            .done(function (data, textStatus, jqXHR) {
+                                $("#modal_alert").dialog("option", "title", "Alta de capacitadores");
+                                if (data.success) {
+                                    $("#modal_alert").html("El capacitador fue dado de alta");
+                                } else {
+                                    $("#modal_alert").html("El capacitador no posee id valido");
+                                }
+                                $("#modal_alert").dialog("open");
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                if (console && console.log) {
+                                    console.log("La solicitud a fallado: " + textStatus);
+                                    console.log(jqXHR + " # " + errorThrown);
+                                }
+                            });
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
 
-    {/literal}
+        $("[name='baja_capacitador']").click(function () {
+            $("#modal_confirm").dialog("option", "title", "Baja de capacitador");
+            $("#modal_confirm").html("Esta seguro que desea dar de baja este capacitador?");
+            $("#modal_confirm").dialog("open");
+
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/capacitadores/ajax_capacitadores.php?funcion=baja_capacitador",
+                        data: {
+                            id_capacitador: $(this).data("id"),
+                            usrlogin: $("#usrlogin").val()
+                        }
+                    })
+                            .done(function (data, textStatus, jqXHR) {
+                                $("#modal_alert").dialog("option", "title", "Baja de capacitador");
+                                if (data.success) {
+                                    $("#modal_alert").html("El alumno fue dado de baja");
+                                } else {
+                                    $("#modal_alert").html("El alumno no posee id valido");
+                                }
+                                $("#modal_alert").dialog("open");
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                if (console && console.log) {
+                                    console.log("La solicitud a fallado: " + textStatus);
+                                    console.log(jqXHR + " # " + errorThrown);
+                                }
+                            });
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
+
+        //Set botones alert
+        $("#modal_alert").dialog("option", "buttons", {
+            "Acpetar": function () {
+                window.location.reload();
+            }
+        });
+
+    });
 </script>
 
 <h1>Capacitadores</h1>
-<form autocomplete="off" id="formBAlumno" name="formBAlumno" action="index.php?section=capacitadores&sub=listar_capacitadores" method="POST">
+<form autocomplete="off" id="formListarCapacitadores" name="formListarCapacitadores" action="index.php?section=capacitadores&sub=listar_capacitadores" method="POST">
 
     <p>Cantidad total de capacitadores {$cantidad_capacitadores}<br />
-    Estado:
-    <input type="hidden" value="" name="apellido" id="nombre"/>
-    <input type="hidden" value="" name="nombre" id="apellido"/>
-    <input type="hidden" value="" name="dni" id="dni"/>
-    
-    <select id="estado" name="estado">
-        {if $estado eq "ACTIVO"}
-        <option value=""> TODOS </option>
-        <option value="ACTIVO" selected=""> ACTIVO </option>
-        <option value="INACTIVO"> INACTIVO </option>
-        {elseif $estado eq "INACTIVO"}
-        <option value=""> TODOS </option>
-        <option value="ACTIVO"> ACTIVO </option>
-        <option value="INACTIVO" selected=""> INACTIVO </option>
-        {else}
-        <option value="" selected=""> TODOS </option>
-        <option value="ACTIVO"> ACTIVO </option>
-        <option value="INACTIVO"> INACTIVO </option>
-        {/if}
-    </select>
-    <button type="submit" form="formBAlumno" value="filtrar">Filtrar</button>
+        Estado:
+        <input type="hidden" value="" name="apellido" id="nombre"/>
+        <input type="hidden" value="" name="nombre" id="apellido"/>
+        <input type="hidden" value="" name="dni" id="dni"/>
+
+        <select id="estado" name="estado">
+            {if $estado eq "ACTIVO"}
+            <option value=""> TODOS </option>
+            <option value="ACTIVO" selected=""> ACTIVO </option>
+            <option value="INACTIVO"> INACTIVO </option>
+            {elseif $estado eq "INACTIVO"}
+            <option value=""> TODOS </option>
+            <option value="ACTIVO"> ACTIVO </option>
+            <option value="INACTIVO" selected=""> INACTIVO </option>
+            {else}
+            <option value="" selected=""> TODOS </option>
+            <option value="ACTIVO"> ACTIVO </option>
+            <option value="INACTIVO"> INACTIVO </option>
+            {/if}
+        </select>
+        <button type="submit" form="formListarCapacitadores" value="filtrar">Filtrar</button>
     </p>
 </form>
+
 <table class="zebra-striped" id="sortTableExample">
     <thead>
         <tr>
@@ -85,17 +153,16 @@
             <td>{$lista_capacitadores[c].celular}</td>
             <td>{$lista_capacitadores[c].estado}</td>
             <td>
-                <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_capacitador('{$lista_capacitadores[c].id_capacitador}')" />
+                <img name="ver_capacitador" src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
                 {if $lista_capacitadores[c].estado eq "ACTIVO"}
-                <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_capacitador('{$lista_capacitadores[c].id_capacitador}')" />
-                <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_capacitador('{$lista_capacitadores[c].id_capacitador}')"/>
+                <img name="modificar_capacitador" src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
+                <img name="baja_capacitador" src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
                 {else}
-                <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_capacitador('{$lista_capacitadores[c].id_capacitador}')"/>
+                <img sname="alta_capacitador" rc="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
                 {/if}
             </td>
         </tr>
         {/section}
     </tbody>
-</table> 
+</table>
 <input type="hidden" value="{$usrlogin}" id="usrlogin" name="usrlogin"/>
-

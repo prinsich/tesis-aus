@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 18:42:23
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 19:56:48
          compiled from ".\templates\alumnos\listar_alumnos.html" */ ?>
 <?php /*%%SmartyHeaderCode:30097567ef673491e77-03757491%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '221bbca5a9b80213b72f67702b6d168feea0a125' => 
     array (
       0 => '.\\templates\\alumnos\\listar_alumnos.html',
-      1 => 1451161218,
+      1 => 1457814382,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_567ef6738b3a02_52160533',
   'variables' => 
   array (
-    'Sajax' => 0,
     'cantidad_alumnos' => 0,
     'estado' => 0,
     'lista_alumnos' => 0,
@@ -30,71 +29,138 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567ef6738b3a02_52160533')) {function content_567ef6738b3a02_52160533($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
 ?><?php echo '<script'; ?>
->
-    <?php echo $_smarty_tpl->tpl_vars['Sajax']->value;?>
+ language="javascript" type="text/javascript">
+    $(document).ready(function () {
 
-    
-    function ver_alumno(id) {
-        var urlp = "index.php?section=alumnos&sub=ver_alumno&id_alumno=" + id;
-        window.open(urlp, "_self");
-    }
+        $("[name='ver_alumno']").click(function () {
+            var id_alumno = $(this).data("id");
+            var urlp = "index.php?section=alumnos&sub=ver_alumno&id_alumno=" + id_alumno;
+            window.open(urlp, "_self");
+        });
 
-    function modificar_alumno(id) {
-        var urlp = "index.php?section=alumnos&sub=modificar_alumno&id_alumno=" + id;
-        window.open(urlp, "_self");
-    }
+        $("[name='modificar_alumno']").click(function () {
+            var id_alumno = $(this).data("id");
+            var urlp = "index.php?section=alumnos&sub=modificar_alumno&id_alumno=" + id_alumno;
+            window.open(urlp, "_self");
+        });
 
-    function alta_alumno(id) {
-        if (confirm("Esta seguro que desea dar de alta este alumno?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_alta_alumno(id, usrlogin, retorno_cb);
-        }
-    }
+        $("[name='alta_alumno']").click(function () {
+            $("#modal_confirm").dialog("option", "title", "Alta de alumno");
+            $("#modal_confirm").html("Esta seguro que desea dar de alta este alumno?");
+            $("#modal_confirm").dialog("open");
 
-    function baja_alumno(id) {
-        if (confirm("Esta seguro que desea dar de baja este alumno?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_baja_alumno(id, usrlogin, retorno_cb);
-        }
-    }
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/alumnos/ajax_alumno.php?funcion=alta_alumno",
+                        data: {
+                            id_alumno: $(this).data("id"),
+                            usrlogin: $("#usrlogin").val(),
+                        }
+                    })
+                            .done(function (data, textStatus, jqXHR) {
+                                $("#modal_alert").dialog("option", "title", "Alta de alumno");
+                                if (data.success) {
+                                    $("#modal_alert").html("El alumno fue dado de alta");
+                                } else {
+                                    $("#modal_alert").html("El alumno no posee id valido");
+                                }
+                                $("#modal_alert").dialog("open");
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                if (console && console.log) {
+                                    console.log("La solicitud a fallado: " + textStatus);
+                                    console.log(jqXHR + " # " + errorThrown);
+                                }
+                            });
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
 
-    function retorno_cb(z) {
-        alert(z);
-        window.location.reload();
-    }
-    
+        $("[name='baja_alumno']").click(function () {
+            $("#modal_confirm").dialog("option", "title", "Baja de alumno");
+            $("#modal_confirm").html("Esta seguro que desea dar de baja este alumno?");
+            $("#modal_confirm").dialog("open");
+
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/alumnos/ajax_alumno.php?funcion=baja_alumno",
+                        data: {
+                            id_alumno: $(this).data("id"),
+                            usrlogin: ("#usrlogin").val(),
+                        }
+                    })
+                            .done(function (data, textStatus, jqXHR) {
+                                $("#modal_alert").dialog("option", "title", "Baja de alumno");
+                                if (data.success) {
+                                    $("#modal_alert").html("El alumno fue dado de baja");
+                                } else {
+                                    $("#modal_alert").html("El alumno no posee id valido");
+                                }
+                                $("#modal_alert").dialog("open");
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                if (console && console.log) {
+                                    console.log("La solicitud a fallado: " + textStatus);
+                                    console.log(jqXHR + " # " + errorThrown);
+                                }
+                            });
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
+
+        //Set botones alert
+        $("#modal_alert").dialog("option", "buttons", {
+            "Acpetar": function () {
+                window.location.reload();
+            }
+        });
+    });
 <?php echo '</script'; ?>
 >
 
 <h1>Alumnos</h1>
-<form autocomplete="off" id="formBAlumno" name="formBAlumno" action="index.php?section=alumnos&sub=listar_alumnos" method="POST">
+<form autocomplete="off" id="formListarAlumno" name="formListarAlumno" action="index.php?section=alumnos&sub=listar_alumnos" method="POST">
 
     <p>Cantidad total de alumnos: <?php echo $_smarty_tpl->tpl_vars['cantidad_alumnos']->value;?>
 <br />
-    Estado:
-    <input type="hidden" value="" name="apellido" id="nombre"/>
-    <input type="hidden" value="" name="nombre" id="apellido"/>
-    <input type="hidden" value="" name="dni" id="dni"/>
-    <input type="hidden" value="" name="taller" id="taller"/>
-    <input type="hidden" value="" name="alta_seguro" id="alta_seguro"/>
+        Estado:
+        <input type="hidden" value="" name="apellido" id="nombre"/>
+        <input type="hidden" value="" name="nombre" id="apellido"/>
+        <input type="hidden" value="" name="dni" id="dni"/>
+        <input type="hidden" value="" name="taller" id="taller"/>
+        <input type="hidden" value="" name="alta_seguro" id="alta_seguro"/>
 
-    <select id="estado" name="estado">
-        <?php if ($_smarty_tpl->tpl_vars['estado']->value=="ACTIVO") {?>
-        <option value=""> TODOS </option>
-        <option value="ACTIVO" selected=""> ACTIVO </option>
-        <option value="INACTIVO"> INACTIVO </option>
-        <?php } elseif ($_smarty_tpl->tpl_vars['estado']->value=="INACTIVO") {?>
-        <option value=""> TODOS </option>
-        <option value="ACTIVO"> ACTIVO </option>
-        <option value="INACTIVO" selected=""> INACTIVO </option>
-        <?php } else { ?>
-        <option value="" selected=""> TODOS </option>
-        <option value="ACTIVO"> ACTIVO </option>
-        <option value="INACTIVO"> INACTIVO </option>
-        <?php }?>
-    </select>
-    <button type="submit" form="formBAlumno" value="filtrar">Filtrar</button>
-        </p>
+        <select id="estado" name="estado">
+            <?php if ($_smarty_tpl->tpl_vars['estado']->value=="ACTIVO") {?>
+            <option value=""> TODOS </option>
+            <option value="ACTIVO" selected=""> ACTIVO </option>
+            <option value="INACTIVO"> INACTIVO </option>
+            <?php } elseif ($_smarty_tpl->tpl_vars['estado']->value=="INACTIVO") {?>
+            <option value=""> TODOS </option>
+            <option value="ACTIVO"> ACTIVO </option>
+            <option value="INACTIVO" selected=""> INACTIVO </option>
+            <?php } else { ?>
+            <option value="" selected=""> TODOS </option>
+            <option value="ACTIVO"> ACTIVO </option>
+            <option value="INACTIVO"> INACTIVO </option>
+            <?php }?>
+        </select>
+        <button type="submit" form="formListarAlumno" value="filtrar">Filtrar</button>
+    </p>
 </form>
 
 
@@ -154,16 +220,16 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['a']['last']       = ($_smart
             <td><?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['estado'];?>
 </td>
             <td>
-                <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_alumno('<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
-')" />
+                <img name="ver_alumno" src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
+"  />
                 <?php if ($_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['estado']=="ACTIVO") {?>
-                <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_alumno('<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
-')" />
-                <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_alumno('<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
-')"/>
+                <img name="modificar_alumno" src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
+" />
+                <img name="baja_alumno" src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
+" />
                 <?php } else { ?>
-                <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_alumno('<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
-')"/>
+                <img name="alta_alumno" src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['id_alumno'];?>
+" />
                 <?php }?>
             </td>
         </tr>

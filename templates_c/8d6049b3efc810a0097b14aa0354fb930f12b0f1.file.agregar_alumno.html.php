@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:11:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 00:25:13
          compiled from ".\templates\alumnos\agregar_alumno.html" */ ?>
 <?php /*%%SmartyHeaderCode:18901567ef24022acc0-43125761%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8d6049b3efc810a0097b14aa0354fb930f12b0f1' => 
     array (
       0 => '.\\templates\\alumnos\\agregar_alumno.html',
-      1 => 1451160705,
+      1 => 1457839491,
       2 => 'file',
     ),
   ),
@@ -24,12 +24,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567ef240381985_50310402')) {function content_567ef240381985_50310402($_smarty_tpl) {?>
-<?php echo '<script'; ?>
->
-    /*JQUERY*/
+<?php if ($_valid && !is_callable('content_567ef240381985_50310402')) {function content_567ef240381985_50310402($_smarty_tpl) {?><?php echo '<script'; ?>
+ language="javascript" type="text/javascript">
+
     $(document).ready(function () {
-        $("ul#tabs li").click(function (e) {
+        //Tabs
+        $("ul#tabs li").click(function () {
             if (!$(this).hasClass("active")) {
                 var tabNum = $(this).index();
                 var nthChild = tabNum + 1;
@@ -38,199 +38,191 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 $("ul#tab li.active").removeClass("active");
                 $("ul#tab li:nth-child(" + nthChild + ")").addClass("active");
             }
-        }); 
+        });
+
+        //Mascaras para las fechas
         $("#fecha_nacimiento").mask("99/99/9999");
-    });
 
-    /*JAVASCRIPT*/
-    
-    function validar_fecha(fecha_input){
-        var fecha = fecha_input.value;
-        var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
-        var fechaCompleta = fecha.match(datePat);
-        if (fechaCompleta == null) {
-            return false;
-        }
+        //Guardar datos
+        $("#guardar").click(function () {
+            if (validar()) {
+                $("#alta_seguro").val(getCheckedRadioValue("alta_seguro_radio"));
+                $("#formAgregarAlumno").submit();
+            }
+        });
 
-        dia = fechaCompleta[1];
-        mes = fechaCompleta[3];
-        anio = fechaCompleta[5];
+        //Salir de la pantalla
+        $("#salir").click(function () {
+            $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+            $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
+            $("#modal_confirm").dialog("open");
+        });
 
-        if (dia < 1 || dia > 31) {
-            alert("El valor del día debe estar comprendido entre 1 y 31.");
-            fecha_input.value = "";
-            return false;
-        }
-        if (mes < 1 || mes > 12) {
-            alert("El valor del mes debe estar comprendido entre 1 y 12.");
-            fecha_input.value = "";
-            return false;
-        }
-        if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia == 31) {
-            alert("El mes " + mes + " no tiene 31 días!");
-            fecha_input.value = "";
-            return false;
-        }
-        if (mes == 2) { // bisiesto
-            var bisiesto = (anio % 4 == 0 && (anio % 100 != 0 || anio % 400 == 0));
-            if (dia > 29 || (dia == 29 && !bisiesto)) {
-                alert("Febrero del " + anio + " no contiene " + dia + " dias!");
-                fecha_input.value = "";
+        //Set botones confirmar
+        $("#modal_confirm").dialog("option", "buttons", {
+            "SI": function () {
+                window.location = "index.php";
+            },
+            "NO": function () {
+                $(this).dialog("close");
+            }
+        });
+
+        //Validacion del formato de la fecha
+        $("#fecha_nacimiento").change(function(){
+            var fecha = $(this).val();
+            var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+            var fechaCompleta = fecha.match(datePat);
+
+            var msj = "";
+            var fecha_valida = true;
+
+            if (fechaCompleta === null) {
+                fecha_valida = false;
+            }
+
+            var dia = fechaCompleta[1];
+            var mes = fechaCompleta[3];
+            var anio = fechaCompleta[5];
+
+            if (dia < 1 || dia > 31) {
+                msj += "El valor del d&iacute;a debe estar comprendido entre 1 y 31.<br />";
+                this.val() = "";
+                fecha_valida = false;
+            }
+            if (mes < 1 || mes > 12) {
+                msj += "El valor del mes debe estar comprendido entre 1 y 12.<br />";
+                this.val() = "";
+                 fecha_valida = false;
+            }
+            if ((mes === 4 || mes === 6 || mes === 9 || mes === 11) && dia === 31) {
+                msj += "El mes " + mes + " no tiene 31 días.<br />";
+                this.val() = "";
+                fecha_valida = false;
+            }
+            if (mes === 2) { // bisiesto
+                var bisiesto = (anio % 4 === 0 && (anio % 100 !== 0 || anio % 400 === 0));
+                if (dia > 29 || (dia === 29 && !bisiesto)) {
+                    msj += "Febrero del " + anio + " no contiene " + dia + " dias.";
+                    this.val() = "";
+                    fecha_valida = false;
+                }
+            }
+
+            if(fecha_valida){
+                return true;
+            } else {
+                $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
+                $("#modal_alert").html(msj);
+                $("#modal_alert").dialog("open");
                 return false;
             }
-        }
-        return true;
-    }
-    
-    function validar_edad(fecha_input){
-        var fecha_nacimiento = fecha_input.value;
-        var edad = calcularEdad(fecha_nacimiento);
-        if (edad < 6) {
-            alert("El alumno debe ser mayor a 6 a\u00F1os\n");
-            fecha_input.focus();
-        }
-    }
+        });
 
-    function validar() {
-
-        var valido = true;
-        var error = "Por favor complete los siguiente campos: \n";
-
-        var apellido = document.getElementById("apellido").value;
-        if (apellido.trim() === "") {
-            valido = false;
-            error += " - Apellido\n";
-        }
-
-        var nombre = document.getElementById("nombre").value;
-        if (nombre.trim() === "") {
-            valido = false;
-            error += " - Nombre\n";
-        }
-
-        var sexo = document.getElementById("sexo").value;
-        if (sexo === "00") {
-            valido = false;
-            error += " - Sexo\n";
-        }
-
-        var domicilio = document.getElementById("domicilio").value;
-        if (domicilio.trim() === "") {
-            valido = false;
-            error += " - Domicilio\n";
-        }
-
-        var telefono = document.getElementById("telefono").value;
-        if (telefono.trim() === "") {
-            valido = false;
-            error += " - Telefono\n";
-        }
-
-        var dni = document.getElementById("dni").value;
-        if (dni.trim() === "") {
-            valido = false;
-            error += " - D.N.I.\n";
-        }
-
-        var fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
-        if (fecha_nacimiento.trim() === "") {
-            valido = false;
-            error += " - Fecha de Nacimiento\n";
-        } else {
+        //validacion de la edad
+        $("#fecha_nacimiento").change(function(){
+            var fecha_nacimiento = $(this).val();
             var edad = calcularEdad(fecha_nacimiento);
             if (edad < 6) {
-                valido = false;
-                error += " - El alumno debe ser mayor a 6 a\u00F1os\n";
+                $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
+                $("#modal_alert").html("El alumno debe ser mayor a 6 a\u00F1os<br />");
+                $("#modal_alert").dialog("open");
+                $(this).val("");
+                $(this).focus();
             }
+        });
+
+        //Muestra la vacunacion
+        $("#vacunacion").change(function (){
+            var vac = this.val();
+            if(vac === "I"){
+                $("#vac_faltantes").css('display','inline');
+            } else {
+                $("#vac_faltantes").css('display','none');
+                $("#vacunas_faltantes").html("");
+            }
+        });
+
+        function validar() {
+            var valido = true;
+            var error = "Por favor complete los siguiente campos: <br />";
+
+            var apellido = $("#apellido").val();
+            if (apellido.trim() === "") {
+                valido = false;
+                error += " - Apellido<br />";
+            }
+
+            var nombre = $("#nombre").val();
+            if (nombre.trim() === "") {
+                valido = false;
+                error += " - Nombre<br />";
+            }
+
+            var sexo = $("#sexo").val();
+            if (sexo === "00") {
+                valido = false;
+                error += " - Sexo<br />";
+            }
+
+            var domicilio = $("#domicilio").val();
+            if (domicilio.trim() === "") {
+                valido = false;
+                error += " - Domicilio<br />";
+            }
+
+            var telefono = $("#telefono").val();
+            if (telefono.trim() === "") {
+                valido = false;
+                error += " - Telefono<br />";
+            }
+
+            var dni = $("#dni").val();
+            if (dni.trim() === "") {
+                valido = false;
+                error += " - D.N.I.<br />";
+            }
+
+            var fecha_nacimiento = $("#fecha_nacimiento").val();
+            if (fecha_nacimiento.trim() === "") {
+                valido = false;
+                error += " - Fecha de Nacimiento<br />";
+            }
+
+            var alta_seguro = $("#alta_seguro_radio");
+            if (alta_seguro === false) {
+                valido = false;
+                error += " - Alta del seguro<br />";
+            }
+
+            var padre = $("#table_nombre").val();
+            if (padre.trim() === "") {
+                valido = false;
+                error += " - Debe tener al menos un tutor legal<br />";
+            }
+
+            var parentesco = $("#table_parentesco").val();
+            if (parentesco.trim() === "") {
+                valido = false;
+                error += " - Debe tener al menos un parentesco con el tutor legal<br />";
+            }
+
+            if (!valido) {
+                $("#modal_alert").dialog("option", "title", "Validacion de datos del Alumno");
+                $("#modal_alert").html(error);
+                $("#modal_alert").dialog("open");
+            }
+
+            return valido;
         }
-
-        var alta_seguro = validCheckedRadioValue("alta_seguro_radio");
-        if (alta_seguro === false) {
-            valido = false;
-            error += " - Alta del seguro\n";
-        }
-
-        var padre = document.getElementById("table_nombre").value;
-        if (padre.trim() === "") {
-            valido = false;
-            error += " - Debe tener al menos un tutor legal\n";
-        }
-
-        var parentesco = document.getElementById("table_parentesco").value;
-        if (parentesco.trim() === "") {
-            valido = false;
-            error += " - Debe tener al menos un parentesco con el tutor legal\n";
-        }
-
-        if (!valido) {
-            alert(error);
-        }
-
-        return valido;
-    }
-
-    function guardar() {
-        if (validar()) {
-            document.getElementById("alta_seguro").value = getCheckedRadioValue("alta_seguro_radio");
-            document.forms[0].submit();
-        }
-    }
-
-    function ver_vac_faltantes() {
-        var vac = document.getElementById("vacunacion").value;
-        if (vac === "INCOMPLETAS") {
-            document.getElementById("vac_faltantes").style.display = "inline";
-        } else {
-            document.getElementById("vac_faltantes").style.display = "none";
-        }
-    }
-
-    function salir() {
-        var respuesta = confirm("Esta seguro q desea salir?");
-        if (respuesta)
-            window.location = "index.php";
-    }
+    });
 
 <?php echo '</script'; ?>
 >
 
-<style>
-    ul#tabs {
-        list-style-type: none;
-        padding: 0;
-        text-align: center;
-    }
-    ul#tabs li {
-        display: inline-block;
-        background-color: #32c896;
-        border-bottom: solid 5px #238b68;
-        padding: 5px 20px;
-        margin-bottom: 4px;
-        color: #fff;
-        cursor: pointer;
-    }
-    ul#tabs li:hover {
-        background-color: #238b68;
-    }
-    ul#tabs li.active {
-        background-color: #238b68;
-    }
-    ul#tab {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-    ul#tab li {
-        display: none;
-    }
-    ul#tab li.active {
-        display: block;
-    }
-</style>
-
 <h1>Agregar Alumno</h1>
 
-<form autocomplete="off" id="formAlumno" name="formAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST" >
+<form autocomplete="off" id="formAgregarAlumno" name="formAgregarAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST" >
     <input type="hidden" id="accion" name="accion" value="agregar" />
     <input type="hidden" id="usrlogin" name="usrlogin" value="<?php echo $_smarty_tpl->tpl_vars['usrlogin']->value;?>
 " />
@@ -257,11 +249,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </li>
     </ul>
 
-
     <h2>El taller se encuentra protegido por Seguro San Crist&oacute;bal</h2>
-    <div align="center">
-        <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
-        <input class="btnSubmit2" type="button" name="volver" value="Cancelar" onclick="salir()">
+    <div style="text-align: center">
+        <button type="button" class="btnSubmit2" name="guardar" id="guardar" >Guardar</button>
+        <button type="button" class="btnSubmit2" name="salir" id="salir" >Cancelar</button>
     </div>
-
-</form><?php }} ?>
+</form>
+<?php }} ?>

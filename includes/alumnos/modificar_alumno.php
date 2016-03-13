@@ -1,5 +1,4 @@
 <?php
-include_once("includes/alumnos/ajax.php");
 include_once("classes/class.Alumno.php");
 include_once("classes/class.Datos_Familiares.php");
 include_once("classes/class.Datos_Medicos.php");
@@ -11,7 +10,7 @@ $familiar = new Datos_Familiares($db);
 $medico = new Datos_Medicos($db);
 $personal = new Datos_Personales($db);
 
-$id_alumno = $_GET["id_alumno"];
+$id_alumno = filter_input(INPUT_GET, 'id_alumno');
 
 $datos_alumno = $alumno->getAlumno($id_alumno);
 $datos_familiares = $familiar->getDatosFamiliares($id_alumno);

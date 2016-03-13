@@ -1,17 +1,15 @@
 <?php
-include_once("includes/capacitadores/ajax.php");
 include_once("classes/class.Capacitador.php");
 $capacitador = new Capacitador($db);
 
 $lista_capacitadores = null;
+$datos = filter_input_array(INPUT_POST);
 
-if(empty($_POST)){
+if(empty($datos)){
     $lista_capacitadores = $capacitador->listar_capacitadores();
     $smarty->assign("estado", "");
 } else {
-    extract($_POST);
-    $datos = $_POST;
-    $lista_capacitadores = $capacitador->buscar_capacitadores($datos["apellido"], $datos["nombre"], $datos["dni"], $datos["estado"]);    
+    $lista_capacitadores = $capacitador->buscar_capacitadores($datos["apellido"], $datos["nombre"], $datos["dni"], $datos["estado"]);
     $smarty->assign("estado",  $datos["estado"]);
 }
 

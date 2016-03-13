@@ -3,8 +3,7 @@ include_once("classes/class.Capacitador.php");
 include_once("classes/class.Log_Estados.php");
 include_once("classes/class.Log.php");
 
-extract($_POST);
-$datos = $_POST;
+$datos = filter_input_array(INPUT_POST);
 
 //ID's
 if ($datos["accion"] == "modificar") {

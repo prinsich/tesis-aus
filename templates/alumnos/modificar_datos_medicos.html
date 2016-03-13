@@ -4,8 +4,8 @@
 {html_grupo_sanguineo name="grupo_sanguineo" seleccionar=$datos_medicos.id_grupo_sanguineo}
 <br />
 
-<label for="vacunacion">Vacunaci&oacute;n:</label> 
-<select id="vacunacion" name="vacunacion" onchange="ver_vac_faltantes()" style="width: 125px"> 
+<label for="vacunacion">Vacunaci&oacute;n:</label>
+<select id="vacunacion" name="vacunacion" style="width: 125px"> 
     {if $datos_medicos.vacunacion eq "I"}
     <option value="0"> SELECCIONAR </option>
     <option value="I" selected="">INCOMPLETAS</option>
@@ -24,7 +24,7 @@
 
 {if $datos_medicos.vacunacion eq "COMPLETAS"}
 <div id="vac_faltantes" style="display: none">
-    {else}    
+    {else}
     <div id="vac_faltantes" style="display: inline">
         {/if}
         <label for="vacunas_faltantes">Vacunas Faltantes:</label>

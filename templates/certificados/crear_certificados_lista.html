@@ -1,0 +1,44 @@
+<script language="javascript" type="text/javascript">
+$(document).ready(function () {
+  $("[name='crear_certificado_pdf']").click(function () {
+    var urlp = "index.php?section=certificados&sub=imprimir&id_alumno=" + $(this).data("id") + "&id_taller=" + $("#taller").val() + "&estado=" + $("#estado_" + $(this).data("id")).val();
+    window.open(urlp, "_self");
+  });
+});
+</script>
+<h2>Alumnos</h2>
+{if $lista_alumnos == null}
+<h3 align="center">SIN RESULTADOS</h3>
+{else}
+<table class="zebra-striped" id="sortTableExample">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Apellido</th>
+      <th>Nombres</th>
+      <th>DNI</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {section name=a loop=$lista_alumnos}
+    <tr>
+      <td>{counter}</td>
+      <td>{$lista_alumnos[a].apellido}</td>
+      <td>{$lista_alumnos[a].nombre}</td>
+      <td>{$lista_alumnos[a].dni}</td>
+      <td>
+        <select name="estado_{$lista_alumnos[a].id_alumno}" id="estado_{$lista_alumnos[a].id_alumno}" class="estadoselect">
+          <option value="a" selected="selected">Asisti&oacute;</option>
+          <option value="c">Capacit&oacute;</option>
+        </select>
+      </td>
+      <td>
+          <img name="crear_certificado_pdf" src="images/icons/document_add.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_alumnos[a].id_alumno}" />
+      </td>
+    </tr>
+    {/section}
+  </tbody>
+</table>
+{/if}

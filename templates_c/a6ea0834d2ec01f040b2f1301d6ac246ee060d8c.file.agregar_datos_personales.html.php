@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:12:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-08 19:34:51
          compiled from ".\templates\alumnos\agregar_datos_personales.html" */ ?>
 <?php /*%%SmartyHeaderCode:1514567ef240439298-84485383%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a6ea0834d2ec01f040b2f1301d6ac246ee060d8c' => 
     array (
       0 => '.\\templates\\alumnos\\agregar_datos_personales.html',
-      1 => 1451160717,
+      1 => 1457476486,
       2 => 'file',
     ),
   ),
@@ -58,7 +58,7 @@ if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program
     <br />
 
     <label for="fecha_nacimiento">Fecha de Nacimiento(*):</label>
-    <input type="text" value="" id="fecha_nacimiento" name="fecha_nacimiento" onchange="validar_fecha(this);validar_edad(this);"/>
+    <input type="text" value="" id="fecha_nacimiento" name="fecha_nacimiento" />
     <br />
 
     <label for="escuela">Escuela:</label>

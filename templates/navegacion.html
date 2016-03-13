@@ -1,39 +1,39 @@
+<div id="log"></div>
 <div id="navegacion">
     <ul>
         <hr>
-        <a href="index.php" id="index" onclick="return control_salida();"><li>Inicio</li></a>
-        <a href="index.php?section=perfil&sub=ver" id="ver_perfil" onclick="return control_salida();"><li>Ver mi perfil</li></a>
-        {if $logueado }
-        <a href="index.php?section=logout" id="logout"><li>Salir</li></a>
-        {/if}
+        <a class="control_salida"  href="index.php?section=home" id="index" ><li>Inicio</li></a>
+        <a class="control_salida"  href="index.php?section=perfil&sub=ver" id="ver_perfil" ><li>Ver mi perfil</li></a>
+        <a class="control_salida"  href="index.php?section=logout" id="logout"><li>Salir</li></a>
+
         <hr>
         <p align="center"><b>Alumnos</b></p>
         <hr>
-        <a href="index.php?section=alumnos&sub=agregar_alumno" id="agregar_alumno" onclick="return control_salida();"><li>Agregar Alumno</li></a>
-        <a href="index.php?section=alumnos&sub=listar_alumnos" id="listar_alumnos" onclick="return control_salida();"><li>Listar Alumnos</li></a>
-        <a href="index.php?section=alumnos&sub=buscar_alumno" id="buscar_alumno" onclick="return control_salida();"><li>Buscar Alumno</li></a>
+        <a class="control_salida"  href="index.php?section=alumnos&sub=agregar_alumno" id="agregar_alumno" ><li>Agregar Alumno</li></a>
+        <a class="control_salida"  href="index.php?section=alumnos&sub=listar_alumnos" id="listar_alumnos" ><li>Listar Alumnos</li></a>
+        <a class="control_salida"  href="index.php?section=alumnos&sub=buscar_alumno" id="buscar_alumno" ><li>Buscar Alumno</li></a>
         <hr>
         <p align="center"><b>Capacitadores</b></p>
-        <hr>		
-        <a href="index.php?section=capacitadores&sub=agregar_capacitador" id="agregar_capacitador" onclick="return control_salida();"><li>Agregar Capacitador</li></a>
-        <a href="index.php?section=capacitadores&sub=listar_capacitadores" id="listar_capacitadores" onclick="return control_salida();"><li>Listar Capacitadores</li></a>
-        <a href="index.php?section=capacitadores&sub=buscar_capacitadores" id="buscar_capacitadores" onclick="return control_salida();"><li>Buscar Capacitador</li></a>		
+        <hr>
+        <a class="control_salida"  href="index.php?section=capacitadores&sub=agregar_capacitador" id="agregar_capacitador" ><li>Agregar Capacitador</li></a>
+        <a class="control_salida"  href="index.php?section=capacitadores&sub=listar_capacitadores" id="listar_capacitadores" ><li>Listar Capacitadores</li></a>
+        <a class="control_salida"  href="index.php?section=capacitadores&sub=buscar_capacitadores" id="buscar_capacitadores" ><li>Buscar Capacitador</li></a>
         <hr>
         <p align="center"><b>Talleres</b></p>
-        <hr>	
-        <a href="index.php?section=talleres&sub=agregar_taller" id="agregar_taller" onclick="return control_salida();"><li>Agregar Taller</li></a>
-        <!--a href="index.php?section=talleres&sub=resetear_taller" onclick="return control_salida();"><li>Resetear Talleres</li></a-->
-        <a href="index.php?section=talleres&sub=listar_talleres" id="listar_talleres" onclick="return control_salida();"><li>Listar Talleres</li></a> 
-        <a href="index.php?section=talleres&sub=buscar_talleres" id="buscar_talleres" onclick="return control_salida();"><li>Buscar Taller</li></a>		
+        <hr>
+        <a class="control_salida"  href="index.php?section=talleres&sub=agregar_taller" id="agregar_taller" ><li>Agregar Taller</li></a>
+        <!--a href="index.php?section=talleres&sub=resetear_taller" ><li>Resetear Talleres</li></a-->
+        <a class="control_salida"  href="index.php?section=talleres&sub=listar_talleres" id="listar_talleres" ><li>Listar Talleres</li></a>
+        <a class="control_salida"  href="index.php?section=talleres&sub=buscar_talleres" id="buscar_talleres" ><li>Buscar Taller</li></a>
         <hr>
         <p align="center"><b>Certificados</b></p>
-        <hr>	
-        <a href="index.php?section=certificados&sub=crear_certificados" id="crear_certificados" onclick="return control_salida();"><li>Crear Certificados</li></a>
         <hr>
-        {if $usrperfil eq "Admin"}
+        <a class="control_salida"  href="index.php?section=certificados&sub=crear_certificados" id="crear_certificados" ><li>Crear Certificados</li></a>
+        <hr>
+        {if $usrperfil eq "ADMIN"}
         <p align="center"><b>Administraci&oacute;n</b></p>
-        <hr>	
-        <a href="index.php?section=admin&sub=admin"><li>Acceder a sistema</li></a>
+        <hr>
+        <a class="control_salida"  href="index.php?section=admin&sub=admin"><li>Acceder al modo administrador</li></a>
         <hr>
         {/if}
     </ul>

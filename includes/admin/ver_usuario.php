@@ -3,7 +3,7 @@ include_once("classes/class.Usuarios.php");
 
 $usuario = new Usuarios($db);
 
-$id_usuario = $_GET["id_usuario"];
+$id_usuario = filter_input(INPUT_GET, 'id_usuario');
 
 $dato_usuario = $usuario->getUsuario($id_usuario);
 

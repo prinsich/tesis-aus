@@ -1,4 +1,5 @@
 <?php
-$archivo = $sub.".php"; 
-include ("includes/login/".$archivo );  	
-?>
+$archivo = $sub.".php";
+if (file_exists("includes/login/".$archivo)) {
+    include ("includes/login/".$archivo );
+}

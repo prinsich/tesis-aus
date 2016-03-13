@@ -1,16 +1,15 @@
-{if $section eq "" 
-    || $section eq "home"
-    || $section eq "alumnos"
-    || $section eq "capacitadores"
-    || $section eq "talleres"
-    || $section eq "certificados"
-    || $section eq "admin"
-    || $section eq "perfil"}
-	{include file="menu.html"}
+{if $section eq ""}
+    {include file="login/index.html"}
+
 {elseif $section eq "login"}
     {include file="login/index.html"}
+
 {elseif $section eq "logout"}
     {include file="login/index.html"}
+
+{elseif $logueado}
+	{include file="home.html"}
+
 {else}
-    {include file="desarrollo_index.html"}
+    {include file="accedo_denegado.html"}
 {/if}

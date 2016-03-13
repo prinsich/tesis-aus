@@ -1,5 +1,4 @@
 <?php
-include_once("includes/perfil/ajax.php");
 include_once("classes/class.Usuarios.php");
 
 $usuario = new Usuarios($db);

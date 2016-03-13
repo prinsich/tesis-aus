@@ -1,24 +1,23 @@
 <div id="navegacion">
     <ul>
         <hr>
-        <a href="index.php" id="index" onclick="return control_salida();"><li>Inicio</li></a>
-        {if $logueado }
-        <a href="index.php?section=logout" id="logout"><li>Salir</li></a>
-        {/if}
+        <a class="control_salida"  href="index.php?section=admin" id="index" ><li>Inicio</li></a>
+        <a class="control_salida"  href="index.php?section=logout" id="logout"><li>Salir</li></a>
+
         <hr>
         <p align="center"><b>Usuario</b></p>
         <hr>
-        <a href="index.php?section=admin&sub=agregar_usuario" id="agregar_alumno" onclick="return control_salida();"><li>Agregar Usuario</li></a>
-        <a href="index.php?section=admin&sub=listar_usuarios" id="listar_alumnos" onclick="return control_salida();"><li>Listar Usuarios</li></a>
-        <a href="index.php?section=admin&sub=buscar_usuario" id="buscar_alumno" onclick="return control_salida();"><li>Buscar Usuario</li></a>
+        <a class="control_salida"  href="index.php?section=admin&sub=agregar_usuario" id="agregar_alumno" ><li>Agregar Usuario</li></a>
+        <a class="control_salida"  href="index.php?section=admin&sub=listar_usuarios" id="listar_alumnos" ><li>Listar Usuarios</li></a>
+        <a class="control_salida"  href="index.php?section=admin&sub=buscar_usuario" id="buscar_alumno" ><li>Buscar Usuario</li></a>
         <hr>
         <p align="center"><b>Registros</b></p>
-        <hr>		
-        <a href="index.php?section=admin&sub=ver_registro" id="agregar_capacitador" onclick="return control_salida();"><li>Ver Registros</li></a>	
+        <hr>
+        <a class="control_salida"  href="index.php?section=admin&sub=ver_registro" id="agregar_capacitador" ><li>Ver Registros</li></a>
         <hr>
         <p align="center"><b>Administraci&oacute;n</b></p>
-        <hr>	
-        <a href="index.php"><li>Salir a sistema</li></a>
+        <hr>
+        <a class="control_salida"  href="index.php?section=home"><li>Salir a sistema</li></a>
         <hr>
     </ul>
 </div>

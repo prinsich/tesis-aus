@@ -1,142 +1,156 @@
-<script>
-    {$Sajax}
-    {literal}
-    function validar() {
-        
-        var valido = true;
-        var error = "Por favor complete los siguiente campos: \n";
-        
-        var usr = document.getElementById("user").value;
-        if (usr.trim() === "") {
-            valido = false;
-            error += " - DNI para el nombre de usuario\n";
-        }        
-        
-        var perfil = document.getElementById("perfil").value;
-        if (perfil === "00") {
-            valido = false;
-            error += " - Selecione un perfil\n";
-        }        
-              
-        var apellido = document.getElementById("apellido").value;
-        if (apellido.trim() === "") {
-            valido = false;
-            error += " - Apellido\n";
-        }
+<script language="javascript" type="text/javascript">
+{literal}
+$(document).ready(function () {
+      $("#guardar").click(function() {
+          if(validar()){
+              $("#formAgregarUsuario").submit();
+          }
+      });
 
-        var nombre = document.getElementById("nombre").value;
-        if (nombre.trim() === "") {
-            valido = false;
-            error += " - Nombre\n";
-        }
-        
-        var domicilio = document.getElementById("domicilio").value;
-        if (domicilio.trim() === "") {
-            valido = false;
-            error += " - Domicilio\n";
-        }
+      function validar() {
+          var valido = true;
+          var error = "Por favor complete los siguiente campos: <br />";
 
-        var telefono = document.getElementById("telefono").value;
-        if (telefono.trim() === "") {
-            valido = false;
-            error += " - Telefono y/o celular\n";
-        }
-        
-        var email = document.getElementById("email").value;
-        if (email.trim() === "") {
-            valido = false;
-            error += " - Email\n";
-        }
+          var usr = $("#user").val();
+          if (usr.trim() === "") {
+              valido = false;
+              error += " - DNI para el nombre de usuario<br />";
+          }
 
-        if(!valido){
-            alert(error);
-        }
-        
-        return valido;
-    }
-    
-    function validarEmail() {
-        var email = document.getElementById("email").value;
-        expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(email.trim() !== ""){
-            if ( !expr.test(email) ){
-                alert("La direcci\u00F3n de correo " + email + " es incorrecta.");
+          var perfil = $("#perfil").val();
+          if (perfil === "00") {
+              valido = false;
+              error += " - Selecione un perfil<br />";
+          }
+
+          var apellido = $("#apellido").val();
+          if (apellido.trim() === "") {
+              valido = false;
+              error += " - Apellido<br />";
+          }
+
+          var nombre = $("#nombre").val();
+          if (nombre.trim() === "") {
+              valido = false;
+              error += " - Nombre<br />";
+          }
+
+          var domicilio = $("#domicilio").val();
+          if (domicilio.trim() === "") {
+              valido = false;
+              error += " - Domicilio<br />";
+          }
+
+          var telefono = $("#telefono").val();
+          if (telefono.trim() === "") {
+              valido = false;
+              error += " - Telefono y/o celular<br />";
+          }
+
+          var email = $("#email").val();
+          if (email.trim() === "") {
+              valido = false;
+              error += " - Email<br />";
+          }
+
+          if(valido){
+              return true;
+          } else {
+              $("#modal_alert").dialog("option", "title", "Guardar usuario");
+              $("#modal_alert").html(error);
+              $("#modal_alert").dialog("open");
+              return false;
+          }
+      }
+
+      $("#email").change(function() {
+          var email = $(this).val();
+          expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(email.trim() !== ""){
+              if ( !expr.test(email) ){
+                  $("#modal_alert").dialog("option", "title", "Email");
+                  $("#modal_alert").html("La direccion de correo " + email + " es incorrecta.");
+                  $("#modal_alert").dialog("open");
+                  $(this).val("");
+              }
+          }
+      });
+
+      $("#user").change(function() {
+          if($.trim($(this).val()) !== ""){
+              $.ajax({
+                      method: "POST",
+                      dataType: "json",
+                      url: "includes/admin/ajax_admin.php?funcion=buscar_nombre_usr",
+                      data: {
+                          user: $(this).val(),
+                      }
+                  })
+                  .done(function (data, textStatus, jqXHR) {
+                      if (data.success) {
+                        $("#modal_alert").dialog("option", "title", "busquedar alumno");
+                        $("#modal_alert").html("El usuario ya existe");
+                        $("#modal_alert").dialog("open");
+                        $("#user").val("");
+                      }
+
+                  })
+                  .fail(function (jqXHR, textStatus, errorThrown) {
+                      if (console && console.log) {
+                          console.log("La solicitud a fallado: " + textStatus);
+                          console.log(jqXHR + " # " + errorThrown);
+                      }
+                  });
             }
-        }
-    }
-    
-    function buscar_usuario(){
-        
-        var usr = document.getElementById("user").value;
-        x_buscar_usuario(usr, buscar_usuario_cb);
-        return true;
-        
-    }
-
-    function buscar_usuario_cb(z){
-        if(z === 1){
-            alert("El usuario ya existe");
-            document.getElementById("user").value = "";
-        }
-    }
-         
-    function guardar(){
-        
-        var valido = validar();
-                
-        if(valido){
-            document.forms[0].submit();
-        }
-    }
-    
-    
-    {/literal}
+      });
+});
+{/literal}
 </script>
 
 <h1>Agregar Usuario</h1>
 
-<form autocomplete="off" name="formCapacitador" action="index.php?section=admin&sub=guardar_usuario" method="POST">
-    <input type="hidden" id="accion" name="accion" value="agregar" />
-    <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
-    <input type="hidden" id="new_pass" name="new_pass" value="SI" />
-    
+<form autocomplete="off" name="formAgregarUsuario" id="formAgregarUsuario" action="index.php?section=admin&sub=guardar_usuario" method="POST">
+    <input type="hidden" id="accion" name="accion" val()="agregar" />
+    <input type="hidden" id="usrlogin" name="usrlogin" val()="{$usrlogin}" />
+    <input type="hidden" id="new_pass" name="new_pass" val()="SI" />
+
     <h2>Datos de login</h2>
     <label for="user">Nombre de usuario:(dni de la persona)</label>
-    <input type="text" value="" id="user" name="user" onchange="buscar_usuario()"/>
+    <input type="text" val()="" id="user" name="user" />
     <br />
     <label></label>
-    <br>
+    <br />
     <label for="password">Contrase&ntilde;a temporal:</label>
     <input type="text" value="{$password}" id="password" name="password" readonly=""/>
     <br />
-    
+
     <label for="perfil">Perfil:</label>
     {html_perfiles name="perfil"}
     <br />
-    
+
     <h2>Datos Personales</h2>
     <label for="apellido">Apellido:</label>
-    <input type="text" value="" id="apellido" name="apellido"  />
+    <input type="text" id="apellido" name="apellido"  />
     <br />
 
     <label for="nombre">Nombres:</label>
-    <input type="text" value="" id="nombre" name="nombre"  />
+    <input type="text" id="nombre" name="nombre"  />
     <br />
 
     <label for="domicilio">Domicilio:</label>
-    <input type="text" value="" id="domicilio" name="domicilio"  />
+    <input type="text" id="domicilio" name="domicilio"  />
     <br />
 
     <label for="telefono">Tel&eacute;fono de contacto:</label>
-    <input type="text" value="" id="telefono" name="telefono" class="numeros" />
+    <input type="text" id="telefono" name="telefono" class="numeros" />
     <br />
-    
+
     <label for="email">Email:</label>
-    <input type="text" value="" id="email" name="email" onblur="validarEmail()"  />
+    <input type="text" id="email" name="email" />
     <br />
 
     <div align="center">
-        <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
-        <input class="btnSubmit2" type="button" name="volver" value="Volver" onclick="history.back();">
+        <button class="btnSubmit2" type="button" name="guardar" id="guardar">Guardar</button>
+        <button class="btnSubmit2" type="button" name="volver" id="volver">Volver</button>
     </div>
 </form>

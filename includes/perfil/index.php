@@ -5,4 +5,6 @@ if($sub == "ver"){
 }
 
 $archivo = $sub.".php";
-include ("includes/perfil/".$archivo );
+if (file_exists("includes/perfil/".$archivo)) {
+    include ("includes/perfil/".$archivo );
+}

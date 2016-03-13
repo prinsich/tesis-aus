@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:02:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 22:19:02
          compiled from ".\templates\alumnos\index.html" */ ?>
 <?php /*%%SmartyHeaderCode:20108567ef23f6611a4-16814342%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e3c0b6ed895f0de29a0a2159b791cf8322ed3188' => 
     array (
       0 => '.\\templates\\alumnos\\index.html',
-      1 => 1425320310,
+      1 => 1457831807,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567ef2400083a7_48859859',
   'variables' => 
   array (
     'sub' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567ef2400083a7_48859859',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567ef2400083a7_48859859')) {function content_567ef2400083a7_48859859($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['sub']->value==''||$_smarty_tpl->tpl_vars['sub']->value=="buscar_alumno") {?>
 	<?php echo $_smarty_tpl->getSubTemplate ("alumnos/buscar_alumno.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
@@ -48,6 +48,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 	
 <?php } else { ?>
-	<?php echo $_smarty_tpl->getSubTemplate ("desarrollo.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+	<?php echo $_smarty_tpl->getSubTemplate ("404_not_found.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 <?php }?><?php }} ?>

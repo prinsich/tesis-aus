@@ -1,50 +1,57 @@
-<script>
-    {$Sajax}
-    
-    $(function () {
-        $("#desde").datepicker({
-            changeMonth: true,
-            changeYear: true
-        });
-        $("#hasta").datepicker({
-            changeMonth: true,
-            changeYear: true
+<script language="javascript" type="text/javascript">
+$(document).ready(function () {
+
+    $("#desde").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+
+    $("#hasta").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+
+    $("#buscar").click(function(){
+        $("#hidden_desde").val($("#desde").val());
+        $("#hidden_hasta").val($("#hasta").val());
+        $("#hidden_usr").val($("#usr").val());
+        $("#hidden_accion").val($("#accion").val());
+        $("#hidden_clase").val($("#clase").val());
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            url: "includes/admin/ajax_admin.php?funcion=ver_registro",
+            data: {
+                desde: $("#desde").val(),
+                hasta: $("#hasta").val(),
+                usr: $("#usr").val(),
+                accion: $("#accion").val(),
+                clase: $("#clase").val(),
+            }
+        })
+        .done(function (data, textStatus, jqXHR) {
+            if (data.success) {
+                $("#capa_datos").html(data.html);
+                $("#divPrintLog").css('display', 'inline');
+            } else {
+                $("#modal_alert").html("Sin resultados");
+            }
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            if (console && console.log) {
+                console.log("La solicitud a fallado: " + textStatus);
+                console.log(jqXHR + " # " + errorThrown);
+            }
         });
     });
 
-    function buscar() {
-        var desde = document.getElementById("desde").value;
-        var hasta = document.getElementById("hasta").value;
-        var usr = document.getElementById("usr").value;
-        var accion = document.getElementById("accion").value;
-        var clase = document.getElementById("clase").value;
+    $("#print").click(function(){
+        $("#formPrintLog").submit();
+    });
 
-        document.getElementById("hidden_desde").value = desde;
-        document.getElementById("hidden_hasta").value = hasta;
-        document.getElementById("hidden_usr").value = usr;
-        document.getElementById("hidden_accion").value = accion;
-        document.getElementById("hidden_clase").value = clase;
-
-        x_ver_registro(desde, hasta, usr, accion, clase, buscar_cb);
-    }
-
-    function buscar_cb(log) {
-        if (log !== "") {
-            document.getElementById("capa_datos").innerHTML = log;
-            document.getElementById("div_form").style.display = "block";
-        } else {
-            document.getElementById("div_form").style.display = "none";
-        }
-    }
-
-    function imprimir() {
-        document.forms[0].submit();
-    }
-
-    function buscar_cb(log) {
-        document.getElementById("capa_datos").innerHTML = log;
-    }
+});
 </script>
+
 <h1>Log de Acciones</h1>
 <p>Acciones realizadas por los usuarios del sistemas</p>
 <hr />
@@ -56,33 +63,31 @@
 </p>
 
 <p>
-    Usuario: 
+    Usuario:
     {html_log_usr name="usr" style="width: 130px;"}
 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    Acci&oacute;n: 
+    Acci&oacute;n:
     {html_log_accion name="accion" style="width: 130px;"}
 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    Clase: 
+    Clase:
     {html_log_clase name="clase" style="width: 130px;"}
 </p>
 
-<input type="button" class="btnSubmit" value="Buscar" id="search" name="search" onclick="buscar();"/>
-<hr />
-<p>Resultado</p>
-<div id="capa_datos">
+<Button type="button" class="btnSubmit" id="buscar" name="buscar" >Buscar</button>
+    <hr />
+    <div id="capa_datos"></div>
 
-</div>
-<div id="div_form" style="display: inline">
-    <form autocomplete="off" id="formPrintLog" action="index.php?section=admin&sub=print_log" method="POST" >
-        <input type="hidden" value="" id="hidden_desde" name="hidden_desde" />
-        <input type="hidden" value="" id="hidden_hasta" name="hidden_hasta" />
-        <input type="hidden" value="" id="hidden_usr" name="hidden_usr" />
-        <input type="hidden" value="" id="hidden_accion" name="hidden_accion" />
-        <input type="hidden" value="" id="hidden_clase" name="hidden_clase" />
-        <input type="button" class="btnSubmit" value="Imprimir" id="print" name="print" onclick="imprimir();"/>
-    </form>
-</div>
+    <div id="divPrintLog" style="display: none">
+        <form autocomplete="off" id="formPrintLog" action="index.php?section=admin&sub=print_log" method="POST" >
+            <input type="hidden" value="" id="hidden_desde" name="hidden_desde" />
+            <input type="hidden" value="" id="hidden_hasta" name="hidden_hasta" />
+            <input type="hidden" value="" id="hidden_usr" name="hidden_usr" />
+            <input type="hidden" value="" id="hidden_accion" name="hidden_accion" />
+            <input type="hidden" value="" id="hidden_clase" name="hidden_clase" />
+            <button type="button" class="btnSubmit" id="print" name="print" >Imprimir</button>
+        </form>
+    </div>

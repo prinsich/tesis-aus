@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 18:42:28
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-08 21:39:05
          compiled from ".\templates\alumnos\modificar_datos_personales.html" */ ?>
 <?php /*%%SmartyHeaderCode:12371567f09c4b24204-03487795%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c664f43537e11daa45b53ad9e258157c473747e1' => 
     array (
       0 => '.\\templates\\alumnos\\modificar_datos_personales.html',
-      1 => 1451160786,
+      1 => 1457483943,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567f09c4d24572_56425976',
   'variables' => 
   array (
     'datos_alumno' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567f09c4d24572_56425976',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567f09c4d24572_56425976')) {function content_567f09c4d24572_56425976($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
 if (!is_callable('smarty_function_html_turnos')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_turnos.php';
@@ -40,7 +40,7 @@ if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program
 <br />
 
 <label for="sexo">Sexo(*):</label>
-<select name="sexo" id="sexo" style="width: 300px;"> 
+<select name="sexo" id="sexo" style="width: 300px;">
     <?php if ($_smarty_tpl->tpl_vars['datos_alumno']->value['sexo']=="M") {?>
     <option value="00" > SELECCIONAR </option>
     <option value="M" selected="selected" >MASCULINO</option>
@@ -78,8 +78,8 @@ if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program
 <br />
 
 <label for="fecha_nacimiento">Fecha de Nacimiento(*):</label>
-<input type="text" value="" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['datos_alumno']->value['fecha_nacimiento'],'d/m/Y');?>
-" onchange="validar_fecha(this);validar_edad(this);"/>
+<input type="text" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['datos_alumno']->value['fecha_nacimiento'],'d/m/Y');?>
+" />
 <br />
 
 <label for="escuela">Escuela:</label>
@@ -92,7 +92,7 @@ if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program
 " id="anio" name="anio" class="numeros" maxlength="2"/>
 <br />
 
-<label for="turno">Turno:</label> 
+<label for="turno">Turno:</label>
 <input type="hidden" id="turno_aux" name="turno_aux" value="<?php echo $_smarty_tpl->tpl_vars['datos_alumno']->value['turno'];?>
 " />
 <?php echo smarty_function_html_turnos(array('name'=>"turno",'seleccionar'=>$_smarty_tpl->tpl_vars['datos_alumno']->value['id_turno']),$_smarty_tpl);?>
@@ -124,4 +124,5 @@ if ($_smarty_tpl->tpl_vars['datos_alumno']->value['alta_seguro'] = "NO") {?>
 <span class="diascheck">
     <?php echo smarty_function_html_checkbox_talleres(array('name'=>"talleres[]",'selecionar'=>((string)$_smarty_tpl->tpl_vars['talleres_alumno']->value)),$_smarty_tpl);?>
 
-</span><?php }} ?>
+</span>
+<?php }} ?>

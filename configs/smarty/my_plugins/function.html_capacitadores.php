@@ -7,7 +7,7 @@
 function smarty_function_html_capacitadores($params) {
     global $db;
     $db->query("SET NAMES 'utf8'");
-    
+
     $nombre = "capacitadores";
     $onchange = "";
     $seleccionar = "";
@@ -38,18 +38,18 @@ function smarty_function_html_capacitadores($params) {
     }
     //SALIDA
     $_output = "<select style='width: 300px;' name='$nombre' id='$nombre' $onchange $option>";
-    $_output .= "<option value='0'> SELECCIONAR </option>";
+    $_output .= "<option value='00'> SELECCIONAR </option>";
 
         $sql = "SELECT id_capacitador, CONCAT(apellido, ', ', nombre) AS nombre
                 FROM capacitadores
                 WHERE id_capacitador != 0";
-        if($estado != "ALL"){        
+        if($estado != "ALL"){
             $sql .= " AND estado LIKE '$estado'";
         }
-        
+
         $resultSetSql = $db->query($sql);
         while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {
-            
+
             if ($row["id_capacitador"] == $seleccionar) {
                 $_output .= "<option value='" . $row["id_capacitador"] . "' selected> " . $row["nombre"] . "</option>";
             } else {

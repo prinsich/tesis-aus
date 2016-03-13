@@ -1,24 +1,37 @@
-<script>
-    {$Sajax}
-    {literal}
-    
-    function buscar_capacitadores(){
-        var nombre = document.getElementById("nombre").value;
-        var apellido = document.getElementById("apellido").value;
-        var dni = document.getElementById("dni").value;
-        var estado = document.getElementById("estado").value;
-        x_buscar_usuarios(apellido, nombre, dni, estado, resultado_cb);
-    }
-    
-    function resultado_cb(z){
-        if(z === 0){
-            alert("No existe coincidencia con los datos ingresados\nPruebe nuevamente");
-        } else {
-            document.forms[0].submit();
-        }
-    }
-    
-    {/literal}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("#buscar").click(function (){
+            $.ajax({
+                    method: "POST",
+                    dataType: "json",
+                    url: "includes/admin/ajax_admin.php?funcion=buscar_usuarios",
+                    data: {
+                        nombre: $("#nombre").val(),
+                        apellido: $("#apellido").val(),
+                        dni: $("#dni").val(),
+                        estado: $("#estado").val(),
+                    }
+                })
+                        .done(function (data, textStatus, jqXHR) {
+                            if (data.success) {
+                                $("#formBuscarUsuarios").submit();
+                            } else {
+                                $("#modal_alert").dialog("option", "title", "busquedar de usuario");
+                                $("#modal_alert").html("No existe coincidencia con los datos ingresados<br/>Pruebe nuevamente");
+                                $("#modal_alert").dialog("open");
+                            }
+
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                            if (console && console.log) {
+                                console.log("La solicitud a fallado: " + textStatus);
+                                console.log(jqXHR + " # " + errorThrown);
+                            }
+                        });
+
+
+        });
+    });
 </script>
 
 <h1>Buscar Capacitadores</h1>
@@ -26,12 +39,12 @@
     Complete los datos para poder filtar la busqueda<br />
     Si deja el formulario en blanco visualizara la totalidad de los usuarios
 </p>
-<form autocomplete="off" name="formBAlumno" action="index.php?section=admin&sub=listar_usuarios" method="POST">
+<form autocomplete="off" name="formBuscarUsuarios" id="formBuscarUsuarios" action="index.php?section=admin&sub=listar_usuarios" method="POST">
     <label for="apellido">Apellido:</label>
     <input type="text" value="" name="apellido" class="letras" id="apellido"/>
     <br />
 
-    <label for="nombre">Nombres:</label> 
+    <label for="nombre">Nombres:</label>
     <input type="text" value="" name="nombre" class="letras" id="nombre"/>
     <br />
 
@@ -47,5 +60,5 @@
     </select>
     <br />
 
-    <input class="btnSubmit" type="button" name="buscar" value="Buscar" onclick="buscar_capacitadores()">
+    <button class="btnSubmit" type="button" id="buscar" name="buscar" >Buscar</button>
 </form>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 18:35:26
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-10 20:51:56
          compiled from ".\templates\talleres\modificar_taller.html" */ ?>
 <?php /*%%SmartyHeaderCode:25059567efd0b656f09-02369639%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '134b5565366b09b6f0eb72c5f1b00b10c77ad4c9' => 
     array (
       0 => '.\\templates\\talleres\\modificar_taller.html',
-      1 => 1451165725,
+      1 => 1457653914,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_567efd0b9ab583_79794931',
   'variables' => 
   array (
-    'Sajax' => 0,
     'id_taller' => 0,
     'usrlogin' => 0,
     'taller' => 0,
@@ -30,105 +29,131 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567efd0b9ab583_79794931')) {function content_567efd0b9ab583_79794931($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_capacitadores')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_capacitadores.php';
 ?><?php echo '<script'; ?>
->
-    <?php echo $_smarty_tpl->tpl_vars['Sajax']->value;?>
-
-    
-
-    function verficar_disponibilidad(){
+ language="javascript" type="text/javascript">
+$(document).ready(function () {
+    $("#verificar").click(function() {
         if(validar()){
-            var nombre = document.getElementById("nombre").value;
-            var id_capacitador = document.getElementById("id_capacitador").value;
-            var id_taller = document.getElementById("id_taller").value;
-            var dias = new Array();
-            dias.push(""); 
-            for(i = 1; i < 6; i++){
-                var id_dia = "dia_" + i;
-                dias.push(document.getElementById(id_dia).checked); 
-            }
-            x_verficar_disponibilidad("modificar", id_taller, nombre, id_capacitador, dias, verficar_disponibilidad_cb);
+            var checkbox_dias = new Array();
+            $('.checkbox_dias').each(function() {
+                checkbox_dias.push($(this).is(":checked"));
+            });
+
+            $.ajax({
+                    method: "POST",
+                    dataType: "json",
+                    url: "includes/talleres/ajax_talleres.php?funcion=verficar_disponibilidad",
+                    data: {
+                        accion: "agregar",
+                        id_taller: "0",
+                        nombre: $("#nombre").val(),
+                        id_capacitador: $("#id_capacitador").val(),
+                        dias: checkbox_dias
+                    }
+                })
+                .done(function (data, textStatus, jqXHR) {
+                    $("#modal_alert").dialog("option", "title", "verificar disponibilida del taller");
+                    $("#modal_alert").html(data.msj);
+                    $("#modal_alert").dialog("open");
+                    if(data.success){
+                        $("#guardar").prop( "disabled", false );
+                    } else {
+                        $("#guardar").prop( "disabled", true );
+                    }
+
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    if (console && console.log) {
+                        console.log("La solicitud a fallado: " + textStatus);
+                        console.log(jqXHR + " # " + errorThrown);
+                    }
+                });
         }
-    }
-    
-    function verficar_disponibilidad_cb(z){
-        alert(z[0]);
-        if(z[1]){
-            document.getElementById("save").disabled = false;
-        }
-    }
+    });
 
     function validar(){
         var valido = true;
-        var error = "Complete lis siguientes campos\n";
-        
-        var nombre = document.getElementById("nombre").value;
-        if(nombre === ""){
+        var error = "Complete lis siguientes campos<br />";
+
+        var nombre = $("#nombre").val();
+        if(nombre.trim() === ""){
             valido = false;
-            error += " - Nombre\n";
+            error += " - Nombre<br />";
         }
-        
-        var nombre = document.getElementById("id_capacitador").value;
-        if(nombre.trim() === "0"){
+
+        var capacitador = $("#id_capacitador").val();
+        if(capacitador === "00"){
             valido = false;
-            error += " - Capacitador\n";
+            error += " - Capacitador<br />";
         }
-        
-        var i;
+
         var error_check = false;
-        for(i = 1; i < 6; i++){
-            var id_dia = "dia_" + i;
-            var dia_check = document.getElementById(id_dia).checked;
-            //alert(id_dia + " " +dia_check);
-            if(dia_check){
+        $('.checkbox_dias').each(function() {
+            if($(this).is(":checked")){
                 error_check = true;
-            } 
-        }
-        
+            }
+        });
+
         if(!valido){
-            if(!error_check)
-                error += " - Selecione al menos un dia\n";
-            alert(error);
+            if(!error_check){
+                error += " - Selecione al menos un dia<br />";
+            }
+
+            $("#modal_alert").dialog("option", "title", "Validacion de los datos del taller");
+            $("#modal_alert").html(error);
+            $("#modal_alert").dialog("open");
+
         }
         return valido;
     }
 
-    function guardar() {
-        if (validar()) {
-            document.forms[0].submit();
+    $("#guardar").click(function (){
+        if(validar()){
+          $("#formTaller").submit();
         }
-    }
-    
-    function salir() {
-        var respuesta = confirm("Esta seguro q desea salir?");
-        if (respuesta)
-            window.location = "http://localhost/tesis-aus/index.php?section=talleres&sub=listar_talleres";
-    }
-    
-    function disableSave(){
-        document.getElementById("save").disabled = true;
-    }
-    
+    });
 
+    //Salir de la pantalla
+    $("#cancelar").click(function () {
+        $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+        $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
+        $("#modal_confirm").dialog("open");
+    });
+
+    //Set botones confirmar
+    $("#modal_confirm").dialog("option", "buttons", {
+        "SI": function () {
+            window.location = "index.php";
+        },
+        "NO": function () {
+            $(this).dialog("close");
+        }
+    });
+
+    $("#nombre, #id_capacitador, .checkbox_dias").change(function(){
+        $("#guardar").prop( "disabled", true );
+    });
+
+});
 <?php echo '</script'; ?>
 >
 
 <h1>Modificar Taller</h1>
 <p>Los campos marcado con <b>*</b> son obligatorios</p>
 
-<form autocomplete="off" name="formTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
+<form autocomplete="off" name="formTaller" id="formTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />
     <input type="hidden" id="id_taller" name="id_taller" value="<?php echo $_smarty_tpl->tpl_vars['id_taller']->value;?>
 " />
     <input type="hidden" id="usrlogin" name="usrlogin" value="<?php echo $_smarty_tpl->tpl_vars['usrlogin']->value;?>
 " />
-    
-    <label for="nombre">Nombre(*):</label> 
+
+    <label for="nombre">Nombre(*):</label>
     <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['taller']->value['nombre'];?>
-" id="nombre" name="nombre" onchange="disableSave()"/>
+" id="nombre" name="nombre" />
     <br />
 
-    <label for="capacitador">Capacitador(*):</label> 
-    <?php echo smarty_function_html_capacitadores(array('name'=>"id_capacitador",'seleccionar'=>$_smarty_tpl->tpl_vars['taller']->value['id_capacitador'],'estado'=>"ACTIVO",'onchange'=>"disableSave()"),$_smarty_tpl);?>
+    <label for="capacitador">Capacitador(*):</label>
+    <?php echo smarty_function_html_capacitadores(array('name'=>"id_capacitador",'seleccionar'=>$_smarty_tpl->tpl_vars['taller']->value['id_capacitador'],'estado'=>"ACTIVO"),$_smarty_tpl);?>
 
     <br />
 
@@ -166,15 +191,15 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['d']['last']       = ($_smart
                 <?php if ($_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['id_taller']==$_smarty_tpl->tpl_vars['id_taller']->value) {?>
                     <td><?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['dia'];?>
 </td>
-                    <td><input type="checkbox" id="dia_<?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['id_dia'];?>
+                    <td><input class="checkbox_dias" type="checkbox" id="dia_<?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['id_dia'];?>
 " name="days_list[]" value="<?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['id_dia'];?>
-" checked onchange="disableSave()"></td>
+" checked ></td>
                 <?php } else { ?>
                     <td><?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['dia'];?>
 </td>
-                    <td><input type="checkbox" id="dia_<?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['id_dia'];?>
+                    <td><input class="checkbox_dias" type="checkbox" id="dia_<?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['id_dia'];?>
 " name="days_list[]" value="<?php echo $_smarty_tpl->tpl_vars['lista_dias']->value[$_smarty_tpl->getVariable('smarty')->value['section']['d']['index']]['id_dia'];?>
-" onchange="disableSave()"></td>
+" ></td>
                 <?php }?>
             </tr>
         <?php endfor; endif; ?>
@@ -219,9 +244,9 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['a']['last']       = ($_smart
     <br />
     <?php }?>
     <div style="text-align: center">
-    <input class="btnSubmit2" type="button" name="verificar" id="verificar" value="Verficar Disponibilidad" onclick="verficar_disponibilidad();" />
-    <input class="btnSubmit2" type="button" name="save" id="save" value="Guardar" onclick="guardar()" disabled/>
-    <input class="btnSubmit2" type="button" name="volver" id="volver" value="Cancelar" onclick="salir()">
+      <button class="btnSubmit2" type="button" name="verificar" id="verificar" >Verficar Disponibilidad</button>
+      <button class="btnSubmit2" type="button" name="guardar" id="guardar" >Guardar</button>
+      <button class="btnSubmit2" type="button" name="cancelar" id="cancelar" >Cancelar</button>
     </div>
 </form>
 <?php }} ?>

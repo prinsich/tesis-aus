@@ -1,37 +1,105 @@
-<script>
-    {$Sajax}
-    {literal}
-    
-    function ver_usuario(id) {
-        var urlp = "index.php?section=admin&sub=ver_usuario&id_usuario=" + id;
-        window.open(urlp, "_self");
-    }
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
 
-    function modificar_usuario(id) {
-        var urlp = "index.php?section=admin&sub=modificar_usuario&id_usuario=" + id;
-        window.open(urlp, "_self");
-    }
+        $("[name='ver_usuario']").click(function () {
+            var id_usuario = $(this).data("id");
+            var urlp = "index.php?section=admin&sub=ver_usuario&id_usuario=" + id_usuario;
+            window.open(urlp, "_self");
+        });
 
-    function alta_usuario(id) {
-        if (confirm("Esta seguro que desea dar de alta este usuario?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_alta_usuario(id, usrlogin, retorno_cb);
-        }
-    }
+        $("[name='modificar_usuario']").click(function () {
+            var id_usuario = $(this).data("id");
+            var urlp = "index.php?section=admin&sub=modificar_usuario&id_usuario=" + id_usuario;
+            window.open(urlp, "_self");
+        });
 
-    function baja_usuario(id) {
-        if (confirm("Esta seguro que desea dar de baja este usuario?")) {
-            var usrlogin = document.getElementById("usrlogin").value;
-            x_baja_usuario(id, usrlogin, retorno_cb);
-        }
-    }
+        $("[name='alta_usuario']").click(function () {
+            var id_usuario = $(this).data("id");
+            $("#modal_confirm").dialog("option", "title", "Alta de alumno");
+            $("#modal_confirm").html("Esta seguro que desea dar de alta este alumno?");
+            $("#modal_confirm").dialog("open");
 
-    function retorno_cb(z) {
-        alert(z);
-        window.location.reload();
-    }
-    
-    {/literal}
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/admin/ajax_admin.php?funcion=alta_usuario",
+                        data: {
+                            id_usuario: id_usuario,
+                            usrlogin: $("#usrlogin").val(),
+                        }
+                    })
+                            .done(function (data, textStatus, jqXHR) {
+                                $("#modal_alert").dialog("option", "title", "Alta de alumno");
+                                if (data.success) {
+                                    $("#modal_alert").html("El usuario fue dado de alta");
+                                } else {
+                                    $("#modal_alert").html("El usuario no posee id valido");
+                                }
+                                $("#modal_alert").dialog("open");
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                if (console && console.log) {
+                                    console.log("La solicitud a fallado: " + textStatus);
+                                    console.log(jqXHR + " # " + errorThrown);
+                                }
+                            });
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
+
+        $("[name='baja_usuario']").click(function () {
+            var id_usuario = $(this).data("id");
+            $("#modal_confirm").dialog("option", "title", "Baja de alumno");
+            $("#modal_confirm").html("Esta seguro que desea dar de baja este alumno?");
+            $("#modal_confirm").dialog("open");
+
+            //Set botones confirmar
+            $("#modal_confirm").dialog("option", "buttons", {
+                "SI": function () {
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: "includes/admin/ajax_admin.php?funcion=baja_usuario",
+                        data: {
+                            id_usuario: id_usuario,
+                            usrlogin: $("#usrlogin").val(),
+                        }
+                    })
+                            .done(function (data, textStatus, jqXHR) {
+                                $("#modal_alert").dialog("option", "title", "Baja de alumno");
+                                if (data.success) {
+                                    $("#modal_alert").html("El usuario fue dado de baja");
+                                } else {
+                                    $("#modal_alert").html("El usuario no posee id valido");
+                                }
+                                $("#modal_alert").dialog("open");
+                            })
+                            .fail(function (jqXHR, textStatus, errorThrown) {
+                                if (console && console.log) {
+                                    console.log("La solicitud a fallado: " + textStatus);
+                                    console.log(jqXHR + " # " + errorThrown);
+                                }
+                            });
+                },
+                "NO": function () {
+                    $(this).dialog("close");
+                }
+            });
+        });
+
+        //Set botones alert
+        $("#modal_alert").dialog("option", "buttons", {
+            "Acpetar": function () {
+                window.location.reload();
+            }
+        });
+    });
 </script>
 
 <h1>Usuarios</h1>
@@ -61,17 +129,17 @@
                 <td>{$lista_usuarios[u].nombre}</td>
                 <td>{$lista_usuarios[u].estado}</td>
                 <td>
-                    <img src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="ver_usuario('{$lista_usuarios[u].id_usuario}')" />
-                    <img src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="modificar_usuario('{$lista_usuarios[u].id_usuario}')" />
+                    <img name="ver_usuario" src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_usuarios[u].id_usuario}" />
+                    <img name="modificar_usuario" src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_usuarios[u].id_usuario}" />
                     {if $lista_usuarios[u].estado eq "ACTIVO"}
-                        <img src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="baja_usuario('{$lista_usuarios[u].id_usuario}')"/>
+                        <img name="baja_usuario" src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_usuarios[u].id_usuario}"/>
                     {else}
-                        <img src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" onclick="alta_usuario('{$lista_usuarios[u].id_usuario}')"/>
+                        <img name="alta_usuario" src="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_usuarios[u].id_usuario}"/>
                     {/if}
                 </td>
             </tr>
             {/section}
         </tbody>
-    </table> 
+    </table>
 </div>
 <input type="hidden" value="{$usrlogin}" id="usrlogin" name="usrlogin"/>

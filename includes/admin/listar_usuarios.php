@@ -1,16 +1,14 @@
 <?php
-include_once("includes/admin/ajax.php");
 include_once("classes/class.Usuarios.php");
 $usuario = new Usuarios($db);
 
 $lista_usuarios = null;
+$datos = filter_input_array(INPUT_POST);
 
-if(empty($_POST)){
+if(empty($datos)){
     $lista_usuarios = $usuario->listar_usuarios();
 } else {
-    extract($_POST);
-    $datos = $_POST;
-    $lista_usuarios = $usuario->buscar_usuarios($datos["apellido"], $datos["nombre"], $datos["dni"], $datos["estado"]);    
+    $lista_usuarios = $usuario->buscar_usuarios($datos["apellido"], $datos["nombre"], $datos["dni"], $datos["estado"]);
 }
 
 $smarty->assign("cantidad_usuarios", count($lista_usuarios));

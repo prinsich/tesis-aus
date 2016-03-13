@@ -1,11 +1,11 @@
-<script>
-    {$Sajax}
-    {literal}
-    function newpassword() {
-        var usr = document.getElementById("user").value;
-        var pass1 = document.getElementById("pass1").value;
-        var pass2 = document.getElementById("pass1").value;
+<script language="javascript" type="text/javascript">
+$(document).ready(function () {
+    $("#newpass").click(function (){
+        var usr = $("#user").val();
+        var pass1 = $("#pass1").val();
+        var pass2 = $("#pass2").val();
         var valida = true;
+        $("#modal_alert").dialog("option", "title", "Cambio de Contraseña");
 
         //password sin espacios
         var espacios = false;
@@ -13,40 +13,59 @@
 
         while (!espacios && (cont < pass1.length)) {
             if (pass1.charAt(cont) == " ")
-                espacios = true;
+            espacios = true;
             cont++;
         }
 
         if (espacios) {
-            alert("La contraseña no puede contener espacios en blanco");
+            $("#modal_alert").html("La contraseña no puede contener espacios en blanco");
+            $("#modal_alert").dialog("open");
             valida = false;
         }
 
         //password con mas de 8 caracteres
         if (pass1.length < 8 || pass2.length < 8) {
-            alert("Los campos de la password deben tener mas de 8 caracteres");
+            $("#modal_alert").html("Los campos de la password deben tener mas de 8 caracteres");
+            $("#modal_alert").dialog("open");
             valida = false;
         }
-        
+
         //password iguales
         if (pass1 != pass2) {
-            alert("Las passwords deben de coincidir");
+            $("#modal_alert").html("Las passwords deben de coincidir");
+            $("#modal_alert").dialog("open");
             valida = false;
         }
-        
-        if(valida){
-            x_newPassword(usr, pass1, newPassword_cb);
-        }
-    }
 
-    function newPassword_cb() {
-        alert("La contrase\u00F1a se cmabio con exito");
-    }
-    {/literal}
+        if(valida){
+            $.ajax({
+                method: "POST",
+                dataType: "json",
+                url: "includes/perfil/ajax_perfil.php?funcion=newPassword",
+                data: {
+                    username: $("#user").val(),
+                    password: $("#pass1").val(),
+                }
+            })
+            .done(function (data, textStatus, jqXHR) {
+                $("#modal_alert").html("La contraseña fue cambiada con exito");
+                $("#modal_alert").dialog("open");
+                $("#pass1").val("");
+                $("#pass2").val("");
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                if (console && console.log) {
+                    console.log("La solicitud a fallado: " + textStatus);
+                    console.log(jqXHR + " # " + errorThrown);
+                }
+            });
+        }
+    });
+});
 </script>
 
 <style>
-    td { /*border: none;*/ text-align: left; /*width: 10%;*/}
+td { /*border: none;*/ text-align: left; /*width: 10%;*/}
 </style>
 <h1>Mis Datos</h1>
 
@@ -55,12 +74,12 @@
     <tr>
         <td style="width: 55%">Usuario</td>
         <td><b>{$dato_usuario.nombreusr}</b></td>
-    <input type="hidden" id="user" value="{$dato_usuario.nombreusr}"/>
-</tr>
-<tr>
-    <td>Perfil:</td>
-    <td><b>{$dato_usuario.perfil}</b></td>
-</tr>
+        <input type="hidden" id="user" value="{$dato_usuario.nombreusr}"/>
+    </tr>
+    <tr>
+        <td>Perfil:</td>
+        <td><b>{$dato_usuario.perfil}</b></td>
+    </tr>
 </table>
 
 <h2>Datos Personales</h2>
@@ -98,8 +117,10 @@
         <td><input type="password" value="" id="pass2" name="pass2"/></td>
     </tr>
     <tr>
-        <td colspan="2" style="text-align: center"><input class="btnSubmit2" type="button" name="newpass" id="newpass" value="Crear nueva contrase&ntilde;a" onclick="newpassword()"/></td>
+        <td colspan="2" style="text-align: center">
+            <button class="btnSubmit2" type="button" name="newpass" id="newpass" >Crear nueva contrase&ntilde;a</button>
+        </td>
     </tr>
 </table>
 
-<input class="btnSubmit" type="button" name="volver" value="Volver" onclick="history.back();">
+<button class="btnSubmit" type="button" name="volver" id="volver" >Volver</button>

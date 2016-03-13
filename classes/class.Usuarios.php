@@ -11,9 +11,9 @@ class Usuarios extends DBTable {
 
     /**
      * Constructor de la clase Inscripto
-     * 
+     *
      * Esta clase permite el manejo de los inscriptos en los distintos congresos o seminarios
-     * 
+     *
      * @param string $db identificacion de la conexion a la base de datos
      * @param string $id identificador del Inscripto (no obligatorio)
      */
@@ -40,13 +40,11 @@ class Usuarios extends DBTable {
         $datos["id_usuario"] = $this->id_usuario;
         return $this->id_usuario;
     }
-    
+
     function listar_usuarios(){
         $sql = "SELECT id_usuario, apellido, nombre, nombreusr, perfil, estado
                 FROM usuarios
                     JOIN ".BASE_DATA.".perfiles ON usuarios.id_perfil = perfiles.id_perfil
-                    JOIN estados ON usuarios.id_usuario = estados.id_sobre
-                WHERE sobre like '$this->className' AND activo = 1 
                 ORDER BY id_usuario ASC
                ";
 
@@ -54,64 +52,63 @@ class Usuarios extends DBTable {
 
         return $usuarios;
     }
-    
+
     function buscar_usuarios($apellido, $nombre, $dni, $estado){
-        
+
         $sql = "SELECT id_usuario, apellido, nombre, nombreusr, perfil, estado
                 FROM usuarios
                     JOIN ".BASE_DATA.".perfiles on usuarios.id_perfil = perfiles.id_perfil
-                    JOIN estados ON usuarios.id_usuario = estados.id_sobre
-                WHERE sobre like '$this->className' AND activo = 1";
-        
-        if($apellido != "") {
-            $sql .= " AND UPPER(apellido) LIKE '%".trim($apellido)."%' ";
+                WHERE 1 ";
+
+        if ($apellido != "") {
+            $sql .= " AND apellido LIKE '".$apellido."%' ";
         }
-        
-        if($nombre != "") {
-            $sql .= " AND UPPER(nombre) LIKE '%".trim($nombre)."%' ";
+
+        if ($nombre != "") {
+            $sql .= " AND nombre LIKE '".$nombre."%' ";
         }
-        
-        if($dni != "") {
-            $sql .= " AND UPPER(dni) LIKE '%".trim($dni)."%' ";
+
+        if ($dni != "") {
+            $sql .= " AND dni = ".$dni." ";
         }
-        
+
         if($estado != "") {
-            $sql .= " AND UPPER(estado) LIKE '".trim($estado)."' ";
+            $sql .= " AND estado LIKE '".trim($estado)."' ";
         }
 
         $sql .= " ORDER BY id_usuario ASC ";
-        
+
         $usuarios = $this->consultar($sql);
-        
+
         return $usuarios;
     }
-    
+
     function getUsuario($id_usuario){
-        $sql = "SELECT * 
-                FROM usuarios 
+        $sql = "SELECT *
+                FROM usuarios
                     JOIN ".BASE_DATA.".perfiles on usuarios.id_perfil = perfiles.id_perfil
                 WHERE id_usuario = $id_usuario";
-        
+
         $dato_usuario = $this->consultar($sql);
         return $dato_usuario[0];
     }
-    
+
     function getUsuarioName($usrname){
-        $sql = "SELECT * 
-                FROM usuarios 
+        $sql = "SELECT *
+                FROM usuarios
                     JOIN ".BASE_DATA.".perfiles on usuarios.id_perfil = perfiles.id_perfil
                 WHERE nombreusr LIKE '$usrname'";
-        
+
         $dato_usuario = $this->consultar($sql);
         return $dato_usuario[0];
     }
-    
+
     function getUsuarioLogin($username){
         $sql = "SELECT nombreusr, perfil FROM usuarios JOIN ".BASE_DATA.".perfiles ON usuarios.id_perfil = perfiles.id_perfil WHERE nombreusr LIKE '$username'";
         $user = $this->consultar($sql);
         return $user[0];
     }
-    
+
     function login($username, $password){
         $sql = "SELECT id_usuario FROM usuarios WHERE nombreusr LIKE '$username' AND passusr LIKE '$password'";
         $login = $this->consultar($sql);
@@ -119,7 +116,7 @@ class Usuarios extends DBTable {
             return false;
         else return true;
     }
-    
+
     function usrExist($username){
         $sql = "SELECT id_usuario FROM usuarios WHERE nombreusr LIKE '$username'";
         $login = $this->consultar($sql);
@@ -127,9 +124,19 @@ class Usuarios extends DBTable {
             return false;
         else return true;
     }
-    
+
     function setPassword($username, $password){
         $sql = "UPDATE usuarios SET passusr = '$password' WHERE nombreusr LIKE '$username' ";
+        $this->ejecutar($sql);
+    }
+
+    function darAlta($id_usuario){
+        $sql = "UPDATE usuarios SET estado = 'ACTIVO' WHERE id_usuario = $id_usuario";
+        $this->ejecutar($sql);
+    }
+
+    function darBaja($id_usuario){
+        $sql = "UPDATE usuarios SET estado = 'INACTIVO' WHERE id_usuario = $id_usuario";
         $this->ejecutar($sql);
     }
 }

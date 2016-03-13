@@ -1,90 +1,93 @@
-<script>
-    {literal}
-    function validar() {
-        
-        var valido = true;
-        var error = "Por favor complete los siguiente campos: \n";
-        
-        var usr = document.getElementById("user").value;
-        if (usr.trim() === "") {
-            valido = false;
-            error += " - DNI para el nombre de usuario\n";
-        }        
-        
-        var perfil = document.getElementById("perfil").value;
-        if (perfil === "00") {
-            valido = false;
-            error += " - Selecione un perfil\n";
-        }        
-              
-        var apellido = document.getElementById("apellido").value;
-        if (apellido.trim() === "") {
-            valido = false;
-            error += " - Apellido\n";
-        }
+<script language="javascript" type="text/javascript">
+{literal}
+$(document).ready(function () {
+      $("#guardar").click(function() {
+          if(validar()){
+              $("#formModificarUsuario").submit();
+          }
+      });
 
-        var nombre = document.getElementById("nombre").value;
-        if (nombre.trim() === "") {
-            valido = false;
-            error += " - Nombre\n";
-        }
-        
-        var domicilio = document.getElementById("domicilio").value;
-        if (domicilio.trim() === "") {
-            valido = false;
-            error += " - Domicilio\n";
-        }
+      function validar() {
+          var valido = true;
+          var error = "Por favor complete los siguiente campos: <br />";
 
-        var telefono = document.getElementById("telefono").value;
-        if (telefono.trim() === "") {
-            valido = false;
-            error += " - Telefono y/o celular\n";
-        }
-        
-        var email = document.getElementById("email").value;
-        if (email.trim() === "") {
-            valido = false;
-            error += " - Email\n";
-        }
+          var usr = $("#user").val();
+          if (usr.trim() === "") {
+              valido = false;
+              error += " - DNI para el nombre de usuario<br />";
+          }
 
-        if(!valido){
-            alert(error);
-        }
-        
-        return valido;
-    }
-    
-    function validarEmail() {
-        var email = document.getElementById("email").value;
-        expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(email.trim() !== ""){
-            if ( !expr.test(email) ){
-                alert("La direcci\u00F3n de correo " + email + " es incorrecta.");
-            }
-        }
-    }
-    
-    function guardar(){
-        
-        var valido = validar();
-                
-        if(valido){
-            document.forms[0].submit();
-        }
-    }
-    
-    {/literal}
+          var perfil = $("#perfil").val();
+          if (perfil === "00") {
+              valido = false;
+              error += " - Selecione un perfil<br />";
+          }
+
+          var apellido = $("#apellido").val();
+          if (apellido.trim() === "") {
+              valido = false;
+              error += " - Apellido<br />";
+          }
+
+          var nombre = $("#nombre").val();
+          if (nombre.trim() === "") {
+              valido = false;
+              error += " - Nombre<br />";
+          }
+
+          var domicilio = $("#domicilio").val();
+          if (domicilio.trim() === "") {
+              valido = false;
+              error += " - Domicilio<br />";
+          }
+
+          var telefono = $("#telefono").val();
+          if (telefono.trim() === "") {
+              valido = false;
+              error += " - Telefono y/o celular<br />";
+          }
+
+          var email = $("#email").val();
+          if (email.trim() === "") {
+              valido = false;
+              error += " - Email<br />";
+          }
+
+          if(valido){
+              return true;
+          } else {
+              $("#modal_alert").dialog("option", "title", "Guardar usuario");
+              $("#modal_alert").html(error);
+              $("#modal_alert").dialog("open");
+              return false;
+          }
+      }
+
+      $("#email").change(function() {
+          var email = $(this).val();
+          expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if(email.trim() !== ""){
+              if ( !expr.test(email) ){
+                  $("#modal_alert").dialog("option", "title", "Email");
+                  $("#modal_alert").html("La direccion de correo " + email + " es incorrecta.");
+                  $("#modal_alert").dialog("open");
+                  $(this).val("");
+              }
+          }
+      });
+});
+{/literal}
 </script>
 
 <h1>Agregar Usuario</h1>
 
-<form autocomplete="off" name="formCapacitador" action="index.php?section=admin&sub=guardar_usuario" method="POST">
+<form autocomplete="off" name="formModificarUsuario" id="formModificarUsuario" action="index.php?section=admin&sub=guardar_usuario" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />
     <input type="hidden" id="id_usuario" name="id_usuario" value="{$dato_usuario.id_usuario}" />
     <input type="hidden" id="usrlogin" name="usrlogin" value="{$usrlogin}" />
-    
+
     <h2>Datos de login</h2>
-    
+
     <label for="user">Usuario:</label>
     <input type="text" value="{$dato_usuario.nombreusr}" disabled=""/>
     <input type="hidden" value="{$dato_usuario.nombreusr}" id="user" name="user"/>
@@ -93,12 +96,12 @@
     <label for="nombre">Perfil:</label>
     {html_perfiles name="perfil" seleccionar=$dato_usuario.id_perfil}
     <br />
-    
+
     <h2>Datos Personales</h2>
     <label for="apellido">Apellido:</label>
     <input type="text" value="{$dato_usuario.apellido}" id="apellido" name="apellido"   />
     <br />
-    
+
     <label for="nombre">Nombres:</label>
     <input type="text" value="{$dato_usuario.nombre}" id="nombre" name="nombre"  />
     <br />
@@ -110,13 +113,13 @@
     <label for="telefono">Tel&eacute;fono de contacto:</label>
     <input type="text" value="{$dato_usuario.telefono}" id="telefono" name="telefono" class="numeros"/>
     <br />
-    
+
     <label for="email">Email:</label>
-    <input type="text" value="{$dato_usuario.email}" id="email" name="email" onblur="validarEmail()"  />
+    <input type="text" value="{$dato_usuario.email}" id="email" name="email" />
     <br />
-    
+
     <div align="center">
-        <input class="btnSubmit2" type="button" name="save" value="Guardar" onclick="guardar();" />
-        <input class="btnSubmit2" type="button" name="volver" value="volver" onclick="history.back();">
+        <button class="btnSubmit2" type="button" name="guardar" id="guardar">Guardar</button>
+        <button class="btnSubmit2" type="button" name="volver" id="volver">Volver</button>
     </div>
 </form>

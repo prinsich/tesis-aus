@@ -1,16 +1,14 @@
 <?php
-include_once("includes/talleres/ajax.php");
 include_once("classes/class.Talleres.php");
 $taller = new Talleres($db);
 
 $lista_talleres = null;
+$datos = filter_input_array(INPUT_POST);
 
-if(empty($_POST)){
+if(empty($datos)){
     $lista_talleres = $taller->listar_talleres();
     $smarty->assign("estado",  "");
 } else {
-    extract($_POST);
-    $datos = $_POST;
     $lista_talleres = $taller->buscar_talleres($datos["nombre"], $datos["id_capacitador"], $datos["estado"]);
     $smarty->assign("estado",  $datos["estado"]);
 }

@@ -1,10 +1,11 @@
 <?php
 include_once("classes/class.Talleres.php");
 include_once("classes/class.Dias_Talleres.php");
-$id_taller = $_GET["id_taller"];
+
+$id_taller = filter_input(INPUT_GET, 'id_taller');
 
 $lista_dias = $db->getAll("
-    SELECT dias.dia 
+    SELECT dias.dia
     FROM ".BASE_DATA.".dias JOIN dias_talleres ON dias.id_dia = dias_talleres.id_dia
     WHERE id_taller = $id_taller
     ORDER BY dias.id_dia");
@@ -30,4 +31,3 @@ $smarty->assign("id_taller", $id_taller);
 $smarty->assign("cantidad_alumnos", $cantidad_alumnos[0]["cantidad_alumnos"]);
 
 ?>
-

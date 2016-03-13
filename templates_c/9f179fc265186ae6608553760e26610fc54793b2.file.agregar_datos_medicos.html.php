@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:02:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-08 21:30:38
          compiled from ".\templates\alumnos\agregar_datos_medicos.html" */ ?>
 <?php /*%%SmartyHeaderCode:219567ef240838e15-26657991%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9f179fc265186ae6608553760e26610fc54793b2' => 
     array (
       0 => '.\\templates\\alumnos\\agregar_datos_medicos.html',
-      1 => 1448405760,
+      1 => 1457481237,
       2 => 'file',
     ),
   ),
@@ -15,20 +15,20 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_567ef240918008_45974216',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567ef240918008_45974216')) {function content_567ef240918008_45974216($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_grupo_sanguineo')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_grupo_sanguineo.php';
 ?><h2>Datos M&eacute;dicos</h2>
 
-<label for="grupo_sanguineo">Grupo Sangu&iacute;neo:</label> 
+<label for="grupo_sanguineo">Grupo Sangu&iacute;neo:</label>
 <?php echo smarty_function_html_grupo_sanguineo(array('name'=>"grupo_sanguineo"),$_smarty_tpl);?>
 
 <br />
 
-<label for="vacunacion">Vacunaci&oacute;n:</label> 
-<select id="vacunacion" name="vacunacion" onchange="ver_vac_faltantes()" style="width: 125px"> 
+<label for="vacunacion">Vacunaci&oacute;n:</label>
+<select id="vacunacion" name="vacunacion" style="width: 125px"> 
     <option value="0" selected=""> SELECCIONAR </option>
     <option value="I"> INCOMPLETAS </option>
     <option value="C"> COMPLETAS </option>
@@ -83,4 +83,5 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 <label for="obra_social">Obra Social:</label>
 <input type="text" value="" id="obra_social" name="obra_social" />
-<br /><?php }} ?>
+<br />
+<?php }} ?>

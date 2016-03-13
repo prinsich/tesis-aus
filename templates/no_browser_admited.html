@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Casa de Francisco</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="css/login.css">
+
+        <!-- LIBRERIAS DE JQUERY -->
+        <script src="js/jquery-2.1.4.js" type="text/javascript"></script>
+        <script src="js/jquery-validate.js" type="text/javascript"></script>
+        <!--script src="js/jquery-validate.min.js" type="text/javascript"></script-->
+
+        <script src="js/jquery-ui/jquery-ui.js" type="text/javascript"></script>
+        <link href="js/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+        <script src="js/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+        <!--link href="js/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/-->
+
+        <link href="js/jquery-ui/jquery-ui.structure.css" rel="stylesheet" type="text/css"/>
+        <!--link href="js/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/-->
+
+        <link href="js/jquery-ui/jquery-ui.theme.css" rel="stylesheet" type="text/css"/>
+        <!--link href="js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/-->
+
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function () {
+              $('#Firefox').click(function(){
+                  window.open('https://www.mozilla.org/es-AR/firefox/','_blank');
+              });
+
+              $('#Chrome').click(function(){
+                  window.open('https://www.google.es/chrome/browser/desktop/','_blank');
+              });
+            });
+            </script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="container">
+              <h1 id="title">Este sitio solo admite <br /> Mozilla Firefox o Google Chrome</h1>
+              <hr>
+              <br />Descargar<br /><br />
+              <form class="form">
+                <button type="button" class="access" id="Firefox" formtarget="_blank"><img src="images/firefox.png" title="" alt="" border="0" height="24" align="absmiddle"/>Modzilla FireFox</button>
+                &nbsp;&nbsp;
+                <button type="button" class="access" id="Chrome" onclick="" formtarget="_blank"><img src="images/chrome.png" title="" alt="" border="0" height="24" align="absmiddle"/>Google FireFox</button>
+              </form>
+            </div>
+
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </body>
+</html>
