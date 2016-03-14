@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 18:10:22
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:31:06
          compiled from ".\templates\admin\ver_usuario.html" */ ?>
 <?php /*%%SmartyHeaderCode:3161356e485be7f3314-06273302%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '065efcf3e79a1903e655a0c313de002edb972ef4' => 
     array (
       0 => '.\\templates\\admin\\ver_usuario.html',
-      1 => 1435889826,
+      1 => 1457929863,
       2 => 'file',
     ),
   ),
@@ -15,15 +15,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_56e485be88c239_58054519',
   'variables' => 
   array (
     'dato_usuario' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56e485be88c239_58054519',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56e485be88c239_58054519')) {function content_56e485be88c239_58054519($_smarty_tpl) {?><style>
+<?php if ($_valid && !is_callable('content_56e485be88c239_58054519')) {function content_56e485be88c239_58054519($_smarty_tpl) {?><?php echo '<script'; ?>
+ type="text/javascript">
+    $(document).ready(function() {
+        $("#volver").click(function(){
+            window.location = "index.php?section=admin&sub=listar_usuarios";
+        });
+    });
+<?php echo '</script'; ?>
+>
+<style>
     td { /*border: none;*/ text-align: left; /*width: 10%;*/}
 </style>
 <h1>Datos del Usuario</h1>
@@ -71,5 +80,5 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     </tr>
 </table>
 
-<input class="btnSubmit" type="button" name="volver" value="Volver" onclick="history.back();">
+<button class="btnSubmit" type="button" name="volver" id="volver" >Volver</button>
 <?php }} ?>

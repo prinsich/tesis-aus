@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 19:21:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:36:14
          compiled from ".\templates\admin\ver_registro.html" */ ?>
 <?php /*%%SmartyHeaderCode:845956e2ff4cf3e062-02888961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6c7df6dc2cfda0a8ab4854d9e7a5100941c447cc' => 
     array (
       0 => '.\\templates\\admin\\ver_registro.html',
-      1 => 1457821261,
+      1 => 1457895833,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 if (!is_callable('smarty_function_html_log_accion')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_log_accion.php';
 if (!is_callable('smarty_function_html_log_clase')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_log_clase.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
 $(document).ready(function () {
 
     $("#desde").datepicker({

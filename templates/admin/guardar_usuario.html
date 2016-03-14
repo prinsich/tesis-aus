@@ -1,5 +1,14 @@
+<script type="text/javascript">
+$(document).ready(function() {
+    window.setInterval(function() {
+        window.location = "index.php?section=admin&sub=listar_usuarios";
+    }, 2000);
+});
+</script>
 <h3>
-    Se ha {$accion} con &eacute;xito al usuario {$apellido}, {$nombre} 
+    Se ha {$accion} con &eacute;xito al usuario {$apellido}, {$nombre}
     <br /><br />
-    La contrase&ntilde;a fue enviada a {$email} 
+    {if $accion eq "registrado"}
+    La contrase&ntilde;a fue enviada a {$email}
+    {/if}
 </h3>

@@ -1,4 +1,4 @@
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $("#buscar").click(function (){
             $.ajax({
@@ -16,7 +16,7 @@
                             if (data.success) {
                                 $("#formBuscarUsuarios").submit();
                             } else {
-                                $("#modal_alert").dialog("option", "title", "busquedar de usuario");
+                                $("#modal_alert").dialog("option", "title", "Busquedar de usuario");
                                 $("#modal_alert").html("No existe coincidencia con los datos ingresados<br/>Pruebe nuevamente");
                                 $("#modal_alert").dialog("open");
                             }

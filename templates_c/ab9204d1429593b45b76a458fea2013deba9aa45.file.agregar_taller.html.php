@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-10 14:35:28
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:17:31
          compiled from ".\templates\talleres\agregar_taller.html" */ ?>
 <?php /*%%SmartyHeaderCode:2547356e0e20431cfe6-58268049%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab9204d1429593b45b76a458fea2013deba9aa45' => 
     array (
       0 => '.\\templates\\talleres\\agregar_taller.html',
-      1 => 1457584310,
+      1 => 1457928309,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56e0e2043f8e04_27283646')) {function content_56e0e2043f8e04_27283646($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_capacitadores')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_capacitadores.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
 $(document).ready(function () {
     $("#verificar").click(function() {
         if(validar()){
@@ -48,7 +48,7 @@ $(document).ready(function () {
                     }
                 })
                 .done(function (data, textStatus, jqXHR) {
-                    $("#modal_alert").dialog("option", "title", "verificar disponibilida del taller");
+                    $("#modal_alert").dialog("option", "title", "Verificar disponibilida del taller");
                     $("#modal_alert").html(data.msj);
                     $("#modal_alert").dialog("open");
                     if(data.success){
@@ -83,35 +83,36 @@ $(document).ready(function () {
             error += " - Capacitador<br />";
         }
 
-        var error_check = false;
+        var checkbox = 0;
+        var checked = 0;
         $('.checkbox_dias').each(function() {
-            if($(this).is(":checked")){
-                error_check = true;
+            checkbox++;
+            if(!$(this).is(":checked")){
+                checked++;
             }
         });
+        if(checkbox == checked){
+            valido = false;
+            error += " - Selecione al menos un dia<br />";
+        }
 
         if(!valido){
-            if(!error_check){
-                error += " - Selecione al menos un dia<br />";
-            }
-
             $("#modal_alert").dialog("option", "title", "Validacion de los datos del taller");
             $("#modal_alert").html(error);
             $("#modal_alert").dialog("open");
-
         }
         return valido;
     }
 
     $("#guardar").click(function (){
         if(validar()){
-          $("#formTaller").submit();
+          $("#formAgregarTaller").submit();
         }
     });
 
     //Salir de la pantalla
     $("#cancelar").click(function () {
-        $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+        $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
         $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
         $("#modal_confirm").dialog("open");
     });
@@ -119,7 +120,7 @@ $(document).ready(function () {
     //Set botones confirmar
     $("#modal_confirm").dialog("option", "buttons", {
         "SI": function () {
-            window.location = "index.php";
+            window.location = "index.php?section=talleres&sub=listar_talleres";
         },
         "NO": function () {
             $(this).dialog("close");
@@ -131,7 +132,7 @@ $(document).ready(function () {
 
 <h1>Agregar Taller</h1>
 <p>Los campos marcado con <b>*</b> son obligatorios</p>
-<form autocomplete="off" id="formTaller" name="formTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
+<form autocomplete="off" id="formAgregarTaller" name="formAgregarTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
     <input type="hidden" id="accion" name="accion" value="agregar" />
     <input type="hidden" id="usrlogin" name="usrlogin" value="<?php echo $_smarty_tpl->tpl_vars['usrlogin']->value;?>
 " />
@@ -185,9 +186,9 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['d']['last']       = ($_smart
     <br /><br /><br /><br /><br /><br /><br /><br /><br />
 
     <div style="text-align: center">
-      <button class="btnSubmit2" type="button" name="verificar" id="verificar" >Verficar Disponibilidad</button>
-      <button class="btnSubmit2" type="button" name="guardar" id="guardar" disabled >Guardar</button>
-      <button class="btnSubmit2" type="button" name="cancelar" id="cancelar" >Cancelar</button>
+      <button class="multipleBtnSubmit" type="button" name="verificar" id="verificar" >Verficar Disponibilidad</button>
+      <button class="multipleBtnSubmit" type="button" name="guardar" id="guardar" disabled >Guardar</button>
+      <button class="multipleBtnSubmit" type="button" name="cancelar" id="cancelar" >Cancelar</button>
     </div>
 </form>
 <?php }} ?>

@@ -7,7 +7,7 @@ class DBTable {
     var $table = "";
     var $fields = array(); //array con los campos
     var $dates = array(); // guarda los campos fechas ??
-    var $original = array(); // cuando busca para por findregistro guarda los datos original 
+    var $original = array(); // cuando busca para por findregistro guarda los datos original
     var $mensaje = "";
     var $tiposave = "";
 
@@ -25,7 +25,7 @@ class DBTable {
         $this->mensaje = "";
         $this->tiposave = "";
     }
-    
+
     function getClassName(){
         return $this->className;
     }
@@ -91,7 +91,6 @@ class DBTable {
 
     function save() {
         $sql = "INSERT INTO " . $this->table . " (" . implode(',', $this->fields) . ") VALUES (";
-        $valor = "";
         foreach ($this->fields as $key => $field) {
             $valor = $this->$field;
             if (in_array($field, $this->dates)) { // cambia formato fecha
@@ -101,7 +100,6 @@ class DBTable {
                     $valor = "0000-00-00";
                 }
             }
-
             //	$sql .= ' "' . $valor  . '",';
             $sql .= ' "' . addslashes($valor) . '",';
         }
@@ -195,7 +193,7 @@ class DBTable {
     function lastInsert($campoId = "") {
         if ($this->tiposave == 2) {
             $salida = $this->$campoId;
-        } else {  //if ($campoId == "") 
+        } else {  //if ($campoId == "")
             $sql = "SELECT LAST_INSERT_ID() AS id ";
             $salida = $this->consultarOne($sql);
             $this->$campoId = $salida;
@@ -254,7 +252,7 @@ class DBTable {
         if (!empty($datos)) {
             foreach ($datos as $field_name => $field_value) {
                 if (in_array($field_name, $this->fields)) {
-                    $this->$field_name = ($field_value == null) ? "" : strtoupper($field_value);
+                    $this->$field_name = ($field_value == null) ? "" : $field_value;
                 }
             }
         }

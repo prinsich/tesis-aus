@@ -1,4 +1,4 @@
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
 
         $("[name='ver_alumno']").click(function () {
@@ -14,6 +14,7 @@
         });
 
         $("[name='alta_alumno']").click(function () {
+            var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de alumno");
             $("#modal_confirm").html("Esta seguro que desea dar de alta este alumno?");
             $("#modal_confirm").dialog("open");
@@ -26,7 +27,7 @@
                         dataType: "json",
                         url: "includes/alumnos/ajax_alumno.php?funcion=alta_alumno",
                         data: {
-                            id_alumno: $(this).data("id"),
+                            id_alumno: id_usuario,
                             usrlogin: $("#usrlogin").val(),
                         }
                     })
@@ -53,6 +54,7 @@
         });
 
         $("[name='baja_alumno']").click(function () {
+            var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de alumno");
             $("#modal_confirm").html("Esta seguro que desea dar de baja este alumno?");
             $("#modal_confirm").dialog("open");
@@ -65,8 +67,8 @@
                         dataType: "json",
                         url: "includes/alumnos/ajax_alumno.php?funcion=baja_alumno",
                         data: {
-                            id_alumno: $(this).data("id"),
-                            usrlogin: ("#usrlogin").val(),
+                            id_alumno: id_usuario,
+                            usrlogin: $("#usrlogin").val(),
                         }
                     })
                             .done(function (data, textStatus, jqXHR) {

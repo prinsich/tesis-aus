@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-08 23:18:40
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:33:03
          compiled from ".\templates\alumnos\modificar_alumno.html" */ ?>
 <?php /*%%SmartyHeaderCode:26690567f09c48a81a9-78162082%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6c8392c6e7657cbb6a927203c2340c6b890b0dcb' => 
     array (
       0 => '.\\templates\\alumnos\\modificar_alumno.html',
-      1 => 1457489919,
+      1 => 1457987506,
       2 => 'file',
     ),
   ),
@@ -27,9 +27,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567f09c49f9ee6_20505089')) {function content_567f09c49f9ee6_20505089($_smarty_tpl) {?>
-<?php echo '<script'; ?>
->
+<?php if ($_valid && !is_callable('content_567f09c49f9ee6_20505089')) {function content_567f09c49f9ee6_20505089($_smarty_tpl) {?><?php echo '<script'; ?>
+ type="text/javascript">
+
     $(document).ready(function () {
         //Tabs
         $("ul#tabs li").click(function () {
@@ -41,16 +41,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 $("ul#tab li.active").removeClass("active");
                 $("ul#tab li:nth-child(" + nthChild + ")").addClass("active");
             }
-        }); 
-        
+        });
+
         //Mascaras para las fechas
         $("#fecha_nacimiento").mask("99/99/9999");
-        
+
         //Guardar datos
         $("#guardar").click(function () {
             if (validar()) {
                 $("#alta_seguro").val(getCheckedRadioValue("alta_seguro_radio"));
-                $("#formAlumno").submit();
+                $("#formModificarAlumno").submit();
             }
         });
 
@@ -60,7 +60,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
             $("#modal_confirm").dialog("open");
         });
-        
+
         //Set botones confirmar
         $("#modal_confirm").dialog("option", "buttons", {
             "SI": function () {
@@ -70,13 +70,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 $(this).dialog("close");
             }
         });
-        
-        
+
+
         $("#fecha_nacimiento").change(function(){
-            var fecha = this.val();
+            var fecha_nacimiento = $(this).val();
             var datePat = "/^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/";
-            var fechaCompleta = fecha.match(datePat);
-            
+            var fechaCompleta = fecha_nacimiento.match(datePat);
+
             if (fechaCompleta === null) {
                 return false;
             }
@@ -111,27 +111,28 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     return false;
                 }
             }
-            
+
+            //validacion de la edad
             if(fecha_valida){
-                return true;
-            } else {
+                var edad = calcularEdad(fecha_nacimiento);
+                if (edad < 6 || edad > 18) {
+                    msj += "El alumno debe ser mayor a 6 a\u00F1os y menor de 18<br />"
+                    fecha_valida = false;
+                }
+            }
+
+            if(!fecha_valida){
                 $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
                 $("#modal_alert").html(msj);
                 $("#modal_alert").dialog("open");
+                $(this).val("");
+                $(this).focus();
                 return false;
+            } else {
+                return true;
             }
         });
-        
-        $("#fecha_nacimiento").change(function(){
-            var fecha_nacimiento = this.val();
-            var edad = calcularEdad(fecha_nacimiento);
-            if (edad < 6) {
-                alert("El alumno debe ser mayor a 6 a\u00F1os<br />");
-                this.val() = "";
-                this.focus();
-            }
-        });
-        
+
         //Muestra la vacunacion
         $("#vacunacion").change(function (){
             var vac = this.val();
@@ -142,9 +143,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 $("#vacunas_faltantes").html("");
             }
         });
-        
+
         function validar() {
-        
+
             var valido = true;
             var error = "Por favor complete los siguiente campos: <br />";
 
@@ -182,12 +183,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             if (fecha_nacimiento.trim() === "") {
                 valido = false;
                 error += " - Fecha de Nacimiento<br />";
-            } else {
-                var edad = calcularEdad(fecha_nacimiento);
-                if (edad < 6) {
-                    valido = false;
-                    error += " - El alumno debe ser mayor a 6 a\u00F1os<br />";
-                }
             }
 
             var alta_seguro = validCheckedRadioValue("alta_seguro_radio");
@@ -217,13 +212,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             return valido;
         }
     });
+
 <?php echo '</script'; ?>
 >
 
-
 <h1>Modificar Alumno</h1>
 
-<form autocomplete="off" name="formAlumno" id="formAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST">
+<form autocomplete="off" name="formModificarAlumno" id="formModificarAlumno" action="index.php?section=alumnos&sub=guardar_alumno" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />
     <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['datos_alumno']->value['id_alumno'];?>
 " id="id_alumno" name="id_alumno" />
@@ -235,7 +230,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 " />
     <input type="hidden" id="fecha_hoy" name="fecha_hoy" value="<?php echo $_smarty_tpl->tpl_vars['fecha_hoy']->value;?>
 " />
-    
+
     <ul id="tabs">
         <li class="active">Datos Personales</li>
         <li>Datos M&eacute;dicos</li>
@@ -258,8 +253,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <h2>El taller se encuentra protegido por Seguro San Crist&oacute;bal.</h2>
     <div align="center">
-        <button type="button" class="btnSubmit2" name="guardar" id="guardar" >Guardar</button>
-        <button type="button" class="btnSubmit2" name="salir" id="salir" >Cancelar</button>
+        <button type="button" class="multipleBtnSubmit" name="guardar" id="guardar" >Guardar</button>
+        <button type="button" class="multipleBtnSubmit" name="salir" id="salir" >Cancelar</button>
     </div>
 
-</form><?php }} ?>
+</form>
+<?php }} ?>

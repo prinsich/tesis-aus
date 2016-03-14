@@ -1,3 +1,10 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#volver").click(function(){
+            window.location = "index.php?section=capacitadores&sub=listar_capacitadores";
+        });
+    });
+</script>
 <style>
     td { /*border: none;*/ text-align: left; /*width: 10%;*/}
 </style>
@@ -70,4 +77,4 @@
     </tr>
 </table>
 {/if}
-<input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">
+<button class="btnSubmit" type="button" name="volver" id="volver" >Volver</button>

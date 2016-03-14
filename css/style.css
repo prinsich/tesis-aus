@@ -39,14 +39,19 @@ body{
     padding: 0 0;
     text-align:center;
 }
-#navegacion ul li{
+#navegacion ul li.title {
+    /*margin: 5px 10px;*/
+    padding: 0 0 0 0px;
+    text-align: center;
+}
+#navegacion ul li.menu{
     line-height: 30px;
     border: 2px solid #75b87e;
     margin: 5px 10px;
     padding: 0 0 0 10px;
     text-align: center;
 }
-#navegacion ul li:hover{
+#navegacion ul li.menu:hover{
     border: 2px solid #32a457;
     background-color: #75b87e;
 }
@@ -124,6 +129,7 @@ textarea{
     margin: 20px 0 0;
     width: 300px;
     height: 200px;
+    resize:none;
     //text-transform:uppercase;
 }
 select{
@@ -138,10 +144,11 @@ select{
     width: 150px;
 }
 
-.btnSubmit2{
+.multipleBtnSubmit{
+    display:inline;
     margin-left: 20px;
-    /*display:block;*/
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 150px;
 }
 

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 18:29:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:20:41
          compiled from ".\templates\admin\listar_usuarios.html" */ ?>
 <?php /*%%SmartyHeaderCode:2250856e33e6f808f05-00315906%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '906545f4030426339533c2117fd38228cd1c3aca' => 
     array (
       0 => '.\\templates\\admin\\listar_usuarios.html',
-      1 => 1457818147,
+      1 => 1457895833,
       2 => 'file',
     ),
   ),
@@ -27,7 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56e33e6fa46834_01775146')) {function content_56e33e6fa46834_01775146($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
     $(document).ready(function () {
 
         $("[name='ver_usuario']").click(function () {

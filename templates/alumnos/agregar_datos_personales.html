@@ -1,4 +1,4 @@
-    
+
     <h2>Datos Personales</h2>
     <p>Los campos marcado con <b>*</b> son obligatorios</p>
 
@@ -9,8 +9,8 @@
     <label for="nombre">Nombres(*):</label>
     <input type="text" value="" id="nombre" name="nombre" class="letras"/>
     <br />
-    
-    <label for="sexo">Sexo(*):</label> 
+
+    <label for="sexo">Sexo(*):</label>
     <select name="sexo" id="sexo" style="width: 300px;">
         <option value="00" selected="selected"> SELECCIONAR </option>
         <option value="M" >MASCULINO</option>
@@ -27,7 +27,7 @@
     <br />
 
     <label for="telefono">Tel&eacute;fono(*):</label>
-    <input type="text" value="" id="telefono" name="telefono" class="numeros"/>
+    <input type="text" value="" id="telefono" name="telefono" class="numeros" maxlength="15" />
     <br />
 
     <label for="dni">DNI(*):</label>
@@ -46,7 +46,7 @@
     <input type="text" value="" id="anio" name="anio" class="numeros" maxlength="2"/>
     <br />
 
-    <label for="turno">Turno:</label> 
+    <label for="turno">Turno:</label>
     {html_turnos name="turno"}
     <br />
 

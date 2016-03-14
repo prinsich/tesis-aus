@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 00:23:05
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 14:14:45
          compiled from ".\templates\home.html" */ ?>
 <?php /*%%SmartyHeaderCode:3126656684f9b212737-08521817%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd93aefaa85a48c95e55951e07ff576a1623e1de8' => 
     array (
       0 => '.\\templates\\home.html',
-      1 => 1457839202,
+      1 => 1457889004,
       2 => 'file',
     ),
   ),
@@ -30,7 +30,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <head>
         <title>Casa de Francisco</title>
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <!-- ESTILOS CSS -->
         <!--link type="text/css" rel="stylesheet" href="css/reset.css"-->

@@ -69,8 +69,6 @@ $(document).ready(function () {
             && (key.keyCode !== 9) //tab
             && (key.keyCode !== 37) //izq
             && (key.keyCode !== 39) //der
-            && (key.which !== 46) //punto
-            && (key.which !== 44) //coma
         )
         return false;
     });
@@ -105,7 +103,7 @@ $(document).ready(function () {
         }
 
         if (!salir) {
-            $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+            $("#modal_confirm").dialog("option", "title", "Sal\u00edr del formulario");
             $("#modal_confirm").html("&iquest;Esta por salir, perdera todos sus cambios si no guarda.\nDesea salir?");
             $("#modal_confirm").dialog("open");
 

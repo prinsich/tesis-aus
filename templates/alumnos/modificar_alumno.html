@@ -1,4 +1,4 @@
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 {literal}
     $(document).ready(function () {
         //Tabs
@@ -43,9 +43,9 @@
 
 
         $("#fecha_nacimiento").change(function(){
-            var fecha = this.val();
+            var fecha_nacimiento = $(this).val();
             var datePat = "/^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/";
-            var fechaCompleta = fecha.match(datePat);
+            var fechaCompleta = fecha_nacimiento.match(datePat);
 
             if (fechaCompleta === null) {
                 return false;
@@ -82,26 +82,24 @@
                 }
             }
 
+            //validacion de la edad
             if(fecha_valida){
-                return true;
-            } else {
+                var edad = calcularEdad(fecha_nacimiento);
+                if (edad < 6 || edad > 18) {
+                    msj += "El alumno debe ser mayor a 6 a\u00F1os y menor de 18<br />"
+                    fecha_valida = false;
+                }
+            }
+
+            if(!fecha_valida){
                 $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
                 $("#modal_alert").html(msj);
                 $("#modal_alert").dialog("open");
-                return false;
-            }
-        });
-
-        //validacion de la edad
-        $("#fecha_nacimiento").change(function(){
-            var fecha_nacimiento = $(this).val();
-            var edad = calcularEdad(fecha_nacimiento);
-            if (edad < 6) {
-                $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
-                $("#modal_alert").html("El alumno debe ser mayor a 6 a\u00F1os<br />");
-                $("#modal_alert").dialog("open");
                 $(this).val("");
                 $(this).focus();
+                return false;
+            } else {
+                return true;
             }
         });
 
@@ -216,8 +214,8 @@
 
     <h2>El taller se encuentra protegido por Seguro San Crist&oacute;bal.</h2>
     <div align="center">
-        <button type="button" class="btnSubmit2" name="guardar" id="guardar" >Guardar</button>
-        <button type="button" class="btnSubmit2" name="salir" id="salir" >Cancelar</button>
+        <button type="button" class="multipleBtnSubmit" name="guardar" id="guardar" >Guardar</button>
+        <button type="button" class="multipleBtnSubmit" name="salir" id="salir" >Cancelar</button>
     </div>
 
 </form>

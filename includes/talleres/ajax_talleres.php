@@ -206,7 +206,7 @@ function alta_taller($arg) {
     exit();
 }
 
-function reset_taller($id_taller, $usrlogin) {
+function reset_taller($arg) {
     global $db;
     $jsondata = array();
 

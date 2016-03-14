@@ -1,3 +1,10 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#volver").click(function(){
+            window.location = "index.php?section=alumnos&sub=listar_alumnos";
+        });
+    });
+</script>
 <style>
     td { /*border: none;*/ text-align: left; /*width: 10%;*/}
 </style>
@@ -186,7 +193,7 @@
         <td style="width: 40%">Parentesco</td>
         <td>{$datos_familiares[dm].parentesco}</td>
     </tr>
-    {if $datos_familiares[dm].edad != ''}
+    {if $datos_familiares[dm].edad != '' && $datos_familiares[dm].edad != 0}
     <tr>
         <td>Edad</td>
         <td>{$datos_familiares[dm].edad}</td>
@@ -345,4 +352,4 @@
     {/if}
 </table>
 {/if}
-<input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">
+<button class="btnSubmit" type="button" name="volver" id="volver">Volver</button>

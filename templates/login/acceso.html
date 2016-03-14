@@ -23,7 +23,7 @@
         <link href="js/jquery-ui/jquery-ui.theme.css" rel="stylesheet" type="text/css"/>
         <!--link href="js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/-->
 
-        <script language="javascript" type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function () {
               $('#usr').on('keypress', function (event) {
                   $("#error").html("");
@@ -66,6 +66,7 @@
                               } else {
                                 $("#error").html("El usuario o la contrase&ntilde;a son incorrectos");
                                 $("#usr").val("");
+                                $("#usr").focus();
                                 $("#pass").val("")
                               }
 

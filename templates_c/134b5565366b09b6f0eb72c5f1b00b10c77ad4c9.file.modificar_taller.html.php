@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-10 20:51:56
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:17:37
          compiled from ".\templates\talleres\modificar_taller.html" */ ?>
 <?php /*%%SmartyHeaderCode:25059567efd0b656f09-02369639%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '134b5565366b09b6f0eb72c5f1b00b10c77ad4c9' => 
     array (
       0 => '.\\templates\\talleres\\modificar_taller.html',
-      1 => 1457653914,
+      1 => 1457928993,
       2 => 'file',
     ),
   ),
@@ -29,7 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567efd0b9ab583_79794931')) {function content_567efd0b9ab583_79794931($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_capacitadores')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_capacitadores.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
 $(document).ready(function () {
     $("#verificar").click(function() {
         if(validar()){
@@ -86,35 +86,36 @@ $(document).ready(function () {
             error += " - Capacitador<br />";
         }
 
-        var error_check = false;
+        var checkbox = 0;
+        var checked = 0;
         $('.checkbox_dias').each(function() {
-            if($(this).is(":checked")){
-                error_check = true;
+            checkbox++;
+            if(!$(this).is(":checked")){
+                checked++;
             }
         });
+        if(checkbox == checked){
+            valido = false;
+            error += " - Selecione al menos un dia<br />";
+        }
 
         if(!valido){
-            if(!error_check){
-                error += " - Selecione al menos un dia<br />";
-            }
-
             $("#modal_alert").dialog("option", "title", "Validacion de los datos del taller");
             $("#modal_alert").html(error);
             $("#modal_alert").dialog("open");
-
         }
         return valido;
     }
 
     $("#guardar").click(function (){
         if(validar()){
-          $("#formTaller").submit();
+          $("#formModifircarTaller").submit();
         }
     });
 
     //Salir de la pantalla
     $("#cancelar").click(function () {
-        $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+        $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
         $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
         $("#modal_confirm").dialog("open");
     });
@@ -122,7 +123,7 @@ $(document).ready(function () {
     //Set botones confirmar
     $("#modal_confirm").dialog("option", "buttons", {
         "SI": function () {
-            window.location = "index.php";
+            window.location = "index.php?section=talleres&sub=listar_talleres";
         },
         "NO": function () {
             $(this).dialog("close");
@@ -140,7 +141,7 @@ $(document).ready(function () {
 <h1>Modificar Taller</h1>
 <p>Los campos marcado con <b>*</b> son obligatorios</p>
 
-<form autocomplete="off" name="formTaller" id="formTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
+<form autocomplete="off" name="formModifircarTaller" id="formModifircarTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />
     <input type="hidden" id="id_taller" name="id_taller" value="<?php echo $_smarty_tpl->tpl_vars['id_taller']->value;?>
 " />
@@ -243,10 +244,13 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['a']['last']       = ($_smart
     </table>
     <br />
     <?php }?>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
+
     <div style="text-align: center">
-      <button class="btnSubmit2" type="button" name="verificar" id="verificar" >Verficar Disponibilidad</button>
-      <button class="btnSubmit2" type="button" name="guardar" id="guardar" >Guardar</button>
-      <button class="btnSubmit2" type="button" name="cancelar" id="cancelar" >Cancelar</button>
+      <button class="multipleBtnSubmit" type="button" name="verificar" id="verificar" >Verficar Disponibilidad</button>
+      <button class="multipleBtnSubmit" type="button" name="guardar" id="guardar" disabled="">Guardar</button>
+      <button class="multipleBtnSubmit" type="button" name="cancelar" id="cancelar" >Cancelar</button>
     </div>
 </form>
 <?php }} ?>

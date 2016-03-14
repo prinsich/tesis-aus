@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 00:25:13
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:31:48
          compiled from ".\templates\alumnos\agregar_alumno.html" */ ?>
 <?php /*%%SmartyHeaderCode:18901567ef24022acc0-43125761%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8d6049b3efc810a0097b14aa0354fb930f12b0f1' => 
     array (
       0 => '.\\templates\\alumnos\\agregar_alumno.html',
-      1 => 1457839491,
+      1 => 1457987454,
       2 => 'file',
     ),
   ),
@@ -25,7 +25,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567ef240381985_50310402')) {function content_567ef240381985_50310402($_smarty_tpl) {?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
 
     $(document).ready(function () {
         //Tabs
@@ -52,8 +52,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         });
 
         //Salir de la pantalla
-        $("#salir").click(function () {
-            $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+        $("#cancelar").click(function () {
+            $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
             $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
             $("#modal_confirm").dialog("open");
         });
@@ -61,7 +61,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         //Set botones confirmar
         $("#modal_confirm").dialog("option", "buttons", {
             "SI": function () {
-                window.location = "index.php";
+                window.location = "index.php?section=alumnos&sub=listar_alumnos";
             },
             "NO": function () {
                 $(this).dialog("close");
@@ -70,9 +70,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         //Validacion del formato de la fecha
         $("#fecha_nacimiento").change(function(){
-            var fecha = $(this).val();
+            var fecha_nacimiento = $(this).val();
             var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
-            var fechaCompleta = fecha.match(datePat);
+            var fechaCompleta = fecha_nacimiento.match(datePat);
 
             var msj = "";
             var fecha_valida = true;
@@ -109,26 +109,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 }
             }
 
+            //validacion de la edad
             if(fecha_valida){
-                return true;
-            } else {
+                var edad = calcularEdad(fecha_nacimiento);
+                if (edad < 6 || edad > 18) {
+                    msj += "El alumno debe ser mayor a 6 a\u00F1os y menor de 18<br />"
+                    fecha_valida = false;
+                }
+            }
+
+            if(!fecha_valida){
                 $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
                 $("#modal_alert").html(msj);
                 $("#modal_alert").dialog("open");
-                return false;
-            }
-        });
-
-        //validacion de la edad
-        $("#fecha_nacimiento").change(function(){
-            var fecha_nacimiento = $(this).val();
-            var edad = calcularEdad(fecha_nacimiento);
-            if (edad < 6) {
-                $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
-                $("#modal_alert").html("El alumno debe ser mayor a 6 a\u00F1os<br />");
-                $("#modal_alert").dialog("open");
                 $(this).val("");
                 $(this).focus();
+                return false;
+            } else {
+                return true;
             }
         });
 
@@ -251,8 +249,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <h2>El taller se encuentra protegido por Seguro San Crist&oacute;bal</h2>
     <div style="text-align: center">
-        <button type="button" class="btnSubmit2" name="guardar" id="guardar" >Guardar</button>
-        <button type="button" class="btnSubmit2" name="salir" id="salir" >Cancelar</button>
+        <button type="button" class="multipleBtnSubmit" name="guardar" id="guardar" >Guardar</button>
+        <button type="button" class="multipleBtnSubmit" name="cancelar" id="cancelar" >Cancelar</button>
     </div>
 </form>
 <?php }} ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-09 23:47:43
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:18:17
          compiled from ".\templates\capacitadores\buscar_capacitadores.html" */ ?>
 <?php /*%%SmartyHeaderCode:2135256e0e04f85cad6-88311141%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '37ebdc40418bfd3aed18bc5f9ab788b095b89936' => 
     array (
       0 => '.\\templates\\capacitadores\\buscar_capacitadores.html',
-      1 => 1457568878,
+      1 => 1457895833,
       2 => 'file',
     ),
   ),
@@ -15,18 +15,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_56e0e04f8996e2_13165751',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56e0e04f8996e2_13165751')) {function content_56e0e04f8996e2_13165751($_smarty_tpl) {?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
     $(document).ready(function () {
       $("#buscar").click(function (){
           $.ajax({
                   method: "POST",
                   dataType: "json",
-                  url: "includes/alumnos/ajax_alumno.php?funcion=buscar_alumnos",
+                  url: "includes/capacitadores/ajax_capacitadores.php?funcion=buscar_capacitadores",
                   data: {
                       nombre: $("#nombre").val(),
                       apellido: $("#apellido").val(),
@@ -38,7 +38,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               })
                       .done(function (data, textStatus, jqXHR) {
                           if (data.success) {
-                              $("#formCapacitador").submit();
+                              $("#formBuscarCapacitador").submit();
                           } else {
                               $("#modal_alert").dialog("option", "title", "busquedar Capacitador");
                               $("#modal_alert").html("No existe coincidencia con los datos ingresados<br />Pruebe nuevamente");
@@ -62,7 +62,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     Complete los datos para poder filtar la busqueda<br />
     Si deja el formulario en blanco visualizara la totalidad de los capacitores
 </p>
-<form autocomplete="off" name="formCapacitador" id="formCapacitador" action="index.php?section=capacitadores&sub=listar_capacitadores" method="POST">
+<form autocomplete="off" name="formBuscarCapacitador" id="formBuscarCapacitador" action="index.php?section=capacitadores&sub=listar_capacitadores" method="POST">
     <label for="apellido">Apellido:</label>
     <input type="text" value="" name="apellido" class="letras" id="apellido"/>
     <br />
@@ -83,6 +83,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     </select>
     <br />
 
-    <input class="btnSubmit" type="button" name="buscar" value="Buscar" onclick="buscar_capacitadores()">
+    <button class="btnSubmit" type="button" name="buscar" id="buscar" >Buscar</button>
 </form>
 <?php }} ?>

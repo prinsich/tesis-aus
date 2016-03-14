@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-10 22:22:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:13:18
          compiled from ".\templates\talleres\listar_talleres.html" */ ?>
 <?php /*%%SmartyHeaderCode:12752567efcd47b8838-01156082%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b6638b0f2418832f08ed4ae7de7f11fe76fa2705' => 
     array (
       0 => '.\\templates\\talleres\\listar_talleres.html',
-      1 => 1457659353,
+      1 => 1457928795,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567efcd49f2d23_50900674')) {function content_567efcd49f2d23_50900674($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
     $(document).ready(function () {
         $("[name='ver_taller']").click(function () {
             var id_taller = $(this).data("id");
@@ -141,7 +141,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("[name='resetear_taller']").click(function () {
             var id_taller = $(this).data("id");
 
-            $("#modal_confirm").dialog("option", "title", "Baja de taller");
+            $("#modal_confirm").dialog("option", "title", "Reset de taller");
             $("#modal_confirm").html("Esta seguro que desea resetear este taller?");
             $("#modal_confirm").dialog("open");
 
@@ -152,16 +152,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     $.ajax({
                         method: "POST",
                         dataType: "json",
-                        url: "includes/capacitadores/ajax_capacitadores.php?funcion=resetear_taller",
+                        url: "includes/talleres/ajax_talleres.php?funcion=reset_taller",
                         data: {
                             id_taller: id_taller,
                             usrlogin: $("#usrlogin").val(),
                         }
                     })
                             .done(function (data, textStatus, jqXHR) {
-                                $("#modal_alert").dialog("option", "title", "Baja de taller");
+                                $("#modal_alert").dialog("option", "title", "Reset de taller");
                                 if (data.success) {
-                                    $("#modal_alert").html("El taller fue dado de baja");
+                                    $("#modal_alert").html("El taller fue reiniciado");
                                 } else {
                                     $("#modal_alert").html("El taller no posee id valido");
                                 }
@@ -184,7 +184,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("#modal_alert").dialog("option", "buttons", {
             "Acpetar": function () {
                 $(this).dialog("close");
-                //window.location.reload();
+                window.location.reload();
             }
         });
     });
@@ -192,7 +192,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
 
 <h1>Talleres</h1>
-<form autocomplete="off" id="formBtaller" name="formBtaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
+<form autocomplete="off" id="formListartaller" name="formListartaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
 
     <p>Cantidad de Talleres: <?php echo $_smarty_tpl->tpl_vars['cantidad_talleres']->value;?>
 <br />
@@ -215,7 +215,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <option value="INACTIVO"> INACTIVO </option>
         <?php }?>
     </select>
-    <button type="submit" form="formBAlumno" value="filtrar">Filtrar</button>
+    <button type="submit" form="formListartaller" value="filtrar">Filtrar</button>
     </p>
 </form>
 <div id="listado">

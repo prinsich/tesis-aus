@@ -90,10 +90,19 @@ function sql_inyection_ajax($datos_post, $log, $ajax_file){
 
     if(!empty($datos_post)){
         foreach ($datos_post as $dato) {
-            if(!sqlInyectionCheck($dato)){
-                $sql_inyection = true;
-                break;
-            }
+			if(!is_array($dato)){
+				if(!sqlInyectionCheck($dato)){
+                	$sql_inyection = true;
+                	break;
+            	}
+			} else {
+				foreach ($dato as $metadato) {
+					if(!sqlInyectionCheck($metadato)){
+	                	$sql_inyection = true;
+	                	break;
+	            	}
+				}
+			}
         }
     }
 

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 00:01:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 23:12:28
          compiled from ".\templates\capacitadores\listar_capacitadores.html" */ ?>
 <?php /*%%SmartyHeaderCode:30644567ef5be6b7512-89024025%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '72fdb8a57ac41d563ecaa203baf1a9dfc8e88f9d' => 
     array (
       0 => '.\\templates\\capacitadores\\listar_capacitadores.html',
-      1 => 1457814476,
+      1 => 1457920904,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567ef5be9efda8_40503376')) {function content_567ef5be9efda8_40503376($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
     $(document).ready(function () {
 
         $("[name='ver_capacitador']").click(function () {
@@ -44,6 +44,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         });
 
         $("[name='alta_capacitador']").click(function () {
+            var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de capacitador");
             $("#modal_confirm").html("Esta seguro que desea dar de alta este capacitador?");
             $("#modal_confirm").dialog("open");
@@ -56,7 +57,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         dataType: "json",
                         url: "includes/capacitadores/ajax_capacitadores.php?funcion=alta_capacitador",
                         data: {
-                            id_capacitador: $(this).data("id"),
+                            id_capacitador: id_capacitador,
                             usrlogin: $("#usrlogin").val()
                         }
                     })
@@ -83,6 +84,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         });
 
         $("[name='baja_capacitador']").click(function () {
+            var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de capacitador");
             $("#modal_confirm").html("Esta seguro que desea dar de baja este capacitador?");
             $("#modal_confirm").dialog("open");
@@ -95,7 +97,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         dataType: "json",
                         url: "includes/capacitadores/ajax_capacitadores.php?funcion=baja_capacitador",
                         data: {
-                            id_capacitador: $(this).data("id"),
+                            id_capacitador: id_capacitador,
                             usrlogin: $("#usrlogin").val()
                         }
                     })
@@ -215,15 +217,15 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['c']['last']       = ($_smart
             <td><?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['estado'];?>
 </td>
             <td>
-                <img name="ver_capacitador" src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
+                <img name="ver_capacitador" src="images/icons/file_search.png" title="Ver capacitador" alt="Ver capacitador" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
 " />
                 <?php if ($_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['estado']=="ACTIVO") {?>
-                <img name="modificar_capacitador" src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
+                <img name="modificar_capacitador" src="images/icons/file_edit.png" title="Modificar capacitador" alt="Modificar capacitador" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
 " />
-                <img name="baja_capacitador" src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
+                <img name="baja_capacitador" src="images/icons/file_delete.png" title="baja capacitador" alt="Baja capacitador" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
 " />
                 <?php } else { ?>
-                <img sname="alta_capacitador" rc="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
+                <img name="alta_capacitador" src="images/icons/file_add.png" title="Alta capacitador" alt="Alta capacitador" border="0" height="17" align="absmiddle" data-id="<?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['id_capacitador'];?>
 " />
                 <?php }?>
             </td>

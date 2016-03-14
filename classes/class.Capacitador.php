@@ -11,9 +11,9 @@ class Capacitador extends DBTable {
 
     /**
      * Constructor de la clase Inscripto
-     * 
+     *
      * Esta clase permite el manejo de los inscriptos en los distintos congresos o seminarios
-     * 
+     *
      * @param string $db identificacion de la conexion a la base de datos
      * @param string $id identificador del Inscripto (no obligatorio)
      */
@@ -33,7 +33,7 @@ class Capacitador extends DBTable {
      * @return el id del Inscripto registrado en la base de datos
      */
     function guardar($datos) {
-        
+
         $this->setRegistro($datos);
         $ok = $this->save();
 
@@ -41,65 +41,65 @@ class Capacitador extends DBTable {
         $datos["id_capacitador"] = $this->id_capacitador;
         return $this->id_capacitador;
     }
-    
+
     function listar_capacitadores(){
         $sql = "SELECT id_capacitador, apellido, nombre, dni, fecha_nacimiento, telefono, celular, estado
                 FROM capacitadores
                 WHERE id_capacitador != 0
-                ORDER BY estado, id_capacitador ASC";
+                ORDER BY apellido, nombre, estado, id_capacitador ASC";
 
         $capacitadores = $this->consultar($sql);
         return $capacitadores;
     }
-    
+
     function buscar_capacitadores($apellido, $nombre, $dni, $estado){
-        
+
         $sql = "SELECT id_capacitador, apellido, nombre, dni, fecha_nacimiento, telefono, celular, estado
                 FROM capacitadores
                 WHERE id_capacitador != 0 ";
-        
+
         if($apellido != "") {
             $sql .= " AND apellido LIKE '$apellido%' ";
         }
-        
+
         if($nombre != "") {
             $sql .= " AND nombre LIKE '$nombre%' ";
         }
-        
+
         if($dni != "") {
             $sql .= " AND dni = $dni ";
         }
-        
+
         if($estado != "") {
             $sql .= " AND estado LIKE '$estado' ";
         }
-        
+
         $sql .= " ORDER BY estado, id_capacitador ASC ";
-        
+
         $capacitadores = $this->consultar($sql);
-        
+
         return $capacitadores;
     }
-    
+
     function getCapacitador($id_capacitador){
         $sql = "SELECT * FROM capacitadores WHERE id_capacitador = $id_capacitador";
-        
+
         $dato_capacitador = $this->consultar($sql);
         return $dato_capacitador[0];
     }
-    
+
     function getTalleresDicta($id_capacitador){
         $sql = "SELECT nombre FROM talleres WHERE id_capacitador = $id_capacitador";
-        
+
         $dato_capacitador = $this->consultar($sql);
         return $dato_capacitador;
     }
-    
+
     function darAlta($id_capacitador){
         $sql = "UPDATE capacitadores SET estado = 'ACTIVO' WHERE id_capacitador = $id_capacitador";
         $this->ejecutar($sql);
     }
-    
+
     function darBaja($id_capacitador){
         $sql = "UPDATE capacitadores SET estado = 'INACTIVO' WHERE id_capacitador = $id_capacitador";
         $this->ejecutar($sql);

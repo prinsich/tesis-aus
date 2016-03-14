@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 11:12:50
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 15:56:34
          compiled from ".\templates\perfil\ver_perfil.html" */ ?>
 <?php /*%%SmartyHeaderCode:1086356e22d84ab4e04-70966907%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c689d46261319a7a175fcafd0927a4ae47cf939b' => 
     array (
       0 => '.\\templates\\perfil\\ver_perfil.html',
-      1 => 1457878367,
+      1 => 1457895391,
       2 => 'file',
     ),
   ),
@@ -87,6 +87,10 @@ $(document).ready(function () {
             });
         }
     });
+
+    $("#volver").click(function(){
+        window.location="index.php?section=home";
+    })
 });
 <?php echo '</script'; ?>
 >
@@ -153,10 +157,10 @@ td { /*border: none;*/ text-align: left; /*width: 10%;*/}
     </tr>
     <tr>
         <td colspan="2" style="text-align: center">
-            <button class="btnSubmit2" type="button" name="newpass" id="newpass" >Crear nueva contrase&ntilde;a</button>
+            <button class="multipleBtnSubmit" type="button" name="newpass" id="newpass" >Crear nueva contrase&ntilde;a</button>
         </td>
     </tr>
 </table>
 
-<button class="btnSubmit" type="button" name="volver" >Volver</button>
+<button class="btnSubmit" type="button" name="volver" id="volver">Volver</button>
 <?php }} ?>

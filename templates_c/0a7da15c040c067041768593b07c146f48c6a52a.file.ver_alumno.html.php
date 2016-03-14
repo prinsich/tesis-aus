@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-09 00:06:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:35:47
          compiled from ".\templates\alumnos\ver_alumno.html" */ ?>
 <?php /*%%SmartyHeaderCode:1893856df9353476e90-65681296%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0a7da15c040c067041768593b07c146f48c6a52a' => 
     array (
       0 => '.\\templates\\alumnos\\ver_alumno.html',
-      1 => 1449001344,
+      1 => 1457987746,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_56df93538e8d12_61610821',
   'variables' => 
   array (
     'datos_alumno' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'datos_personales' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56df93538e8d12_61610821',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56df93538e8d12_61610821')) {function content_56df93538e8d12_61610821($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
 ?><style>
@@ -291,7 +291,7 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['last']       = ($_smar
         <td><?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['parentesco'];?>
 </td>
     </tr>
-    <?php if ($_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['edad']!='') {?>
+    <?php if ($_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['edad']!=''&&$_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['edad']!=0) {?>
     <tr>
         <td>Edad</td>
         <td><?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['edad'];?>
@@ -466,5 +466,5 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['last']       = ($_smar
     <?php }?>
 </table>
 <?php }?>
-<input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">
+<button class="btnSubmit" type="button" name="volver" onclick="history.back();">Volver</button>
 <?php }} ?>

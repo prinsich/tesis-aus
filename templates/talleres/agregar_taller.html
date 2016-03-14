@@ -1,4 +1,4 @@
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function () {
     $("#verificar").click(function() {
         if(validar()){
@@ -20,7 +20,7 @@ $(document).ready(function () {
                     }
                 })
                 .done(function (data, textStatus, jqXHR) {
-                    $("#modal_alert").dialog("option", "title", "verificar disponibilida del taller");
+                    $("#modal_alert").dialog("option", "title", "Verificar disponibilida del taller");
                     $("#modal_alert").html(data.msj);
                     $("#modal_alert").dialog("open");
                     if(data.success){
@@ -55,22 +55,23 @@ $(document).ready(function () {
             error += " - Capacitador<br />";
         }
 
-        var error_check = false;
+        var checkbox = 0;
+        var checked = 0;
         $('.checkbox_dias').each(function() {
-            if($(this).is(":checked")){
-                error_check = true;
+            checkbox++;
+            if(!$(this).is(":checked")){
+                checked++;
             }
         });
+        if(checkbox == checked){
+            valido = false;
+            error += " - Selecione al menos un dia<br />";
+        }
 
         if(!valido){
-            if(!error_check){
-                error += " - Selecione al menos un dia<br />";
-            }
-
             $("#modal_alert").dialog("option", "title", "Validacion de los datos del taller");
             $("#modal_alert").html(error);
             $("#modal_alert").dialog("open");
-
         }
         return valido;
     }
@@ -83,7 +84,7 @@ $(document).ready(function () {
 
     //Salir de la pantalla
     $("#cancelar").click(function () {
-        $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+        $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
         $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
         $("#modal_confirm").dialog("open");
     });
@@ -91,7 +92,7 @@ $(document).ready(function () {
     //Set botones confirmar
     $("#modal_confirm").dialog("option", "buttons", {
         "SI": function () {
-            window.location = "index.php";
+            window.location = "index.php?section=talleres&sub=listar_talleres";
         },
         "NO": function () {
             $(this).dialog("close");
@@ -128,8 +129,8 @@ $(document).ready(function () {
     <br /><br /><br /><br /><br /><br /><br /><br /><br />
 
     <div style="text-align: center">
-      <button class="btnSubmit2" type="button" name="verificar" id="verificar" >Verficar Disponibilidad</button>
-      <button class="btnSubmit2" type="button" name="guardar" id="guardar" disabled >Guardar</button>
-      <button class="btnSubmit2" type="button" name="cancelar" id="cancelar" >Cancelar</button>
+      <button class="multipleBtnSubmit" type="button" name="verificar" id="verificar" >Verficar Disponibilidad</button>
+      <button class="multipleBtnSubmit" type="button" name="guardar" id="guardar" disabled >Guardar</button>
+      <button class="multipleBtnSubmit" type="button" name="cancelar" id="cancelar" >Cancelar</button>
     </div>
 </form>

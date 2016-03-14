@@ -1,10 +1,10 @@
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
       $("#buscar").click(function (){
           $.ajax({
                   method: "POST",
                   dataType: "json",
-                  url: "includes/alumnos/ajax_alumno.php?funcion=buscar_alumnos",
+                  url: "includes/capacitadores/ajax_capacitadores.php?funcion=buscar_capacitadores",
                   data: {
                       nombre: $("#nombre").val(),
                       apellido: $("#apellido").val(),
@@ -60,5 +60,5 @@
     </select>
     <br />
 
-    <input class="btnSubmit" type="button" name="buscar" value="Buscar" onclick="buscar_capacitadores()">
+    <button class="btnSubmit" type="button" name="buscar" id="buscar" >Buscar</button>
 </form>

@@ -17,14 +17,23 @@ if ($datos["accion"] == "modificar") {
 //------------------------------------------------------------------------------
 //Datos Login
 //------------------------------------------------------------------------------
+if ($datos_usuario["id_usuario"] == null) {
+    $usuario = new Usuarios($db);
+} else {
+    $usuario = new Usuarios($db, $datos_usuario["id_usuario"]);
+}
+
+
 $datos_usuario["nombreusr"] = $datos["user"];
 $datos_usuario["id_perfil"] = $datos["perfil"];
 
 if($datos["accion"] == "agregar"){
     $datos_usuario["passusr"] = $datos["password"];
     $datos_usuario["new_pass"] = 1;
+} else {
+    $datos_usuario["passusr"] = $usuario->getUsuario($datos_usuario["id_usuario"])["passusr"];
+    $datos_usuario["new_pass"] = 1;
 }
-
 /*if($datos["new_pass"] == "SI"){
     $newpass = substr(md5(microtime()), 1, 8);
     $datos_usuario["pass"] = md5($newpass);
@@ -40,12 +49,7 @@ $datos_usuario["nombre"] = $datos["nombre"];
 $datos_usuario["domicilio"] = $datos["domicilio"];
 $datos_usuario["telefono"] = $datos["telefono"];
 $datos_usuario["email"] = $datos["email"];
-
-if ($datos_usuario["id_usuario"] == null) {
-    $usuario = new Usuarios($db);
-} else {
-    $usuario = new Usuarios($db, $datos_usuario["id_usuario"]);
-}
+$datos_usuario["estado"] = "ACTIVO";
 
 $id_usuario = $usuario->guardar($datos_usuario);
 

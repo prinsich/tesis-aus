@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-10 20:26:32
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 00:43:14
          compiled from ".\templates\talleres\ver_taller.html" */ ?>
 <?php /*%%SmartyHeaderCode:2886656e202a8722384-95996773%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a3627a0fa1f96a3b6d406d75791252e09ba3375b' => 
     array (
       0 => '.\\templates\\talleres\\ver_taller.html',
-      1 => 1451162678,
+      1 => 1457926991,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_56e202a87c1744_90316994',
   'variables' => 
   array (
     'taller' => 0,
@@ -23,10 +25,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'lista_alumnos' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56e202a87c1744_90316994',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56e202a87c1744_90316994')) {function content_56e202a87c1744_90316994($_smarty_tpl) {?><style>
+<?php if ($_valid && !is_callable('content_56e202a87c1744_90316994')) {function content_56e202a87c1744_90316994($_smarty_tpl) {?><?php echo '<script'; ?>
+ type="text/javascript">
+    $(document).ready(function() {
+        $("#volver").click(function(){
+            window.location = "index.php?section=talleres&sub=listar_talleres";
+        });
+    });
+<?php echo '</script'; ?>
+>
+<style>
     td { /*border: none;*/ text-align: left; /*width: 10%;*/}
 </style>
 <h1>Ver Taller</h1>
@@ -116,4 +125,5 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['a']['last']       = ($_smart
     </tr>
 </table>
 
-<input class="btnSubmit" type="button" name="volver" value="Volver" onclick="history.back();"><?php }} ?>
+<button class="btnSubmit" type="button" name="volver" id="volver">Volver</button>
+<?php }} ?>

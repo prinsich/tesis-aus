@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 21:58:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 16:08:06
          compiled from ".\templates\login\acceso.html" */ ?>
 <?php /*%%SmartyHeaderCode:2191356684f90c1fbc8-62556215%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '09f48593a9cdfdd7e2ce4ae6eab10821190fe320' => 
     array (
       0 => '.\\templates\\login\\acceso.html',
-      1 => 1457830727,
+      1 => 1457895833,
       2 => 'file',
     ),
   ),
@@ -54,7 +54,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <!--link href="js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/-->
 
         <?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
             $(document).ready(function () {
               $('#usr').on('keypress', function (event) {
                   $("#error").html("");
@@ -97,6 +97,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                               } else {
                                 $("#error").html("El usuario o la contrase&ntilde;a son incorrectos");
                                 $("#usr").val("");
+                                $("#usr").focus();
                                 $("#pass").val("")
                               }
 

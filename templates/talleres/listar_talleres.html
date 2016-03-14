@@ -1,4 +1,4 @@
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $("[name='ver_taller']").click(function () {
             var id_taller = $(this).data("id");
@@ -111,7 +111,7 @@
         $("[name='resetear_taller']").click(function () {
             var id_taller = $(this).data("id");
 
-            $("#modal_confirm").dialog("option", "title", "Baja de taller");
+            $("#modal_confirm").dialog("option", "title", "Reset de taller");
             $("#modal_confirm").html("Esta seguro que desea resetear este taller?");
             $("#modal_confirm").dialog("open");
 
@@ -122,16 +122,16 @@
                     $.ajax({
                         method: "POST",
                         dataType: "json",
-                        url: "includes/capacitadores/ajax_capacitadores.php?funcion=resetear_taller",
+                        url: "includes/talleres/ajax_talleres.php?funcion=reset_taller",
                         data: {
                             id_taller: id_taller,
                             usrlogin: $("#usrlogin").val(),
                         }
                     })
                             .done(function (data, textStatus, jqXHR) {
-                                $("#modal_alert").dialog("option", "title", "Baja de taller");
+                                $("#modal_alert").dialog("option", "title", "Reset de taller");
                                 if (data.success) {
-                                    $("#modal_alert").html("El taller fue dado de baja");
+                                    $("#modal_alert").html("El taller fue reiniciado");
                                 } else {
                                     $("#modal_alert").html("El taller no posee id valido");
                                 }

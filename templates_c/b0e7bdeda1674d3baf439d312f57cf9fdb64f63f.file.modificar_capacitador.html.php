@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 00:02:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:17:23
          compiled from ".\templates\capacitadores\modificar_capacitador.html" */ ?>
 <?php /*%%SmartyHeaderCode:2159456e0e02aeb5d33-62188416%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b0e7bdeda1674d3baf439d312f57cf9fdb64f63f' => 
     array (
       0 => '.\\templates\\capacitadores\\modificar_capacitador.html',
-      1 => 1457814493,
+      1 => 1457929041,
       2 => 'file',
     ),
   ),
@@ -27,16 +27,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56e0e02b022e81_82122212')) {function content_56e0e02b022e81_82122212($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
 
     $(document).ready(function () {
         $("#fecha_nacimiento").mask("99/99/9999");
 
         //Validacion del formato de la fecha
         $("#fecha_nacimiento").change(function(){
-            var fecha = this.val();
+            var fecha_nacimiento = $(this).val();
             var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
-            var fechaCompleta = fecha.match(datePat);
+            var fechaCompleta = fecha_nacimiento.match(datePat);
 
             var msj = "";
             var fecha_valida = true;
@@ -51,36 +51,48 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
             if (dia < 1 || dia > 31) {
                 msj += "El valor del d&iacute;a debe estar comprendido entre 1 y 31.<br />";
-                this.val() = "";
+                $(this).val("");
                 fecha_valida = false;
             }
             if (mes < 1 || mes > 12) {
                 msj += "El valor del mes debe estar comprendido entre 1 y 12.<br />";
-                this.val() = "";
-                 fecha_valida = false;
+                $(this).val("");
+                fecha_valida = false;
             }
             if ((mes === 4 || mes === 6 || mes === 9 || mes === 11) && dia === 31) {
                 msj += "El mes " + mes + " no tiene 31 días.<br />";
-                this.val() = "";
+                $(this).val("");
                 fecha_valida = false;
             }
             if (mes === 2) { // bisiesto
                 var bisiesto = (anio % 4 === 0 && (anio % 100 !== 0 || anio % 400 === 0));
                 if (dia > 29 || (dia === 29 && !bisiesto)) {
-                    msj += "Febrero del " + anio + " no contiene " + dia + " dias.";
-                    this.val() = "";
+                    msj += "Febrero del " + anio + " no contiene " + dia + " dias.<br />";
+                    $(this).val("");
                     fecha_valida = false;
                 }
             }
 
+            //validacion de la edad
             if(fecha_valida){
-                return true;
-            } else {
+                var edad = calcularEdad(fecha_nacimiento);
+                if (edad < 18 || edad > 80) {
+                    msj += "El alumno debe ser mayor a 18 a\u00F1os<br />"
+                    fecha_valida = false;
+                }
+            }
+
+            if(!fecha_valida){
                 $("#modal_alert").dialog("option", "title", "Error en la fecha de nacimeiento");
                 $("#modal_alert").html(msj);
                 $("#modal_alert").dialog("open");
+                $(this).val("");
+                $(this).focus();
                 return false;
+            } else {
+                return true;
             }
+
         });
 
         $("#guardar").click(function (){
@@ -90,8 +102,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         });
 
         //Salir de la pantalla
-        $("#salir").click(function () {
-            $("#modal_confirm").dialog("option", "title", "Sal&iacute;r del formulario");
+        $("#cancelar").click(function () {
+            $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
             $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
             $("#modal_confirm").dialog("open");
         });
@@ -99,7 +111,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         //Set botones confirmar
         $("#modal_confirm").dialog("option", "buttons", {
             "SI": function () {
-                window.location = "index.php";
+                window.location = "index.php?section=capacitadores&sub=listar_capacitadores";
             },
             "NO": function () {
                 $(this).dialog("close");
@@ -144,13 +156,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 error += " - Telefono y/o celular<br />";
             }
 
-            var fecha_nac = $("#fecha_nacimiento").val();
-            if (fecha_nac.trim() !== "") {
-                var edad = calcularEdad(fecha_nac);
-                if (edad < 18) {
-                    valido = false;
-                    error += " - El capacitador debe ser mayor a 18 años<br />";
-                }
+            var fecha_nacimiento = $("#fecha_nacimiento").val();
+            if (fecha_nacimiento.trim() === "") {
+                valido = false;
+                error += " - Fecha de Nacimiento<br />";
             }
 
             if (!valido) {
@@ -223,12 +232,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
     <input type="text" value="<?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['datos_capacitador']->value['fecha_nacimiento'],'d/m/Y');?>
-" id="fecha_nacimiento" name="fecha_nacimiento" readonly/>
+" id="fecha_nacimiento" name="fecha_nacimiento" />
     <br />
 
     <div align="center">
-        <button class="btnSubmit2" type="button" id="guardar" name="guardar" >Guardar</button>
-        <button class="btnSubmit2" type="button" id="cancel" name="cancel" >Cancelar</button>
+        <button class="multipleBtnSubmit" type="button" id="guardar" name="guardar" >Guardar</button>
+        <button class="multipleBtnSubmit" type="button" id="cancelar" name="cancelar" >Cancelar</button>
     </div>
 </form>
 <?php }} ?>

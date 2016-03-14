@@ -33,12 +33,12 @@ function smarty_function_html_talleres($params, &$smarty) {
     }
     //SALIDA
     $_output = "<select style='width: 150px;' name='$nombre' id='$nombre' $onchange>";
-    $_output .= "<option value='0'> Seleccionar </option>";
+    $_output .= "<option value='0'> TODOS </option>";
 
     $sql = "SELECT id_taller, nombre
             FROM talleres";
-    
-    if($estado != "ALL"){        
+
+    if($estado != "ALL"){
         $sql .= " WHERE estado LIKE '$estado'";
     }
 
@@ -51,7 +51,7 @@ function smarty_function_html_talleres($params, &$smarty) {
             $_output .= "<option value='" . $row["id_taller"] . "'> " . $row["nombre"] . "</option>";
         }
     }
-    
+
 
     $_output .= "</select>";
 

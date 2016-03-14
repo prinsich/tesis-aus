@@ -1,4 +1,4 @@
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
 
         $("[name='ver_capacitador']").click(function () {
@@ -14,6 +14,7 @@
         });
 
         $("[name='alta_capacitador']").click(function () {
+            var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de capacitador");
             $("#modal_confirm").html("Esta seguro que desea dar de alta este capacitador?");
             $("#modal_confirm").dialog("open");
@@ -26,7 +27,7 @@
                         dataType: "json",
                         url: "includes/capacitadores/ajax_capacitadores.php?funcion=alta_capacitador",
                         data: {
-                            id_capacitador: $(this).data("id"),
+                            id_capacitador: id_capacitador,
                             usrlogin: $("#usrlogin").val()
                         }
                     })
@@ -53,6 +54,7 @@
         });
 
         $("[name='baja_capacitador']").click(function () {
+            var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de capacitador");
             $("#modal_confirm").html("Esta seguro que desea dar de baja este capacitador?");
             $("#modal_confirm").dialog("open");
@@ -65,7 +67,7 @@
                         dataType: "json",
                         url: "includes/capacitadores/ajax_capacitadores.php?funcion=baja_capacitador",
                         data: {
-                            id_capacitador: $(this).data("id"),
+                            id_capacitador: id_capacitador,
                             usrlogin: $("#usrlogin").val()
                         }
                     })
@@ -153,12 +155,12 @@
             <td>{$lista_capacitadores[c].celular}</td>
             <td>{$lista_capacitadores[c].estado}</td>
             <td>
-                <img name="ver_capacitador" src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
+                <img name="ver_capacitador" src="images/icons/file_search.png" title="Ver capacitador" alt="Ver capacitador" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
                 {if $lista_capacitadores[c].estado eq "ACTIVO"}
-                <img name="modificar_capacitador" src="images/icons/file_edit.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
-                <img name="baja_capacitador" src="images/icons/file_delete.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
+                <img name="modificar_capacitador" src="images/icons/file_edit.png" title="Modificar capacitador" alt="Modificar capacitador" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
+                <img name="baja_capacitador" src="images/icons/file_delete.png" title="baja capacitador" alt="Baja capacitador" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
                 {else}
-                <img sname="alta_capacitador" rc="images/icons/file_add.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
+                <img name="alta_capacitador" src="images/icons/file_add.png" title="Alta capacitador" alt="Alta capacitador" border="0" height="17" align="absmiddle" data-id="{$lista_capacitadores[c].id_capacitador}" />
                 {/if}
             </td>
         </tr>

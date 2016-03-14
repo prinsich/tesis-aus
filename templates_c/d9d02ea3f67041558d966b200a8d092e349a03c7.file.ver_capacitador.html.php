@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:32:22
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 22:51:30
          compiled from ".\templates\capacitadores\ver_capacitador.html" */ ?>
 <?php /*%%SmartyHeaderCode:25218567ef9560d9168-28762115%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd9d02ea3f67041558d966b200a8d092e349a03c7' => 
     array (
       0 => '.\\templates\\capacitadores\\ver_capacitador.html',
-      1 => 1451161941,
+      1 => 1457920282,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_567ef9563560f0_77767581',
   'variables' => 
   array (
     'datos_capacitador' => 0,
@@ -22,10 +24,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cantidad_talleres' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567ef9563560f0_77767581',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567ef9563560f0_77767581')) {function content_567ef9563560f0_77767581($_smarty_tpl) {?><style>
+<?php if ($_valid && !is_callable('content_567ef9563560f0_77767581')) {function content_567ef9563560f0_77767581($_smarty_tpl) {?><?php echo '<script'; ?>
+ type="text/javascript">
+    $(document).ready(function() {
+        $("#volver").click(function(){
+            window.location = "index.php?section=capacitadores&sub=listar_capacitadores";
+        });
+    });
+<?php echo '</script'; ?>
+>
+<style>
     td { /*border: none;*/ text-align: left; /*width: 10%;*/}
 </style>
 <h1>Datos del Capacitador</h1>
@@ -129,5 +138,5 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['t']['last']       = ($_smart
     </tr>
 </table>
 <?php }?>
-<input class="btnSubmit" type="button" name="volver" value="volver" onclick="history.back();">
+<button class="btnSubmit" type="button" name="volver" id="volver" >Volver</button>
 <?php }} ?>

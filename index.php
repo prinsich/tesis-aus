@@ -5,6 +5,8 @@ require ("configs/db.php");
 require ("configs/auxiliar_function.php");
 include_once("classes/class.Log.php");
 
+header('Content-Type: text/html; charset=UTF-8');
+
 //------------------------------------------------------------------------------
 //CHECK BROWSER - ONLY ADMIT FIREFOX OR CHORME
 //------------------------------------------------------------------------------
@@ -143,11 +145,21 @@ if(is_int($Chrome) || is_int($Firefox)){
 
     if(!empty($datos_post)){
         foreach ($datos_post as $dato) {
-            if(!sqlInyectionCheck($dato)){
-                $sql_inyection = true;
-                $inyection_in .= "POST";
-                break;
-            }
+            if(!is_array($dato)){
+                if(!sqlInyectionCheck($dato)){
+                    $sql_inyection = true;
+                    $inyection_in .= "POST";
+                    break;
+                }
+			} else {
+				foreach ($dato as $metadato) {
+					if(!sqlInyectionCheck($metadato)){
+	                	$sql_inyection = true;
+                        $inyection_in .= "POST";
+	                	break;
+	            	}
+				}
+			}
         }
     }
 

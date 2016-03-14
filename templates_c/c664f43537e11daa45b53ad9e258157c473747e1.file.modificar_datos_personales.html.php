@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-08 21:39:05
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:33:03
          compiled from ".\templates\alumnos\modificar_datos_personales.html" */ ?>
 <?php /*%%SmartyHeaderCode:12371567f09c4b24204-03487795%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c664f43537e11daa45b53ad9e258157c473747e1' => 
     array (
       0 => '.\\templates\\alumnos\\modificar_datos_personales.html',
-      1 => 1457483943,
+      1 => 1457918364,
       2 => 'file',
     ),
   ),
@@ -69,7 +69,7 @@ if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program
 
 <label for="telefono">Tel&eacute;fono(*):</label>
 <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['datos_alumno']->value['telefono'];?>
-" id="telefono" name="telefono" class="numeros"/>
+" id="telefono" name="telefono" class="numeros" maxlength="15"/>
 <br />
 
 <label for="dni">DNI(*):</label>

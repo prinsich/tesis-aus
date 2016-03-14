@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-11 00:29:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:19:04
          compiled from ".\templates\certificados\crear_certificados.html" */ ?>
 <?php /*%%SmartyHeaderCode:20407567f09b32f9472-21705566%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f8bb23d533978b937e02035bf47d6118307423b3' => 
     array (
       0 => '.\\templates\\certificados\\crear_certificados.html',
-      1 => 1457666949,
+      1 => 1457895833,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567f09b33c12b1_36797792')) {function content_567f09b33c12b1_36797792($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_talleres')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_talleres.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
 $(document).ready(function () {
   $("#buscar").click(function (){
     if($("#taller").val() == 0){

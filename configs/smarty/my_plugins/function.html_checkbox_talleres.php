@@ -76,27 +76,31 @@ function smarty_function_html_checkbox_talleres($params) {
     }
 
     //SALIDA
-    $_output = "<table id='$nombre' name='$nombre' class='diascheck' style='width: 310px; float: right; margin-left: 360px; margin-right: 100px; margin-top: 0px; margin-bottom: 20px;'>";
-
     $sql = "SELECT id_taller, nombre
                 FROM talleres
                 WHERE estado LIKE 'ACTIVO'";
 
     $resultSetSql = $db->query($sql);
-    while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {
-        $_output .= "<tr>";
-        if($seleccionar == null){
-             $_output .= "<td><input type='checkbox' id='taller_" . $row["id_taller"] . "' name='talleres_list[]' value='" . $row["id_taller"] . "' /></td>";
-        } else if(in_array($row["id_taller"], $seleccionar)){
-            $_output .= "<td><input type='checkbox' id='taller_" . $row["id_taller"] . "' name='talleres_list[]' value='" . $row["id_taller"] . "' checked /></td>";
-        } else {
-            $_output .= "<td><input type='checkbox' id='taller_" . $row["id_taller"] . "' name='talleres_list[]' value='" . $row["id_taller"] . "' /></td>";
-        }
-        $_output .= "<td>" . $row["nombre"] . "</td>";
-        $_output .= "</tr>";
-    }
+    if($resultSetSql != null){
 
-    $_output .= "</table>";
+        $_output = "<table id='$nombre' name='$nombre' class='diascheck' style='width: 310px; float: right; margin-left: 360px; margin-right: 100px; margin-top: 0px; margin-bottom: 20px;'>";
+        while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {
+            $_output .= "<tr>";
+            if($seleccionar == null){
+                 $_output .= "<td><input type='checkbox' id='taller_" . $row["id_taller"] . "' name='talleres_list[]' value='" . $row["id_taller"] . "' /></td>";
+            } else if(in_array($row["id_taller"], $seleccionar)){
+                $_output .= "<td><input type='checkbox' id='taller_" . $row["id_taller"] . "' name='talleres_list[]' value='" . $row["id_taller"] . "' checked /></td>";
+            } else {
+                $_output .= "<td><input type='checkbox' id='taller_" . $row["id_taller"] . "' name='talleres_list[]' value='" . $row["id_taller"] . "' /></td>";
+            }
+            $_output .= "<td>" . $row["nombre"] . "</td>";
+            $_output .= "</tr>";
+        }
+
+        $_output .= "</table>";
+    } else {
+        $_output = "No hay talleres cargados";
+    }
 
     return $_output;
 }

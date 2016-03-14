@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 19:56:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:38:20
          compiled from ".\templates\alumnos\listar_alumnos.html" */ ?>
 <?php /*%%SmartyHeaderCode:30097567ef673491e77-03757491%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '221bbca5a9b80213b72f67702b6d168feea0a125' => 
     array (
       0 => '.\\templates\\alumnos\\listar_alumnos.html',
-      1 => 1457814382,
+      1 => 1457987897,
       2 => 'file',
     ),
   ),
@@ -29,7 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_567ef6738b3a02_52160533')) {function content_567ef6738b3a02_52160533($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
 ?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
     $(document).ready(function () {
 
         $("[name='ver_alumno']").click(function () {
@@ -45,6 +45,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         });
 
         $("[name='alta_alumno']").click(function () {
+            var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de alumno");
             $("#modal_confirm").html("Esta seguro que desea dar de alta este alumno?");
             $("#modal_confirm").dialog("open");
@@ -57,7 +58,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         dataType: "json",
                         url: "includes/alumnos/ajax_alumno.php?funcion=alta_alumno",
                         data: {
-                            id_alumno: $(this).data("id"),
+                            id_alumno: id_usuario,
                             usrlogin: $("#usrlogin").val(),
                         }
                     })
@@ -84,6 +85,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         });
 
         $("[name='baja_alumno']").click(function () {
+            var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de alumno");
             $("#modal_confirm").html("Esta seguro que desea dar de baja este alumno?");
             $("#modal_confirm").dialog("open");
@@ -96,8 +98,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         dataType: "json",
                         url: "includes/alumnos/ajax_alumno.php?funcion=baja_alumno",
                         data: {
-                            id_alumno: $(this).data("id"),
-                            usrlogin: ("#usrlogin").val(),
+                            id_alumno: id_usuario,
+                            usrlogin: $("#usrlogin").val(),
                         }
                     })
                             .done(function (data, textStatus, jqXHR) {

@@ -1,3 +1,10 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#volver").click(function(){
+            window.location = "index.php?section=talleres&sub=listar_talleres";
+        });
+    });
+</script>
 <style>
     td { /*border: none;*/ text-align: left; /*width: 10%;*/}
 </style>
@@ -37,4 +44,4 @@
     </tr>
 </table>
 
-<input class="btnSubmit" type="button" name="volver" value="Volver" onclick="history.back();">
+<button class="btnSubmit" type="button" name="volver" id="volver">Volver</button>
