@@ -13,7 +13,12 @@ $database["cdmon"]["pass"] = 'wNmSHhtE';
 $database["localhost"]["user"] = 'root';
 $database["localhost"]["pass"] = 'root';
 
-$database_used = $database["localhost"];
+if($_SERVER['SERVER_NAME'] == 'localhost'){
+	$database_used = $database["localhost"];
+} else {
+	$database_used = $database["cdmon"];
+}
+
 
 /////////////////////////////////////////////////////////////
 define("DB_FETCHMODE_ORDERED", "3");
