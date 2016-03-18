@@ -2,18 +2,13 @@
 
 /**
  * Smarty Internal Plugin Compile extend
- * Compiles the {extends} tag
+ * Compiles the {extends} tag.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile extend Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile extend Class.
  */
 class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase
 {
@@ -21,6 +16,7 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('file');
@@ -28,12 +24,13 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('file');
 
     /**
-     * Compiles code for the {extends} tag
+     * Compiles code for the {extends} tag.
      *
      * @param array  $args     array with attributes from parser
      * @param object $compiler compiler object
@@ -52,7 +49,7 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase
         }
 
         $name = $_attr['file'];
-        /** @var Smarty_Internal_Template $_smarty_tpl
+        /** @var Smarty_Internal_Template
          * used in evaluated code
          */
         $_smarty_tpl = $compiler->template;
@@ -77,9 +74,10 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase
                 $compiler->extends_uid[$uid] = true;
             }
         }
-        unset ($_template);
+        unset($_template);
         $compiler->inheritance_child = true;
         $compiler->lex->yypushstate(Smarty_Internal_Templatelexer::CHILDBODY);
+
         return '';
     }
 }

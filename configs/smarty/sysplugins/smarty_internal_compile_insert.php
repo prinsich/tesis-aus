@@ -2,18 +2,13 @@
 
 /**
  * Smarty Internal Plugin Compile Insert
- * Compiles the {insert} tag
+ * Compiles the {insert} tag.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile Insert Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Insert Class.
  */
 class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
 {
@@ -21,6 +16,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('name');
@@ -28,6 +24,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('name');
@@ -35,15 +32,16 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $optional_attributes = array('_any');
 
     /**
-     * Compiles code for the {insert} tag
+     * Compiles code for the {insert} tag.
      *
-     * @param  array  $args     array with attributes from parser
-     * @param  object $compiler compiler object
+     * @param array  $args     array with attributes from parser
+     * @param object $compiler compiler object
      *
      * @return string compiled code
      */
@@ -60,7 +58,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
 
         $_output = '<?php ';
         // save possible attributes
-        eval('$_name = ' . $_attr['name'] . ';');
+        eval('$_name = '.$_attr['name'].';');
         if (isset($_attr['assign'])) {
             // output will be stored in a smarty variable instead of being displayed
             $_assign = $_attr['assign'];
@@ -72,7 +70,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
             $_function = "smarty_insert_{$_name}";
             $_smarty_tpl = $compiler->template;
             $_filepath = false;
-            eval('$_script = ' . $_attr['script'] . ';');
+            eval('$_script = '.$_attr['script'].';');
             if (!isset($compiler->smarty->security_policy) && file_exists($_script)) {
                 $_filepath = $_script;
             } else {
@@ -83,9 +81,9 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
                 }
                 if (!empty($_dir)) {
                     foreach ((array) $_dir as $_script_dir) {
-                        $_script_dir = rtrim($_script_dir, '/\\') . DS;
-                        if (file_exists($_script_dir . $_script)) {
-                            $_filepath = $_script_dir . $_script;
+                        $_script_dir = rtrim($_script_dir, '/\\').DS;
+                        if (file_exists($_script_dir.$_script)) {
+                            $_filepath = $_script_dir.$_script;
                             break;
                         }
                     }
@@ -118,7 +116,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
         foreach ($_attr as $_key => $_value) {
             $_paramsArray[] = "'$_key' => $_value";
         }
-        $_params = 'array(' . implode(", ", $_paramsArray) . ')';
+        $_params = 'array('.implode(', ', $_paramsArray).')';
         // call insert
         if (isset($_assign)) {
             if ($_smarty_tpl->caching) {

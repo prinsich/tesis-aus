@@ -1,18 +1,13 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Include PHP
- * Compiles the {include_php} tag
+ * Compiles the {include_php} tag.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile Insert Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Insert Class.
  */
 class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
 {
@@ -20,6 +15,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('file');
@@ -27,6 +23,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('file');
@@ -34,33 +31,35 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $optional_attributes = array('once', 'assign');
 
     /**
-     * Compiles code for the {include_php} tag
+     * Compiles code for the {include_php} tag.
      *
-     * @param  array  $args     array with attributes from parser
-     * @param  object $compiler compiler object
+     * @param array  $args     array with attributes from parser
+     * @param object $compiler compiler object
      *
      * @throws SmartyException
+     *
      * @return string compiled code
      */
     public function compile($args, $compiler)
     {
         if (!($compiler->smarty instanceof SmartyBC)) {
-            throw new SmartyException("{include_php} is deprecated, use SmartyBC class to enable");
+            throw new SmartyException('{include_php} is deprecated, use SmartyBC class to enable');
         }
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
-        /** @var Smarty_Internal_Template $_smarty_tpl
+        /** @var Smarty_Internal_Template
          * used in evaluated code
          */
         $_smarty_tpl = $compiler->template;
         $_filepath = false;
-        eval('$_file = ' . $_attr['file'] . ';');
+        eval('$_file = '.$_attr['file'].';');
         if (!isset($compiler->smarty->security_policy) && file_exists($_file)) {
             $_filepath = $_file;
         } else {
@@ -71,9 +70,9 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
             }
             if (!empty($_dir)) {
                 foreach ((array) $_dir as $_script_dir) {
-                    $_script_dir = rtrim($_script_dir, '/\\') . DS;
-                    if (file_exists($_script_dir . $_file)) {
-                        $_filepath = $_script_dir . $_file;
+                    $_script_dir = rtrim($_script_dir, '/\\').DS;
+                    if (file_exists($_script_dir.$_file)) {
+                        $_filepath = $_script_dir.$_file;
                         break;
                     }
                 }

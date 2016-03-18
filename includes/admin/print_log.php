@@ -49,7 +49,7 @@ $registros = $log->ver_log($datos["hidden_usr"], $datos["hidden_desde"], $datos[
 $smarty->assign("log", $registros);
 
 ////////////////////////////////////////////////////////////////////////////////
-$html = $smarty->fetch("templates/admin/print_log.html");
+$html = $smarty->fetch("templates/admin/print_log.tpl");
 
 $pdf->AddPage('L');
 $pdf->SetFont('helvetica', '', 8);

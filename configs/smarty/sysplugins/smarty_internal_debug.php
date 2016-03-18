@@ -1,37 +1,32 @@
 <?php
 /**
  * Smarty Internal Plugin Debug
- * Class to collect data for the Smarty Debugging Consol
+ * Class to collect data for the Smarty Debugging Consol.
  *
- * @package    Smarty
- * @subpackage Debug
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Debug Class
- *
- * @package    Smarty
- * @subpackage Debug
+ * Smarty Internal Plugin Debug Class.
  */
 class Smarty_Internal_Debug extends Smarty_Internal_Data
 {
     /**
-     * template data
+     * template data.
      *
      * @var array
      */
     public static $template_data = array();
 
     /**
-     * List of uid's which shall be ignored
+     * List of uid's which shall be ignored.
      *
      * @var array
      */
     public static $ignore_uid = array();
 
     /**
-     * Ignore template
+     * Ignore template.
      *
      * @param object $template
      */
@@ -45,7 +40,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * Start logging of compile time
+     * Start logging of compile time.
      *
      * @param object $template
      */
@@ -56,7 +51,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
             $key = $template->compiler->trace_uid;
             if (!isset(self::$template_data[$key])) {
                 if (isset($_is_stringy[$template->source->type])) {
-                    self::$template_data[$key]['name'] = '\'' . substr($template->source->name, 0, 25) . '...\'';
+                    self::$template_data[$key]['name'] = '\''.substr($template->source->name, 0, 25).'...\'';
                 } else {
                     self::$template_data[$key]['name'] = $template->source->filepath;
                 }
@@ -74,7 +69,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * End logging of compile time
+     * End logging of compile time.
      *
      * @param object $template
      */
@@ -93,7 +88,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * Start logging of render time
+     * Start logging of render time.
      *
      * @param object $template
      */
@@ -104,7 +99,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * End logging of compile time
+     * End logging of compile time.
      *
      * @param object $template
      */
@@ -115,7 +110,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * Start logging of cache time
+     * Start logging of cache time.
      *
      * @param object $template cached template
      */
@@ -126,7 +121,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * End logging of cache time
+     * End logging of cache time.
      *
      * @param object $template cached template
      */
@@ -137,7 +132,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * Opens a window for the Smarty Debugging Consol and display the data
+     * Opens a window for the Smarty Debugging Consol and display the data.
      *
      * @param Smarty_Internal_Template|Smarty $obj object to debug
      */
@@ -169,7 +164,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
         $_template->cache_id = null;
         $_template->compile_id = null;
         if ($obj instanceof Smarty_Internal_Template) {
-            $_template->assign('template_name', $obj->source->type . ':' . $obj->source->name);
+            $_template->assign('template_name', $obj->source->type.':'.$obj->source->name);
         }
         if ($obj instanceof Smarty) {
             $_template->assign('template_data', self::$template_data);
@@ -183,9 +178,9 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * Recursively gets variables from all template/data scopes
+     * Recursively gets variables from all template/data scopes.
      *
-     * @param  Smarty_Internal_Template|Smarty_Data $obj object to debug
+     * @param Smarty_Internal_Template|Smarty_Data $obj object to debug
      *
      * @return StdClass
      */
@@ -196,7 +191,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
         foreach ($obj->tpl_vars as $key => $var) {
             $tpl_vars[$key] = clone $var;
             if ($obj instanceof Smarty_Internal_Template) {
-                $tpl_vars[$key]->scope = $obj->source->type . ':' . $obj->source->name;
+                $tpl_vars[$key]->scope = $obj->source->type.':'.$obj->source->name;
             } elseif ($obj instanceof Smarty_Data) {
                 $tpl_vars[$key]->scope = 'Data object';
             } else {
@@ -222,9 +217,9 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
     }
 
     /**
-     * Return key into $template_data for template
+     * Return key into $template_data for template.
      *
-     * @param  object $template template object
+     * @param object $template template object
      *
      * @return string key into $template_data
      */
@@ -240,7 +235,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
             return $key;
         } else {
             if (isset($_is_stringy[$template->source->type])) {
-                self::$template_data[$key]['name'] = '\'' . substr($template->source->name, 0, 25) . '...\'';
+                self::$template_data[$key]['name'] = '\''.substr($template->source->name, 0, 25).'...\'';
             } else {
                 self::$template_data[$key]['name'] = $template->source->filepath;
             }

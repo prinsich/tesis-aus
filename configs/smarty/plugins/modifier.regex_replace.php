@@ -1,19 +1,17 @@
 <?php
 /**
- * Smarty plugin
- *
- * @package    Smarty
- * @subpackage PluginsModifier
+ * Smarty plugin.
  */
 
 /**
  * Smarty regex_replace modifier plugin
  * Type:     modifier<br>
  * Name:     regex_replace<br>
- * Purpose:  regular expression search/replace
+ * Purpose:  regular expression search/replace.
  *
  * @link    http://smarty.php.net/manual/en/language.modifier.regex.replace.php
  *          regex_replace (Smarty online manual)
+ *
  * @author  Monte Ohrt <monte at ohrt dot com>
  *
  * @param string       $string  input string
@@ -36,7 +34,7 @@ function smarty_modifier_regex_replace($string, $search, $replace)
 }
 
 /**
- * @param  string $search string(s) that should be replaced
+ * @param string $search string(s) that should be replaced
  *
  * @return string
  * @ignore
@@ -50,7 +48,7 @@ function _smarty_regex_replace_check($search)
     }
     // remove eval-modifier from $search
     if (preg_match('!([a-zA-Z\s]+)$!s', $search, $match) && (strpos($match[1], 'e') !== false)) {
-        $search = substr($search, 0, - strlen($match[1])) . preg_replace('![e\s]+!', '', $match[1]);
+        $search = substr($search, 0, -strlen($match[1])).preg_replace('![e\s]+!', '', $match[1]);
     }
 
     return $search;

@@ -10,17 +10,26 @@
     </tr>
     {for $index=0 to 9}
     <tr>
-        <td><input type="text" id="table_nombre" value="" name="nombre_apellido_{$index}" class="inputntable letras" /></td>
-        <td><input type="text" id="table_parentesco" value="" name="parentesco_{$index}" /></td>
-        <td><input type="text" id="table_edad" value="" name="edad_{$index}" class="inputedad numeros" maxlength="2"/></td>
+        <td>
+            <input type="text" id="table_nombre" value="" name="nombre_apellido_{$index}" class="inputntable letras" />
+        </td>
+        <td>
+            <input type="text" id="table_parentesco" value="" name="parentesco_{$index}" />
+        </td>
+        <td>
+            <input type="text" id="table_edad" value="" name="edad_{$index}" class="inputedad numeros" maxlength="2" />
+        </td>
         <td>{html_estado_civil name="estado_civil_$index" id="table_estado_civil" style="width: 120px"}</td>
-        <td><select id="table_vive_hogar" name="vive_hogar_{$index}" style="width: 40px"> 
+        <td>
+            <select id="table_vive_hogar" name="vive_hogar_{$index}" style="width: 40px">
                 <option value="SI" selected="selected">Si</option>
                 <option value="NO">No</option>
             </select>
         </td>
-        <td><input type="text" id="table_ocupacion" value="" name="ocupacion_{$index}" /></td>
-    </tr> 
+        <td>
+            <input type="text" id="table_ocupacion" value="" name="ocupacion_{$index}" />
+        </td>
+    </tr>
     {/for}
 </table>
 
@@ -37,7 +46,7 @@
         <li>Situaci&oacute;n econ&oacute;mica-laboral de su familia. </li>
         <li>Integraci&oacute;n de su familia a la comunidad. </li>
     </ul>
-</label> 
+</label>
 <textarea id="relaciones_familiares" name="relaciones_familiares"></textarea>
 <br />
 
@@ -65,7 +74,7 @@
     </ul>
 </label>
 <textarea id="tiempo_libre" name="tiempo_libre"></textarea>
-<br />	
+<br />
 
 
 <h2>Educaci&oacute;n</h2>

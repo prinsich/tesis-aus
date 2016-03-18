@@ -1,5 +1,5 @@
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:36:17
-         compiled from "..\..\templates\admin\ver_registro_table.html" */ ?>
+         compiled from "..\..\templates\admin\ver_registro_table.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1508556e63fc153fd62-32533275%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 

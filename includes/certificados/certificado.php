@@ -114,7 +114,7 @@ $pdf->SetAutoPageBreak($auto_page_break, $bMargin);
 // set the starting point for the page content
 $pdf->setPageMark();
 
-$html = $smarty->fetch("templates/certificados/certificado.html");
+$html = $smarty->fetch("templates/certificados/certificado.tpl");
 $pdf->writeHTML($html, true, 0, 0, 0);
 $pdf->Output('Certificado_de_'.$datos_alumno["apellido"].'_'.$datos_alumno["nombre"].'.pdf', 'D');
 

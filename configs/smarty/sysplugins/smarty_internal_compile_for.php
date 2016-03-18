@@ -1,18 +1,13 @@
 <?php
 /**
  * Smarty Internal Plugin Compile For
- * Compiles the {for} {forelse} {/for} tags
+ * Compiles the {for} {forelse} {/for} tags.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile For Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile For Class.
  */
 class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase
 {
@@ -26,9 +21,9 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase
      * The parser is generating different sets of attribute by which this compiler can
      * determine which syntax is used.
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      *
      * @return string compiled code
      */
@@ -44,7 +39,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
-        $output = "<?php ";
+        $output = '<?php ';
         if ($parameter == 1) {
             foreach ($_attr['start'] as $_statement) {
                 $output .= " \$_smarty_tpl->tpl_vars[$_statement[var]] = new Smarty_Variable;";
@@ -69,7 +64,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase
             $output .= "\$_smarty_tpl->tpl_vars[$_statement[var]]->first = \$_smarty_tpl->tpl_vars[$_statement[var]]->iteration == 1;";
             $output .= "\$_smarty_tpl->tpl_vars[$_statement[var]]->last = \$_smarty_tpl->tpl_vars[$_statement[var]]->iteration == \$_smarty_tpl->tpl_vars[$_statement[var]]->total;";
         }
-        $output .= "?>";
+        $output .= '?>';
 
         $this->openTag($compiler, 'for', array('for', $compiler->nocache));
         // maybe nocache because of nocache variables
@@ -80,19 +75,16 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase
 }
 
 /**
- * Smarty Internal Plugin Compile Forelse Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Forelse Class.
  */
 class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the {forelse} tag
+     * Compiles code for the {forelse} tag.
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      *
      * @return string compiled code
      */
@@ -104,24 +96,21 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase
         list($openTag, $nocache) = $this->closeTag($compiler, array('for'));
         $this->openTag($compiler, 'forelse', array('forelse', $nocache));
 
-        return "<?php }} else { ?>";
+        return '<?php }} else { ?>';
     }
 }
 
 /**
- * Smarty Internal Plugin Compile Forclose Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Forclose Class.
  */
 class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the {/for} tag
+     * Compiles code for the {/for} tag.
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      *
      * @return string compiled code
      */
@@ -137,9 +126,9 @@ class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase
         list($openTag, $compiler->nocache) = $this->closeTag($compiler, array('for', 'forelse'));
 
         if ($openTag == 'forelse') {
-            return "<?php }  ?>";
+            return '<?php }  ?>';
         } else {
-            return "<?php }} ?>";
+            return '<?php }} ?>';
         }
     }
 }

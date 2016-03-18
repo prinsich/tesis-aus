@@ -1,27 +1,22 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Append
- * Compiles the {append} tag
+ * Compiles the {append} tag.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile Append Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Append Class.
  */
 class Smarty_Internal_Compile_Append extends Smarty_Internal_Compile_Assign
 {
     /**
-     * Compiles code for the {append} tag
+     * Compiles code for the {append} tag.
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      *
      * @return string compiled code
      */
@@ -35,7 +30,7 @@ class Smarty_Internal_Compile_Append extends Smarty_Internal_Compile_Assign
         $_attr = $this->getAttributes($compiler, $args);
         // map to compile assign attributes
         if (isset($_attr['index'])) {
-            $_params['smarty_internal_index'] = '[' . $_attr['index'] . ']';
+            $_params['smarty_internal_index'] = '['.$_attr['index'].']';
             unset($_attr['index']);
         } else {
             $_params['smarty_internal_index'] = '[]';

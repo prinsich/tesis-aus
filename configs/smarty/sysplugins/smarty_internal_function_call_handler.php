@@ -1,23 +1,18 @@
 <?php
 /**
- * Smarty Internal Plugin Function Call Handler
+ * Smarty Internal Plugin Function Call Handler.
  *
- * @package    Smarty
- * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
 
 /**
- * This class does call function defined with the {function} tag
- *
- * @package    Smarty
- * @subpackage PluginsInternal
+ * This class does call function defined with the {function} tag.
  */
 class Smarty_Internal_Function_Call_Handler
 {
     /**
      * This function handles calls to template functions defined by {function}
-     * It does create a PHP function at the first call
+     * It does create a PHP function at the first call.
      *
      * @param string                   $_name     template function name
      * @param Smarty_Internal_Template $_template template object
@@ -39,12 +34,12 @@ class Smarty_Internal_Function_Call_Handler
     foreach (\$params as \$key => \$value) {\$_smarty_tpl->tpl_vars[\$key] = new Smarty_variable(\$value);}?>";
             if ($_nocache) {
                 $_code .= preg_replace(array("!<\?php echo \\'/\*%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/|/\*/%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/\\';\?>!",
-                                             "!\\\'!"), array('', "'"), $_template->smarty->template_functions[$_name]['compiled']);
+                                             "!\\\'!", ), array('', "'"), $_template->smarty->template_functions[$_name]['compiled']);
                 $_template->smarty->template_functions[$_name]['called_nocache'] = true;
             } else {
                 $_code .= preg_replace("/{$_template->smarty->template_functions[$_name]['nocache_hash']}/", $_template->properties['nocache_hash'], $_template->smarty->template_functions[$_name]['compiled']);
             }
-            $_code .= "<?php \$_smarty_tpl->tpl_vars = \$saved_tpl_vars;}";
+            $_code .= '<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;}';
             eval($_code);
         }
         $_function($_template, $_params);

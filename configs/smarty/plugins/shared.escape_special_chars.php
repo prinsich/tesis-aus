@@ -1,21 +1,17 @@
 <?php
 /**
- * Smarty shared plugin
- *
- * @package    Smarty
- * @subpackage PluginsShared
+ * Smarty shared plugin.
  */
-
 if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
     /**
      * escape_special_chars common function
      * Function: smarty_function_escape_special_chars<br>
      * Purpose:  used by other smarty functions to escape
-     *           special chars except for already escaped ones
+     *           special chars except for already escaped ones.
      *
      * @author   Monte Ohrt <monte at ohrt dot com>
      *
-     * @param  string $string text that should by escaped
+     * @param string $string text that should by escaped
      *
      * @return string
      */
@@ -32,11 +28,11 @@ if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
      * escape_special_chars common function
      * Function: smarty_function_escape_special_chars<br>
      * Purpose:  used by other smarty functions to escape
-     *           special chars except for already escaped ones
+     *           special chars except for already escaped ones.
      *
      * @author   Monte Ohrt <monte at ohrt dot com>
      *
-     * @param  string $string text that should by escaped
+     * @param string $string text that should by escaped
      *
      * @return string
      */

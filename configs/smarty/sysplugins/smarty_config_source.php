@@ -1,18 +1,14 @@
 <?php
 /**
- * Smarty Internal Plugin
- *
- * @package    Smarty
- * @subpackage TemplateResources
+ * Smarty Internal Plugin.
  */
 
 /**
  * Smarty Resource Data Object
- * Meta Data Container for Config Files
+ * Meta Data Container for Config Files.
  *
- * @package    Smarty
- * @subpackage TemplateResources
  * @author     Rodney Rehm
+ *
  * @property string $content
  * @property int    $timestamp
  * @property bool   $exists
@@ -20,7 +16,7 @@
 class Smarty_Config_Source extends Smarty_Template_Source
 {
     /**
-     * create Config Object container
+     * create Config Object container.
      *
      * @param Smarty_Resource $handler         Resource Handler this source object communicates with
      * @param Smarty          $smarty          Smarty instance this source object belongs to
@@ -48,8 +44,8 @@ class Smarty_Config_Source extends Smarty_Template_Source
     /**
      * <<magic>> Generic setter.
      *
-     * @param  string $property_name valid: content, timestamp, exists
-     * @param  mixed  $value         newly assigned value (not check for correct type)
+     * @param string $property_name valid: content, timestamp, exists
+     * @param mixed  $value         newly assigned value (not check for correct type)
      *
      * @throws SmartyException when the given property name is not valid
      */
@@ -70,9 +66,10 @@ class Smarty_Config_Source extends Smarty_Template_Source
     /**
      * <<magic>> Generic getter.
      *
-     * @param  string $property_name valid: content, timestamp, exists
+     * @param string $property_name valid: content, timestamp, exists
      *
      * @return mixed|void
+     *
      * @throws SmartyException when the given property name is not valid
      */
     public function __get($property_name)

@@ -1,27 +1,22 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Special Smarty Variable
- * Compiles the special $smarty variables
+ * Compiles the special $smarty variables.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile special Smarty Variable Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile special Smarty Variable Class.
  */
 class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the special $smarty variables
+     * Compiles code for the special $smarty variables.
      *
-     * @param  array  $args     array with attributes from parser
-     * @param  object $compiler compiler object
-     * @param         $parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param        $parameter
      *
      * @return string compiled code
      */
@@ -41,7 +36,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 return 'time()';
             case 'cookies':
                 if (isset($compiler->smarty->security_policy) && !$compiler->smarty->security_policy->allow_super_globals) {
-                    $compiler->trigger_template_error("(secure mode) super globals not permitted");
+                    $compiler->trigger_template_error('(secure mode) super globals not permitted');
                     break;
                 }
                 $compiled_ref = '$_COOKIE';
@@ -54,10 +49,10 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
             case 'session':
             case 'request':
                 if (isset($compiler->smarty->security_policy) && !$compiler->smarty->security_policy->allow_super_globals) {
-                    $compiler->trigger_template_error("(secure mode) super globals not permitted");
+                    $compiler->trigger_template_error('(secure mode) super globals not permitted');
                     break;
                 }
-                $compiled_ref = '$_' . strtoupper($variable);
+                $compiled_ref = '$_'.strtoupper($variable);
                 break;
 
             case 'template':
@@ -76,7 +71,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
 
             case 'const':
                 if (isset($compiler->smarty->security_policy) && !$compiler->smarty->security_policy->allow_constants) {
-                    $compiler->trigger_template_error("(secure mode) constants not permitted");
+                    $compiler->trigger_template_error('(secure mode) constants not permitted');
                     break;
                 }
 
@@ -99,13 +94,13 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 return "'$_rdelim'";
 
             default:
-                $compiler->trigger_template_error('$smarty.' . trim($_index[0], "'") . ' is invalid');
+                $compiler->trigger_template_error('$smarty.'.trim($_index[0], "'").' is invalid');
                 break;
         }
         if (isset($_index[1])) {
             array_shift($_index);
             foreach ($_index as $_ind) {
-                $compiled_ref = $compiled_ref . "[$_ind]";
+                $compiled_ref = $compiled_ref."[$_ind]";
             }
         }
 

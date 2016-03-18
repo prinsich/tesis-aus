@@ -1,18 +1,13 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Foreach
- * Compiles the {foreach} {foreachelse} {/foreach} tags
+ * Compiles the {foreach} {foreachelse} {/foreach} tags.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile Foreach Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Foreach Class.
  */
 class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
 {
@@ -20,6 +15,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('from', 'item');
@@ -27,6 +23,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $optional_attributes = array('name', 'key');
@@ -34,16 +31,17 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('from', 'item', 'key', 'name');
 
     /**
-     * Compiles code for the {foreach} tag
+     * Compiles code for the {foreach} tag.
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      *
      * @return string compiled code
      */
@@ -71,20 +69,20 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
         if (isset($_attr['name'])) {
             $name = $_attr['name'];
             $has_name = true;
-            $SmartyVarName = '$smarty.foreach.' . trim($name, '\'"') . '.';
+            $SmartyVarName = '$smarty.foreach.'.trim($name, '\'"').'.';
         } else {
             $name = null;
             $has_name = false;
         }
-        $ItemVarName = '$' . trim($item, '\'"') . '@';
+        $ItemVarName = '$'.trim($item, '\'"').'@';
         // evaluates which Smarty variables and properties have to be computed
         if ($has_name) {
-            $usesSmartyFirst = strpos($compiler->lex->data, $SmartyVarName . 'first') !== false;
-            $usesSmartyLast = strpos($compiler->lex->data, $SmartyVarName . 'last') !== false;
-            $usesSmartyIndex = strpos($compiler->lex->data, $SmartyVarName . 'index') !== false;
-            $usesSmartyIteration = strpos($compiler->lex->data, $SmartyVarName . 'iteration') !== false;
-            $usesSmartyShow = strpos($compiler->lex->data, $SmartyVarName . 'show') !== false;
-            $usesSmartyTotal = strpos($compiler->lex->data, $SmartyVarName . 'total') !== false;
+            $usesSmartyFirst = strpos($compiler->lex->data, $SmartyVarName.'first') !== false;
+            $usesSmartyLast = strpos($compiler->lex->data, $SmartyVarName.'last') !== false;
+            $usesSmartyIndex = strpos($compiler->lex->data, $SmartyVarName.'index') !== false;
+            $usesSmartyIteration = strpos($compiler->lex->data, $SmartyVarName.'iteration') !== false;
+            $usesSmartyShow = strpos($compiler->lex->data, $SmartyVarName.'show') !== false;
+            $usesSmartyTotal = strpos($compiler->lex->data, $SmartyVarName.'total') !== false;
         } else {
             $usesSmartyFirst = false;
             $usesSmartyLast = false;
@@ -92,14 +90,14 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
             $usesSmartyShow = false;
         }
 
-        $usesPropFirst = $usesSmartyFirst || strpos($compiler->lex->data, $ItemVarName . 'first') !== false;
-        $usesPropLast = $usesSmartyLast || strpos($compiler->lex->data, $ItemVarName . 'last') !== false;
-        $usesPropIndex = $usesPropFirst || strpos($compiler->lex->data, $ItemVarName . 'index') !== false;
-        $usesPropIteration = $usesPropLast || strpos($compiler->lex->data, $ItemVarName . 'iteration') !== false;
-        $usesPropShow = strpos($compiler->lex->data, $ItemVarName . 'show') !== false;
-        $usesPropTotal = $usesSmartyTotal || $usesSmartyShow || $usesPropShow || $usesPropLast || strpos($compiler->lex->data, $ItemVarName . 'total') !== false;
+        $usesPropFirst = $usesSmartyFirst || strpos($compiler->lex->data, $ItemVarName.'first') !== false;
+        $usesPropLast = $usesSmartyLast || strpos($compiler->lex->data, $ItemVarName.'last') !== false;
+        $usesPropIndex = $usesPropFirst || strpos($compiler->lex->data, $ItemVarName.'index') !== false;
+        $usesPropIteration = $usesPropLast || strpos($compiler->lex->data, $ItemVarName.'iteration') !== false;
+        $usesPropShow = strpos($compiler->lex->data, $ItemVarName.'show') !== false;
+        $usesPropTotal = $usesSmartyTotal || $usesSmartyShow || $usesPropShow || $usesPropLast || strpos($compiler->lex->data, $ItemVarName.'total') !== false;
         // generate output code
-        $output = "<?php ";
+        $output = '<?php ';
         $output .= " \$_smarty_tpl->tpl_vars[$item] = new Smarty_Variable; \$_smarty_tpl->tpl_vars[$item]->_loop = false;\n";
         if ($key != null) {
             $output .= " \$_smarty_tpl->tpl_vars[$key] = new Smarty_Variable;\n";
@@ -161,26 +159,23 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
                 $output .= " \$_smarty_tpl->tpl_vars['smarty']->value['foreach'][$name]['last'] = \$_smarty_tpl->tpl_vars[$item]->last;\n";
             }
         }
-        $output .= "?>";
+        $output .= '?>';
 
         return $output;
     }
 }
 
 /**
- * Smarty Internal Plugin Compile Foreachelse Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Foreachelse Class.
  */
 class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the {foreachelse} tag
+     * Compiles code for the {foreachelse} tag.
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      *
      * @return string compiled code
      */
@@ -197,19 +192,16 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase
 }
 
 /**
- * Smarty Internal Plugin Compile Foreachclose Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Foreachclose Class.
  */
 class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the {/foreach} tag
+     * Compiles code for the {/foreach} tag.
      *
-     * @param  array  $args      array with attributes from parser
-     * @param  object $compiler  compiler object
-     * @param  array  $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      *
      * @return string compiled code
      */
@@ -224,6 +216,6 @@ class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase
 
         list($openTag, $compiler->nocache, $item, $key) = $this->closeTag($compiler, array('foreach', 'foreachelse'));
 
-        return "<?php } ?>";
+        return '<?php } ?>';
     }
 }

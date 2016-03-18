@@ -1,73 +1,69 @@
 <?php
 /**
- * Smarty Internal Plugin Config
+ * Smarty Internal Plugin Config.
  *
- * @package    Smarty
- * @subpackage Config
  * @author     Uwe Tews
  */
 
 /**
  * Smarty Internal Plugin Config
- * Main class for config variables
+ * Main class for config variables.
  *
- * @package    Smarty
- * @subpackage Config
  * @ignore
  */
 class Smarty_Internal_Config
 {
     /**
-     * Smarty instance
+     * Smarty instance.
      *
      * @var Smarty object
      */
     public $smarty = null;
     /**
-     * Object of config var storage
+     * Object of config var storage.
      *
      * @var object
      */
     public $data = null;
     /**
-     * Config resource
+     * Config resource.
      *
      * @var string
      */
     public $config_resource = null;
     /**
-     * Compiled config file
+     * Compiled config file.
      *
      * @var string
      */
     public $compiled_config = null;
     /**
-     * filepath of compiled config file
+     * filepath of compiled config file.
      *
      * @var string
      */
     public $compiled_filepath = null;
     /**
-     * Filemtime of compiled config Filemtime
+     * Filemtime of compiled config Filemtime.
      *
      * @var int
      */
     public $compiled_timestamp = null;
     /**
-     * flag if compiled config file is invalid and must be (re)compiled
+     * flag if compiled config file is invalid and must be (re)compiled.
      *
      * @var bool
      */
     public $mustCompile = null;
     /**
-     * Config file compiler object
+     * Config file compiler object.
      *
      * @var Smarty_Internal_Config_File_Compiler object
      */
     public $compiler_object = null;
 
     /**
-     * Constructor of config file object
+     * Constructor of config file object.
      *
      * @param string $config_resource config file resource name
      * @param Smarty $smarty          Smarty instance
@@ -81,7 +77,7 @@ class Smarty_Internal_Config
     }
 
     /**
-     * Returns the compiled  filepath
+     * Returns the compiled  filepath.
      *
      * @return string the compiled filepath
      */
@@ -102,27 +98,27 @@ class Smarty_Internal_Config
         $_compile_id = isset($this->smarty->compile_id) ? preg_replace('![^\w\|]+!', '_', $this->smarty->compile_id) : null;
         $_flag = (int) $this->smarty->config_read_hidden + (int) $this->smarty->config_booleanize * 2
             + (int) $this->smarty->config_overwrite * 4;
-        $_filepath = sha1(realpath($this->source->filepath) . $_flag);
+        $_filepath = sha1(realpath($this->source->filepath).$_flag);
         // if use_sub_dirs, break file into directories
         if ($this->smarty->use_sub_dirs) {
-            $_filepath = substr($_filepath, 0, 2) . DS
-                . substr($_filepath, 2, 2) . DS
-                . substr($_filepath, 4, 2) . DS
-                . $_filepath;
+            $_filepath = substr($_filepath, 0, 2).DS
+                .substr($_filepath, 2, 2).DS
+                .substr($_filepath, 4, 2).DS
+                .$_filepath;
         }
         $_compile_dir_sep = $this->smarty->use_sub_dirs ? DS : '^';
         if (isset($_compile_id)) {
-            $_filepath = $_compile_id . $_compile_dir_sep . $_filepath;
+            $_filepath = $_compile_id.$_compile_dir_sep.$_filepath;
         }
         $_compile_dir = $this->smarty->getCompileDir();
 
-        return $_compile_dir . $_filepath . '.' . basename($this->source->name) . '.config' . '.php';
+        return $_compile_dir.$_filepath.'.'.basename($this->source->name).'.config'.'.php';
     }
 
     /**
-     * Returns the timestamp of the compiled file
+     * Returns the timestamp of the compiled file.
      *
-     * @return integer the file timestamp
+     * @return int the file timestamp
      */
     public function getCompiledTimestamp()
     {
@@ -133,9 +129,9 @@ class Smarty_Internal_Config
 
     /**
      * Returns if the current config file must be compiled
-     * It does compare the timestamps of config source and the compiled config and checks the force compile configuration
+     * It does compare the timestamps of config source and the compiled config and checks the force compile configuration.
      *
-     * @return boolean true if the file must be compiled
+     * @return bool true if the file must be compiled
      */
     public function mustCompile()
     {
@@ -146,7 +142,7 @@ class Smarty_Internal_Config
 
     /**
      * Returns the compiled config file
-     * It checks if the config file must be compiled or just read the compiled version
+     * It checks if the config file must be compiled or just read the compiled version.
      *
      * @return string the compiled config file
      */
@@ -165,7 +161,7 @@ class Smarty_Internal_Config
     }
 
     /**
-     * Compiles the config files
+     * Compiles the config files.
      *
      * @throws Exception
      */
@@ -185,8 +181,7 @@ class Smarty_Internal_Config
         // call compiler
         try {
             $this->compiler_object->compileSource($this);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             // restore old timestamp in case of error
             if ($this->smarty->compile_locking && $saved_timestamp) {
                 touch($this->getCompiledFilepath(), $saved_timestamp);
@@ -199,9 +194,9 @@ class Smarty_Internal_Config
     }
 
     /**
-     * load config variables
+     * load config variables.
      *
-     * @param mixed         $sections array of section names, single section or null
+     * @param mixed  $sections array of section names, single section or null
      * @param string $scope    global,parent or local
      *
      * @throws Exception
@@ -230,7 +225,7 @@ class Smarty_Internal_Config
             }
         }
         $_config_vars = array();
-        include($this->getCompiledFilepath());
+        include $this->getCompiledFilepath();
         // copy global config vars
         foreach ($_config_vars['vars'] as $variable => $value) {
             if ($this->smarty->config_overwrite || !isset($scope_ptr->config_vars[$variable])) {
@@ -256,10 +251,10 @@ class Smarty_Internal_Config
     }
 
     /**
-     * set Smarty property in template context
+     * set Smarty property in template context.
      *
-     * @param  string $property_name property name
-     * @param  mixed  $value         value
+     * @param string $property_name property name
+     * @param mixed  $value         value
      *
      * @throws SmartyException if $property_name is not valid
      */
@@ -277,11 +272,12 @@ class Smarty_Internal_Config
     }
 
     /**
-     * get Smarty property in template context
+     * get Smarty property in template context.
      *
-     * @param  string $property_name property name
+     * @param string $property_name property name
      *
      * @return \Smarty_Config_Source|\Smarty_Template_Compiled
+     *
      * @throws SmartyException if $property_name is not valid
      */
     public function __get($property_name)

@@ -1,31 +1,26 @@
 <?php
 /**
- * Smarty Internal Plugin Resource Extends
+ * Smarty Internal Plugin Resource Extends.
  *
- * @package    Smarty
- * @subpackage TemplateResources
  * @author     Uwe Tews
  * @author     Rodney Rehm
  */
 
 /**
  * Smarty Internal Plugin Resource Extends
- * Implements the file system as resource for Smarty which {extend}s a chain of template files templates
- *
- * @package    Smarty
- * @subpackage TemplateResources
+ * Implements the file system as resource for Smarty which {extend}s a chain of template files templates.
  */
 class Smarty_Internal_Resource_Extends extends Smarty_Resource
 {
     /**
-     * mbstring.overload flag
+     * mbstring.overload flag.
      *
      * @var int
      */
     public $mbstring_overload = 0;
 
     /**
-     * populate Source Object with meta data from Resource
+     * populate Source Object with meta data from Resource.
      *
      * @param Smarty_Template_Source   $source    source object
      * @param Smarty_Internal_Template $_template template object
@@ -61,7 +56,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
     }
 
     /**
-     * populate Source Object with timestamp and exists from Resource
+     * populate Source Object with timestamp and exists from Resource.
      *
      * @param Smarty_Template_Source $source source object
      */
@@ -75,11 +70,12 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
     }
 
     /**
-     * Load template's source from files into current template object
+     * Load template's source from files into current template object.
      *
      * @param Smarty_Template_Source $source source object
      *
      * @return string template source
+     *
      * @throws SmartyException if source cannot be loaded
      */
     public function getContent(Smarty_Template_Source $source)
@@ -95,11 +91,12 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
             // read content
             $_content .= $_component->content;
         }
+
         return $_content;
     }
 
     /**
-     * Determine basename for compiled filename
+     * Determine basename for compiled filename.
      *
      * @param Smarty_Template_Source $source source object
      *

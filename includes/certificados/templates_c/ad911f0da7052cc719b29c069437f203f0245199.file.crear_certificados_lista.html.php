@@ -1,5 +1,5 @@
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:19:10
-         compiled from "..\..\templates\certificados\crear_certificados_lista.html" */ ?>
+         compiled from "..\..\templates\certificados\crear_certificados_lista.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:751556e57267c0b296-47755606%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 

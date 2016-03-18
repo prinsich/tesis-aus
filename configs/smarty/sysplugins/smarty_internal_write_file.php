@@ -1,29 +1,25 @@
 <?php
 /**
- * Smarty write file plugin
+ * Smarty write file plugin.
  *
- * @package    Smarty
- * @subpackage PluginsInternal
  * @author     Monte Ohrt
  */
 
 /**
- * Smarty Internal Write File Class
- *
- * @package    Smarty
- * @subpackage PluginsInternal
+ * Smarty Internal Write File Class.
  */
 class Smarty_Internal_Write_File
 {
     /**
-     * Writes file in a safe way to disk
+     * Writes file in a safe way to disk.
      *
-     * @param  string $_filepath complete filepath
-     * @param  string $_contents file content
-     * @param  Smarty $smarty    smarty instance
+     * @param string $_filepath complete filepath
+     * @param string $_contents file content
+     * @param Smarty $smarty    smarty instance
      *
      * @throws SmartyException
-     * @return boolean true
+     *
+     * @return bool true
      */
     public static function writeFile($_filepath, $_contents, Smarty $smarty)
     {
@@ -40,11 +36,11 @@ class Smarty_Internal_Write_File
         }
 
         // write to tmp file, then move to overt file lock race condition
-        $_tmp_file = $_dirpath . DS . str_replace(array('.', ','), '_', uniqid('wrt', true));
+        $_tmp_file = $_dirpath.DS.str_replace(array('.', ','), '_', uniqid('wrt', true));
         if (!file_put_contents($_tmp_file, $_contents)) {
             error_reporting($_error_reporting);
             throw new SmartyException("unable to write file {$_tmp_file}");
-       }
+        }
 
         /*
          * Windows' rename() fails if the destination exists,

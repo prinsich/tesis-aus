@@ -1,18 +1,13 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Section
- * Compiles the {section} {sectionelse} {/section} tags
+ * Compiles the {section} {sectionelse} {/section} tags.
  *
- * @package    Smarty
- * @subpackage Compiler
  * @author     Uwe Tews
  */
 
 /**
- * Smarty Internal Plugin Compile Section Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Section Class.
  */
 class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
 {
@@ -20,6 +15,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('name', 'loop');
@@ -27,6 +23,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('name', 'loop');
@@ -34,15 +31,16 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
      * Attribute definition: Overwrites base class.
      *
      * @var array
+     *
      * @see Smarty_Internal_CompileBase
      */
     public $optional_attributes = array('start', 'step', 'max', 'show');
 
     /**
-     * Compiles code for the {section} tag
+     * Compiles code for the {section} tag.
      *
-     * @param  array  $args     array with attributes from parser
-     * @param  object $compiler compiler object
+     * @param array  $args     array with attributes from parser
+     * @param object $compiler compiler object
      *
      * @return string compiled code
      */
@@ -55,7 +53,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
         // maybe nocache because of nocache variables
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
 
-        $output = "<?php ";
+        $output = '<?php ';
 
         $section_name = $_attr['name'];
 
@@ -103,7 +101,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
         if (!isset($_attr['max'])) {
             $output .= "{$section_props}['max'] = {$section_props}['loop'];\n";
         } else {
-            $output .= "if ({$section_props}['max'] < 0)\n" . "    {$section_props}['max'] = {$section_props}['loop'];\n";
+            $output .= "if ({$section_props}['max'] < 0)\n"."    {$section_props}['max'] = {$section_props}['loop'];\n";
         }
 
         if (!isset($_attr['step'])) {
@@ -113,7 +111,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
         if (!isset($_attr['start'])) {
             $output .= "{$section_props}['start'] = {$section_props}['step'] > 0 ? 0 : {$section_props}['loop']-1;\n";
         } else {
-            $output .= "if ({$section_props}['start'] < 0)\n" . "    {$section_props}['start'] = max({$section_props}['step'] > 0 ? 0 : -1, {$section_props}['loop'] + {$section_props}['start']);\n" . "else\n" . "    {$section_props}['start'] = min({$section_props}['start'], {$section_props}['step'] > 0 ? {$section_props}['loop'] : {$section_props}['loop']-1);\n";
+            $output .= "if ({$section_props}['start'] < 0)\n"."    {$section_props}['start'] = max({$section_props}['step'] > 0 ? 0 : -1, {$section_props}['loop'] + {$section_props}['start']);\n"."else\n"."    {$section_props}['start'] = min({$section_props}['start'], {$section_props}['step'] > 0 ? {$section_props}['loop'] : {$section_props}['loop']-1);\n";
         }
 
         $output .= "if ({$section_props}['show']) {\n";
@@ -122,7 +120,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
         } else {
             $output .= "    {$section_props}['total'] = min(ceil(({$section_props}['step'] > 0 ? {$section_props}['loop'] - {$section_props}['start'] : {$section_props}['start']+1)/abs({$section_props}['step'])), {$section_props}['max']);\n";
         }
-        $output .= "    if ({$section_props}['total'] == 0)\n" . "        {$section_props}['show'] = false;\n" . "} else\n" . "    {$section_props}['total'] = 0;\n";
+        $output .= "    if ({$section_props}['total'] == 0)\n"."        {$section_props}['show'] = false;\n"."} else\n"."    {$section_props}['total'] = 0;\n";
 
         $output .= "if ({$section_props}['show']):\n";
         $output .= "
@@ -135,25 +133,22 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
         $output .= "{$section_props}['first']      = ({$section_props}['iteration'] == 1);\n";
         $output .= "{$section_props}['last']       = ({$section_props}['iteration'] == {$section_props}['total']);\n";
 
-        $output .= "?>";
+        $output .= '?>';
 
         return $output;
     }
 }
 
 /**
- * Smarty Internal Plugin Compile Sectionelse Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Sectionelse Class.
  */
 class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the {sectionelse} tag
+     * Compiles code for the {sectionelse} tag.
      *
-     * @param  array  $args     array with attributes from parser
-     * @param  object $compiler compiler object
+     * @param array  $args     array with attributes from parser
+     * @param object $compiler compiler object
      *
      * @return string compiled code
      */
@@ -165,23 +160,20 @@ class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase
         list($openTag, $nocache) = $this->closeTag($compiler, array('section'));
         $this->openTag($compiler, 'sectionelse', array('sectionelse', $nocache));
 
-        return "<?php endfor; else: ?>";
+        return '<?php endfor; else: ?>';
     }
 }
 
 /**
- * Smarty Internal Plugin Compile Sectionclose Class
- *
- * @package    Smarty
- * @subpackage Compiler
+ * Smarty Internal Plugin Compile Sectionclose Class.
  */
 class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the {/section} tag
+     * Compiles code for the {/section} tag.
      *
-     * @param  array  $args     array with attributes from parser
-     * @param  object $compiler compiler object
+     * @param array  $args     array with attributes from parser
+     * @param object $compiler compiler object
      *
      * @return string compiled code
      */
@@ -198,9 +190,9 @@ class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase
         list($openTag, $compiler->nocache) = $this->closeTag($compiler, array('section', 'sectionelse'));
 
         if ($openTag == 'sectionelse') {
-            return "<?php endif; ?>";
+            return '<?php endif; ?>';
         } else {
-            return "<?php endfor; endif; ?>";
+            return '<?php endfor; endif; ?>';
         }
     }
 }
