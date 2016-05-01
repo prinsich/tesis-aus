@@ -206,7 +206,7 @@ if (is_int($Chrome) || is_int($Firefox)) {
         include 'includes/'.$section.'/index.php';
     }
 
-    $smarty->display('index.tpl');
+    $smarty->display('index.html');
 } else {
     $smarty->display('no_browser_admited.tpl');
 }

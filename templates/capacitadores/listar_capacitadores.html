@@ -149,8 +149,8 @@
         {section name=c loop=$lista_capacitadores}
         <tr>
             <td>{counter}</td>
-            <td>{$lista_capacitadores[c].apellido}</td>
-            <td>{$lista_capacitadores[c].nombre}</td>
+            <td>{$lista_capacitadores[c].apellido|strtoupper}</td>
+            <td>{$lista_capacitadores[c].nombre|strtoupper}</td>
             <td>{$lista_capacitadores[c].telefono}</td>
             <td>{$lista_capacitadores[c].celular}</td>
             <td>{$lista_capacitadores[c].estado}</td>

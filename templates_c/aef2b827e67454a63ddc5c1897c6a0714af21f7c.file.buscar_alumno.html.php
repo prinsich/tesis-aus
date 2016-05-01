@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 22:22:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-01 12:53:58
          compiled from ".\templates\alumnos\buscar_alumno.html" */ ?>
 <?php /*%%SmartyHeaderCode:1775556e0979caedbc9-60610014%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aef2b827e67454a63ddc5c1897c6a0714af21f7c' => 
     array (
       0 => '.\\templates\\alumnos\\buscar_alumno.html',
-      1 => 1457895833,
+      1 => 1457918648,
       2 => 'file',
     ),
   ),
@@ -80,7 +80,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <br />
 
     <label for="taller">Taller:</label>
-    <?php echo smarty_function_html_talleres(array('name'=>"taller"),$_smarty_tpl);?>
+    <?php echo smarty_function_html_talleres(array('name'=>"taller",'estado'=>"ACTIVO"),$_smarty_tpl);?>
 
     <br />
 

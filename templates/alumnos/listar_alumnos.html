@@ -152,8 +152,8 @@
         {section name=a loop=$lista_alumnos}
         <tr>
             <td>{$index}</td>
-            <td>{$lista_alumnos[a].apellido}</td>
-            <td>{$lista_alumnos[a].nombre}</td>
+            <td>{$lista_alumnos[a].apellido|strtoupper}</td>
+            <td>{$lista_alumnos[a].nombre|strtoupper}</td>
             <td>{$lista_alumnos[a].dni}</td>
             <td>{$lista_alumnos[a].fecha_nacimiento|date_format:"d-m-Y"}</td>
             <td>{$lista_alumnos[a].telefono}</td>

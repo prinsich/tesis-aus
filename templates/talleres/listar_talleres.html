@@ -203,8 +203,8 @@
             {section name=t loop=$lista_talleres}
             <tr>
                 <td>{counter}</td>
-                <td>{$lista_talleres[t].nombre}</td>
-                <td>{$lista_talleres[t].capacitador}</td>
+                <td>{$lista_talleres[t].nombre|strtoupper}</td>
+                <td>{$lista_talleres[t].capacitador|strtoupper}</td>
                 <td>{$lista_talleres[t].cant_alumnos}</td>
                 <td>{$lista_talleres[t].estado}</td>
                 <td>

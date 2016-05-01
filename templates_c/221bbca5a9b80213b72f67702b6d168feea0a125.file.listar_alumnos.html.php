@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:38:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-01 14:48:06
          compiled from ".\templates\alumnos\listar_alumnos.html" */ ?>
 <?php /*%%SmartyHeaderCode:30097567ef673491e77-03757491%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '221bbca5a9b80213b72f67702b6d168feea0a125' => 
     array (
       0 => '.\\templates\\alumnos\\listar_alumnos.html',
-      1 => 1457987897,
+      1 => 1462124884,
       2 => 'file',
     ),
   ),
@@ -209,9 +209,9 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['a']['last']       = ($_smart
         <tr>
             <td><?php echo $_smarty_tpl->tpl_vars['index']->value;?>
 </td>
-            <td><?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['apellido'];?>
+            <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['apellido']);?>
 </td>
-            <td><?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['nombre'];?>
+            <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['nombre']);?>
 </td>
             <td><?php echo $_smarty_tpl->tpl_vars['lista_alumnos']->value[$_smarty_tpl->getVariable('smarty')->value['section']['a']['index']]['dni'];?>
 </td>
