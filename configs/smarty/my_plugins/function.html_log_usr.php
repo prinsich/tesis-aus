@@ -41,9 +41,10 @@ function smarty_function_html_log_usr($params, &$smarty)
     $_output = "<select name='$nombre' id='$nombre' $onchange $onblur $option> ";
     $_output .= "<option value=''> TODOS </option>";
 
-    $sql = 'SELECT user
+    $sql = "SELECT user
             FROM log
-            GROUP BY user';
+            WHERE user NOT LIKE ''
+            GROUP BY user";
     $resultSetSql = $db->query($sql);
 
     while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {

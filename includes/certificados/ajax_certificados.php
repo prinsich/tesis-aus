@@ -25,7 +25,7 @@ function buscar_alumnos($arg) {
   $lista_alumnos = $db->getAll($sql);
 
   $smarty->assign("lista_alumnos", $lista_alumnos);
-  $html = $smarty->fetch("../../templates/certificados/crear_certificados_lista.tpl");
+  $html = $smarty->fetch("../../templates/certificados/crear_certificados_lista.html");
 
   $jsondata["html"] = $html;
   header('Content-type: application/json; charset=utf-8');

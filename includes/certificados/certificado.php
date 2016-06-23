@@ -6,13 +6,13 @@ require_once('configs/tcpdf/tcpdf.php');
 
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
-    
+
     //Page header
     public function Header() {
-        
+
       //$image_file = "../images/".'top-imprimir-1.jpg';
       //$this->Image($image_file, 20, 10, 170, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
-      
+
       // Set font
       $this->SetFont('helvetica', 'B', 15);
 
@@ -20,17 +20,17 @@ class MYPDF extends TCPDF {
 
     // Page footer
     public function Footer() {
-        
+
         // Position at 15 mm from bottom
         $this->SetY(-15);
-        
+
         // Set font
         $this->SetFont('helvetica', 'I', 8);
-        
+
         //$this->MultiCell(55, 5, "Fecha de impresion: ".date("d/m/Y g:i a"), 0, 'L', 0, 0, '', '', true);
         //$this->MultiCell(55, 5, "", 0, 'C', 0, 0, '', '', true);
         //$this->MultiCell(75, 5, 'Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, 'R', 0, 0, '', '', true);
-        
+
     }
 }
 
@@ -86,12 +86,12 @@ $smarty->assign("nombre_capacitador", $datos_capacitador["apellido"].", ".$datos
 
 $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
 $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
- 
+
 //$fecha = $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
 $fecha = date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
 $smarty->assign("fecha", $fecha);
 
-///////////// genera html en una variabel 
+///////////// genera html en una variabel
 $pdf->AddPage();
 // convert TTF font to TCPDF format and store it on the fonts folder
 $fontname = $pdf->addTTFfont('configs/tcpdf/fonts_own/BERNHC.TTF', 'TrueTypeUnicode', '', 96);
@@ -114,7 +114,7 @@ $pdf->SetAutoPageBreak($auto_page_break, $bMargin);
 // set the starting point for the page content
 $pdf->setPageMark();
 
-$html = $smarty->fetch("templates/certificados/certificado.tpl");
+$html = $smarty->fetch("templates/certificados/certificado.html");
 $pdf->writeHTML($html, true, 0, 0, 0);
 $pdf->Output('Certificado_de_'.$datos_alumno["apellido"].'_'.$datos_alumno["nombre"].'.pdf', 'D');
 

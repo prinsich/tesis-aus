@@ -49,13 +49,13 @@ $registros = $log->ver_log($datos["hidden_usr"], $datos["hidden_desde"], $datos[
 $smarty->assign("log", $registros);
 
 ////////////////////////////////////////////////////////////////////////////////
-$html = $smarty->fetch("templates/admin/print_log.tpl");
+$html = $smarty->fetch("templates/admin/print_log.html");
 
 $pdf->AddPage('L');
 $pdf->SetFont('helvetica', '', 8);
 
 $pdf->writeHTML($html, true, 0, 0, 0);
-$pdf->Output('print_log_'.date("d/m/Y g:i a"), 'D');
+$pdf->Output('print_log_'.date("d/m/Y g:i a").'.pdf', 'D');
 
 
 ?>

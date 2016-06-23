@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 15:56:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-06-21 21:23:21
          compiled from ".\templates\perfil\ver_perfil.html" */ ?>
 <?php /*%%SmartyHeaderCode:1086356e22d84ab4e04-70966907%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c689d46261319a7a175fcafd0927a4ae47cf939b' => 
     array (
       0 => '.\\templates\\perfil\\ver_perfil.html',
-      1 => 1457895391,
+      1 => 1457896512,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56e22d84b0a546_40975602')) {function content_56e22d84b0a546_40975602($_smarty_tpl) {?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
 $(document).ready(function () {
     $("#newpass").click(function (){
         var usr = $("#user").val();

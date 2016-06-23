@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 15:42:57
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-06-21 21:26:49
          compiled from ".\templates\navegacion.html" */ ?>
 <?php /*%%SmartyHeaderCode:305356684f9b0de459-08687495%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b72f3aa4eab85edc7c93401dcdd4a8105639c97d' => 
     array (
       0 => '.\\templates\\navegacion.html',
-      1 => 1457894575,
+      1 => 1466555144,
       2 => 'file',
     ),
   ),
@@ -27,41 +27,41 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <div id="navegacion">
     <ul>
         <li class="title"><hr></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=home" id="index" >Inicio</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=perfil&sub=ver" id="ver_perfil" >Ver mi perfil</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=logout" id="logout">Salir</a></li>
+        <a class="control_salida"  href="index.php?section=home" id="index" ><li class="menu">Inicio</li></a>
+        <a class="control_salida"  href="index.php?section=perfil&sub=ver" id="ver_perfil"><li class="menu">Ver mi perfil</li></a>
+        <a class="control_salida"  href="index.php?section=logout" id="logout"><li class="menu">Salir</li></a>
         <li class="title">
             <hr>
             <b>Alumnos</b>
         </li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=alumnos&sub=agregar_alumno" id="agregar_alumno" >Agregar Alumno</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=alumnos&sub=listar_alumnos" id="listar_alumnos" >Listar Alumnos</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=alumnos&sub=buscar_alumno" id="buscar_alumno" >Buscar Alumno</a></li>
+        <a class="control_salida"  href="index.php?section=alumnos&sub=agregar_alumno" id="agregar_alumno" ><li class="menu">Agregar Alumno</li></a>
+        <a class="control_salida"  href="index.php?section=alumnos&sub=listar_alumnos" id="listar_alumnos" ><li class="menu">Listar Alumnos</li></a>
+        <a class="control_salida"  href="index.php?section=alumnos&sub=buscar_alumno" id="buscar_alumno" ><li class="menu">Buscar Alumno</li></a>
         <li class="title">
             <hr>
             <b>Capacitadores</b>
         </li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=capacitadores&sub=agregar_capacitador" id="agregar_capacitador" >Agregar Capacitador</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=capacitadores&sub=listar_capacitadores" id="listar_capacitadores" >Listar Capacitadores</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=capacitadores&sub=buscar_capacitadores" id="buscar_capacitadores" >Buscar Capacitador</a></li>
+        <a class="control_salida"  href="index.php?section=capacitadores&sub=agregar_capacitador" id="agregar_capacitador" ><li class="menu">Agregar Capacitador</li></a>
+        <a class="control_salida"  href="index.php?section=capacitadores&sub=listar_capacitadores" id="listar_capacitadores" ><li class="menu">Listar Capacitadores</li></a>
+        <a class="control_salida"  href="index.php?section=capacitadores&sub=buscar_capacitadores" id="buscar_capacitadores" ><li class="menu">Buscar Capacitador</li></a>
         <li class="title">
             <hr>
             <b>Talleres</b>
         </li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=talleres&sub=agregar_taller" id="agregar_taller" >Agregar Taller</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=talleres&sub=listar_talleres" id="listar_talleres" >Listar Talleres</a></li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=talleres&sub=buscar_talleres" id="buscar_talleres" >Buscar Taller</a></li>
+        <a class="control_salida"  href="index.php?section=talleres&sub=agregar_taller" id="agregar_taller" ><li class="menu">Agregar Taller</li></a>
+        <a class="control_salida"  href="index.php?section=talleres&sub=listar_talleres" id="listar_talleres" ><li class="menu">Listar Talleres</li></a>
+        <a class="control_salida"  href="index.php?section=talleres&sub=buscar_talleres" id="buscar_talleres" ><li class="menu">Buscar Taller</li></a>
         <li class="title">
             <hr>
             <b>Certificados</b>
         </li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=certificados&sub=crear_certificados" id="crear_certificados" >Crear Certificados</a></li>
+        <a class="control_salida"  href="index.php?section=certificados&sub=crear_certificados" id="crear_certificados" ><li class="menu">Crear Certificados</li></a>
         <?php if ($_smarty_tpl->tpl_vars['usrperfil']->value=="ADMIN") {?>
         <li class="title">
             <hr>
             <b>Administraci&oacute;n</b>
         </li>
-        <li class="menu"><a class="control_salida"  href="index.php?section=admin&sub=admin">Acceder al modo administrador</a></li>
+        <a class="control_salida"  href="index.php?section=admin&sub=admin"><li class="menu">Acceder al modo administrador</li></a>
         <?php }?>
         <li class="title"><hr></li>
     </ul>

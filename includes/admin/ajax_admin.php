@@ -149,7 +149,7 @@ function ver_registro($arg){
         $registros = $log->ver_log($usr, $desde, $hasta, $accion, $clase);
 
         $smarty->assign("log", $registros);
-        $html = $smarty->fetch("../../templates/admin/ver_registro_table.tpl");
+        $html = $smarty->fetch("../../templates/admin/ver_registro_table.html");
 
         $jsondata['success'] = true;
         $jsondata['html'] = $html;

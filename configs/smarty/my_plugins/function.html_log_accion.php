@@ -41,9 +41,10 @@ function smarty_function_html_log_accion($params, &$smarty)
     $_output = "<select name='$nombre' id='$nombre' $onchange $onblur $option> ";
     $_output .= "<option value=''> TODOS </option>";
 
-    $sql = 'SELECT action
+    $sql = "SELECT action
             FROM log
-            GROUP BY action';
+            WHERE action NOT LIKE ''
+            GROUP BY action";
     $resultSetSql = $db->query($sql);
 
     while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {

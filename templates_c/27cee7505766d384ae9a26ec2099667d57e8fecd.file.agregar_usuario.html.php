@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:27:53
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-06-23 09:08:16
          compiled from ".\templates\admin\agregar_usuario.html" */ ?>
 <?php /*%%SmartyHeaderCode:056e2ffb0c66d72-34752955%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '27cee7505766d384ae9a26ec2099667d57e8fecd' => 
     array (
       0 => '.\\templates\\admin\\agregar_usuario.html',
-      1 => 1457929664,
+      1 => 1466683680,
       2 => 'file',
     ),
   ),
@@ -165,8 +165,7 @@ $(document).ready(function () {
     <label for="user">Nombre de usuario:(dni de la persona)</label>
     <input type="text" value="" id="user" name="user" />
     <br />
-    <label></label>
-    <br />
+
     <label for="password">Contrase&ntilde;a temporal:</label>
     <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['password']->value;?>
 " id="password" name="password" readonly=""/>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 17:11:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-06-21 21:26:54
          compiled from ".\templates\alumnos\agregar_datos_familiares.html" */ ?>
 <?php /*%%SmartyHeaderCode:18296567ef240b20676-98521695%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fbadcd6c0833ee27821785258339d048d7fb8a7e' => 
     array (
       0 => '.\\templates\\alumnos\\agregar_datos_familiares.html',
-      1 => 1451160390,
+      1 => 1458244833,
       2 => 'file',
     ),
   ),
@@ -39,23 +39,32 @@ if ($_smarty_tpl->tpl_vars['index']->total > 0) {
 for ($_smarty_tpl->tpl_vars['index']->value = 0, $_smarty_tpl->tpl_vars['index']->iteration = 1;$_smarty_tpl->tpl_vars['index']->iteration <= $_smarty_tpl->tpl_vars['index']->total;$_smarty_tpl->tpl_vars['index']->value += $_smarty_tpl->tpl_vars['index']->step, $_smarty_tpl->tpl_vars['index']->iteration++) {
 $_smarty_tpl->tpl_vars['index']->first = $_smarty_tpl->tpl_vars['index']->iteration == 1;$_smarty_tpl->tpl_vars['index']->last = $_smarty_tpl->tpl_vars['index']->iteration == $_smarty_tpl->tpl_vars['index']->total;?>
     <tr>
-        <td><input type="text" id="table_nombre" value="" name="nombre_apellido_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" class="inputntable letras" /></td>
-        <td><input type="text" id="table_parentesco" value="" name="parentesco_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" /></td>
-        <td><input type="text" id="table_edad" value="" name="edad_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" class="inputedad numeros" maxlength="2"/></td>
+        <td>
+            <input type="text" id="table_nombre" value="" name="nombre_apellido_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" class="inputntable letras" />
+        </td>
+        <td>
+            <input type="text" id="table_parentesco" value="" name="parentesco_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" />
+        </td>
+        <td>
+            <input type="text" id="table_edad" value="" name="edad_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" class="inputedad numeros" maxlength="2" />
+        </td>
         <td><?php echo smarty_function_html_estado_civil(array('name'=>"estado_civil_".((string)$_smarty_tpl->tpl_vars['index']->value),'id'=>"table_estado_civil",'style'=>"width: 120px"),$_smarty_tpl);?>
 </td>
-        <td><select id="table_vive_hogar" name="vive_hogar_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" style="width: 40px"> 
+        <td>
+            <select id="table_vive_hogar" name="vive_hogar_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" style="width: 40px">
                 <option value="SI" selected="selected">Si</option>
                 <option value="NO">No</option>
             </select>
         </td>
-        <td><input type="text" id="table_ocupacion" value="" name="ocupacion_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" /></td>
-    </tr> 
+        <td>
+            <input type="text" id="table_ocupacion" value="" name="ocupacion_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" />
+        </td>
+    </tr>
     <?php }} ?>
 </table>
 
@@ -72,7 +81,7 @@ $_smarty_tpl->tpl_vars['index']->first = $_smarty_tpl->tpl_vars['index']->iterat
         <li>Situaci&oacute;n econ&oacute;mica-laboral de su familia. </li>
         <li>Integraci&oacute;n de su familia a la comunidad. </li>
     </ul>
-</label> 
+</label>
 <textarea id="relaciones_familiares" name="relaciones_familiares"></textarea>
 <br />
 
@@ -100,7 +109,7 @@ $_smarty_tpl->tpl_vars['index']->first = $_smarty_tpl->tpl_vars['index']->iterat
     </ul>
 </label>
 <textarea id="tiempo_libre" name="tiempo_libre"></textarea>
-<br />	
+<br />
 
 
 <h2>Educaci&oacute;n</h2>
@@ -158,4 +167,5 @@ $_smarty_tpl->tpl_vars['index']->first = $_smarty_tpl->tpl_vars['index']->iterat
 
 <label for="observaciones_personales">Observaciones:</label>
 <textarea id="observaciones_personales" name="observaciones_personales"></textarea>
-<br /><?php }} ?>
+<br />
+<?php }} ?>

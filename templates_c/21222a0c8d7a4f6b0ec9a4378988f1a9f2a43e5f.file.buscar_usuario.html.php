@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 17:37:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-06-23 10:07:48
          compiled from ".\templates\admin\buscar_usuario.html" */ ?>
 <?php /*%%SmartyHeaderCode:1384056e461881018a4-09272887%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '21222a0c8d7a4f6b0ec9a4378988f1a9f2a43e5f' => 
     array (
       0 => '.\\templates\\admin\\buscar_usuario.html',
-      1 => 1457813707,
+      1 => 1457895833,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_56e461882758b1_95378387')) {function content_56e461882758b1_95378387($_smarty_tpl) {?><?php echo '<script'; ?>
- language="javascript" type="text/javascript">
+ type="text/javascript">
     $(document).ready(function () {
         $("#buscar").click(function (){
             $.ajax({
@@ -38,7 +38,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             if (data.success) {
                                 $("#formBuscarUsuarios").submit();
                             } else {
-                                $("#modal_alert").dialog("option", "title", "busquedar de usuario");
+                                $("#modal_alert").dialog("option", "title", "Busquedar de usuario");
                                 $("#modal_alert").html("No existe coincidencia con los datos ingresados<br/>Pruebe nuevamente");
                                 $("#modal_alert").dialog("open");
                             }
