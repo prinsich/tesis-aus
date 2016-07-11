@@ -1,25 +1,25 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-01 12:53:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:40:23
          compiled from ".\templates\alumnos\buscar_alumno.html" */ ?>
-<?php /*%%SmartyHeaderCode:1775556e0979caedbc9-60610014%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:7704577cfc3794acc0-44595237%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'aef2b827e67454a63ddc5c1897c6a0714af21f7c' => 
     array (
       0 => '.\\templates\\alumnos\\buscar_alumno.html',
-      1 => 1457918648,
+      1 => 1467766358,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1775556e0979caedbc9-60610014',
+  'nocache_hash' => '7704577cfc3794acc0-44595237',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56e0979cb385e2_09930121',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cfc379b6af5_51156357',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56e0979cb385e2_09930121')) {function content_56e0979cb385e2_09930121($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_talleres')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_talleres.php';
+<?php if ($_valid && !is_callable('content_577cfc379b6af5_51156357')) {function content_577cfc379b6af5_51156357($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_talleres')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_talleres.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
     $(document).ready(function () {
@@ -41,8 +41,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             if (data.success) {
                                 $("#formBuscarAlumno").submit();
                             } else {
-                                $("#modal_alert").dialog("option", "title", "busquedar alumno");
-                                $("#modal_alert").html("No existe coincidencia con los datos ingresados<br />Pruebe nuevamente");
+                                $("#modal_alert").dialog("option", "title", "Buscar alumno");
+                                $("#modal_alert").html("No existe coincidencia con los datos ingresados. Pruebe nuevamente");
                                 $("#modal_alert").dialog("open");
                             }
 

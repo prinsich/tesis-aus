@@ -16,7 +16,7 @@
             var id_taller = $(this).data("id");
 
             $("#modal_confirm").dialog("option", "title", "Alta de taller");
-            $("#modal_confirm").html("Esta seguro que desea dar de alta este taller?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de alta este taller?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -70,7 +70,7 @@
             var id_taller = $(this).data("id");
 
             $("#modal_confirm").dialog("option", "title", "Baja de taller");
-            $("#modal_confirm").html("Esta seguro que desea dar de baja este taller?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de baja este taller?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -112,7 +112,7 @@
             var id_taller = $(this).data("id");
 
             $("#modal_confirm").dialog("option", "title", "Reset de taller");
-            $("#modal_confirm").html("Esta seguro que desea resetear este taller?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea resetear este taller?");
             $("#modal_confirm").dialog("open");
 
 
@@ -163,7 +163,7 @@
 <h1>Talleres</h1>
 <form autocomplete="off" id="formListartaller" name="formListartaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
 
-    <p>Cantidad de Talleres: {$cantidad_talleres}<br />
+    <p>Cantidad total de talleres: {$cantidad_talleres}<br />
     Estado:
     <input type="hidden" value="" name="nombre" id="nombre"/>
     <input type="hidden" value="" name="id_capacitador" id="id_capacitador"/>

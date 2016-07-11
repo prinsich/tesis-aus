@@ -1,33 +1,37 @@
 <h2>Grupo Familiar y/o de Convivencia</h2>
 <table id="familiares">
     <tr>
-        <th>Nombre y Apellido</th>
-        <th>Parentesco</th>
-        <th>Edad</th>
-        <th>Estado Civil</th>
-        <th>Vive en el Hogar</th>
-        <th>Ocupaci&oacute;n</th>
+        <th style="width: 20px">Nombre y Apellido</th>
+        <th style="width: 20px">Parentesco</th>
+        <th style="width: 10px">Edad</th>
+        <th style="width: 10px">Estado Civil</th>
+        <th style="width: 10px">Vive en el Hogar</th>
+        <th style="width: 10px">Ocupaci&oacute;n</th>
+        <th style="width: 10px">Tutor Legal</th>
     </tr>
     {for $index=0 to 9}
     <tr>
         <td>
-            <input type="text" id="table_nombre" value="" name="nombre_apellido_{$index}" class="inputntable letras" />
+            <input type="text" id="table_nombre_{$index}" value="" name="nombre_apellido_{$index}" class="inputntable letras" />
         </td>
         <td>
-            <input type="text" id="table_parentesco" value="" name="parentesco_{$index}" />
+            <input type="text" id="table_parentesco_{$index}" value="" name="parentesco_{$index}" />
         </td>
         <td>
-            <input type="text" id="table_edad" value="" name="edad_{$index}" class="inputedad numeros" maxlength="2" />
+            <input type="text" id="table_edad_{$index}" value="" name="edad_{$index}" class="inputedad numeros" maxlength="2" />
         </td>
         <td>{html_estado_civil name="estado_civil_$index" id="table_estado_civil" style="width: 120px"}</td>
         <td>
-            <select id="table_vive_hogar" name="vive_hogar_{$index}" style="width: 40px">
+            <select id="table_vive_hogar_{$index}" name="vive_hogar_{$index}" style="width: 40px">
                 <option value="SI" selected="selected">Si</option>
                 <option value="NO">No</option>
             </select>
         </td>
         <td>
-            <input type="text" id="table_ocupacion" value="" name="ocupacion_{$index}" />
+            <input type="text" id="table_ocupacion_{$index}" value="" name="ocupacion_{$index}" />
+        </td>
+        <td>
+            <input type="radio" id="tutor_{$index}" value="{$index}" name="tutor_legal" />
         </td>
     </tr>
     {/for}

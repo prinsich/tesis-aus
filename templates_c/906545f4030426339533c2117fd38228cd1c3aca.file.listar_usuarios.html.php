@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:20:41
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-05 22:03:41
          compiled from ".\templates\admin\listar_usuarios.html" */ ?>
-<?php /*%%SmartyHeaderCode:2250856e33e6f808f05-00315906%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:11791577c58ed782649-58794011%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '906545f4030426339533c2117fd38228cd1c3aca' => 
     array (
       0 => '.\\templates\\admin\\listar_usuarios.html',
-      1 => 1457895833,
+      1 => 1467756949,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2250856e33e6f808f05-00315906',
+  'nocache_hash' => '11791577c58ed782649-58794011',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56e33e6fa46834_01775146',
   'variables' => 
   array (
     'cantidad_usuarios' => 0,
@@ -24,8 +22,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usrlogin' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577c58ed93efc0_09333189',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56e33e6fa46834_01775146')) {function content_56e33e6fa46834_01775146($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_577c58ed93efc0_09333189')) {function content_577c58ed93efc0_09333189($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
     $(document).ready(function () {
@@ -45,7 +45,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("[name='alta_usuario']").click(function () {
             var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de alumno");
-            $("#modal_confirm").html("Esta seguro que desea dar de alta este alumno?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de alta este alumno?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -85,7 +85,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("[name='baja_usuario']").click(function () {
             var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de alumno");
-            $("#modal_confirm").html("Esta seguro que desea dar de baja este alumno?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de baja este alumno?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -183,9 +183,9 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['u']['last']       = ($_smart
 </td>
                 <td><?php echo $_smarty_tpl->tpl_vars['lista_usuarios']->value[$_smarty_tpl->getVariable('smarty')->value['section']['u']['index']]['perfil'];?>
 </td>
-                <td><?php echo $_smarty_tpl->tpl_vars['lista_usuarios']->value[$_smarty_tpl->getVariable('smarty')->value['section']['u']['index']]['apellido'];?>
+                <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_usuarios']->value[$_smarty_tpl->getVariable('smarty')->value['section']['u']['index']]['apellido']);?>
 </td>
-                <td><?php echo $_smarty_tpl->tpl_vars['lista_usuarios']->value[$_smarty_tpl->getVariable('smarty')->value['section']['u']['index']]['nombre'];?>
+                <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_usuarios']->value[$_smarty_tpl->getVariable('smarty')->value['section']['u']['index']]['nombre']);?>
 </td>
                 <td><?php echo $_smarty_tpl->tpl_vars['lista_usuarios']->value[$_smarty_tpl->getVariable('smarty')->value['section']['u']['index']]['estado'];?>
 </td>

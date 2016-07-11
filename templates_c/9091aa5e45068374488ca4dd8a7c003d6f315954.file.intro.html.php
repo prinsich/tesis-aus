@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-12 22:25:05
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-05 21:41:47
          compiled from ".\templates\intro.html" */ ?>
-<?php /*%%SmartyHeaderCode:1374256e4c171d8d468-61518265%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:14651577c53cb755fd7-37509915%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1374256e4c171d8d468-61518265',
+  'nocache_hash' => '14651577c53cb755fd7-37509915',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56e4c171d91106_83265073',
+  'unifunc' => 'content_577c53cb776747_15871829',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56e4c171d91106_83265073')) {function content_56e4c171d91106_83265073($_smarty_tpl) {?><h1>Acerca del sistema...</h1> 
+<?php if ($_valid && !is_callable('content_577c53cb776747_15871829')) {function content_577c53cb776747_15871829($_smarty_tpl) {?><h1>Acerca del sistema...</h1> 
 <h2>Alumnos</h2>
 <p>Esta secci&oacute;n permite agregar nuevos alumnos al sistema, modificarlos, eliminarlos, buscarlos y mostrar su informaci&oacute;n.</p>
 <h2>Capacitadores</h2>

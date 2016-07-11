@@ -76,7 +76,7 @@
     </tr>
 </table>
 
-<h2>Talleres a los q asiste</h2>
+<h2>Talleres a los que asiste</h2>
 {if $talleres_alumno != null}
 <table style="width: 90%; border: none; padding-left: 5%;" >
     {section name=t loop=$talleres_alumno}
@@ -189,6 +189,16 @@
 {section name=dm loop=$datos_familiares}
 <h3>{$datos_familiares[dm].nombre_apellido}</h3>
 <table style="width: 90%; border: none; padding-left: 5%;" >
+    <tr>
+        <td style="width: 40%">Tutor Legal</td>
+        <td>
+            {if $datos_familiares[dm].tutor_legal == 1}
+            SI
+            {else}
+            NO
+            {/if}
+        </td>
+    </tr>
     <tr>
         <td style="width: 40%">Parentesco</td>
         <td>{$datos_familiares[dm].parentesco}</td>

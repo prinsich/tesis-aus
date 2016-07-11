@@ -48,7 +48,7 @@
             if(fecha_valida){
                 var edad = calcularEdad(fecha_nacimiento);
                 if (edad < 18 || edad > 80) {
-                    msj += "El Capacitador debe ser mayor a 18 a\u00F1os<br />"
+                    msj += "El Capacitador debe ser mayor de 18 a\u00F1os<br />"
                     fecha_valida = false;
                 }
             }
@@ -74,7 +74,7 @@
 
         //Salir de la pantalla
         $("#cancelar").click(function () {
-            $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
+            $("#modal_confirm").dialog("option", "title", "Salir");
             $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
             $("#modal_confirm").dialog("open");
         });
@@ -91,7 +91,7 @@
 
         function validar() {
             var valido = true;
-            var error = "Por favor complete los siguiente campos: <br />";
+            var error = "Por favor complete los siguientes campos: <br />";
 
             var apellido = $("#apellido").val();
             if (apellido.trim() === "") {
@@ -148,7 +148,7 @@
 
 <h1>Modificar Capacitador</h1>
 <h2>Datos Personales</h2>
-<p>Los campos marcado con <b>*</b> son obligatorios</p>
+<p>Los campos marcados con <b>*</b> son obligatorios</p>
 <form autocomplete="off" name="formModificarCapacitador" id="formModificarCapacitador" action="index.php?section=capacitadores&sub=guardar_capacitador" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />
     <input type="hidden" id="id_capacitador" name="id_capacitador" value="{$datos_capacitador.id_capacitador}" />

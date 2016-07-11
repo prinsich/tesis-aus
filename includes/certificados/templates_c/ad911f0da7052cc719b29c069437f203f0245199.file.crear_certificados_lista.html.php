@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:19:10
-         compiled from "..\..\templates\certificados\crear_certificados_lista.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:751556e57267c0b296-47755606%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:41:35
+         compiled from "..\..\templates\certificados\crear_certificados_lista.html" */ ?>
+<?php /*%%SmartyHeaderCode:6192577cfc7f90b541-24766517%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,19 +11,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '751556e57267c0b296-47755606',
+  'nocache_hash' => '6192577cfc7f90b541-24766517',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56e57268061d64_98230830',
   'variables' => 
   array (
     'lista_alumnos' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cfc7fa3cae6_50948536',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56e57268061d64_98230830')) {function content_56e57268061d64_98230830($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_577cfc7fa3cae6_50948536')) {function content_577cfc7fa3cae6_50948536($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
 $(document).ready(function () {

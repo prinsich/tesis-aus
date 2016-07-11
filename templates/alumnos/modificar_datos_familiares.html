@@ -2,28 +2,29 @@
 
 <table id="familiares">
     <tr>
-        <th>Nombre y Apellido</th>
-        <th>Parentesco</th>
-        <th>Edad</th>
-        <th>Estado Civil</th>
-        <th>Vive en el Hogar</th>
-        <th>Ocupaci&oacute;n</th>
+        <th style="width: 20px">Nombre y Apellido</th>
+        <th style="width: 20px">Parentesco</th>
+        <th style="width: 10px">Edad</th>
+        <th style="width: 10px">Estado Civil</th>
+        <th style="width: 10px">Vive en el Hogar</th>
+        <th style="width: 10px">Ocupaci&oacute;n</th>
+        <th style="width: 10px">Tutor Legal</th>
     </tr>
     {assign var="index" value=0} {section name=dm loop=$datos_familiares}
     <tr>
-        <input type="hidden" id="table_checkbox" value="{$datos_familiares[dm].id_familiar}" name="id_familiar_{$index}" />
+        <input type="hidden" id="table_checkbox_{$index}" value="{$datos_familiares[dm].id_familiar}" name="id_familiar_{$index}" />
         <td>
-            <input type="text" id="table_nombre" value="{$datos_familiares[dm].nombre_apellido}" name="nombre_apellido_{$index}" class="inputntable letras" />
+            <input type="text" id="table_nombre_{$index}" value="{$datos_familiares[dm].nombre_apellido}" name="nombre_apellido_{$index}" class="inputntable letras" />
         </td>
         <td>
-            <input type="text" id="table_parentesco" value="{$datos_familiares[dm].parentesco}" name="parentesco_{$index}" />
+            <input type="text" id="table_parentesco_{$index}" value="{$datos_familiares[dm].parentesco}" name="parentesco_{$index}" />
         </td>
         <td>
-            <input type="text" id="table_edad" value="{$datos_familiares[dm].edad}" name="edad_{$index}" class="inputedad numeros" maxlength="2" />
+            <input type="text" id="table_edad_{$index}" value="{$datos_familiares[dm].edad}" name="edad_{$index}" class="inputedad numeros" maxlength="2" />
         </td>
         <td>{html_estado_civil name="estado_civil_$index" id="table_estado_civil" seleccionar=$datos_familiares[dm].id_est_civil style="width: 120px"}</td>
         <td>
-            <select id="table_vive_hogar" name="vive_hogar_{$index}" style="width: 40px">
+            <select id="table_vive_hogar_{$index}" name="vive_hogar_{$index}" style="width: 40px">
                 {if $datos_familiares[dm].vive_hogar == "SI"}
                 <option value="SI" selected>Si</option>
                 <option value="NO">No</option>
@@ -34,30 +35,36 @@
             </select>
         </td>
         <td>
-            <input type="text" id="table_ocupacion" value="{$datos_familiares[dm].ocupacion}" name="ocupacion_{$index}" />
+            <input type="text" id="table_ocupacion_{$index}" value="{$datos_familiares[dm].ocupacion}" name="ocupacion_{$index}" />
+        </td>
+        <td>
+            <input type="radio" id="tutor_{$index}" value="{$index}" name="tutor_legal" {if $datos_familiares[dm].tutor_legal == 1} checked="" {/if}/>
         </td>
     </tr>
     {$index = $index +1} {/section} {for $i=$index to 9}
     <tr>
-        <input type="hidden" id="table_checkbox" value="null" name="id_familiar_{$i}" />
+        <input type="hidden" id="table_checkbox_{$index}" value="null" name="id_familiar_{$i}" />
         <td>
-            <input type="text" id="table_nombre" value="" name="nombre_apellido_{$i}" class="inputntable letras" />
+            <input type="text" id="table_nombre_{$index}" value="" name="nombre_apellido_{$i}" class="inputntable letras" />
         </td>
         <td>
-            <input type="text" id="table_parentesco" value="" name="parentesco_{$i}" />
+            <input type="text" id="table_parentesco_{$index}" value="" name="parentesco_{$i}" />
         </td>
         <td>
-            <input type="text" id="table_edad" value="" name="edad_{$i}" class="inputedad numeros" maxlength="2" />
+            <input type="text" id="table_edad_{$index}" value="" name="edad_{$i}" class="inputedad numeros" maxlength="2" />
         </td>
         <td>{html_estado_civil name="estado_civil_$i" id="table_estado_civil" style="width: 120px"}</td>
         <td>
-            <select id="table_vive_hogar" name="vive_hogar_{$i}" style="width: 40px">
+            <select id="table_vive_hogar_{$index}" name="vive_hogar_{$i}" style="width: 40px">
                 <option value="SI" selected="selected">Si</option>
                 <option value="NO">No</option>
             </select>
         </td>
         <td>
-            <input type="text" id="table_ocupacion" value="" name="ocupacion_{$i}" />
+            <input type="text" id="table_ocupacion_{$index}" value="" name="ocupacion_{$i}" />
+        </td>
+        <td>
+            <input type="radio" id="tutor_{$index}" value="{$index}" name="tutor_legal" />
         </td>
     </tr>
     {/for}

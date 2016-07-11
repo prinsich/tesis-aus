@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:17:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-05 21:47:05
          compiled from ".\templates\talleres\modificar_taller.html" */ ?>
-<?php /*%%SmartyHeaderCode:25059567efd0b656f09-02369639%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:25733577c53d3b28f36-99871438%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '134b5565366b09b6f0eb72c5f1b00b10c77ad4c9' => 
     array (
       0 => '.\\templates\\talleres\\modificar_taller.html',
-      1 => 1457928993,
+      1 => 1467766001,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '25059567efd0b656f09-02369639',
+  'nocache_hash' => '25733577c53d3b28f36-99871438',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567efd0b9ab583_79794931',
+  'unifunc' => 'content_577c53d3d35099_15260380',
   'variables' => 
   array (
     'id_taller' => 0,
@@ -27,7 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567efd0b9ab583_79794931')) {function content_567efd0b9ab583_79794931($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_capacitadores')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_capacitadores.php';
+<?php if ($_valid && !is_callable('content_577c53d3d35099_15260380')) {function content_577c53d3d35099_15260380($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_capacitadores')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_capacitadores.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
 $(document).ready(function () {
@@ -43,15 +43,15 @@ $(document).ready(function () {
                     dataType: "json",
                     url: "includes/talleres/ajax_talleres.php?funcion=verficar_disponibilidad",
                     data: {
-                        accion: "agregar",
-                        id_taller: "0",
+                        accion: $("#accion").val(),
+                        id_taller: $("#id_taller").val(),
                         nombre: $("#nombre").val(),
                         id_capacitador: $("#id_capacitador").val(),
                         dias: checkbox_dias
                     }
                 })
                 .done(function (data, textStatus, jqXHR) {
-                    $("#modal_alert").dialog("option", "title", "verificar disponibilida del taller");
+                    $("#modal_alert").dialog("option", "title", "Verificar disponibilidad del taller");
                     $("#modal_alert").html(data.msj);
                     $("#modal_alert").dialog("open");
                     if(data.success){
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
     //Salir de la pantalla
     $("#cancelar").click(function () {
-        $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
+        $("#modal_confirm").dialog("option", "title", "Salir");
         $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
         $("#modal_confirm").dialog("open");
     });
@@ -139,7 +139,7 @@ $(document).ready(function () {
 >
 
 <h1>Modificar Taller</h1>
-<p>Los campos marcado con <b>*</b> son obligatorios</p>
+<p>Los campos marcados con <b>*</b> son obligatorios</p>
 
 <form autocomplete="off" name="formModifircarTaller" id="formModifircarTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />

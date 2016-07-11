@@ -16,7 +16,7 @@
         $("[name='alta_capacitador']").click(function () {
             var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de capacitador");
-            $("#modal_confirm").html("Esta seguro que desea dar de alta este capacitador?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de alta este capacitador?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -56,7 +56,7 @@
         $("[name='baja_capacitador']").click(function () {
             var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de capacitador");
-            $("#modal_confirm").html("Esta seguro que desea dar de baja este capacitador?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de baja este capacitador?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -74,9 +74,9 @@
                             .done(function (data, textStatus, jqXHR) {
                                 $("#modal_alert").dialog("option", "title", "Baja de capacitador");
                                 if (data.success) {
-                                    $("#modal_alert").html("El alumno fue dado de baja");
+                                    $("#modal_alert").html("El capacitador fue dado de baja");
                                 } else {
-                                    $("#modal_alert").html("El alumno no posee id valido");
+                                    $("#modal_alert").html("El capacitador no posee id valido");
                                 }
                                 $("#modal_alert").dialog("open");
                             })

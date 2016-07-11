@@ -1,29 +1,29 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 22:21:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:27:26
          compiled from ".\templates\alumnos\agregar_datos_personales.html" */ ?>
-<?php /*%%SmartyHeaderCode:1514567ef240439298-84485383%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:29059577cf92e82bfe5-33146674%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'a6ea0834d2ec01f040b2f1301d6ac246ee060d8c' => 
     array (
       0 => '.\\templates\\alumnos\\agregar_datos_personales.html',
-      1 => 1457918362,
+      1 => 1467749794,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1514567ef240439298-84485383',
+  'nocache_hash' => '29059577cf92e82bfe5-33146674',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567ef24059d784_12633862',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cf92e9255d3_53995121',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567ef24059d784_12633862')) {function content_567ef24059d784_12633862($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_turnos')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_turnos.php';
+<?php if ($_valid && !is_callable('content_577cf92e9255d3_53995121')) {function content_577cf92e9255d3_53995121($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_turnos')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_turnos.php';
 if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_checkbox_talleres.php';
 ?>
     <h2>Datos Personales</h2>
-    <p>Los campos marcado con <b>*</b> son obligatorios</p>
+    <p>Los campos marcados con <b>*</b> son obligatorios</p>
 
     <label for="apellido">Apellido(*):</label>
     <input type="text" value="" id="apellido" name="apellido" class="letras"/>

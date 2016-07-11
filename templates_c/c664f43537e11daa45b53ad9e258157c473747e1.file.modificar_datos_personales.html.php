@@ -1,33 +1,33 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:33:03
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:40:38
          compiled from ".\templates\alumnos\modificar_datos_personales.html" */ ?>
-<?php /*%%SmartyHeaderCode:12371567f09c4b24204-03487795%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:24150577cfc46e93e76-25059793%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c664f43537e11daa45b53ad9e258157c473747e1' => 
     array (
       0 => '.\\templates\\alumnos\\modificar_datos_personales.html',
-      1 => 1457918364,
+      1 => 1467749794,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12371567f09c4b24204-03487795',
+  'nocache_hash' => '24150577cfc46e93e76-25059793',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567f09c4d24572_56425976',
   'variables' => 
   array (
     'datos_alumno' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cfc47123ac7_57718506',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567f09c4d24572_56425976')) {function content_567f09c4d24572_56425976($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_577cfc47123ac7_57718506')) {function content_577cfc47123ac7_57718506($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
 if (!is_callable('smarty_function_html_turnos')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_turnos.php';
 if (!is_callable('smarty_function_html_checkbox_talleres')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_checkbox_talleres.php';
 ?><h2>Datos Personales</h2>
-<p>Los campos marcado con <b>*</b> son obligatorios</p>
+<p>Los campos marcados con <b>*</b> son obligatorios</p>
 
 <label for="apellido">Apellido(*):</label>
 <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['datos_alumno']->value['apellido'];?>

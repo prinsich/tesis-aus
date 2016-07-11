@@ -26,7 +26,7 @@
 
         //Salir de la pantalla
         $("#cancelar").click(function () {
-            $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
+            $("#modal_confirm").dialog("option", "title", "Salir");
             $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
             $("#modal_confirm").dialog("open");
         });
@@ -64,7 +64,7 @@
                 fecha_valida = false;
             }
             if (mes < 1 || mes > 12) {
-                msj += "El valor del mes debe estar comprendido entre 1 y 12.<br />";
+                    msj += "El valor del mes debe estar comprendido entre 1 y 12.<br />";
                 this.val() = "";
                  fecha_valida = false;
             }
@@ -86,7 +86,7 @@
             if(fecha_valida){
                 var edad = calcularEdad(fecha_nacimiento);
                 if (edad < 6 || edad > 18) {
-                    msj += "El alumno debe ser mayor a 6 a\u00F1os y menor de 18<br />"
+                    msj += "El alumno debe ser mayor de 6 a&ntilde;os y menor de 18.<br />"
                     fecha_valida = false;
                 }
             }
@@ -116,7 +116,7 @@
 
         function validar() {
             var valido = true;
-            var error = "Por favor complete los siguiente campos: <br />";
+            var error = "Por favor complete los siguientes campos: <br />";
 
             var apellido = $("#apellido").val();
             if (apellido.trim() === "") {
@@ -160,22 +160,29 @@
                 error += " - Fecha de Nacimiento<br />";
             }
 
-            var alta_seguro = $("#alta_seguro_radio");
-            if (alta_seguro === false) {
+            var alta_seguro = $('input:radio[name=tutor_legal]:checked').val();
+            if (alta_seguro === undefined) {
                 valido = false;
                 error += " - Alta del seguro<br />";
             }
 
-            var padre = $("#table_nombre").val();
-            if (padre.trim() === "") {
-                valido = false;
-                error += " - Debe tener al menos un tutor legal<br />";
-            }
+            var tutor_legal = $('input:radio[name=tutor_legal]:checked').val();
+            if(tutor_legal != null) {
+                var index = tutor_legal;
+                var padre = $("#table_nombre_" + index).val();
+                if (padre.trim() === "") {
+                    valido = false;
+                    error += " - El tutor legal debe tener nombre<br />";
+                }
 
-            var parentesco = $("#table_parentesco").val();
-            if (parentesco.trim() === "") {
+                var parentesco = $("#table_parentesco_" + index).val();
+                if (parentesco.trim() === "") {
+                    valido = false;
+                    error += " - Debe haber un parentesco con el tutor legal<br />";
+                }
+            } else {
                 valido = false;
-                error += " - Debe tener al menos un parentesco con el tutor legal<br />";
+                error += " - Debe tener al menos un tutor legal<br />"
             }
 
             if (!valido) {

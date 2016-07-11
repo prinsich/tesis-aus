@@ -1,5 +1,26 @@
 $(document).ready(function () {
 
+        //CALENDARIO JQUERY
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '<Ant',
+            nextText: 'Sig>',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+
         $("#modal_alert").dialog({
             autoOpen: false,
             modal: true,
@@ -100,11 +121,13 @@ $(document).ready(function () {
             salir = false;
         } else if (sub === "agregar_taller" || sub === "modificar_taller") {
             salir = false;
+        } else if (sub === "agregar_usuario" || sub === "modificar_usuario") {
+            salir = false;
         }
 
         if (!salir) {
-            $("#modal_confirm").dialog("option", "title", "Sal\u00edr del formulario");
-            $("#modal_confirm").html("&iquest;Esta por salir, perdera todos sus cambios si no guarda.\nDesea salir?");
+            $("#modal_confirm").dialog("option", "title", "Salir del formulario");
+            $("#modal_confirm").html("&iquest;Desea salir?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar

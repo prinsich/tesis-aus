@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-08 21:30:38
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:27:26
          compiled from ".\templates\alumnos\agregar_datos_medicos.html" */ ?>
-<?php /*%%SmartyHeaderCode:219567ef240838e15-26657991%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:28416577cf92eac9a42-94569978%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '219567ef240838e15-26657991',
+  'nocache_hash' => '28416577cf92eac9a42-94569978',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567ef240918008_45974216',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cf92eb21322_81795662',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567ef240918008_45974216')) {function content_567ef240918008_45974216($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_grupo_sanguineo')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_grupo_sanguineo.php';
+<?php if ($_valid && !is_callable('content_577cf92eb21322_81795662')) {function content_577cf92eb21322_81795662($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_grupo_sanguineo')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_grupo_sanguineo.php';
 ?><h2>Datos M&eacute;dicos</h2>
 
 <label for="grupo_sanguineo">Grupo Sangu&iacute;neo:</label>

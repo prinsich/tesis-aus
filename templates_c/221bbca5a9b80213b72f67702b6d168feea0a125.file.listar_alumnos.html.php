@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-01 14:48:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:30:52
          compiled from ".\templates\alumnos\listar_alumnos.html" */ ?>
-<?php /*%%SmartyHeaderCode:30097567ef673491e77-03757491%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:7550577cf9fca01001-72704378%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '221bbca5a9b80213b72f67702b6d168feea0a125' => 
     array (
       0 => '.\\templates\\alumnos\\listar_alumnos.html',
-      1 => 1462124884,
+      1 => 1467606626,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '30097567ef673491e77-03757491',
+  'nocache_hash' => '7550577cf9fca01001-72704378',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567ef6738b3a02_52160533',
   'variables' => 
   array (
     'cantidad_alumnos' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usrlogin' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cf9fccc25e1_95791462',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567ef6738b3a02_52160533')) {function content_567ef6738b3a02_52160533($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_577cf9fccc25e1_95791462')) {function content_577cf9fccc25e1_95791462($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\modifier.date_format.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
     $(document).ready(function () {
@@ -47,7 +47,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("[name='alta_alumno']").click(function () {
             var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de alumno");
-            $("#modal_confirm").html("Esta seguro que desea dar de alta este alumno?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de alta este alumno?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -87,7 +87,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("[name='baja_alumno']").click(function () {
             var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de alumno");
-            $("#modal_confirm").html("Esta seguro que desea dar de baja este alumno?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de baja este alumno?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar

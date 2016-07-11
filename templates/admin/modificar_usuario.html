@@ -3,7 +3,7 @@
 $(document).ready(function () {
     //Salir de la pantalla
     $("#cancelar").click(function () {
-        $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
+        $("#modal_confirm").dialog("option", "title", "Salir");
         $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
         $("#modal_confirm").dialog("open");
     });
@@ -26,7 +26,7 @@ $(document).ready(function () {
 
     function validar() {
         var valido = true;
-        var error = "Por favor complete los siguiente campos: <br />";
+        var error = "Por favor complete los siguientes campos: <br />";
 
         var usr = $("#user").val();
         if (usr.trim() === "") {
@@ -86,7 +86,7 @@ $(document).ready(function () {
         if(email.trim() !== ""){
             if ( !expr.test(email) ){
                 $("#modal_alert").dialog("option", "title", "Email");
-                $("#modal_alert").html("La direccion de correo " + email + " es incorrecta.");
+                $("#modal_alert").html("La direcci&oacute;n de correo " + email + " es incorrecta.");
                 $("#modal_alert").dialog("open");
                 $(this).val("");
             }

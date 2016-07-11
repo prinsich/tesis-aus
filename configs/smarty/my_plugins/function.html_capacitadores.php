@@ -51,9 +51,9 @@ function smarty_function_html_capacitadores($params)
     $resultSetSql = $db->query($sql);
     while ($row = $resultSetSql->fetchRow(DB_FETCHMODE_ASSOC)) {
         if ($row['id_capacitador'] == $seleccionar) {
-            $_output .= "<option value='".$row['id_capacitador']."' selected> ".$row['nombre'].'</option>';
+            $_output .= "<option value='".$row['id_capacitador']."' selected> ".strtoupper($row['nombre']).'</option>';
         } else {
-            $_output .= "<option value='".$row['id_capacitador']."'> ".$row['nombre'].'</option>';
+            $_output .= "<option value='".$row['id_capacitador']."'> ".strtoupper($row['nombre']).'</option>';
         }
     }
 

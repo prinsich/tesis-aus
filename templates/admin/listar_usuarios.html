@@ -16,7 +16,7 @@
         $("[name='alta_usuario']").click(function () {
             var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de alumno");
-            $("#modal_confirm").html("Esta seguro que desea dar de alta este alumno?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de alta este alumno?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -56,7 +56,7 @@
         $("[name='baja_usuario']").click(function () {
             var id_usuario = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de alumno");
-            $("#modal_confirm").html("Esta seguro que desea dar de baja este alumno?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de baja este alumno?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -125,8 +125,8 @@
                 <td>{counter}</td>
                 <td>{$lista_usuarios[u].nombreusr}</td>
                 <td>{$lista_usuarios[u].perfil}</td>
-                <td>{$lista_usuarios[u].apellido}</td>
-                <td>{$lista_usuarios[u].nombre}</td>
+                <td>{$lista_usuarios[u].apellido|strtoupper}</td>
+                <td>{$lista_usuarios[u].nombre|strtoupper}</td>
                 <td>{$lista_usuarios[u].estado}</td>
                 <td>
                     <img name="ver_usuario" src="images/icons/file_search.png" title="" alt="" border="0" height="17" align="absmiddle" data-id="{$lista_usuarios[u].id_usuario}" />

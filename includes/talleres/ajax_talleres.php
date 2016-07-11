@@ -55,7 +55,6 @@ function verficar_disponibilidad($arg){
                     }
                     $sql = substr($sql, 0, -4);
                     $sql .= " )";
-
                     $dias_taller = $db->getAll($sql);
                     if($dias_taller != null){
                         $capacitador_habilitado = false;
@@ -67,15 +66,13 @@ function verficar_disponibilidad($arg){
         if($taller_existe){
             $jsondata['msj'] = "El taller ya existe, elija otro nombre";
             $jsondata['success'] = false;
-        }
-
-        if(!$capacitador_habilitado) {
-            $jsondata['msj'] = "Verificacion Fallida, modifique los didas de dictado o el capacitador a cargo";
+        } else if(!$capacitador_habilitado) {
+            $jsondata['msj'] = "Verificaci&oacute;n Fallida, modifique los d&iacute;as de dictado o el capacitador a cargo";
             $jsondata['success'] = false;
+        } else {
+            $jsondata['msj'] = "Verificaci&oacute;n Exitosa";
+            $jsondata['success'] = true;
         }
-
-        $jsondata['msj'] = "Verificacion Exitosa";
-        $jsondata['success'] = true;
 
     } else {
         $jsondata['msj'] = "Error en la consulta";

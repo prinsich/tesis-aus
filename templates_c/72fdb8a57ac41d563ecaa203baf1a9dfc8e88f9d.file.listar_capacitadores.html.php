@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 23:12:28
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-05 21:41:50
          compiled from ".\templates\capacitadores\listar_capacitadores.html" */ ?>
-<?php /*%%SmartyHeaderCode:30644567ef5be6b7512-89024025%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:14286577c53cee24295-44707155%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '72fdb8a57ac41d563ecaa203baf1a9dfc8e88f9d' => 
     array (
       0 => '.\\templates\\capacitadores\\listar_capacitadores.html',
-      1 => 1457920904,
+      1 => 1467753697,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '30644567ef5be6b7512-89024025',
+  'nocache_hash' => '14286577c53cee24295-44707155',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567ef5be9efda8_40503376',
   'variables' => 
   array (
     'cantidad_capacitadores' => 0,
@@ -25,8 +23,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usrlogin' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577c53cf2a69f5_69195283',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567ef5be9efda8_40503376')) {function content_567ef5be9efda8_40503376($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_577c53cf2a69f5_69195283')) {function content_577c53cf2a69f5_69195283($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
     $(document).ready(function () {
@@ -46,7 +46,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("[name='alta_capacitador']").click(function () {
             var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Alta de capacitador");
-            $("#modal_confirm").html("Esta seguro que desea dar de alta este capacitador?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de alta este capacitador?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -86,7 +86,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         $("[name='baja_capacitador']").click(function () {
             var id_capacitador = $(this).data("id");
             $("#modal_confirm").dialog("option", "title", "Baja de capacitador");
-            $("#modal_confirm").html("Esta seguro que desea dar de baja este capacitador?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de baja este capacitador?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -104,9 +104,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             .done(function (data, textStatus, jqXHR) {
                                 $("#modal_alert").dialog("option", "title", "Baja de capacitador");
                                 if (data.success) {
-                                    $("#modal_alert").html("El alumno fue dado de baja");
+                                    $("#modal_alert").html("El capacitador fue dado de baja");
                                 } else {
-                                    $("#modal_alert").html("El alumno no posee id valido");
+                                    $("#modal_alert").html("El capacitador no posee id valido");
                                 }
                                 $("#modal_alert").dialog("open");
                             })
@@ -206,9 +206,9 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['c']['last']       = ($_smart
         <tr>
             <td><?php echo smarty_function_counter(array(),$_smarty_tpl);?>
 </td>
-            <td><?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['apellido'];?>
+            <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['apellido']);?>
 </td>
-            <td><?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['nombre'];?>
+            <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['nombre']);?>
 </td>
             <td><?php echo $_smarty_tpl->tpl_vars['lista_capacitadores']->value[$_smarty_tpl->getVariable('smarty')->value['section']['c']['index']]['telefono'];?>
 </td>

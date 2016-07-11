@@ -92,7 +92,7 @@ function smarty_function_html_checkbox_talleres($params)
             } else {
                 $_output .= "<td><input type='checkbox' id='taller_".$row['id_taller']."' name='talleres_list[]' value='".$row['id_taller']."' /></td>";
             }
-            $_output .= '<td>'.$row['nombre'].'</td>';
+            $_output .= '<td>'.strtoupper($row['nombre']).'</td>';
             $_output .= '</tr>';
         }
 

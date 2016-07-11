@@ -3,12 +3,20 @@ $(document).ready(function () {
 
     $("#desde").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate: 0,
+        onSelect: function(selected) {
+          $("#hasta").datepicker("option","minDate", selected)
+        }
     });
 
     $("#hasta").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        maxDate: 0,
+        onSelect: function(selected) {
+           $("#desde").datepicker("option","maxDate", selected)
+        }
     });
 
     $("#buscar").click(function(){

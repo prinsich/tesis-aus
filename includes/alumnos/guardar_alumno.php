@@ -54,14 +54,14 @@ if (isset($datos['talleres_list'])) {
     foreach ($datos['talleres_list'] as $taller) {
         if ($datos_alumnos["id_alumno"] == null) {
             $taller_alumno = new Taller_Alumno($db);
-            
+
             $datos_taller_alumno["id_taller_alumno"] = null;
             $datos_taller_alumno["id_alumno"] = $id_alumno;
             $datos_taller_alumno["id_taller"] = $taller;
             $taller_alumno->guardar($datos_taller_alumno);
         } else {
             $id_taller_alumno = $taller_alumno->getID($datos_alumnos["id_alumno"], $taller);
-            
+
             $datos_taller_alumno["id_taller_alumno"] = null;
             $datos_taller_alumno["id_alumno"] = $datos_alumnos["id_alumno"];
             $datos_taller_alumno["id_taller"] = $taller;
@@ -76,6 +76,7 @@ if (isset($datos['talleres_list'])) {
 $cantidad_familiares = 10;
 $i = 0;
 for ($i = 0; $i < $cantidad_familiares; $i++) {
+    $tutor_legal = $datos["tutor_legal"];
     if (($datos["nombre_apellido_" . $i]) != "") {
         if ($datos["accion"] == "modificar") {
             if($datos["id_familiar_" . $i] == "null"){
@@ -95,7 +96,10 @@ for ($i = 0; $i < $cantidad_familiares; $i++) {
         $datos_familiares["estado_civil"] = $datos["estado_civil_" . $i];
         $datos_familiares["vive_hogar"] = $datos["vive_hogar_" . $i];
         $datos_familiares["ocupacion"] = $datos["ocupacion_" . $i];
-
+        if($tutor_legal == $i)
+        	$datos_familiares["tutor_legal"] = 1;
+        else
+            $datos_familiares["tutor_legal"] = 0;
 
         if ($datos_familiares["id_familiar"] == null) {
             $familiar = new Datos_Familiares($db);

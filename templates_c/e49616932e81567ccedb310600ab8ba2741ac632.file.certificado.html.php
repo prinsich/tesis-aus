@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 18:44:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:41:41
          compiled from "templates\certificados\certificado.html" */ ?>
-<?php /*%%SmartyHeaderCode:21061567f0a269ad1f5-52990322%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:463577cfc85055a39-94566674%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21061567f0a269ad1f5-52990322',
+  'nocache_hash' => '463577cfc85055a39-94566674',
   'function' => 
   array (
   ),
@@ -26,9 +26,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567f0a26b60f34_20333520',
+  'unifunc' => 'content_577cfc851a2539_85824214',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567f0a26b60f34_20333520')) {function content_567f0a26b60f34_20333520($_smarty_tpl) {?><div style="color: #000080;">
+<?php if ($_valid && !is_callable('content_577cfc851a2539_85824214')) {function content_577cfc851a2539_85824214($_smarty_tpl) {?><div style="color: #000080;">
 <p style="line-height:  45px; font-size: 25px;">
 Certifica que <font face="dejavusans"><em><?php echo $_smarty_tpl->tpl_vars['nombre_alumno']->value;?>
 </em></font><br />

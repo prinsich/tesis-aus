@@ -1,30 +1,30 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:31:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:27:26
          compiled from ".\templates\alumnos\agregar_alumno.html" */ ?>
-<?php /*%%SmartyHeaderCode:18901567ef24022acc0-43125761%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:12338577cf92e641e93-53221268%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '8d6049b3efc810a0097b14aa0354fb930f12b0f1' => 
     array (
       0 => '.\\templates\\alumnos\\agregar_alumno.html',
-      1 => 1457987454,
+      1 => 1467756767,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '18901567ef24022acc0-43125761',
+  'nocache_hash' => '12338577cf92e641e93-53221268',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567ef240381985_50310402',
   'variables' => 
   array (
     'usrlogin' => 0,
     'fecha_hoy' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cf92e76e2b1_34668699',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567ef240381985_50310402')) {function content_567ef240381985_50310402($_smarty_tpl) {?><?php echo '<script'; ?>
+<?php if ($_valid && !is_callable('content_577cf92e76e2b1_34668699')) {function content_577cf92e76e2b1_34668699($_smarty_tpl) {?><?php echo '<script'; ?>
  type="text/javascript">
 
     $(document).ready(function () {
@@ -53,7 +53,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         //Salir de la pantalla
         $("#cancelar").click(function () {
-            $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
+            $("#modal_confirm").dialog("option", "title", "Salir");
             $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
             $("#modal_confirm").dialog("open");
         });
@@ -91,7 +91,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 fecha_valida = false;
             }
             if (mes < 1 || mes > 12) {
-                msj += "El valor del mes debe estar comprendido entre 1 y 12.<br />";
+                    msj += "El valor del mes debe estar comprendido entre 1 y 12.<br />";
                 this.val() = "";
                  fecha_valida = false;
             }
@@ -113,7 +113,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             if(fecha_valida){
                 var edad = calcularEdad(fecha_nacimiento);
                 if (edad < 6 || edad > 18) {
-                    msj += "El alumno debe ser mayor a 6 a\u00F1os y menor de 18<br />"
+                    msj += "El alumno debe ser mayor de 6 a&ntilde;os y menor de 18.<br />"
                     fecha_valida = false;
                 }
             }
@@ -143,7 +143,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         function validar() {
             var valido = true;
-            var error = "Por favor complete los siguiente campos: <br />";
+            var error = "Por favor complete los siguientes campos: <br />";
 
             var apellido = $("#apellido").val();
             if (apellido.trim() === "") {
@@ -187,22 +187,29 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 error += " - Fecha de Nacimiento<br />";
             }
 
-            var alta_seguro = $("#alta_seguro_radio");
-            if (alta_seguro === false) {
+            var alta_seguro = $('input:radio[name=tutor_legal]:checked').val();
+            if (alta_seguro === undefined) {
                 valido = false;
                 error += " - Alta del seguro<br />";
             }
 
-            var padre = $("#table_nombre").val();
-            if (padre.trim() === "") {
-                valido = false;
-                error += " - Debe tener al menos un tutor legal<br />";
-            }
+            var tutor_legal = $('input:radio[name=tutor_legal]:checked').val();
+            if(tutor_legal != null) {
+                var index = tutor_legal;
+                var padre = $("#table_nombre_" + index).val();
+                if (padre.trim() === "") {
+                    valido = false;
+                    error += " - El tutor legal debe tener nombre<br />";
+                }
 
-            var parentesco = $("#table_parentesco").val();
-            if (parentesco.trim() === "") {
+                var parentesco = $("#table_parentesco_" + index).val();
+                if (parentesco.trim() === "") {
+                    valido = false;
+                    error += " - Debe haber un parentesco con el tutor legal<br />";
+                }
+            } else {
                 valido = false;
-                error += " - Debe tener al menos un parentesco con el tutor legal<br />";
+                error += " - Debe tener al menos un tutor legal<br />"
             }
 
             if (!valido) {

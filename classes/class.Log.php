@@ -12,9 +12,9 @@ class Log extends DBTable
 
     /**
      * Constructor de la clase Inscripto.
-     * 
+     *
      * Esta clase permite el manejo de los inscriptos en los distintos congresos o seminarios
-     * 
+     *
      * @param string $db identificacion de la conexion a la base de datos
      * @param string $id identificador del Inscripto (no obligatorio)
      */
@@ -64,11 +64,11 @@ class Log extends DBTable
 
         //UN SQL POR CLASE
         $sql_alumno = "SELECT id_log, user, date_time, action, sobre , CONCAT(apellido, ', ', nombre, ' [id = ', id_alumno, ']') AS objeto, observaciones
-                        FROM log JOIN alumnos ON log.id_sobre = alumnos.id_alumno 
+                        FROM log JOIN alumnos ON log.id_sobre = alumnos.id_alumno
                         WHERE sobre LIKE 'ALUMNO'";
 
         $sql_capacitador = "SELECT id_log, user, date_time, action, sobre , CONCAT(apellido, ', ', nombre, ' [id = ', id_capacitador, ']') AS objeto, observaciones
-                        FROM log JOIN capacitadores ON log.id_sobre = capacitadores.id_capacitador 
+                        FROM log JOIN capacitadores ON log.id_sobre = capacitadores.id_capacitador
                         WHERE sobre LIKE 'CAPACITADOR'";
 
         $sql_taller = "SELECT id_log, user, date_time, action, sobre , CONCAT(nombre, ' [id = ', id_taller, ']') AS objeto, observaciones
@@ -87,11 +87,11 @@ class Log extends DBTable
         }
 
         if ($date_time_start != '' && $date_time_end != '') {
-            $sql_WHERE .= " AND BETWEEN $date_time_start AND $date_time_end ";
+            $sql_WHERE .= " AND date_time BETWEEN '$date_time_start' AND '$date_time_end' ";
         } elseif ($date_time_start == '' && $date_time_end != '') {
-            $sql_WHERE .= " AND BETWEEN CURRENT_DATE AND $date_time_end ";
+            $sql_WHERE .= " AND date_time BETWEEN CURRENT_DATE AND '$date_time_end' ";
         } elseif ($date_time_start != '' && $date_time_end == '') {
-            $sql_WHERE .= " AND BETWEEN $date_time_start AND CURRENT_DATE ";
+            $sql_WHERE .= " AND date_time BETWEEN '$date_time_start' AND CURRENT_DATE ";
         }
 
         if ($action != '') {

@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 01:13:18
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:41:20
          compiled from ".\templates\talleres\listar_talleres.html" */ ?>
-<?php /*%%SmartyHeaderCode:12752567efcd47b8838-01156082%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:26108577c53d1d577f1-54554530%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'b6638b0f2418832f08ed4ae7de7f11fe76fa2705' => 
     array (
       0 => '.\\templates\\talleres\\listar_talleres.html',
-      1 => 1457928795,
+      1 => 1467766110,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12752567efcd47b8838-01156082',
+  'nocache_hash' => '26108577c53d1d577f1-54554530',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567efcd49f2d23_50900674',
+  'unifunc' => 'content_577c53d1f3dd56_29080175',
   'variables' => 
   array (
     'cantidad_talleres' => 0,
@@ -26,7 +26,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567efcd49f2d23_50900674')) {function content_567efcd49f2d23_50900674($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_577c53d1f3dd56_29080175')) {function content_577c53d1f3dd56_29080175($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\plugins\\function.counter.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
     $(document).ready(function () {
@@ -46,7 +46,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             var id_taller = $(this).data("id");
 
             $("#modal_confirm").dialog("option", "title", "Alta de taller");
-            $("#modal_confirm").html("Esta seguro que desea dar de alta este taller?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de alta este taller?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -100,7 +100,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             var id_taller = $(this).data("id");
 
             $("#modal_confirm").dialog("option", "title", "Baja de taller");
-            $("#modal_confirm").html("Esta seguro que desea dar de baja este taller?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea dar de baja este taller?");
             $("#modal_confirm").dialog("open");
 
             //Set botones confirmar
@@ -142,7 +142,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             var id_taller = $(this).data("id");
 
             $("#modal_confirm").dialog("option", "title", "Reset de taller");
-            $("#modal_confirm").html("Esta seguro que desea resetear este taller?");
+            $("#modal_confirm").html("&iquest;Est&aacute; seguro que desea resetear este taller?");
             $("#modal_confirm").dialog("open");
 
 
@@ -194,7 +194,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <h1>Talleres</h1>
 <form autocomplete="off" id="formListartaller" name="formListartaller" action="index.php?section=talleres&sub=listar_talleres" method="POST">
 
-    <p>Cantidad de Talleres: <?php echo $_smarty_tpl->tpl_vars['cantidad_talleres']->value;?>
+    <p>Cantidad total de talleres: <?php echo $_smarty_tpl->tpl_vars['cantidad_talleres']->value;?>
 <br />
     Estado:
     <input type="hidden" value="" name="nombre" id="nombre"/>
@@ -260,9 +260,9 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['t']['last']       = ($_smart
             <tr>
                 <td><?php echo smarty_function_counter(array(),$_smarty_tpl);?>
 </td>
-                <td><?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['nombre'];?>
+                <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['nombre']);?>
 </td>
-                <td><?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['capacitador'];?>
+                <td><?php echo strtoupper($_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['capacitador']);?>
 </td>
                 <td><?php echo $_smarty_tpl->tpl_vars['lista_talleres']->value[$_smarty_tpl->getVariable('smarty')->value['section']['t']['index']]['cant_alumnos'];?>
 </td>

@@ -49,7 +49,7 @@ class Capacitador extends DBTable
         $sql = 'SELECT id_capacitador, apellido, nombre, dni, fecha_nacimiento, telefono, celular, estado
                 FROM capacitadores
                 WHERE id_capacitador != 0
-                ORDER BY apellido, nombre, estado, id_capacitador ASC';
+                ORDER BY estado, id_capacitador, apellido, nombre ASC';
 
         $capacitadores = $this->consultar($sql);
 
@@ -78,7 +78,7 @@ class Capacitador extends DBTable
             $sql .= " AND estado LIKE '$estado' ";
         }
 
-        $sql .= ' ORDER BY estado, id_capacitador ASC ';
+        $sql .= ' ORDER BY estado, id_capacitador, apellido, nombre ASC ';
 
         $capacitadores = $this->consultar($sql);
 

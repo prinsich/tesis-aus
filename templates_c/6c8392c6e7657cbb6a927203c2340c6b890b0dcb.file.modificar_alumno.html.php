@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-14 17:33:03
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:40:38
          compiled from ".\templates\alumnos\modificar_alumno.html" */ ?>
-<?php /*%%SmartyHeaderCode:26690567f09c48a81a9-78162082%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:20593577cfc46c1ce22-93933827%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '6c8392c6e7657cbb6a927203c2340c6b890b0dcb' => 
     array (
       0 => '.\\templates\\alumnos\\modificar_alumno.html',
-      1 => 1457987506,
+      1 => 1467756758,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '26690567f09c48a81a9-78162082',
+  'nocache_hash' => '20593577cfc46c1ce22-93933827',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567f09c49f9ee6_20505089',
   'variables' => 
   array (
     'datos_alumno' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fecha_hoy' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577cfc46da3508_67832635',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567f09c49f9ee6_20505089')) {function content_567f09c49f9ee6_20505089($_smarty_tpl) {?><?php echo '<script'; ?>
+<?php if ($_valid && !is_callable('content_577cfc46da3508_67832635')) {function content_577cfc46da3508_67832635($_smarty_tpl) {?><?php echo '<script'; ?>
  type="text/javascript">
 
     $(document).ready(function () {
@@ -74,7 +74,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         $("#fecha_nacimiento").change(function(){
             var fecha_nacimiento = $(this).val();
-            var datePat = "/^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/";
+            var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
             var fechaCompleta = fecha_nacimiento.match(datePat);
 
             if (fechaCompleta === null) {
@@ -90,25 +90,25 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
             if (dia < 1 || dia > 31) {
                 msj += "El valor del día debe estar comprendido entre 1 y 31. <br />";
-                this.val() = "";
-                return false;
+                $(this).val("");
+                fecha_valida = false;
             }
             if (mes < 1 || mes > 12) {
                 msj += "El valor del mes debe estar comprendido entre 1 y 12. <br />";
-                this.val() = "";
-                return false;
+                $(this).val("");
+                fecha_valida = false;
             }
             if ((mes === 4 || mes === 6 || mes === 9 || mes === 11) && dia === 31) {
                 msj += "El mes " + mes + " no tiene 31 días. <br />";
-                this.val() = "";
-                return false;
+                $(this).val("");
+                fecha_valida = false;
             }
             if (mes === 2) { // bisiesto
                 var bisiesto = (anio % 4 === 0 && (anio % 100 !== 0 || anio % 400 === 0));
                 if (dia > 29 || (dia === 29 && !bisiesto)) {
                     msj += "Febrero del " + anio + " no contiene " + dia + " dias. <br />";
-                    this.val() = "";
-                    return false;
+                    $(this).val("");
+                    fecha_valida = false;
                 }
             }
 
@@ -116,7 +116,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             if(fecha_valida){
                 var edad = calcularEdad(fecha_nacimiento);
                 if (edad < 6 || edad > 18) {
-                    msj += "El alumno debe ser mayor a 6 a\u00F1os y menor de 18<br />"
+                    msj += "El alumno debe ser mayor de 6 a\u00F1os y menor de 18<br />"
                     fecha_valida = false;
                 }
             }
@@ -147,7 +147,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         function validar() {
 
             var valido = true;
-            var error = "Por favor complete los siguiente campos: <br />";
+            var error = "Por favor complete los siguientes campos: <br />";
 
             var apellido = $("#apellido").val();
             if (apellido.trim() === "") {
@@ -185,22 +185,29 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 error += " - Fecha de Nacimiento<br />";
             }
 
-            var alta_seguro = validCheckedRadioValue("alta_seguro_radio");
-            if (alta_seguro === false) {
+            var alta_seguro = $('input:radio[name=tutor_legal]:checked').val();
+            if (alta_seguro === undefined) {
                 valido = false;
                 error += " - Alta del seguro<br />";
             }
 
-            var padre = $("#table_nombre").val();
-            if (padre.trim() === "") {
-                valido = false;
-                error += " - Debe tener al menos un tutor legal<br />";
-            }
+            var tutor_legal = $('input:radio[name=tutor_legal]:checked').val();
+            if(tutor_legal != null) {
+                var index = tutor_legal;
+                var padre = $("#table_nombre_" + index).val();
+                if (padre.trim() === "") {
+                    valido = false;
+                    error += " - El tutor legal debe tener nombre<br />";
+                }
 
-            var parentesco = $("#table_parentesco").val();
-            if (parentesco.trim() === "") {
+                var parentesco = $("#table_parentesco_" + index).val();
+                if (parentesco.trim() === "") {
+                    valido = false;
+                    error += " - Debe haber un parentesco con el tutor legal<br />";
+                }
+            } else {
                 valido = false;
-                error += " - Debe tener al menos un parentesco con el tutor legal<br />";
+                error += " - Debe tener al menos un tutor legal<br />"
             }
 
             if(!valido){

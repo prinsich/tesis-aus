@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-12-26 18:42:29
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-06 09:40:39
          compiled from ".\templates\alumnos\modificar_datos_familiares.html" */ ?>
-<?php /*%%SmartyHeaderCode:22153567f09c5287f80-19077288%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:964577cfc47604723-01589090%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '199ac648169806bab4ca8704378744f798d62822' => 
     array (
       0 => '.\\templates\\alumnos\\modificar_datos_familiares.html',
-      1 => 1448490633,
+      1 => 1467514397,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '22153567f09c5287f80-19077288',
+  'nocache_hash' => '964577cfc47604723-01589090',
   'function' => 
   array (
   ),
@@ -24,22 +24,22 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567f09c563b970_92169526',
+  'unifunc' => 'content_577cfc478726f6_48204417',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567f09c563b970_92169526')) {function content_567f09c563b970_92169526($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_estado_civil')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_estado_civil.php';
+<?php if ($_valid && !is_callable('content_577cfc478726f6_48204417')) {function content_577cfc478726f6_48204417($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_estado_civil')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_estado_civil.php';
 ?><h2>Grupo Familiar y/o de Convivencia</h2>
 
 <table id="familiares">
     <tr>
-        <th>Nombre y Apellido</th>
-        <th>Parentesco</th>
-        <th>Edad</th>
-        <th>Estado Civil</th>
-        <th>Vive en el Hogar</th>
-        <th>Ocupaci&oacute;n</th>
+        <th style="width: 20px">Nombre y Apellido</th>
+        <th style="width: 20px">Parentesco</th>
+        <th style="width: 10px">Edad</th>
+        <th style="width: 10px">Estado Civil</th>
+        <th style="width: 10px">Vive en el Hogar</th>
+        <th style="width: 10px">Ocupaci&oacute;n</th>
+        <th style="width: 10px">Tutor Legal</th>
     </tr>
-    <?php $_smarty_tpl->tpl_vars["index"] = new Smarty_variable(0, null, 0);?>
-    <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['dm'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['dm']);
+    <?php $_smarty_tpl->tpl_vars["index"] = new Smarty_variable(0, null, 0);?> <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['dm'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['dm']);
 $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['name'] = 'dm';
 $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['datos_familiares']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
 $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['show'] = true;
@@ -64,61 +64,100 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['first']      = ($_smar
 $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['dm']['total']);
 ?>
     <tr>
-    <input type="hidden" id="table_checkbox" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['id_familiar'];?>
+        <input type="hidden" id="table_checkbox_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['id_familiar'];?>
 " name="id_familiar_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-"/>
-    <td><input type="text" id="table_nombre" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['nombre_apellido'];?>
+" />
+        <td>
+            <input type="text" id="table_nombre_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['nombre_apellido'];?>
 " name="nombre_apellido_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" class="inputntable letras" /></td>
-    <td><input type="text" id="table_parentesco" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['parentesco'];?>
+" class="inputntable letras" />
+        </td>
+        <td>
+            <input type="text" id="table_parentesco_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['parentesco'];?>
 " name="parentesco_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" /></td>
-    <td><input type="text" id="table_edad" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['edad'];?>
+" />
+        </td>
+        <td>
+            <input type="text" id="table_edad_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['edad'];?>
 " name="edad_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" class="inputedad numeros" maxlength="2"/></td>
-    <td><?php echo smarty_function_html_estado_civil(array('name'=>"estado_civil_".((string)$_smarty_tpl->tpl_vars['index']->value),'id'=>"table_estado_civil",'seleccionar'=>$_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['id_est_civil'],'style'=>"width: 120px"),$_smarty_tpl);?>
+" class="inputedad numeros" maxlength="2" />
+        </td>
+        <td><?php echo smarty_function_html_estado_civil(array('name'=>"estado_civil_".((string)$_smarty_tpl->tpl_vars['index']->value),'id'=>"table_estado_civil",'seleccionar'=>$_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['id_est_civil'],'style'=>"width: 120px"),$_smarty_tpl);?>
 </td>
-    <td><select id="table_vive_hogar" name="vive_hogar_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" style="width: 40px"> 
-            <?php if ($_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['vive_hogar']=="SI") {?>
-            <option value="SI" selected>Si</option>
-            <option value="NO">No</option>
-            <?php } else { ?>
-            <option value="SI">Si</option>
-            <option value="NO" selected>No</option>
-            <?php }?>
-        </select></td>
-    <td><input type="text" id="table_ocupacion" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['ocupacion'];?>
+        <td>
+            <select id="table_vive_hogar_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" name="vive_hogar_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" style="width: 40px">
+                <?php if ($_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['vive_hogar']=="SI") {?>
+                <option value="SI" selected>Si</option>
+                <option value="NO">No</option>
+                <?php } else { ?>
+                <option value="SI">Si</option>
+                <option value="NO" selected>No</option>
+                <?php }?>
+            </select>
+        </td>
+        <td>
+            <input type="text" id="table_ocupacion_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['ocupacion'];?>
 " name="ocupacion_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
-" /></td>
-</tr>
-<?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable($_smarty_tpl->tpl_vars['index']->value+1, null, 0);?>
-<?php endfor; endif; ?>
-<?php $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? 9+1 - ($_smarty_tpl->tpl_vars['index']->value) : $_smarty_tpl->tpl_vars['index']->value-(9)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+" />
+        </td>
+        <td>
+            <input type="radio" id="tutor_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" name="tutor_legal" <?php if ($_smarty_tpl->tpl_vars['datos_familiares']->value[$_smarty_tpl->getVariable('smarty')->value['section']['dm']['index']]['tutor_legal']==1) {?> checked="" <?php }?>/>
+        </td>
+    </tr>
+    <?php $_smarty_tpl->tpl_vars['index'] = new Smarty_variable($_smarty_tpl->tpl_vars['index']->value+1, null, 0);?> <?php endfor; endif; ?> <?php $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? 9+1 - ($_smarty_tpl->tpl_vars['index']->value) : $_smarty_tpl->tpl_vars['index']->value-(9)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
 if ($_smarty_tpl->tpl_vars['i']->total > 0) {
 for ($_smarty_tpl->tpl_vars['i']->value = $_smarty_tpl->tpl_vars['index']->value, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
 $_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>
-<tr>
-    <input type="hidden" id="table_checkbox" value="null" name="id_familiar_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
-"/>
-    <td><input type="text" id="table_nombre" value="" name="nombre_apellido_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
-" class="inputntable letras" /></td>
-    <td><input type="text" id="table_parentesco" value="" name="parentesco_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
-" /></td>
-    <td><input type="text" id="table_edad" value="" name="edad_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
-" class="inputedad numeros" maxlength="2"/></td>
-    <td><?php echo smarty_function_html_estado_civil(array('name'=>"estado_civil_".((string)$_smarty_tpl->tpl_vars['i']->value),'id'=>"table_estado_civil",'style'=>"width: 120px"),$_smarty_tpl);?>
+    <tr>
+        <input type="hidden" id="table_checkbox_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="null" name="id_familiar_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+" />
+        <td>
+            <input type="text" id="table_nombre_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="" name="nombre_apellido_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+" class="inputntable letras" />
+        </td>
+        <td>
+            <input type="text" id="table_parentesco_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="" name="parentesco_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+" />
+        </td>
+        <td>
+            <input type="text" id="table_edad_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="" name="edad_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+" class="inputedad numeros" maxlength="2" />
+        </td>
+        <td><?php echo smarty_function_html_estado_civil(array('name'=>"estado_civil_".((string)$_smarty_tpl->tpl_vars['i']->value),'id'=>"table_estado_civil",'style'=>"width: 120px"),$_smarty_tpl);?>
 </td>
-    <td><select id="table_vive_hogar" name="vive_hogar_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
-" style="width: 40px"> 
-            <option value="SI" selected="selected">Si</option>
-            <option value="NO">No</option>
-        </select>
-    </td>
-    <td><input type="text" id="table_ocupacion" value="" name="ocupacion_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
-" /></td>
-</tr> 
-<?php }} ?>
+        <td>
+            <select id="table_vive_hogar_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" name="vive_hogar_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+" style="width: 40px">
+                <option value="SI" selected="selected">Si</option>
+                <option value="NO">No</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" id="table_ocupacion_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="" name="ocupacion_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+" />
+        </td>
+        <td>
+            <input type="radio" id="tutor_<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['index']->value;?>
+" name="tutor_legal" />
+        </td>
+    </tr>
+    <?php }} ?>
 </table>
 
 <label for="observaciones_familiares">Observaciones:</label>
@@ -135,7 +174,7 @@ $_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1
         <li>Situaci&oacute;n econ&oacute;mica-laboral de su familia. </li>
         <li>Integraci&oacute;n de su familia a la comunidad.</li>
     </ul>
-</label> 
+</label>
 <textarea id="relaciones_familiares" name="relaciones_familiares"><?php echo $_smarty_tpl->tpl_vars['datos_personales']->value['relaciones_familiares'];?>
 </textarea>
 <br />
@@ -166,7 +205,7 @@ $_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1
 </label>
 <textarea id="tiempo_libre" name="tiempo_libre"><?php echo $_smarty_tpl->tpl_vars['datos_personales']->value['tiempo_libre'];?>
 </textarea>
-<br />	
+<br />
 
 
 <h2>Educaci&oacute;n</h2>

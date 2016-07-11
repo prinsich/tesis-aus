@@ -49,7 +49,7 @@ class Usuarios extends DBTable
         $sql = 'SELECT id_usuario, apellido, nombre, nombreusr, perfil, estado
                 FROM usuarios
                     JOIN '.BASE_DATA.'.perfiles ON usuarios.id_perfil = perfiles.id_perfil
-                ORDER BY id_usuario ASC
+                ORDER BY estado, id_usuario, apellido, nombre ASC
                ';
 
         $usuarios = $this->consultar($sql);
@@ -80,7 +80,7 @@ class Usuarios extends DBTable
             $sql .= " AND estado LIKE '".trim($estado)."' ";
         }
 
-        $sql .= ' ORDER BY id_usuario ASC ';
+        $sql .= ' ORDER BY estado, id_usuario, apellido, nombre ASC ';
 
         $usuarios = $this->consultar($sql);
 

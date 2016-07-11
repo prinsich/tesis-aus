@@ -12,15 +12,15 @@ $(document).ready(function () {
                     dataType: "json",
                     url: "includes/talleres/ajax_talleres.php?funcion=verficar_disponibilidad",
                     data: {
-                        accion: "agregar",
-                        id_taller: "0",
+                        accion: $("#accion").val(),
+                        id_taller: $("#id_taller").val(),
                         nombre: $("#nombre").val(),
                         id_capacitador: $("#id_capacitador").val(),
                         dias: checkbox_dias
                     }
                 })
                 .done(function (data, textStatus, jqXHR) {
-                    $("#modal_alert").dialog("option", "title", "verificar disponibilida del taller");
+                    $("#modal_alert").dialog("option", "title", "Verificar disponibilidad del taller");
                     $("#modal_alert").html(data.msj);
                     $("#modal_alert").dialog("open");
                     if(data.success){
@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     //Salir de la pantalla
     $("#cancelar").click(function () {
-        $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
+        $("#modal_confirm").dialog("option", "title", "Salir");
         $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
         $("#modal_confirm").dialog("open");
     });
@@ -107,7 +107,7 @@ $(document).ready(function () {
 </script>
 
 <h1>Modificar Taller</h1>
-<p>Los campos marcado con <b>*</b> son obligatorios</p>
+<p>Los campos marcados con <b>*</b> son obligatorios</p>
 
 <form autocomplete="off" name="formModifircarTaller" id="formModifircarTaller" action="index.php?section=talleres&sub=guardar_taller" method="POST">
     <input type="hidden" id="accion" name="accion" value="modificar" />

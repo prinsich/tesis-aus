@@ -50,8 +50,8 @@ class Talleres extends DBTable
                 FROM talleres
                     JOIN capacitadores ON talleres.id_capacitador = capacitadores.id_capacitador
                     LEFT JOIN taller_alumno ON talleres.id_taller = taller_alumno.id_taller
-                GROUP BY id_taller
-                ORDER BY talleres.estado, id_taller ASC";
+                GROUP BY talleres.id_taller
+                ORDER BY talleres.estado, talleres.id_taller, talleres.nombre ASC";
 
         $lista_talleres = $this->consultar($sql);
 
@@ -115,8 +115,7 @@ class Talleres extends DBTable
             $sql .= " AND talleres.estado LIKE '$estado' ";
         }
 
-        $sql .= ' GROUP BY talleres.id_taller
-                 ORDER BY talleres.id_taller ASC';
+        $sql .= ' GROUP BY talleres.id_taller ORDER BY talleres.estado, id_taller, talleres.nombre  ASC';
 
         $lista_talleres = $this->consultar($sql);
 

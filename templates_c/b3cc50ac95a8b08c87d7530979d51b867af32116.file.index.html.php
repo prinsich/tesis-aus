@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-03-13 23:54:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-05 21:41:53
          compiled from ".\templates\talleres\index.html" */ ?>
-<?php /*%%SmartyHeaderCode:15763567efcd4467df5-65191768%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:14063577c53d1b822f4-68490510%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,19 +11,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '15763567efcd4467df5-65191768',
+  'nocache_hash' => '14063577c53d1b822f4-68490510',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_567efcd4648cf0_50943756',
   'variables' => 
   array (
     'sub' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577c53d1c43336_18909302',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_567efcd4648cf0_50943756')) {function content_567efcd4648cf0_50943756($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['sub']->value==''||$_smarty_tpl->tpl_vars['sub']->value=="buscar_talleres") {?>
+<?php if ($_valid && !is_callable('content_577c53d1c43336_18909302')) {function content_577c53d1c43336_18909302($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['sub']->value==''||$_smarty_tpl->tpl_vars['sub']->value=="buscar_talleres") {?>
     <?php echo $_smarty_tpl->getSubTemplate ("talleres/buscar_talleres.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 <?php } elseif ($_smarty_tpl->tpl_vars['sub']->value=="agregar_taller") {?>

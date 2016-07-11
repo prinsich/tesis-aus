@@ -12,9 +12,9 @@ class Alumno extends DBTable
 
     /**
      * Constructor de la clase Inscripto.
-     * 
+     *
      * Esta clase permite el manejo de los inscriptos en los distintos congresos o seminarios
-     * 
+     *
      * @param string $db identificacion de la conexion a la base de datos
      * @param string $id identificador del Inscripto (no obligatorio)
      */
@@ -61,7 +61,7 @@ class Alumno extends DBTable
     {
         $sql = 'SELECT id_alumno, apellido, nombre, dni, fecha_nacimiento, telefono, estado
                 FROM alumnos
-                ORDER BY estado, id_alumno ASC';
+                ORDER BY estado, id_alumno, apellido, nombre ASC';
 
         $alumnos = $this->consultar($sql);
 
@@ -71,7 +71,7 @@ class Alumno extends DBTable
     public function buscar_alumnos($apellido, $nombre, $dni, $id_taller, $alta_seguro, $estado)
     {
         $sql = 'SELECT alumnos.id_alumno, apellido, nombre, dni, fecha_nacimiento, telefono, estado
-                FROM alumnos 
+                FROM alumnos
                     LEFT JOIN taller_alumno ON alumnos.id_alumno = taller_alumno.id_alumno
                 WHERE 1';
 
@@ -99,7 +99,7 @@ class Alumno extends DBTable
             $sql .= " AND estado LIKE '".trim($estado)."' ";
         }
 
-        $sql .= ' GROUP BY alumnos.id_alumno ORDER BY alumnos.id_alumno ASC';
+        $sql .= ' GROUP BY alumnos.id_alumno ORDER BY estado, id_alumno, apellido, nombre ASC';
         $alumnos = $this->consultar($sql);
 
         return $alumnos;
@@ -108,7 +108,7 @@ class Alumno extends DBTable
     public function getAlumno($id_alumno)
     {
         $sql = 'SELECT *
-                FROM alumnos 
+                FROM alumnos
                     JOIN '.BASE_DATA.".turnos ON alumnos.turno = turnos.id_turno
                 WHERE id_alumno = $id_alumno";
 

@@ -1,37 +1,37 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-06-23 09:08:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-07-05 22:03:39
          compiled from ".\templates\admin\agregar_usuario.html" */ ?>
-<?php /*%%SmartyHeaderCode:056e2ffb0c66d72-34752955%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:5998577c58ebf12397-30016264%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '27cee7505766d384ae9a26ec2099667d57e8fecd' => 
     array (
       0 => '.\\templates\\admin\\agregar_usuario.html',
-      1 => 1466683680,
+      1 => 1467757022,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '056e2ffb0c66d72-34752955',
+  'nocache_hash' => '5998577c58ebf12397-30016264',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_56e2ffb0d54461_53506864',
   'variables' => 
   array (
     'usrlogin' => 0,
     'password' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_577c58ec10d6f2_57944490',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_56e2ffb0d54461_53506864')) {function content_56e2ffb0d54461_53506864($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_perfiles')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_perfiles.php';
+<?php if ($_valid && !is_callable('content_577c58ec10d6f2_57944490')) {function content_577c58ec10d6f2_57944490($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_perfiles')) include 'D:\\Program Files\\wamp\\www\\tesis-aus\\configs\\smarty\\my_plugins\\function.html_perfiles.php';
 ?><?php echo '<script'; ?>
  type="text/javascript">
 
 $(document).ready(function () {
     //Salir de la pantalla
     $("#cancelar").click(function () {
-        $("#modal_confirm").dialog("option", "title", "Sal\u00edr");
+        $("#modal_confirm").dialog("option", "title", "Salir");
         $("#modal_confirm").html("&iquest;Esta seguro que desea sal&iacute;r?");
         $("#modal_confirm").dialog("open");
     });
@@ -54,7 +54,7 @@ $(document).ready(function () {
 
     function validar() {
         var valido = true;
-        var error = "Por favor complete los siguiente campos: <br />";
+        var error = "Por favor complete los siguientes campos: <br />";
 
         var usr = $("#user").val();
         if (usr.trim() === "") {
@@ -114,7 +114,7 @@ $(document).ready(function () {
         if(email.trim() !== ""){
             if ( !expr.test(email) ){
                 $("#modal_alert").dialog("option", "title", "Email");
-                $("#modal_alert").html("La direccion de correo " + email + " es incorrecta.");
+                $("#modal_alert").html("La direcci&oacute;n de correo " + email + " es incorrecta.");
                 $("#modal_alert").dialog("open");
                 $(this).val("");
             }
@@ -178,11 +178,11 @@ $(document).ready(function () {
 
     <h2>Datos Personales</h2>
     <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" name="apellido"  />
+    <input type="text" id="apellido" name="apellido" class="letras"/>
     <br />
 
     <label for="nombre">Nombres:</label>
-    <input type="text" id="nombre" name="nombre"  />
+    <input type="text" id="nombre" name="nombre" class="letras"/>
     <br />
 
     <label for="domicilio">Domicilio:</label>
